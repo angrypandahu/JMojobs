@@ -41,6 +41,10 @@ public class Mjob implements Serializable {
     @Column(name = "jhi_type", nullable = false)
     private JobType type;
 
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Address address;
+
     @ManyToOne(optional = false)
     @NotNull
     private School school;
@@ -95,6 +99,19 @@ public class Mjob implements Serializable {
 
     public void setType(JobType type) {
         this.type = type;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public Mjob address(Address address) {
+        this.address = address;
+        return this;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public School getSchool() {

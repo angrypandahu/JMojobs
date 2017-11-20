@@ -27,6 +27,10 @@ public class MjobDTO implements Serializable {
     @NotNull
     private JobType type;
 
+    private Long addressId;
+
+    private String addressName;
+
     private Long schoolId;
 
     private String schoolName;
@@ -65,6 +69,22 @@ public class MjobDTO implements Serializable {
 
     public void setType(JobType type) {
         this.type = type;
+    }
+
+    public Long getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Long addressId) {
+        this.addressId = addressId;
+    }
+
+    public String getAddressName() {
+        return addressName;
+    }
+
+    public void setAddressName(String addressName) {
+        this.addressName = addressName;
     }
 
     public Long getSchoolId() {

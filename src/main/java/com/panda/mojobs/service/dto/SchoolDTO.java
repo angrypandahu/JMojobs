@@ -30,6 +30,10 @@ public class SchoolDTO implements Serializable {
 
     private String logoName;
 
+    private Long addressId;
+
+    private String addressName;
+
     public Long getId() {
         return id;
     }
@@ -76,6 +80,22 @@ public class SchoolDTO implements Serializable {
 
     public void setLogoName(String mojobImageName) {
         this.logoName = mojobImageName;
+    }
+
+    public Long getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Long addressId) {
+        this.addressId = addressId;
+    }
+
+    public String getAddressName() {
+        return addressName;
+    }
+
+    public void setAddressName(String addressName) {
+        this.addressName = addressName;
     }
 
     @Override

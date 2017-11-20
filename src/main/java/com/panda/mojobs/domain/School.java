@@ -50,6 +50,10 @@ public class School implements Serializable {
     @JoinColumn(unique = true)
     private MojobImage logo;
 
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Address address;
+
     @OneToMany(mappedBy = "school")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -114,6 +118,19 @@ public class School implements Serializable {
 
     public void setLogo(MojobImage mojobImage) {
         this.logo = mojobImage;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public School address(Address address) {
+        this.address = address;
+        return this;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public Set<Mjob> getJobs() {
