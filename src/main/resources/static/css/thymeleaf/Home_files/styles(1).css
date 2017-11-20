@@ -1920,3 +1920,105 @@ body {
   width:62px;
   word-wrap:break-word;
 }
+/*导航栏样式 addby LUOWEN*/
+.mojob-header{
+    width: 100%;
+}
+.mojob-header img
+{
+    width: 124px;
+    height: 105px;
+    vertical-align: middle;
+}
+.mojob-header ul{
+    display: inline-block;
+}
+.mojob-header ul li{
+    display: inline-block;
+    border-radius: 40px;
+    background: #fff;
+    width: 125px;
+    height: 26px;
+    line-height: 26px;
+    font-family: 'Helvetica-Bold', 'Helvetica Bold', 'Helvetica';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 16px;
+    text-align: center;
+    -moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.349019607843137);
+    -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.349019607843137);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.349019607843137);
+    font-family: 'Helvetica-Bold', 'Helvetica Bold', 'Helvetica';
+    font-weight: 700;
+    margin-left: -15px;
+    transition:.5s linear ;
+    -webkit-transition: .5s linear;
+}
+.mojob-header ul li:first-child{
+    margin-left: 0;
+}
+.mojob-header ul li a{
+    display: block;
+    color: #3366CC;
+
+}
+.mojob-header ul li:hover{
+    background-color:rgba(255, 255, 255, 1);
+    -moz-box-shadow:0px 4px 4px 0px rgba(0, 0, 0, 0.349019607843137) inset;
+    -webkit-box-shadow:0px 4px 4px 0px rgba(0, 0, 0, 0.349019607843137) inset;
+    box-shadow:0px 4px 4px 0px rgba(0, 0, 0, 0.349019607843137) inset;
+}
+.logIn{
+    display: inline-block;
+    float: right;
+    margin: 44px 10px 0 0;
+
+}
+.logIn input{
+    width: 83px;
+    height: 25px;
+}
+.logIn .user{
+    width: 24px;
+    height: 29px;
+}
+.logIn .register{
+    width: 66px;
+    height: 25px;
+    line-height: 25px;
+    display: inline-block;
+    background-color: rgba(51, 102, 204, 1);
+    font-weight: 400;
+    font-style: normal;
+    font-size: 13px;
+    color: #fff;
+    text-align: center;
+}
+.logIn .logText{
+    width: 66px;
+    display: inline-block;
+    height: 25px;
+    text-align: center;
+    font-size: 13px;
+    font-family: 'Helvetica';
+}
+/*简历页面 add by luowen*/
+#u366{
+    border: 1px solid #a5a5a5!important;
+}
+#u366>div{
+    border-bottom: 1px solid #a5a5a5;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+#u366>div:last-child{
+    border:0;
+}
+div.annnoteimage{
+    background-image:url(note.gif) ;
+}
+
+
+
+
+

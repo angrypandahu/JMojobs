@@ -8,8 +8,6 @@
         <li><a href="">Messages</a></li>
         <li><a href="">Resume</a></li>
     </ul>
-
-
     <div class="logIn" sec:authorize="!isAuthenticated()">
         <form th:action="@{/login}" method="post">
             <img src="images/u57.png" alt="" class='user'/>
