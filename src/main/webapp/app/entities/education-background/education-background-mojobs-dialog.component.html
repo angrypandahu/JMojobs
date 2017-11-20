@@ -1,0 +1,124 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myEducationBackgroundLabel">Create or edit a Education Background</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!educationBackground.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="educationBackground.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_school">School</label>
+            <input type="text" class="form-control" name="school" id="field_school"
+                [(ngModel)]="educationBackground.school" required maxlength="255" />
+            <div [hidden]="!(editForm.controls.school?.dirty && editForm.controls.school?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.school?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.school?.errors?.maxlength">
+                   This field cannot be longer than 255 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_major">Major</label>
+            <input type="text" class="form-control" name="major" id="field_major"
+                [(ngModel)]="educationBackground.major" required maxlength="255" />
+            <div [hidden]="!(editForm.controls.major?.dirty && editForm.controls.major?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.major?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.major?.errors?.maxlength">
+                   This field cannot be longer than 255 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_degree">Degree</label>
+            <select class="form-control" name="degree" [(ngModel)]="educationBackground.degree" id="field_degree"  required>
+                <option value="ASSOCIATE">ASSOCIATE</option>
+                <option value="BACHELOR">BACHELOR</option>
+                <option value="MASTER">MASTER</option>
+                <option value="DOCTORATE">DOCTORATE</option>
+            </select>
+            <div [hidden]="!(editForm.controls.degree?.dirty && editForm.controls.degree?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.degree?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_location">Location</label>
+            <input type="text" class="form-control" name="location" id="field_location"
+                [(ngModel)]="educationBackground.location" required maxlength="255" />
+            <div [hidden]="!(editForm.controls.location?.dirty && editForm.controls.location?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.location?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.location?.errors?.maxlength">
+                   This field cannot be longer than 255 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_fromDate">From Date</label>
+            <div class="input-group">
+                <input id="field_fromDate" type="text" class="form-control" name="fromDate" ngbDatepicker  #fromDateDp="ngbDatepicker" [(ngModel)]="educationBackground.fromDate"
+                required/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-secondary" (click)="fromDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.fromDate?.dirty && editForm.controls.fromDate?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.fromDate?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_toDate">To Date</label>
+            <div class="input-group">
+                <input id="field_toDate" type="text" class="form-control" name="toDate" ngbDatepicker  #toDateDp="ngbDatepicker" [(ngModel)]="educationBackground.toDate"
+                required/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-secondary" (click)="toDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.toDate?.dirty && editForm.controls.toDate?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.toDate?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_resume">Resume</label>
+            <select class="form-control" id="field_resume" name="resume" [(ngModel)]="educationBackground.resumeId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="resumeOption.id" *ngFor="let resumeOption of resumes; trackBy: trackResumeById">{{resumeOption.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

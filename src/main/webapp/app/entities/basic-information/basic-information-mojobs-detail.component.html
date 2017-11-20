@@ -1,0 +1,61 @@
+
+<div *ngIf="basicInformation">
+    <h2><span>Basic Information</span> {{basicInformation.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Last Name</span></dt>
+        <dd>
+            <span>{{basicInformation.lastName}}</span>
+        </dd>
+        <dt><span>First Name</span></dt>
+        <dd>
+            <span>{{basicInformation.firstName}}</span>
+        </dd>
+        <dt><span>Nationality</span></dt>
+        <dd>
+            <span>{{basicInformation.nationality}}</span>
+        </dd>
+        <dt><span>Gender</span></dt>
+        <dd>
+            <span>{{basicInformation.gender}}</span>
+        </dd>
+        <dt><span>Dateof Brith</span></dt>
+        <dd>
+            <span>{{basicInformation.dateofBrith | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Education Level</span></dt>
+        <dd>
+            <span>{{basicInformation.educationLevel}}</span>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+            <span>{{basicInformation.email}}</span>
+        </dd>
+        <dt><span>Skype</span></dt>
+        <dd>
+            <span>{{basicInformation.skype}}</span>
+        </dd>
+        <dt><span>Phone</span></dt>
+        <dd>
+            <span>{{basicInformation.phone}}</span>
+        </dd>
+        <dt><span>Wechat</span></dt>
+        <dd>
+            <span>{{basicInformation.wechat}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'basic-information-mojobs/'+ basicInformation.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
