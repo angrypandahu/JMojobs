@@ -1,0 +1,59 @@
+
+<div *ngIf="experience">
+    <h2><span>Experience</span> {{experience.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Title</span></dt>
+        <dd>
+            <span>{{experience.title}}</span>
+        </dd>
+        <dt><span>School</span></dt>
+        <dd>
+            <span>{{experience.school}}</span>
+        </dd>
+        <dt><span>Grade</span></dt>
+        <dd>
+            <span>{{experience.grade}}</span>
+        </dd>
+        <dt><span>Location</span></dt>
+        <dd>
+            <span>{{experience.location}}</span>
+        </dd>
+        <dt><span>From Date</span></dt>
+        <dd>
+            <span>{{experience.fromDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>To Date</span></dt>
+        <dd>
+            <span>{{experience.toDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Currently Work Here</span></dt>
+        <dd>
+            <span>{{experience.currentlyWorkHere}}</span>
+        </dd>
+        <dt><span>Responsibility</span></dt>
+        <dd>
+            <span>{{experience.responsibility}}</span>
+        </dd>
+        <dt><span>Resume</span></dt>
+        <dd>
+            <div *ngIf="experience.resumeId">
+                <a [routerLink]="['/resume-mojobs', experience.resumeId]">{{experience.resumeName}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'experience-mojobs/'+ experience.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

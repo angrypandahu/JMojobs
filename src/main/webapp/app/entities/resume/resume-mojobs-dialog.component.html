@@ -1,0 +1,79 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myResumeLabel">Create or edit a Resume</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!resume.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="resume.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="resume.name" required maxlength="255" />
+            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.maxlength">
+                   This field cannot be longer than 255 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_canBeReadBy">Can Be Read By</label>
+            <select class="form-control" name="canBeReadBy" [(ngModel)]="resume.canBeReadBy" id="field_canBeReadBy" >
+                <option value="ALL_SCHOOLS">ALL_SCHOOLS</option>
+                <option value="UNBLOCKED_SCHOOLS">UNBLOCKED_SCHOOLS</option>
+                <option value="ONLY_MYSELF">ONLY_MYSELF</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_others">Others</label>
+            <input type="text" class="form-control" name="others" id="field_others"
+                [(ngModel)]="resume.others" maxlength="2000" />
+            <div [hidden]="!(editForm.controls.others?.dirty && editForm.controls.others?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.others?.errors?.maxlength">
+                   This field cannot be longer than 2000 characters.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_basicInformation">Basic Information</label>
+            <select class="form-control" id="field_basicInformation" name="basicInformation" [(ngModel)]="resume.basicInformationId">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="basicInformationOption.id" *ngFor="let basicInformationOption of basicinformations; trackBy: trackBasicInformationById">{{basicInformationOption.firstName}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" [(ngModel)]="resume.userId"  required>
+                <option *ngIf="!editForm.value.user" [ngValue]="null" selected></option>
+                <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.user?.dirty && editForm.controls.user?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.user?.errors?.required">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

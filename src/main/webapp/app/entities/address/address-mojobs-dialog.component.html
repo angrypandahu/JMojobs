@@ -1,0 +1,127 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myAddressLabel">Create or edit a Address</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!address.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="address.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="address.name" required maxlength="255" />
+            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.maxlength">
+                   This field cannot be longer than 255 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_mobile">Mobile</label>
+            <input type="text" class="form-control" name="mobile" id="field_mobile"
+                [(ngModel)]="address.mobile" required maxlength="255" />
+            <div [hidden]="!(editForm.controls.mobile?.dirty && editForm.controls.mobile?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.mobile?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.mobile?.errors?.maxlength">
+                   This field cannot be longer than 255 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_email">Email</label>
+            <input type="text" class="form-control" name="email" id="field_email"
+                [(ngModel)]="address.email" maxlength="255" />
+            <div [hidden]="!(editForm.controls.email?.dirty && editForm.controls.email?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.email?.errors?.maxlength">
+                   This field cannot be longer than 255 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_phone">Phone</label>
+            <input type="text" class="form-control" name="phone" id="field_phone"
+                [(ngModel)]="address.phone" maxlength="255" />
+            <div [hidden]="!(editForm.controls.phone?.dirty && editForm.controls.phone?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.phone?.errors?.maxlength">
+                   This field cannot be longer than 255 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_line">Line</label>
+            <input type="text" class="form-control" name="line" id="field_line"
+                [(ngModel)]="address.line" maxlength="255" />
+            <div [hidden]="!(editForm.controls.line?.dirty && editForm.controls.line?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.line?.errors?.maxlength">
+                   This field cannot be longer than 255 characters.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_province">Province</label>
+            <select class="form-control" id="field_province" name="province" [(ngModel)]="address.provinceId"  required>
+                <option *ngIf="!editForm.value.province" [ngValue]="null" selected></option>
+                <option [ngValue]="provinceOption.id" *ngFor="let provinceOption of provinces; trackBy: trackProvinceById">{{provinceOption.name}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.province?.dirty && editForm.controls.province?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.province?.errors?.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_city">City</label>
+            <select class="form-control" id="field_city" name="city" [(ngModel)]="address.cityId"  required>
+                <option *ngIf="!editForm.value.city" [ngValue]="null" selected></option>
+                <option [ngValue]="cityOption.id" *ngFor="let cityOption of cities; trackBy: trackCityById">{{cityOption.name}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.city?.dirty && editForm.controls.city?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.city?.errors?.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_town">Town</label>
+            <select class="form-control" id="field_town" name="town" [(ngModel)]="address.townId"  required>
+                <option *ngIf="!editForm.value.town" [ngValue]="null" selected></option>
+                <option [ngValue]="townOption.id" *ngFor="let townOption of towns; trackBy: trackTownById">{{townOption.name}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.town?.dirty && editForm.controls.town?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.town?.errors?.required">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
