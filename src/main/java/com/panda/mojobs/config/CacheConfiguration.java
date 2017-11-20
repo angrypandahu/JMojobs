@@ -67,6 +67,7 @@ public class CacheConfiguration {
             cm.createCache(com.panda.mojobs.domain.ApplyJobResume.class.getName(), jcacheConfiguration);
             cm.createCache(com.panda.mojobs.domain.ChatMessage.class.getName(), jcacheConfiguration);
             cm.createCache(com.panda.mojobs.domain.SchoolAddress.class.getName(), jcacheConfiguration);
+            cm.createCache(com.panda.mojobs.domain.JobAddress.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

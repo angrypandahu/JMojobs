@@ -23,6 +23,7 @@
     <include file="config/liquibase/changelog/20171120014436_added_entity_ApplyJobResume.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171120014437_added_entity_ChatMessage.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171120014438_added_entity_SchoolAddress.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171120085936_added_entity_JobAddress.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20171120014423_added_entity_constraints_City.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171120014424_added_entity_constraints_Town.xml" relativeToChangelogFile="false"/>
@@ -38,5 +39,7 @@
     <include file="config/liquibase/changelog/20171120014436_added_entity_constraints_ApplyJobResume.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171120014437_added_entity_constraints_ChatMessage.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171120014438_added_entity_constraints_SchoolAddress.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171120085936_added_entity_constraints_JobAddress.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171120091210_changelog.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

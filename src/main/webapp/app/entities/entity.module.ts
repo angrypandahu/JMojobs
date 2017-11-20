@@ -18,6 +18,7 @@ import { JmojobsInvitationMojobsModule } from './invitation/invitation-mojobs.mo
 import { JmojobsApplyJobResumeMojobsModule } from './apply-job-resume/apply-job-resume-mojobs.module';
 import { JmojobsChatMessageMojobsModule } from './chat-message/chat-message-mojobs.module';
 import { JmojobsSchoolAddressMojobsModule } from './school-address/school-address-mojobs.module';
+import { JmojobsJobAddressMojobsModule } from './job-address/job-address-mojobs.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -40,6 +41,7 @@ import { JmojobsSchoolAddressMojobsModule } from './school-address/school-addres
         JmojobsApplyJobResumeMojobsModule,
         JmojobsChatMessageMojobsModule,
         JmojobsSchoolAddressMojobsModule,
+        JmojobsJobAddressMojobsModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],
