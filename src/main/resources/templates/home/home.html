@@ -1,0 +1,871 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+
+</head>
+<body>
+<div layout:fragment="content">
+    <!-- Advanced Search (Group) -->
+    <div id="u0" class="ax_default" data-label="Advanced Search" data-left="0" data-top="430" data-width="1280"
+         data-height="71">
+
+        <!-- Advanced Search 框 (Rectangle) -->
+        <div id="u1" class="ax_default box_1" data-label="Advanced Search 框">
+            <div id="u1_div" class=""></div>
+        </div>
+
+        <!-- Position (Rectangle) -->
+        <div id="u2" class="ax_default label" data-label="Position">
+            <div id="u2_div" class=""></div>
+            <div id="u2_text" class="text " style="left: 0px; width: 30px; transform-origin: 15px 8px 0px;">
+                <p><span>Jobs</span></p>
+            </div>
+        </div>
+
+        <!-- Jobs (Droplist) -->
+        <div id="u3" class="ax_default droplist" data-label="Jobs">
+            <select id="u3_input">
+                <option value="Faculty">Faculty</option>
+                <option value="Principal">Principal</option>
+                <option value="Support Staff">Support Staff</option>
+            </select>
+        </div>
+
+        <!-- Unnamed (Rectangle) -->
+        <div id="u4" class="ax_default label">
+            <div id="u4_div" class=""></div>
+            <div id="u4_text" class="text " style="left: 0px; width: 104px; transform-origin: 52px 8px 0px;">
+                <p><span>Subject / Position</span></p>
+            </div>
+        </div>
+
+        <!-- 二级职位菜单 (Dynamic Panel) -->
+        <div id="u5" class="ax_default" data-label="二级职位菜单">
+
+
+            <div id="u5_state2" class="panel_state" data-label="choose Support Staffs"
+                 style="visibility: hidden; display: none;">
+                <div id="u5_state2_content" class="panel_state_content">
+
+                    <!-- Support 对应的菜单 (Droplist) -->
+                    <div id="u8" class="ax_default droplist" data-label="Support 对应的菜单">
+                        <select id="u8_input">
+                            <option value="Human Resources">Human Resources</option>
+                            <option value="Admissions">Admissions</option>
+                            <option value="Communications">Communications</option>
+                            <option value="Marketing ">Marketing</option>
+                            <option value="Alumni">Alumni</option>
+                            <option value="IT">IT</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Facilities">Facilities</option>
+                            <option value="Secretary">Secretary</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div id="u5_state0" class="panel_state" data-label="choose Faculty"
+                 style="display: none; visibility: hidden; position: relative;">
+                <div id="u5_state0_content" class="panel_state_content">
+
+                    <!-- Faculty 对应的菜单 (Droplist) -->
+                    <div id="u6" class="ax_default droplist" data-label="Faculty 对应的菜单">
+                        <select id="u6_input">
+                            <option value="Art">Art</option>
+                            <option value="Computer Education/Technology">Computer Education/Technology</option>
+                            <option value="Counselling/Psychology">Counselling/Psychology</option>
+                            <option value="Early Childhood Education">Early Childhood Education</option>
+                            <option value="Elementary Classroom Teacher">Elementary Classroom Teacher</option>
+                            <option value="English as an Additional Language">English as an Additional Language</option>
+                            <option value="Foreign Language （Except English）">Foreign Language （Except English）</option>
+                            <option value="Humanities">Humanities</option>
+                            <option value="Library/Media">Library/Media</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Miscellaneous">Miscellaneous</option>
+                            <option value="Music">Music</option>
+                            <option value="Performing Arts">Performing Arts</option>
+                            <option value="Physical Education/Health">Physical Education/Health</option>
+                            <option value="Science">Science</option>
+                            <option value="Social Studies/History">Social Studies/History</option>
+                            <option value="Special Education">Special Education</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div id="u5_state1" class="panel_state" data-label="choose Principal" style="visibility: inherit;">
+                <div id="u5_state1_content" class="panel_state_content">
+
+                    <!-- Unnamed (Droplist) -->
+                    <div id="u7" class="ax_default droplist">
+                        <select id="u7_input" disabled="">
+                            <option value="NA">NA</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- School Level (Rectangle) -->
+        <div id="u9" class="ax_default label" data-label="School Level">
+            <div id="u9_div" class=""></div>
+            <div id="u9_text" class="text " style="left: 0px; width: 76px; transform-origin: 38px 8px 0px;">
+                <p><span>School Level</span></p>
+            </div>
+        </div>
+
+        <!-- School Level (Droplist) -->
+        <div id="u10" class="ax_default droplist" data-label="School Level">
+            <select id="u10_input">
+                <option value="Kindergarten">Kindergarten</option>
+                <option value="Elementary School">Elementary School</option>
+                <option value="Middle School">Middle School</option>
+                <option value="High School">High School</option>
+                <option value="University">University</option>
+            </select>
+        </div>
+
+        <!-- School Type (Rectangle) -->
+        <div id="u11" class="ax_default label" data-label="School Type">
+            <div id="u11_div" class=""></div>
+            <div id="u11_text" class="text " style="left: 0px; width: 74px; transform-origin: 37px 8px 0px;">
+                <p><span>School Type</span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (Droplist) -->
+        <div id="u12" class="ax_default droplist">
+            <select id="u12_input">
+                <option value="International / Bilingual School">International / Bilingual School</option>
+                <option value="Language Training">Language Training</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- 搜索栏 篮框 (Rectangle) -->
+    <div id="u13" class="ax_default box_1" data-label="搜索栏 篮框">
+        <div id="u13_div" class=""></div>
+    </div>
+
+    <!-- Unnamed (Droplist) -->
+    <div id="u14" class="ax_default droplist">
+        <select id="u14_input">
+            <option value="All Locations">All Locations</option>
+            <option value="Pudong, Shanghai">Pudong, Shanghai</option>
+            <option value="Puxi, Shanghai">Puxi, Shanghai</option>
+            <option value="Jiangsu">Jiangsu</option>
+            <option value="Zhejiang">Zhejiang</option>
+        </select>
+    </div>
+
+    <!-- Unnamed (Shape) -->
+    <div id="u15" class="ax_default icon">
+        <img id="u15_img" class="img " th:src="@{/css/thymeleaf/Home_files/u15.png}"/>
+    </div>
+
+    <!-- Search job 搜索框 (Text Field) -->
+    <div id="u16" class="ax_default droplist" data-label="Search job 搜索框">
+        <input id="u16_input" type="text" value="" style="color: rgb(153, 153, 153);"/>
+    </div>
+
+    <!-- 轮播 (Dynamic Panel) -->
+    <div id="u17" class="ax_default" data-label="轮播" tabindex="0" style="cursor: pointer; outline: none;">
+
+
+        <div id="u17_state1" class="panel_state" data-label="图片more jobs"
+             style="visibility: hidden; position: absolute; display: none;">
+            <div id="u17_state1_content" class="panel_state_content">
+
+                <!-- Unnamed (Image) -->
+                <div id="u19" class="ax_default image">
+                    <img id="u19_img" class="img " th:src="@{/css/thymeleaf/Home_files/u19.jpg}"/>
+                </div>
+            </div>
+        </div>
+        <div id="u17_state0" class="panel_state" data-label="图片bigger world"
+             style="visibility: inherit; position: absolute;">
+            <div id="u17_state0_content" class="panel_state_content">
+
+                <!-- Unnamed (Image) -->
+                <div id="u18" class="ax_default image">
+                    <img id="u18_img" class="img " th:src="@{/css/thymeleaf/Home_files/u18.jpg}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Advanced Search (Rectangle) -->
+    <div id="u20" class="ax_default label" data-label="Advanced Search">
+        <div id="u20_div" class=""></div>
+        <div id="u20_text" class="text ">
+            <p><span>Advanced&nbsp; Search</span></p>
+        </div>
+    </div>
+
+    <!-- Unnamed (Rectangle) -->
+    <div id="u21" class="ax_default label">
+        <img id="u21_img" class="img " th:src="@{/css/thymeleaf/Home_files/u21.png}"/>
+        <div id="u21_text" class="text " style="left: 0px; width: 279px; transform-origin: 139.5px 9.5px 0px;">
+            <p><span>JOBS YOU MAY BE INTERESTED IN</span></p>
+        </div>
+    </div>
+
+    <!-- Unnamed (bottom) -->
+
+
+
+
+
+
+
+    <!-- Reapter Job List (Repeater) -->
+    <div id="u29" class="ax_default" data-label="Reapter Job List">
+        <script id="u29_script" type="axure-repeater-template" data-label="Reapter Job List">
+
+            <!-- Job List 框 (Rectangle) -->
+            <div id="u30" class="ax_default box_1 u30" data-label="Job List 框">
+                <div id="u30_div" class="u30_div"></div>
+            </div>
+
+            <!-- School Logo (Image) -->
+            <div id="u31" class="ax_default image u31" data-label="School Logo">
+                <img id="u31_img" class="img u31_img"
+                     src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/home/school_logo_u31.png?token=9813d2f96db17fb967533b87cf9970c4"/>
+            </div>
+
+            <!-- Job quick view (Rectangle) -->
+            <div id="u32" class="ax_default label u32" data-label="Job quick view">
+                <div id="u32_div" class="u32_div"></div>
+                <div id="u32_text" class="text u32_text">
+                    <p><span style="font-family:'Helvetica';">School</span><span
+                        style="font-family:'PingFangSC-Regular', 'PingFang SC';">：</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (Group) -->
+            <div id="u33" class="ax_default u33" data-left="31" data-top="177" data-width="87" data-height="15">
+
+                <!-- More Details (Rectangle) -->
+                <div id="u34" class="ax_default label u34" data-label="More Details">
+                    <div id="u34_div" class="u34_div"></div>
+                    <div id="u34_text" class="text u34_text">
+                        <p><span>More details</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Shape) -->
+                <div id="u35" class="ax_default icon u35">
+                    <img id="u35_img" class="img u35_img"
+                         src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/home/u35.png?token=69f4986b810b5b96125ea9f397802648"/>
+                </div>
+            </div>
+
+            <!-- Apply (Rectangle) -->
+            <div id="u36" class="ax_default primary_button u36" data-label="Apply">
+                <div id="u36_div" class="u36_div"></div>
+                <div id="u36_text" class="text u36_text">
+                    <p><span>Apply</span></p>
+                </div>
+            </div>
+
+            <!-- School_1 (Rectangle) -->
+            <div id="u37" class="ax_default label u37" data-label="School_1">
+                <div id="u37_div" class="u37_div"></div>
+                <div id="u37_text" class="text u37_text">
+                    <p><span>Label</span></p>
+                </div>
+            </div>
+
+            <!-- Job quick view (Rectangle) -->
+            <div id="u38" class="ax_default label u38" data-label="Job quick view">
+                <div id="u38_div" class="u38_div"></div>
+                <div id="u38_text" class="text u38_text">
+                    <p><span style="font-family:'Helvetica';">Position</span><span
+                        style="font-family:'PingFangSC-Regular', 'PingFang SC';">：</span></p>
+                </div>
+            </div>
+
+            <!-- Job quick view (Rectangle) -->
+            <div id="u39" class="ax_default label u39" data-label="Job quick view">
+                <div id="u39_div" class="u39_div"></div>
+                <div id="u39_text" class="text u39_text">
+                    <p><span style="font-family:'Helvetica';">Location</span><span
+                        style="font-family:'PingFangSC-Regular', 'PingFang SC';">：</span></p>
+                </div>
+            </div>
+
+            <!-- Position_1 (Rectangle) -->
+            <div id="u40" class="ax_default label u40" data-label="Position_1">
+                <div id="u40_div" class="u40_div"></div>
+                <div id="u40_text" class="text u40_text">
+                    <p><span>Label</span></p>
+                </div>
+            </div>
+
+            <!-- Location_1 (Rectangle) -->
+            <div id="u41" class="ax_default label u41" data-label="Location_1">
+                <div id="u41_div" class="u41_div"></div>
+                <div id="u41_text" class="text u41_text">
+                    <p><span>Label</span></p>
+                </div>
+            </div>
+        </script>
+        <div id="u29-1" class="" style="width: 303px; height: 230px;">
+
+            <!-- Job List 框 (Rectangle) -->
+            <div id="u30-1" class="ax_default box_1 u30" data-label="Job List 框"
+                 style="width: 300px; height: 230px; left: 3px; top: 0px;visibility: inherit">
+                <div id="u30-1_div" class="u30_div" style="width: 300px; height: 230px;visibility: inherit"></div>
+            </div>
+
+            <!-- School Logo (Image) -->
+            <div id="u31-1" class="ax_default image u31" data-label="School Logo"
+                 style="width: 58px; height: 58px; left: 31px; top: 16px;visibility: inherit">
+                <img id="u31-1_img" class="img u31_img" th:src="@{/css/thymeleaf/Home_files/p0.png}"
+                     style="border-radius: 0px; width: 58px; height: 58px;"/>
+                <div id="u31-1_border" style="position: absolute; border-radius: 0px;"></div>
+            </div>
+
+            <!-- Job quick view (Rectangle) -->
+            <div id="u32-1" class="ax_default label u32" data-label="Job quick view"
+                 style="width: 58px; height: 19px; left: 31px; top: 85px;visibility: inherit">
+                <div id="u32-1_div" class="u32_div" style="width: 58px; height: 19px;visibility: inherit"></div>
+                <div id="u32-1_text" class="text u32_text"
+                     style="position: absolute;left: 0px;top: 0px;width: 58px;visibility: inherit">
+                    <p><span style="font-family:&#39;Helvetica&#39;;">School</span><span
+                        style="font-family:&#39;PingFangSC-Regular&#39;, &#39;PingFang SC&#39;;">：</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (Group) -->
+            <div id="u33-1" class="ax_default u33" style="visibility: inherit" data-left="31" data-top="177"
+                 data-width="87" data-height="15">
+
+                <!-- More Details (Rectangle) -->
+                <div id="u34-1" class="ax_default label u34" data-label="More Details"
+                     style="width: 68px; height: 14px; left: 50px; top: 178px;visibility: inherit">
+                    <div id="u34-1_div" class="u34_div" style="width: 68px; height: 14px;visibility: inherit"></div>
+                    <div id="u34-1_text" class="text u34_text"
+                         style="position: absolute; left: 0px; top: 0px; width: 68px; visibility: inherit; transform-origin: 34px 7px 0px;">
+                        <p><span>More details</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Shape) -->
+                <div id="u35-1" class="ax_default icon u35"
+                     style="width: 13px; height: 15px; left: 31px; top: 177px;visibility: inherit">
+                    <img id="u35-1_img" class="img u35_img" th:src="@{/css/thymeleaf/Home_files/u35.png}"/>
+                </div>
+            </div>
+
+            <!-- Apply (Rectangle) -->
+            <div id="u36-1" class="ax_default primary_button u36" data-label="Apply"
+                 style="width: 47px; height: 29px; left: 172px; top: 170px;visibility: inherit">
+                <div id="u36-1_div" class="u36_div" style="width: 47px; height: 29px;visibility: inherit"></div>
+                <div id="u36-1_text" class="text u36_text"
+                     style="position: absolute; left: 2px; top: 9px; width: 43px; visibility: inherit; transform-origin: 21.5px 5.5px 0px;">
+                    <p><span>Apply</span></p>
+                </div>
+            </div>
+
+            <!-- School_1 (Rectangle) -->
+            <div id="u37-1" class="ax_default label u37" data-label="School_1"
+                 style="width: 36px; height: 17px; left: 110px; top: 85px;visibility: inherit">
+                <div id="u37-1_div" class="u37_div" style="width: 36px; height: 17px;visibility: inherit"></div>
+                <div id="u37-1_text" class="text u37_text"
+                     style="position: absolute; left: 0px; top: 0px; width: 36px; visibility: inherit; transform-origin: 18px 9px 0px;">
+                    <p id="cache4"><span id="cache5">Shanghai American School</span></p>
+                </div>
+            </div>
+
+            <!-- Job quick view (Rectangle) -->
+            <div id="u38-1" class="ax_default label u38" data-label="Job quick view"
+                 style="width: 67px; height: 19px; left: 31px; top: 105px;visibility: inherit">
+                <div id="u38-1_div" class="u38_div" style="width: 67px; height: 19px;visibility: inherit"></div>
+                <div id="u38-1_text" class="text u38_text"
+                     style="position: absolute;left: 0px;top: 0px;width: 67px;visibility: inherit">
+                    <p><span style="font-family:&#39;Helvetica&#39;;">Position</span><span
+                        style="font-family:&#39;PingFangSC-Regular&#39;, &#39;PingFang SC&#39;;">：</span></p>
+                </div>
+            </div>
+
+            <!-- Job quick view (Rectangle) -->
+            <div id="u39-1" class="ax_default label u39" data-label="Job quick view"
+                 style="width: 77px; height: 19px; left: 31px; top: 125px;visibility: inherit">
+                <div id="u39-1_div" class="u39_div" style="width: 77px; height: 19px;visibility: inherit"></div>
+                <div id="u39-1_text" class="text u39_text"
+                     style="position: absolute;left: 0px;top: 0px;width: 77px;visibility: inherit">
+                    <p><span style="font-family:&#39;Helvetica&#39;;">Location</span><span
+                        style="font-family:&#39;PingFangSC-Regular&#39;, &#39;PingFang SC&#39;;">：</span></p>
+                </div>
+            </div>
+
+            <!-- Position_1 (Rectangle) -->
+            <div id="u40-1" class="ax_default label u40" data-label="Position_1"
+                 style="width: 36px; height: 17px; left: 110px; top: 105px;visibility: inherit">
+                <div id="u40-1_div" class="u40_div" style="width: 36px; height: 17px;visibility: inherit"></div>
+                <div id="u40-1_text" class="text u40_text"
+                     style="position: absolute; left: 0px; top: 0px; width: 36px; visibility: inherit; transform-origin: 18px 9px 0px;">
+                    <p id="cache2"><span id="cache3">Classroom TA, Middle School</span></p>
+                </div>
+            </div>
+
+            <!-- Location_1 (Rectangle) -->
+            <div id="u41-1" class="ax_default label u41" data-label="Location_1"
+                 style="width: 36px; height: 17px; left: 110px; top: 125px;visibility: inherit">
+                <div id="u41-1_div" class="u41_div" style="width: 36px; height: 17px;visibility: inherit"></div>
+                <div id="u41-1_text" class="text u41_text"
+                     style="position: absolute; left: 0px; top: 0px; width: 36px; visibility: inherit; transform-origin: 18px 9px 0px;">
+                    <p id="cache0"><span id="cache1">Pudong, Shanghai</span></p>
+                </div>
+            </div>
+        </div>
+        <div id="u29-2" class="" style="width: 303px; height: 230px;">
+
+            <!-- Job List 框 (Rectangle) -->
+            <div id="u30-2" class="ax_default box_1 u30" data-label="Job List 框"
+                 style="width: 300px; height: 230px; left: 3px; top: 0px;visibility: inherit">
+                <div id="u30-2_div" class="u30_div" style="width: 300px; height: 230px;visibility: inherit"></div>
+            </div>
+
+            <!-- School Logo (Image) -->
+            <div id="u31-2" class="ax_default image u31" data-label="School Logo"
+                 style="width: 58px; height: 58px; left: 31px; top: 16px;visibility: inherit">
+                <img id="u31-2_img" class="img u31_img" th:src="@{/css/thymeleaf/Home_files/p1.png}"
+                     style="border-radius: 0px; width: 58px; height: 58px;"/>
+                <div id="u31-2_border" style="position: absolute; border-radius: 0px;"></div>
+            </div>
+
+            <!-- Job quick view (Rectangle) -->
+            <div id="u32-2" class="ax_default label u32" data-label="Job quick view"
+                 style="width: 58px; height: 19px; left: 31px; top: 85px;visibility: inherit">
+                <div id="u32-2_div" class="u32_div" style="width: 58px; height: 19px;visibility: inherit"></div>
+                <div id="u32-2_text" class="text u32_text"
+                     style="position: absolute;left: 0px;top: 0px;width: 58px;visibility: inherit">
+                    <p><span style="font-family:&#39;Helvetica&#39;;">School</span><span
+                        style="font-family:&#39;PingFangSC-Regular&#39;, &#39;PingFang SC&#39;;">：</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (Group) -->
+            <div id="u33-2" class="ax_default u33" style="visibility: inherit" data-left="31" data-top="177"
+                 data-width="87" data-height="15">
+
+                <!-- More Details (Rectangle) -->
+                <div id="u34-2" class="ax_default label u34" data-label="More Details"
+                     style="width: 68px; height: 14px; left: 50px; top: 178px;visibility: inherit">
+                    <div id="u34-2_div" class="u34_div" style="width: 68px; height: 14px;visibility: inherit"></div>
+                    <div id="u34-2_text" class="text u34_text"
+                         style="position: absolute; left: 0px; top: 0px; width: 68px; visibility: inherit; transform-origin: 34px 7px 0px;">
+                        <p><span>More details</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Shape) -->
+                <div id="u35-2" class="ax_default icon u35"
+                     style="width: 13px; height: 15px; left: 31px; top: 177px;visibility: inherit">
+                    <img id="u35-2_img" class="img u35_img" th:src="@{/css/thymeleaf/Home_files/u35.png}"/>
+                </div>
+            </div>
+
+            <!-- Apply (Rectangle) -->
+            <div id="u36-2" class="ax_default primary_button u36" data-label="Apply"
+                 style="width: 47px; height: 29px; left: 172px; top: 170px;visibility: inherit">
+                <div id="u36-2_div" class="u36_div" style="width: 47px; height: 29px;visibility: inherit"></div>
+                <div id="u36-2_text" class="text u36_text"
+                     style="position: absolute; left: 2px; top: 9px; width: 43px; visibility: inherit; transform-origin: 21.5px 5.5px 0px;">
+                    <p><span>Apply</span></p>
+                </div>
+            </div>
+
+            <!-- School_1 (Rectangle) -->
+            <div id="u37-2" class="ax_default label u37" data-label="School_1"
+                 style="width: 36px; height: 17px; left: 110px; top: 85px;visibility: inherit">
+                <div id="u37-2_div" class="u37_div" style="width: 36px; height: 17px;visibility: inherit"></div>
+                <div id="u37-2_text" class="text u37_text"
+                     style="position: absolute; left: 0px; top: 0px; width: 36px; visibility: inherit; transform-origin: 18px 9px 0px;">
+                    <p id="cache10"><span id="cache11">2</span></p>
+                </div>
+            </div>
+
+            <!-- Job quick view (Rectangle) -->
+            <div id="u38-2" class="ax_default label u38" data-label="Job quick view"
+                 style="width: 67px; height: 19px; left: 31px; top: 105px;visibility: inherit">
+                <div id="u38-2_div" class="u38_div" style="width: 67px; height: 19px;visibility: inherit"></div>
+                <div id="u38-2_text" class="text u38_text"
+                     style="position: absolute;left: 0px;top: 0px;width: 67px;visibility: inherit">
+                    <p><span style="font-family:&#39;Helvetica&#39;;">Position</span><span
+                        style="font-family:&#39;PingFangSC-Regular&#39;, &#39;PingFang SC&#39;;">：</span></p>
+                </div>
+            </div>
+
+            <!-- Job quick view (Rectangle) -->
+            <div id="u39-2" class="ax_default label u39" data-label="Job quick view"
+                 style="width: 77px; height: 19px; left: 31px; top: 125px;visibility: inherit">
+                <div id="u39-2_div" class="u39_div" style="width: 77px; height: 19px;visibility: inherit"></div>
+                <div id="u39-2_text" class="text u39_text"
+                     style="position: absolute;left: 0px;top: 0px;width: 77px;visibility: inherit">
+                    <p><span style="font-family:&#39;Helvetica&#39;;">Location</span><span
+                        style="font-family:&#39;PingFangSC-Regular&#39;, &#39;PingFang SC&#39;;">：</span></p>
+                </div>
+            </div>
+
+            <!-- Position_1 (Rectangle) -->
+            <div id="u40-2" class="ax_default label u40" data-label="Position_1"
+                 style="width: 36px; height: 17px; left: 110px; top: 105px;visibility: inherit">
+                <div id="u40-2_div" class="u40_div" style="width: 36px; height: 17px;visibility: inherit"></div>
+                <div id="u40-2_text" class="text u40_text"
+                     style="position: absolute; left: 0px; top: 0px; width: 36px; visibility: inherit; transform-origin: 18px 9px 0px;">
+                    <p id="cache8"><span id="cache9"> </span></p>
+                </div>
+            </div>
+
+            <!-- Location_1 (Rectangle) -->
+            <div id="u41-2" class="ax_default label u41" data-label="Location_1"
+                 style="width: 36px; height: 17px; left: 110px; top: 125px;visibility: inherit">
+                <div id="u41-2_div" class="u41_div" style="width: 36px; height: 17px;visibility: inherit"></div>
+                <div id="u41-2_text" class="text u41_text"
+                     style="position: absolute; left: 0px; top: 0px; width: 36px; visibility: hidden; transform-origin: 18px 9px 0px; display: none;">
+                    <p id="cache6"><span id="cache7"></span></p>
+                </div>
+            </div>
+        </div>
+        <div id="u29-3" class="" style="width: 303px; height: 230px;">
+
+            <!-- Job List 框 (Rectangle) -->
+            <div id="u30-3" class="ax_default box_1 u30" data-label="Job List 框"
+                 style="width: 300px; height: 230px; left: 3px; top: 0px;visibility: inherit">
+                <div id="u30-3_div" class="u30_div" style="width: 300px; height: 230px;visibility: inherit"></div>
+            </div>
+
+            <!-- School Logo (Image) -->
+            <div id="u31-3" class="ax_default image u31" data-label="School Logo"
+                 style="width: 58px; height: 58px; left: 31px; top: 16px;visibility: inherit">
+                <img id="u31-3_img" class="img u31_img" th:src="@{/css/thymeleaf/Home_files/transparent.gif}"
+                     style="border-radius: 0px; width: 58px; height: 58px;"/>
+                <div id="u31-3_border" style="position: absolute; border-radius: 0px;"></div>
+            </div>
+
+            <!-- Job quick view (Rectangle) -->
+            <div id="u32-3" class="ax_default label u32" data-label="Job quick view"
+                 style="width: 58px; height: 19px; left: 31px; top: 85px;visibility: inherit">
+                <div id="u32-3_div" class="u32_div" style="width: 58px; height: 19px;visibility: inherit"></div>
+                <div id="u32-3_text" class="text u32_text"
+                     style="position: absolute;left: 0px;top: 0px;width: 58px;visibility: inherit">
+                    <p><span style="font-family:&#39;Helvetica&#39;;">School</span><span
+                        style="font-family:&#39;PingFangSC-Regular&#39;, &#39;PingFang SC&#39;;">：</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (Group) -->
+            <div id="u33-3" class="ax_default u33" style="visibility: inherit" data-left="31" data-top="177"
+                 data-width="87" data-height="15">
+
+                <!-- More Details (Rectangle) -->
+                <div id="u34-3" class="ax_default label u34" data-label="More Details"
+                     style="width: 68px; height: 14px; left: 50px; top: 178px;visibility: inherit">
+                    <div id="u34-3_div" class="u34_div" style="width: 68px; height: 14px;visibility: inherit"></div>
+                    <div id="u34-3_text" class="text u34_text"
+                         style="position: absolute; left: 0px; top: 0px; width: 68px; visibility: inherit; transform-origin: 34px 7px 0px;">
+                        <p><span>More details</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Shape) -->
+                <div id="u35-3" class="ax_default icon u35"
+                     style="width: 13px; height: 15px; left: 31px; top: 177px;visibility: inherit">
+                    <img id="u35-3_img" class="img u35_img" th:src="@{/css/thymeleaf/Home_files/u35.png}"/>
+                </div>
+            </div>
+
+            <!-- Apply (Rectangle) -->
+            <div id="u36-3" class="ax_default primary_button u36" data-label="Apply"
+                 style="width: 47px; height: 29px; left: 172px; top: 170px;visibility: inherit">
+                <div id="u36-3_div" class="u36_div" style="width: 47px; height: 29px;visibility: inherit"></div>
+                <div id="u36-3_text" class="text u36_text"
+                     style="position: absolute; left: 2px; top: 9px; width: 43px; visibility: inherit; transform-origin: 21.5px 5.5px 0px;">
+                    <p><span>Apply</span></p>
+                </div>
+            </div>
+
+            <!-- School_1 (Rectangle) -->
+            <div id="u37-3" class="ax_default label u37" data-label="School_1"
+                 style="width: 36px; height: 17px; left: 110px; top: 85px;visibility: inherit">
+                <div id="u37-3_div" class="u37_div" style="width: 36px; height: 17px;visibility: inherit"></div>
+                <div id="u37-3_text" class="text u37_text"
+                     style="position: absolute; left: 0px; top: 0px; width: 36px; visibility: inherit; transform-origin: 18px 9px 0px;">
+                    <p id="cache16"><span id="cache17">3</span></p>
+                </div>
+            </div>
+
+            <!-- Job quick view (Rectangle) -->
+            <div id="u38-3" class="ax_default label u38" data-label="Job quick view"
+                 style="width: 67px; height: 19px; left: 31px; top: 105px;visibility: inherit">
+                <div id="u38-3_div" class="u38_div" style="width: 67px; height: 19px;visibility: inherit"></div>
+                <div id="u38-3_text" class="text u38_text"
+                     style="position: absolute;left: 0px;top: 0px;width: 67px;visibility: inherit">
+                    <p><span style="font-family:&#39;Helvetica&#39;;">Position</span><span
+                        style="font-family:&#39;PingFangSC-Regular&#39;, &#39;PingFang SC&#39;;">：</span></p>
+                </div>
+            </div>
+
+            <!-- Job quick view (Rectangle) -->
+            <div id="u39-3" class="ax_default label u39" data-label="Job quick view"
+                 style="width: 77px; height: 19px; left: 31px; top: 125px;visibility: inherit">
+                <div id="u39-3_div" class="u39_div" style="width: 77px; height: 19px;visibility: inherit"></div>
+                <div id="u39-3_text" class="text u39_text"
+                     style="position: absolute;left: 0px;top: 0px;width: 77px;visibility: inherit">
+                    <p><span style="font-family:&#39;Helvetica&#39;;">Location</span><span
+                        style="font-family:&#39;PingFangSC-Regular&#39;, &#39;PingFang SC&#39;;">：</span></p>
+                </div>
+            </div>
+
+            <!-- Position_1 (Rectangle) -->
+            <div id="u40-3" class="ax_default label u40" data-label="Position_1"
+                 style="width: 36px; height: 17px; left: 110px; top: 105px;visibility: inherit">
+                <div id="u40-3_div" class="u40_div" style="width: 36px; height: 17px;visibility: inherit"></div>
+                <div id="u40-3_text" class="text u40_text"
+                     style="position: absolute; left: 0px; top: 0px; width: 36px; visibility: hidden; transform-origin: 18px 9px 0px; display: none;">
+                    <p id="cache14"><span id="cache15"></span></p>
+                </div>
+            </div>
+
+            <!-- Location_1 (Rectangle) -->
+            <div id="u41-3" class="ax_default label u41" data-label="Location_1"
+                 style="width: 36px; height: 17px; left: 110px; top: 125px;visibility: inherit">
+                <div id="u41-3_div" class="u41_div" style="width: 36px; height: 17px;visibility: inherit"></div>
+                <div id="u41-3_text" class="text u41_text"
+                     style="position: absolute; left: 0px; top: 0px; width: 36px; visibility: hidden; transform-origin: 18px 9px 0px; display: none;">
+                    <p id="cache12"><span id="cache13"></span></p>
+                </div>
+            </div>
+        </div>
+        <div id="u29-4" class="" style="width: 303px; height: 230px;">
+
+            <!-- Job List 框 (Rectangle) -->
+            <div id="u30-4" class="ax_default box_1 u30" data-label="Job List 框"
+                 style="width: 300px; height: 230px; left: 3px; top: 0px;visibility: inherit">
+                <div id="u30-4_div" class="u30_div" style="width: 300px; height: 230px;visibility: inherit"></div>
+            </div>
+
+            <!-- School Logo (Image) -->
+            <div id="u31-4" class="ax_default image u31" data-label="School Logo"
+                 style="width: 58px; height: 58px; left: 31px; top: 16px;visibility: inherit">
+                <img id="u31-4_img" class="img u31_img" th:src="@{/css/thymeleaf/Home_files/transparent.gif}"
+                     style="border-radius: 0px; width: 58px; height: 58px;"/>
+                <div id="u31-4_border" style="position: absolute; border-radius: 0px;"></div>
+            </div>
+
+            <!-- Job quick view (Rectangle) -->
+            <div id="u32-4" class="ax_default label u32" data-label="Job quick view"
+                 style="width: 58px; height: 19px; left: 31px; top: 85px;visibility: inherit">
+                <div id="u32-4_div" class="u32_div" style="width: 58px; height: 19px;visibility: inherit"></div>
+                <div id="u32-4_text" class="text u32_text"
+                     style="position: absolute;left: 0px;top: 0px;width: 58px;visibility: inherit">
+                    <p><span style="font-family:&#39;Helvetica&#39;;">School</span><span
+                        style="font-family:&#39;PingFangSC-Regular&#39;, &#39;PingFang SC&#39;;">：</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (Group) -->
+            <div id="u33-4" class="ax_default u33" style="visibility: inherit" data-left="31" data-top="177"
+                 data-width="87" data-height="15">
+
+                <!-- More Details (Rectangle) -->
+                <div id="u34-4" class="ax_default label u34" data-label="More Details"
+                     style="width: 68px; height: 14px; left: 50px; top: 178px;visibility: inherit">
+                    <div id="u34-4_div" class="u34_div" style="width: 68px; height: 14px;visibility: inherit"></div>
+                    <div id="u34-4_text" class="text u34_text"
+                         style="position: absolute; left: 0px; top: 0px; width: 68px; visibility: inherit; transform-origin: 34px 7px 0px;">
+                        <p><span>More details</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Shape) -->
+                <div id="u35-4" class="ax_default icon u35"
+                     style="width: 13px; height: 15px; left: 31px; top: 177px;visibility: inherit">
+                    <img id="u35-4_img" class="img u35_img" th:src="@{/css/thymeleaf/Home_files/u35.png}"/>
+                </div>
+            </div>
+
+            <!-- Apply (Rectangle) -->
+            <div id="u36-4" class="ax_default primary_button u36" data-label="Apply"
+                 style="width: 47px; height: 29px; left: 172px; top: 170px;visibility: inherit">
+                <div id="u36-4_div" class="u36_div" style="width: 47px; height: 29px;visibility: inherit"></div>
+                <div id="u36-4_text" class="text u36_text"
+                     style="position: absolute; left: 2px; top: 9px; width: 43px; visibility: inherit; transform-origin: 21.5px 5.5px 0px;">
+                    <p><span>Apply</span></p>
+                </div>
+            </div>
+
+            <!-- School_1 (Rectangle) -->
+            <div id="u37-4" class="ax_default label u37" data-label="School_1"
+                 style="width: 36px; height: 17px; left: 110px; top: 85px;visibility: inherit">
+                <div id="u37-4_div" class="u37_div" style="width: 36px; height: 17px;visibility: inherit"></div>
+                <div id="u37-4_text" class="text u37_text"
+                     style="position: absolute; left: 0px; top: 0px; width: 36px; visibility: inherit; transform-origin: 18px 9px 0px;">
+                    <p id="cache22"><span id="cache23">4</span></p>
+                </div>
+            </div>
+
+            <!-- Job quick view (Rectangle) -->
+            <div id="u38-4" class="ax_default label u38" data-label="Job quick view"
+                 style="width: 67px; height: 19px; left: 31px; top: 105px;visibility: inherit">
+                <div id="u38-4_div" class="u38_div" style="width: 67px; height: 19px;visibility: inherit"></div>
+                <div id="u38-4_text" class="text u38_text"
+                     style="position: absolute;left: 0px;top: 0px;width: 67px;visibility: inherit">
+                    <p><span style="font-family:&#39;Helvetica&#39;;">Position</span><span
+                        style="font-family:&#39;PingFangSC-Regular&#39;, &#39;PingFang SC&#39;;">：</span></p>
+                </div>
+            </div>
+
+            <!-- Job quick view (Rectangle) -->
+            <div id="u39-4" class="ax_default label u39" data-label="Job quick view"
+                 style="width: 77px; height: 19px; left: 31px; top: 125px;visibility: inherit">
+                <div id="u39-4_div" class="u39_div" style="width: 77px; height: 19px;visibility: inherit"></div>
+                <div id="u39-4_text" class="text u39_text"
+                     style="position: absolute;left: 0px;top: 0px;width: 77px;visibility: inherit">
+                    <p><span style="font-family:&#39;Helvetica&#39;;">Location</span><span
+                        style="font-family:&#39;PingFangSC-Regular&#39;, &#39;PingFang SC&#39;;">：</span></p>
+                </div>
+            </div>
+
+            <!-- Position_1 (Rectangle) -->
+            <div id="u40-4" class="ax_default label u40" data-label="Position_1"
+                 style="width: 36px; height: 17px; left: 110px; top: 105px;visibility: inherit">
+                <div id="u40-4_div" class="u40_div" style="width: 36px; height: 17px;visibility: inherit"></div>
+                <div id="u40-4_text" class="text u40_text"
+                     style="position: absolute; left: 0px; top: 0px; width: 36px; visibility: hidden; transform-origin: 18px 9px 0px; display: none;">
+                    <p id="cache20"><span id="cache21"></span></p>
+                </div>
+            </div>
+
+            <!-- Location_1 (Rectangle) -->
+            <div id="u41-4" class="ax_default label u41" data-label="Location_1"
+                 style="width: 36px; height: 17px; left: 110px; top: 125px;visibility: inherit">
+                <div id="u41-4_div" class="u41_div" style="width: 36px; height: 17px;visibility: inherit"></div>
+                <div id="u41-4_text" class="text u41_text"
+                     style="position: absolute; left: 0px; top: 0px; width: 36px; visibility: hidden; transform-origin: 18px 9px 0px; display: none;">
+                    <p id="cache18"><span id="cache19"></span></p>
+                </div>
+            </div>
+        </div>
+        <div id="u29-5" class="" style="width: 303px; height: 230px;">
+
+            <!-- Job List 框 (Rectangle) -->
+            <div id="u30-5" class="ax_default box_1 u30" data-label="Job List 框"
+                 style="width: 300px; height: 230px; left: 3px; top: 0px;visibility: inherit">
+                <div id="u30-5_div" class="u30_div" style="width: 300px; height: 230px;visibility: inherit"></div>
+            </div>
+
+            <!-- School Logo (Image) -->
+            <div id="u31-5" class="ax_default image u31" data-label="School Logo"
+                 style="width: 58px; height: 58px; left: 31px; top: 16px;visibility: inherit">
+                <img id="u31-5_img" class="img u31_img" th:src="@{/css/thymeleaf/Home_files/transparent.gif}"
+                     style="border-radius: 0px; width: 58px; height: 58px;"/>
+                <div id="u31-5_border" style="position: absolute; border-radius: 0px;"></div>
+            </div>
+
+            <!-- Job quick view (Rectangle) -->
+            <div id="u32-5" class="ax_default label u32" data-label="Job quick view"
+                 style="width: 58px; height: 19px; left: 31px; top: 85px;visibility: inherit">
+                <div id="u32-5_div" class="u32_div" style="width: 58px; height: 19px;visibility: inherit"></div>
+                <div id="u32-5_text" class="text u32_text"
+                     style="position: absolute;left: 0px;top: 0px;width: 58px;visibility: inherit">
+                    <p><span style="font-family:&#39;Helvetica&#39;;">School</span><span
+                        style="font-family:&#39;PingFangSC-Regular&#39;, &#39;PingFang SC&#39;;">：</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (Group) -->
+            <div id="u33-5" class="ax_default u33" style="visibility: inherit" data-left="31" data-top="177"
+                 data-width="87" data-height="15">
+
+                <!-- More Details (Rectangle) -->
+                <div id="u34-5" class="ax_default label u34" data-label="More Details"
+                     style="width: 68px; height: 14px; left: 50px; top: 178px;visibility: inherit">
+                    <div id="u34-5_div" class="u34_div" style="width: 68px; height: 14px;visibility: inherit"></div>
+                    <div id="u34-5_text" class="text u34_text"
+                         style="position: absolute; left: 0px; top: 0px; width: 68px; visibility: inherit; transform-origin: 34px 7px 0px;">
+                        <p><span>More details</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Shape) -->
+                <div id="u35-5" class="ax_default icon u35"
+                     style="width: 13px; height: 15px; left: 31px; top: 177px;visibility: inherit">
+                    <img id="u35-5_img" class="img u35_img" th:src="@{/css/thymeleaf/Home_files/u35.png}"/>
+                </div>
+            </div>
+
+            <!-- Apply (Rectangle) -->
+            <div id="u36-5" class="ax_default primary_button u36" data-label="Apply"
+                 style="width: 47px; height: 29px; left: 172px; top: 170px;visibility: inherit">
+                <div id="u36-5_div" class="u36_div" style="width: 47px; height: 29px;visibility: inherit"></div>
+                <div id="u36-5_text" class="text u36_text"
+                     style="position: absolute; left: 2px; top: 9px; width: 43px; visibility: inherit; transform-origin: 21.5px 5.5px 0px;">
+                    <p><span>Apply</span></p>
+                </div>
+            </div>
+
+            <!-- School_1 (Rectangle) -->
+            <div id="u37-5" class="ax_default label u37" data-label="School_1"
+                 style="width: 36px; height: 17px; left: 110px; top: 85px;visibility: inherit">
+                <div id="u37-5_div" class="u37_div" style="width: 36px; height: 17px;visibility: inherit"></div>
+                <div id="u37-5_text" class="text u37_text"
+                     style="position: absolute; left: 0px; top: 0px; width: 36px; visibility: inherit; transform-origin: 18px 9px 0px;">
+                    <p id="cache28"><span id="cache29">5</span></p>
+                </div>
+            </div>
+
+            <!-- Job quick view (Rectangle) -->
+            <div id="u38-5" class="ax_default label u38" data-label="Job quick view"
+                 style="width: 67px; height: 19px; left: 31px; top: 105px;visibility: inherit">
+                <div id="u38-5_div" class="u38_div" style="width: 67px; height: 19px;visibility: inherit"></div>
+                <div id="u38-5_text" class="text u38_text"
+                     style="position: absolute;left: 0px;top: 0px;width: 67px;visibility: inherit">
+                    <p><span style="font-family:&#39;Helvetica&#39;;">Position</span><span
+                        style="font-family:&#39;PingFangSC-Regular&#39;, &#39;PingFang SC&#39;;">：</span></p>
+                </div>
+            </div>
+
+            <!-- Job quick view (Rectangle) -->
+            <div id="u39-5" class="ax_default label u39" data-label="Job quick view"
+                 style="width: 77px; height: 19px; left: 31px; top: 125px;visibility: inherit">
+                <div id="u39-5_div" class="u39_div" style="width: 77px; height: 19px;visibility: inherit"></div>
+                <div id="u39-5_text" class="text u39_text"
+                     style="position: absolute;left: 0px;top: 0px;width: 77px;visibility: inherit">
+                    <p><span style="font-family:&#39;Helvetica&#39;;">Location</span><span
+                        style="font-family:&#39;PingFangSC-Regular&#39;, &#39;PingFang SC&#39;;">：</span></p>
+                </div>
+            </div>
+
+            <!-- Position_1 (Rectangle) -->
+            <div id="u40-5" class="ax_default label u40" data-label="Position_1"
+                 style="width: 36px; height: 17px; left: 110px; top: 105px;visibility: inherit">
+                <div id="u40-5_div" class="u40_div" style="width: 36px; height: 17px;visibility: inherit"></div>
+                <div id="u40-5_text" class="text u40_text"
+                     style="position: absolute; left: 0px; top: 0px; width: 36px; visibility: hidden; transform-origin: 18px 9px 0px; display: none;">
+                    <p id="cache26"><span id="cache27"></span></p>
+                </div>
+            </div>
+
+            <!-- Location_1 (Rectangle) -->
+            <div id="u41-5" class="ax_default label u41" data-label="Location_1"
+                 style="width: 36px; height: 17px; left: 110px; top: 125px;visibility: inherit">
+                <div id="u41-5_div" class="u41_div" style="width: 36px; height: 17px;visibility: inherit"></div>
+                <div id="u41-5_text" class="text u41_text"
+                     style="position: absolute; left: 0px; top: 0px; width: 36px; visibility: hidden; transform-origin: 18px 9px 0px; display: none;">
+                    <p id="cache24"><span id="cache25"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+</body>
+</html>

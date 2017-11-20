@@ -1,0 +1,87 @@
+body{
+    margin: 0;
+    text-align: center;
+    width: 95%;
+}
+a{
+    text-decoration: none;
+}
+/*.mojob-header{*/
+    /*width: 95%;*/
+
+
+/*}*/
+.mojob-header img
+{
+    width: 124px;
+    height: 105px;
+    vertical-align: middle;
+}
+.mojob-header ul{
+    display: inline-block;
+}
+.mojob-header ul li{
+    display: inline-block;
+    border-radius: 40px;
+    background: #fff;
+    width: 125px;
+    height: 26px;
+    line-height: 26px;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 16px;
+    text-align: center;
+    -moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.349019607843137);
+    -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.349019607843137);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.349019607843137);
+    font-family: 'Helvetica-Bold', 'Helvetica Bold', 'Helvetica', serif;
+    margin-left: -15px;
+}
+.mojob-header ul li:first-child{
+    margin-left: 0;
+}
+.mojob-header ul li a{
+    display: block;
+    color: #3366CC;
+
+}
+.mojob-header ul li:hover{
+    background-color:rgba(255, 255, 255, 1);
+    -moz-box-shadow:0 4px 4px 0 rgba(0, 0, 0, 0.349019607843137) inset;
+    -webkit-box-shadow:0 4px 4px 0 rgba(0, 0, 0, 0.349019607843137) inset;
+    box-shadow:0 4px 4px 0 rgba(0, 0, 0, 0.349019607843137) inset;
+}
+.logIn{
+    display: inline-block;
+    float: right;
+    margin: 44px 10px 0 0;
+
+}
+.logIn input{
+    width: 83px;
+    height: 25px;
+}
+.logIn .user{
+    width: 24px;
+    height: 29px;
+}
+.logIn .register{
+    width: 66px;
+    height: 25px;
+    line-height: 25px;
+    display: inline-block;
+    background-color: rgba(51, 102, 204, 1);
+    font-weight: 400;
+    font-style: normal;
+    font-size: 13px;
+    color: #fff;
+    text-align: center;
+}
+.logIn .logText{
+    width: 66px;
+    display: inline-block;
+    height: 25px;
+    text-align: center;
+    font-size: 13px;
+    font-family: 'Helvetica', serif;
+}

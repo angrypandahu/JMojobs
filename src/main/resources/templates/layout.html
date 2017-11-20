@@ -1,0 +1,214 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">IColor BackOffice</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+    <link th:href="@{/css/thymeleaf/Home_files/jquery-ui-themes.css}" type="text/css" rel="stylesheet"/>
+    <link th:href="@{/css/thymeleaf/Home_files/axure_rp_page.css}" type="text/css" rel="stylesheet"/>
+    <link th:href="@{/css/thymeleaf/Home_files/styles.css}" type="text/css" rel="stylesheet"/>
+    <link th:href="@{/css/thymeleaf/Home_files/styles(1).css}" type="text/css" rel="stylesheet"/>
+    <script th:src="@{/css/thymeleaf/Home_files/jquery-1.7.1.min.js}"></script>
+    <script th:src="@{/css/thymeleaf/Home_files/jquery-ui-1.8.10.custom.min.js}"></script>
+    <!--<script th:src="@{/css/thymeleaf/Home_files/prototypePre.js}"></script>-->
+    <!--<script th:src="@{/css/thymeleaf/Home_files/document.js}"></script>-->
+    <!--<script th:src="@{/css/thymeleaf/Home_files/prototypePost.js}"></script>-->
+    <!--<script th:src="@{/css/thymeleaf/Home_files/data.js}"></script>-->
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
+    <script>
+        function login() {
+            $("#loginFormId").submit();
+        }
+    </script>
+</head>
+<body>
+<div id="base" class="">
+
+    <div layout:fragment="content"></div>
+
+    <!-- 导航栏 (Group) -->
+    <div id="u42" class="ax_default" data-label="导航栏" data-left="0" data-top="0" data-width="750" data-height="105">
+
+        <!-- Unnamed (Group) -->
+        <div id="u43" class="ax_default" data-left="0" data-top="0" data-width="0" data-height="0">
+
+            <!-- 导航栏 (Rectangle) -->
+            <div id="u44" class="ax_default box_1 ax_default_hidden" data-label="导航栏"
+                 style="display:none; visibility: hidden">
+                <div id="u44_div" class=""></div>
+            </div>
+        </div>
+
+        <!-- Logo (Image) -->
+        <div id="u45" class="ax_default image" data-label="Logo">
+            <a th:href="@{/}">
+                <img id="u45_img" class="img " th:src="@{/css/thymeleaf/Home_files/logo_u45.png}"/>
+            </a>
+        </div>
+
+        <!-- Unnamed (Group) -->
+        <div id="u46" class="ax_default" data-left="165" data-top="45" data-width="585" data-height="26">
+
+            <!-- 导航栏 - Jobs (Rectangle) -->
+            <div id="u47" class="ax_default box_1" data-label="导航栏 - Jobs">
+                <div id="u47_div" class=""></div>
+                <div id="u47_text" class="text " style="left: 2px; width: 122px; transform-origin: 61px 9px 0px;">
+                    <a th:href="@{/}"><p id="cache30"><span id="cache31">Jobs</span></p></a>
+                </div>
+            </div>
+
+            <!-- 导航栏 - Schools (Rectangle) -->
+            <div id="u48" class="ax_default box_1" data-label="导航栏 - Schools" style="cursor: pointer;">
+                <div id="u48_div" class="" tabindex="0"></div>
+                <div id="u48_text" class="text ">
+                    <a th:href="@{/school}"><p id="cache32"><span id="cache33">Schools</span></p></a>
+                </div>
+            </div>
+
+            <!-- Applications (Rectangle) -->
+            <div id="u49" class="ax_default box_1" data-label="Applications" style="cursor: pointer;">
+                <div id="u49_div" class="" tabindex="0"></div>
+                <div id="u49_text" class="text ">
+                    <a th:href="@{/application}"><p id="cache34"><span id="cache35">Applications</span></p></a>
+                </div>
+            </div>
+
+            <!-- Messages (Rectangle) -->
+            <div id="u50" class="ax_default box_1" data-label="Messages" style="cursor: pointer;">
+                <div id="u50_div" class="" tabindex="0"></div>
+                <div id="u50_text" class="text ">
+                    <a th:href="@{/message}"><p id="cache36"><span id="cache37">Messages</span></p></a>
+                </div>
+            </div>
+
+            <!-- Resumes (Rectangle) -->
+            <div id="u51" class="ax_default box_1" data-label="Resumes" style="cursor: pointer;">
+                <div id="u51_div" class="" tabindex="0"></div>
+                <div id="u51_text" class="text " style="left: 2px; width: 122px; transform-origin: 61px 9px 0px;">
+                    <a th:href="@{/resume}"><p id="cache38"><span id="cache39">Resume</span></p></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Log In (Dynamic Panel) -->
+    <div id="u52" class="ax_default" data-label="Log In">
+
+        <div id="u52_state0" class="panel_state" data-label="Not Log In yet" style=""
+             sec:authorize="!isAuthenticated()">
+            <div id="u52_state0_content" class="panel_state_content">
+                <form th:action="@{/login}" method="post" id="loginFormId">
+                    <!-- User Name (Text Field) -->
+                    <div id="u53" class="ax_default text_field" data-label="User Name">
+                        <input id="u53_input" type="text" name="username" style="color: rgb(153, 153, 153);"/>
+                    </div>
+
+                    <!-- Password (Text Field) -->
+                    <div id="u54" class="ax_default text_field" data-label="Password">
+                        <input id="u54_input" type="password" name="password" style="color: rgb(153, 153, 153);"/>
+                    </div>
+
+                    <!-- Log In (Rectangle) -->
+                    <div id="u55" class="ax_default button" data-label="Log In" style="cursor: pointer;">
+                        <div id="u55_div" class="" tabindex="0"></div>
+                        <div id="u55_text" class="text " style="top: 5px; transform-origin: 31px 7.5px 0px;">
+                            <p><span onclick="login()">Log In</span></p>
+                        </div>
+                    </div>
+                </form>
+                <!-- Sign In (Rectangle) -->
+                <div id="u56" class="ax_default primary_button" data-label="Sign In">
+                    <div id="u56_div" class=""></div>
+                    <div id="u56_text" class="text " style="top: 5px; transform-origin: 31px 7.5px 0px;">
+                        <p><span>Register</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Shape) -->
+                <div id="u57" class="ax_default icon">
+                    <img id="u57_img" class="img " th:src="@{/css/thymeleaf/Home_files/u57.png}"/>
+                </div>
+            </div>
+        </div>
+        <div id="u52_state1" class="panel_state" data-label="Log In" sec:authorize="isAuthenticated()">
+            <div id="u52_state1_content" class="panel_state_content">
+
+                <!-- 头像 (Placeholder) -->
+                <div id="u58" class="ax_default placeholder" data-label="头像">
+                    <img id="u58_img" class="img " th:src="@{/css/thymeleaf/Home_files/头像_u58.png}"/>
+                    <div id="u58_text" class="text ">
+                        <p><span>头像</span></p>
+                    </div>
+                </div>
+
+                <!-- Log Out (Rectangle) -->
+                <div id="u59" class="ax_default primary_button" data-label="Log Out">
+                    <div id="u59_div" class=""></div>
+                    <div id="u59_text" class="text ">
+                        <p><span><a th:href="@{/logout}">Log Out</a></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Foot (Group) -->
+    <div id="u23" class="ax_default" data-label="Foot" data-left="0" data-top="1060" data-width="1280"
+         data-height="209">
+
+        <!-- Unnamed (Rectangle) -->
+
+
+        <!-- Unnamed (Image) -->
+
+
+        <!-- Unnamed (Rectangle) -->
+
+
+        <!-- Unnamed (Placeholder) -->
+        <div id="u24" class="ax_default box_1" style="left: 0px; top: 1060px;">
+            <div id="u24_div" class=""></div>
+        </div>
+        <div id="u25" class="ax_default image" style="left: 240px; top: 1069px;">
+            <img id="u25_img" class="img " th:src="@{/css/thymeleaf/Home_files/u25.png}"/>
+        </div>
+        <div id="u26" class="ax_default label" style="left: 625px; top: 1093px;">
+            <div id="u26_div" class=""></div>
+            <div id="u26_text" class="text " style="left: 0px; width: 170px; transform-origin: 85px 45px 0px;">
+                <p><span>Contact Us</span></p>
+                <p><span><br/></span></p>
+                <p><span><br/></span></p>
+                <p><span>Phone:&nbsp; 021- 12345678</span></p>
+                <p><span>E-mail: info@mojobs.com.cn</span></p>
+            </div>
+        </div>
+        <div id="u27" class="ax_default placeholder" style="left: 838px; top: 1103px;">
+            <img id="u27_img" class="img " th:src="@{/css/thymeleaf/Home_files/u27.png}"/>
+            <div id="u27_text" class="text ">
+                <p><span>二维码</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Unnamed (Rectangle) -->
+    <div id="u28" class="ax_default label">
+        <div id="u28_div" class=""></div>
+        <div id="u28_text" class="text " style="left: 0px; width: 331px; transform-origin: 165.5px 10px 0px;">
+            <p><span
+                style="font-family:&#39;Times-Roman&#39;, &#39;Times&#39;;">MoJobs copyright@2015-2017&nbsp; </span><span
+                style="font-family:&#39;STSongti-SC-Regular&#39;, &#39;Songti SC&#39;;"> All Right Reserved XXX</span>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

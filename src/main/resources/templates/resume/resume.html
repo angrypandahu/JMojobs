@@ -1,0 +1,2485 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link th:href="@{/css/thymeleaf/resume.css}" type="text/css" rel="stylesheet"/>
+
+</head>
+<body>
+<div layout:fragment="content">
+
+    <!-- !Add (Dynamic Panel) -->
+    <div id="u213" class="ax_default ax_default_hidden" data-label="!Add" style="display:none; visibility: hidden">
+        <div id="u213_state0" class="panel_state" data-label="Working Experience_edit" style="">
+            <div id="u213_state0_content" class="panel_state_content">
+
+                <!-- Unnamed (Rectangle) -->
+                <div id="u214" class="ax_default box_1">
+                    <div id="u214_div" class=""></div>
+                </div>
+
+                <!-- Unnamed (Rectangle) -->
+                <div id="u215" class="ax_default box_1">
+                    <div id="u215_div" class=""></div>
+                </div>
+
+                <!-- Unnamed (Rectangle) -->
+                <div id="u216" class="ax_default heading_2">
+                    <div id="u216_div" class=""></div>
+                    <div id="u216_text" class="text ">
+                        <p><span>Add Experience</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Horizontal Line) -->
+                <div id="u217" class="ax_default line">
+                    <img id="u217_img" class="img "
+                         src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u217.png?token=8417cb02fa751f9eddd23b1bb5fcaeb1"/>
+                </div>
+
+                <!-- Title (Rectangle) -->
+                <div id="u218" class="ax_default label" data-label="Title">
+                    <div id="u218_div" class=""></div>
+                    <div id="u218_text" class="text ">
+                        <p><span>Title</span></p>
+                    </div>
+                </div>
+
+                <!-- title_fill in (Text Field) -->
+                <div id="u219" class="ax_default text_field" data-label="title_fill in">
+                    <input id="u219_input" type="text" value=""/>
+                </div>
+
+                <!-- School (Rectangle) -->
+                <div id="u220" class="ax_default label" data-label="School">
+                    <div id="u220_div" class=""></div>
+                    <div id="u220_text" class="text ">
+                        <p><span>School</span></p>
+                    </div>
+                </div>
+
+                <!-- School_fill in (Text Field) -->
+                <div id="u221" class="ax_default text_field" data-label="School_fill in">
+                    <input id="u221_input" type="text" value=""/>
+                </div>
+
+                <!-- Location (Rectangle) -->
+                <div id="u222" class="ax_default label" data-label="Location">
+                    <div id="u222_div" class=""></div>
+                    <div id="u222_text" class="text ">
+                        <p><span>Location</span></p>
+                    </div>
+                </div>
+
+                <!-- Location_fill in (Text Field) -->
+                <div id="u223" class="ax_default text_field" data-label="Location_fill in">
+                    <input id="u223_input" type="text" value=""/>
+                </div>
+
+                <!-- From (Rectangle) -->
+                <div id="u224" class="ax_default label" data-label="From">
+                    <div id="u224_div" class=""></div>
+                    <div id="u224_text" class="text ">
+                        <p><span>From</span></p>
+                    </div>
+                </div>
+
+                <!-- To (Rectangle) -->
+                <div id="u225" class="ax_default label" data-label="To">
+                    <div id="u225_div" class=""></div>
+                    <div id="u225_text" class="text ">
+                        <p><span>To</span></p>
+                        <p><span><br/></span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Checkbox) -->
+                <div id="u226" class="ax_default checkbox">
+                    <label for="u226_input" style="position: absolute; left: 0px;">
+                        <div id="u226_text" class="text ">
+                            <p><span>I currently work here</span></p>
+                        </div>
+                    </label>
+                    <input id="u226_input" type="checkbox" value="checkbox"/>
+                </div>
+
+                <!-- Unnamed (Rectangle) -->
+                <div id="u227" class="ax_default primary_button">
+                    <div id="u227_div" class=""></div>
+                    <div id="u227_text" class="text ">
+                        <p><span>Save</span></p>
+                    </div>
+                </div>
+
+                <!-- From_Mon_fill in (Droplist) -->
+                <div id="u228" class="ax_default droplist" data-label="From_Mon_fill in">
+                    <select id="u228_input">
+                        <option value="Jan">Jan</option>
+                        <option value="Feb">Feb</option>
+                        <option value="Mar">Mar</option>
+                        <option value="Apr">Apr</option>
+                        <option value="May">May</option>
+                        <option value="Jun">Jun</option>
+                        <option value="Jul">Jul</option>
+                        <option value="Aug">Aug</option>
+                        <option value="Sep">Sep</option>
+                        <option value="Oct">Oct</option>
+                        <option value="Nov">Nov</option>
+                        <option value="Dec">Dec</option>
+                    </select>
+                </div>
+
+                <!-- From_Year_fill in (Droplist) -->
+                <div id="u229" class="ax_default droplist" data-label="From_Year_fill in">
+                    <select id="u229_input">
+                        <option value="1993">1993</option>
+                        <option value="1994">1994</option>
+                        <option value="1995">1995</option>
+                        <option value="1996">1996</option>
+                        <option value="1997">1997</option>
+                        <option value="1998">1998</option>
+                        <option value="1999">1999</option>
+                        <option value="2000">2000</option>
+                        <option value="2001">2001</option>
+                        <option value="2002">2002</option>
+                        <option value="2003">2003</option>
+                        <option value="2004">2004</option>
+                        <option value="2005">2005</option>
+                        <option value="2006">2006</option>
+                        <option value="2007">2007</option>
+                        <option value="2008">2008</option>
+                        <option value="2009">2009</option>
+                        <option value="2010">2010</option>
+                        <option value="2011">2011</option>
+                        <option value="2012">2012</option>
+                        <option value="2013">2013</option>
+                        <option value="2014">2014</option>
+                        <option value="2015">2015</option>
+                        <option value="2016">2016</option>
+                        <option value="2017">2017</option>
+                    </select>
+                </div>
+
+                <!-- To_Mon_fill in (Droplist) -->
+                <div id="u230" class="ax_default droplist" data-label="To_Mon_fill in">
+                    <select id="u230_input">
+                        <option value="Jan">Jan</option>
+                        <option value="Feb">Feb</option>
+                        <option value="Mar">Mar</option>
+                        <option value="Apr">Apr</option>
+                        <option value="May">May</option>
+                        <option value="Jun">Jun</option>
+                        <option value="Jul">Jul</option>
+                        <option value="Aug">Aug</option>
+                        <option value="Sep">Sep</option>
+                        <option value="Oct">Oct</option>
+                        <option value="Nov">Nov</option>
+                        <option value="Dec">Dec</option>
+                    </select>
+                </div>
+
+                <!-- To_Year_fill in (Droplist) -->
+                <div id="u231" class="ax_default droplist" data-label="To_Year_fill in">
+                    <select id="u231_input">
+                        <option value="1993">1993</option>
+                        <option value="1994">1994</option>
+                        <option value="1995">1995</option>
+                        <option value="1996">1996</option>
+                        <option value="1997">1997</option>
+                        <option value="1998">1998</option>
+                        <option value="1999">1999</option>
+                        <option value="2000">2000</option>
+                        <option value="2001">2001</option>
+                        <option value="2002">2002</option>
+                        <option value="2003">2003</option>
+                        <option value="2004">2004</option>
+                        <option value="2005">2005</option>
+                        <option value="2006">2006</option>
+                        <option value="2007">2007</option>
+                        <option value="2008">2008</option>
+                        <option value="2009">2009</option>
+                        <option value="2010">2010</option>
+                        <option value="2011">2011</option>
+                        <option value="2012">2012</option>
+                        <option value="2013">2013</option>
+                        <option value="2014">2014</option>
+                        <option value="2015">2015</option>
+                        <option value="2016">2016</option>
+                        <option value="2017">2017</option>
+                    </select>
+                </div>
+
+                <!-- Reponsibility (Rectangle) -->
+                <div id="u232" class="ax_default label" data-label="Reponsibility">
+                    <div id="u232_div" class=""></div>
+                    <div id="u232_text" class="text ">
+                        <p><span>Responsibility</span></p>
+                    </div>
+                </div>
+
+                <!-- Respon_fill in (Text Field) -->
+                <div id="u233" class="ax_default text_field" data-label="Respon_fill in">
+                    <input id="u233_input" type="text" value=""/>
+                </div>
+
+                <!-- School (Rectangle) -->
+                <div id="u234" class="ax_default label" data-label="School">
+                    <div id="u234_div" class=""></div>
+                    <div id="u234_text" class="text ">
+                        <p><span>Grade</span></p>
+                    </div>
+                </div>
+
+                <!-- Grade_fill in (Text Field) -->
+                <div id="u235" class="ax_default text_field" data-label="Grade_fill in">
+                    <input id="u235_input" type="text" value=""/>
+                </div>
+            </div>
+        </div>
+        <div id="u213_state1" class="panel_state" data-label="Education Background_edit" style="visibility: hidden;">
+            <div id="u213_state1_content" class="panel_state_content">
+
+                <!-- Unnamed (Rectangle) -->
+                <div id="u236" class="ax_default box_1">
+                    <div id="u236_div" class=""></div>
+                </div>
+
+                <!-- Unnamed (Rectangle) -->
+                <div id="u237" class="ax_default box_1">
+                    <div id="u237_div" class=""></div>
+                </div>
+
+                <!-- Unnamed (Rectangle) -->
+                <div id="u238" class="ax_default heading_2">
+                    <div id="u238_div" class=""></div>
+                    <div id="u238_text" class="text ">
+                        <p><span>Add Education Background</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Horizontal Line) -->
+                <div id="u239" class="ax_default line">
+                    <img id="u239_img" class="img "
+                         src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u217.png?token=8417cb02fa751f9eddd23b1bb5fcaeb1"/>
+                </div>
+
+                <!-- School_edu bg (Rectangle) -->
+                <div id="u240" class="ax_default label" data-label="School_edu bg">
+                    <div id="u240_div" class=""></div>
+                    <div id="u240_text" class="text ">
+                        <p><span>School</span></p>
+                    </div>
+                </div>
+
+                <!-- school_edu_fill in (Text Field) -->
+                <div id="u241" class="ax_default text_field" data-label="school_edu_fill in">
+                    <input id="u241_input" type="text" value=""/>
+                </div>
+
+                <!-- Major (Rectangle) -->
+                <div id="u242" class="ax_default label" data-label="Major">
+                    <div id="u242_div" class=""></div>
+                    <div id="u242_text" class="text ">
+                        <p><span>Major</span></p>
+                    </div>
+                </div>
+
+                <!-- major_edu_fill in (Text Field) -->
+                <div id="u243" class="ax_default text_field" data-label="major_edu_fill in">
+                    <input id="u243_input" type="text" value=""/>
+                </div>
+
+                <!-- Degree (Rectangle) -->
+                <div id="u244" class="ax_default label" data-label="Degree">
+                    <div id="u244_div" class=""></div>
+                    <div id="u244_text" class="text ">
+                        <p><span>Degree</span></p>
+                    </div>
+                </div>
+
+                <!-- From (Rectangle) -->
+                <div id="u245" class="ax_default label" data-label="From">
+                    <div id="u245_div" class=""></div>
+                    <div id="u245_text" class="text ">
+                        <p><span>From</span></p>
+                    </div>
+                </div>
+
+                <!-- To (Rectangle) -->
+                <div id="u246" class="ax_default label" data-label="To">
+                    <div id="u246_div" class=""></div>
+                    <div id="u246_text" class="text ">
+                        <p><span>To</span></p>
+                        <p><span><br/></span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Rectangle) -->
+                <div id="u247" class="ax_default primary_button">
+                    <div id="u247_div" class=""></div>
+                    <div id="u247_text" class="text ">
+                        <p><span>SAVE</span></p>
+                    </div>
+                </div>
+
+                <!-- edu_From_Mon_fill in (Droplist) -->
+                <div id="u248" class="ax_default droplist" data-label="edu_From_Mon_fill in">
+                    <select id="u248_input">
+                        <option value="Jan">Jan</option>
+                        <option value="Feb">Feb</option>
+                        <option value="Mar">Mar</option>
+                        <option value="Apr">Apr</option>
+                        <option value="May">May</option>
+                        <option value="Jun">Jun</option>
+                        <option value="Jul">Jul</option>
+                        <option value="Aug">Aug</option>
+                        <option value="Sep">Sep</option>
+                        <option value="Oct">Oct</option>
+                        <option value="Nov">Nov</option>
+                        <option value="Dec">Dec</option>
+                    </select>
+                </div>
+
+                <!-- edu_From_Year_fill in (Droplist) -->
+                <div id="u249" class="ax_default droplist" data-label="edu_From_Year_fill in">
+                    <select id="u249_input">
+                        <option value="1993">1993</option>
+                        <option value="1994">1994</option>
+                        <option value="1995">1995</option>
+                        <option value="1996">1996</option>
+                        <option value="1997">1997</option>
+                        <option value="1998">1998</option>
+                        <option value="1999">1999</option>
+                        <option value="2000">2000</option>
+                        <option value="2001">2001</option>
+                        <option value="2002">2002</option>
+                        <option value="2003">2003</option>
+                        <option value="2004">2004</option>
+                        <option value="2005">2005</option>
+                        <option value="2006">2006</option>
+                        <option value="2007">2007</option>
+                        <option value="2008">2008</option>
+                        <option value="2009">2009</option>
+                        <option value="2010">2010</option>
+                        <option value="2011">2011</option>
+                        <option value="2012">2012</option>
+                        <option value="2013">2013</option>
+                        <option value="2014">2014</option>
+                        <option value="2015">2015</option>
+                        <option value="2016">2016</option>
+                        <option value="2017">2017</option>
+                    </select>
+                </div>
+
+                <!-- edu_To_Mon_fill in (Droplist) -->
+                <div id="u250" class="ax_default droplist" data-label="edu_To_Mon_fill in">
+                    <select id="u250_input">
+                        <option value="Jan">Jan</option>
+                        <option value="Feb">Feb</option>
+                        <option value="Mar">Mar</option>
+                        <option value="Apr">Apr</option>
+                        <option value="May">May</option>
+                        <option value="Jun">Jun</option>
+                        <option value="Jul">Jul</option>
+                        <option value="Aug">Aug</option>
+                        <option value="Sep">Sep</option>
+                        <option value="Oct">Oct</option>
+                        <option value="Nov">Nov</option>
+                        <option value="Dec">Dec</option>
+                    </select>
+                </div>
+
+                <!-- edu_To_Year_fill in (Droplist) -->
+                <div id="u251" class="ax_default droplist" data-label="edu_To_Year_fill in">
+                    <select id="u251_input">
+                        <option value="1993">1993</option>
+                        <option value="1994">1994</option>
+                        <option value="1995">1995</option>
+                        <option value="1996">1996</option>
+                        <option value="1997">1997</option>
+                        <option value="1998">1998</option>
+                        <option value="1999">1999</option>
+                        <option value="2000">2000</option>
+                        <option value="2001">2001</option>
+                        <option value="2002">2002</option>
+                        <option value="2003">2003</option>
+                        <option value="2004">2004</option>
+                        <option value="2005">2005</option>
+                        <option value="2006">2006</option>
+                        <option value="2007">2007</option>
+                        <option value="2008">2008</option>
+                        <option value="2009">2009</option>
+                        <option value="2010">2010</option>
+                        <option value="2011">2011</option>
+                        <option value="2012">2012</option>
+                        <option value="2013">2013</option>
+                        <option value="2014">2014</option>
+                        <option value="2015">2015</option>
+                        <option value="2016">2016</option>
+                        <option value="2017">2017</option>
+                    </select>
+                </div>
+
+                <!-- Location (Rectangle) -->
+                <div id="u252" class="ax_default label" data-label="Location">
+                    <div id="u252_div" class=""></div>
+                    <div id="u252_text" class="text ">
+                        <p><span>Location</span></p>
+                    </div>
+                </div>
+
+                <!-- Location_edu_fill in (Text Field) -->
+                <div id="u253" class="ax_default text_field" data-label="Location_edu_fill in">
+                    <input id="u253_input" type="text" value=""/>
+                </div>
+
+                <!-- degree_edu (Droplist) -->
+                <div id="u254" class="ax_default droplist" data-label="degree_edu">
+                    <select id="u254_input">
+                        <option value="Associate">Associate</option>
+                        <option value="Bachelor">Bachelor</option>
+                        <option value="Master">Master</option>
+                        <option value="Doctorate">Doctorate</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div id="u213_state2" class="panel_state" data-label="Professional Development_edit"
+             style="visibility: hidden;">
+            <div id="u213_state2_content" class="panel_state_content">
+
+                <!-- Unnamed (Rectangle) -->
+                <div id="u255" class="ax_default box_1">
+                    <div id="u255_div" class=""></div>
+                </div>
+
+                <!-- Unnamed (Rectangle) -->
+                <div id="u256" class="ax_default box_1">
+                    <div id="u256_div" class=""></div>
+                </div>
+
+                <!-- Unnamed (Rectangle) -->
+                <div id="u257" class="ax_default heading_2">
+                    <div id="u257_div" class=""></div>
+                    <div id="u257_text" class="text ">
+                        <p><span>Add Professional Development</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Horizontal Line) -->
+                <div id="u258" class="ax_default line">
+                    <img id="u258_img" class="img "
+                         src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u217.png?token=8417cb02fa751f9eddd23b1bb5fcaeb1"/>
+                </div>
+
+                <!-- PD_fill in (Text Field) -->
+                <div id="u259" class="ax_default text_field" data-label="PD_fill in">
+                    <input id="u259_input" type="text" value=""/>
+                </div>
+
+                <!-- From (Rectangle) -->
+                <div id="u260" class="ax_default label" data-label="From">
+                    <div id="u260_div" class=""></div>
+                    <div id="u260_text" class="text ">
+                        <p><span>From</span></p>
+                    </div>
+                </div>
+
+                <!-- To (Rectangle) -->
+                <div id="u261" class="ax_default label" data-label="To">
+                    <div id="u261_div" class=""></div>
+                    <div id="u261_text" class="text ">
+                        <p><span>To</span></p>
+                        <p><span><br/></span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Rectangle) -->
+                <div id="u262" class="ax_default primary_button">
+                    <div id="u262_div" class=""></div>
+                    <div id="u262_text" class="text ">
+                        <p><span>Save</span></p>
+                    </div>
+                </div>
+
+                <!-- PD_From_Mon_fill in (Droplist) -->
+                <div id="u263" class="ax_default droplist" data-label="PD_From_Mon_fill in">
+                    <select id="u263_input">
+                        <option value="Jan">Jan</option>
+                        <option value="Feb">Feb</option>
+                        <option value="Mar">Mar</option>
+                        <option value="Apr">Apr</option>
+                        <option value="May">May</option>
+                        <option value="Jun">Jun</option>
+                        <option value="Jul">Jul</option>
+                        <option value="Aug">Aug</option>
+                        <option value="Sep">Sep</option>
+                        <option value="Oct">Oct</option>
+                        <option value="Nov">Nov</option>
+                        <option value="Dec">Dec</option>
+                    </select>
+                </div>
+
+                <!-- PD_From_Year_fill in (Droplist) -->
+                <div id="u264" class="ax_default droplist" data-label="PD_From_Year_fill in">
+                    <select id="u264_input">
+                        <option value="1993">1993</option>
+                        <option value="1994">1994</option>
+                        <option value="1995">1995</option>
+                        <option value="1996">1996</option>
+                        <option value="1997">1997</option>
+                        <option value="1998">1998</option>
+                        <option value="1999">1999</option>
+                        <option value="2000">2000</option>
+                        <option value="2001">2001</option>
+                        <option value="2002">2002</option>
+                        <option value="2003">2003</option>
+                        <option value="2004">2004</option>
+                        <option value="2005">2005</option>
+                        <option value="2006">2006</option>
+                        <option value="2007">2007</option>
+                        <option value="2008">2008</option>
+                        <option value="2009">2009</option>
+                        <option value="2010">2010</option>
+                        <option value="2011">2011</option>
+                        <option value="2012">2012</option>
+                        <option value="2013">2013</option>
+                        <option value="2014">2014</option>
+                        <option value="2015">2015</option>
+                        <option value="2016">2016</option>
+                        <option value="2017">2017</option>
+                    </select>
+                </div>
+
+                <!-- PD_To_Mon_fill in (Droplist) -->
+                <div id="u265" class="ax_default droplist" data-label="PD_To_Mon_fill in">
+                    <select id="u265_input">
+                        <option value="Jan">Jan</option>
+                        <option value="Feb">Feb</option>
+                        <option value="Mar">Mar</option>
+                        <option value="Apr">Apr</option>
+                        <option value="May">May</option>
+                        <option value="Jun">Jun</option>
+                        <option value="Jul">Jul</option>
+                        <option value="Aug">Aug</option>
+                        <option value="Sep">Sep</option>
+                        <option value="Oct">Oct</option>
+                        <option value="Nov">Nov</option>
+                        <option value="Dec">Dec</option>
+                    </select>
+                </div>
+
+                <!-- PD_To_Year_fill in (Droplist) -->
+                <div id="u266" class="ax_default droplist" data-label="PD_To_Year_fill in">
+                    <select id="u266_input">
+                        <option value="1993">1993</option>
+                        <option value="1994">1994</option>
+                        <option value="1995">1995</option>
+                        <option value="1996">1996</option>
+                        <option value="1997">1997</option>
+                        <option value="1998">1998</option>
+                        <option value="1999">1999</option>
+                        <option value="2000">2000</option>
+                        <option value="2001">2001</option>
+                        <option value="2002">2002</option>
+                        <option value="2003">2003</option>
+                        <option value="2004">2004</option>
+                        <option value="2005">2005</option>
+                        <option value="2006">2006</option>
+                        <option value="2007">2007</option>
+                        <option value="2008">2008</option>
+                        <option value="2009">2009</option>
+                        <option value="2010">2010</option>
+                        <option value="2011">2011</option>
+                        <option value="2012">2012</option>
+                        <option value="2013">2013</option>
+                        <option value="2014">2014</option>
+                        <option value="2015">2015</option>
+                        <option value="2016">2016</option>
+                        <option value="2017">2017</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div id="u213_state3" class="panel_state" data-label="Language" style="visibility: hidden;">
+            <div id="u213_state3_content" class="panel_state_content">
+
+                <!-- Unnamed (Rectangle) -->
+                <div id="u267" class="ax_default box_1">
+                    <div id="u267_div" class=""></div>
+                </div>
+
+                <!-- Unnamed (Rectangle) -->
+                <div id="u268" class="ax_default box_1">
+                    <div id="u268_div" class=""></div>
+                </div>
+
+                <!-- Unnamed (Rectangle) -->
+                <div id="u269" class="ax_default heading_2">
+                    <div id="u269_div" class=""></div>
+                    <div id="u269_text" class="text ">
+                        <p><span>Add Language</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Horizontal Line) -->
+                <div id="u270" class="ax_default line">
+                    <img id="u270_img" class="img "
+                         src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u217.png?token=8417cb02fa751f9eddd23b1bb5fcaeb1"/>
+                </div>
+
+                <!-- Language_fill in (Text Field) -->
+                <div id="u271" class="ax_default text_field" data-label="Language_fill in">
+                    <input id="u271_input" type="text" value=""/>
+                </div>
+
+                <!-- Unnamed (Rectangle) -->
+                <div id="u272" class="ax_default primary_button">
+                    <div id="u272_div" class=""></div>
+                    <div id="u272_text" class="text ">
+                        <p><span>SAVE</span></p>
+                    </div>
+                </div>
+
+                <!-- Language Level (Droplist) -->
+                <div id="u273" class="ax_default droplist" data-label="Language Level">
+                    <select id="u273_input">
+                        <option value="Native Speaker">Native Speaker</option>
+                        <option value="Advanced">Advanced</option>
+                        <option value="Average">Average</option>
+                        <option value="Beginner">Beginner</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resume frame (Rectangle) -->
+    <div id="u274" class="ax_default box_1" data-label="Resume frame">
+        <div id="u274_div" class=""></div>
+    </div>
+
+
+
+    <!-- Process Left (Rectangle) -->
+    <div id="u286" class="ax_default box_1" data-label="Process Left">
+        <div id="u286_div" class=""></div>
+    </div>
+
+    <!-- Resume Name (Text Field) -->
+    <div id="u287" class="ax_default text_field" data-label="Resume Name">
+        <input id="u287_input" type="text" value=""/>
+    </div>
+
+    <!-- Unnamed (Shape) -->
+    <div id="u288" class="ax_default icon">
+        <img id="u288_img" class="img "
+             src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u288.png?token=9f38c671466aa9f5fcaeee8af6e529dc"/>
+    </div>
+
+    <!-- View Option (Rectangle) -->
+    <div id="u289" class="ax_default box_1" data-label="View Option">
+        <div id="u289_div" class=""></div>
+        <div id="u289_text" class="text ">
+            <p><span>&nbsp; Can be read by</span></p>
+        </div>
+    </div>
+
+    <!-- All Schools (Radio Button) -->
+    <div id="u290" class="ax_default radio_button" data-label="All Schools">
+        <label for="u290_input" style="position: absolute; left: 0px;">
+            <div id="u290_text" class="text ">
+                <p><span>All Schools</span></p>
+            </div>
+        </label>
+        <input id="u290_input" type="radio" value="radio" name="Resume Availibility"/>
+    </div>
+
+    <!-- Only Myself (Radio Button) -->
+    <div id="u291" class="ax_default radio_button" data-label="Only Myself">
+        <label for="u291_input" style="position: absolute; left: 0px;">
+            <div id="u291_text" class="text ">
+                <p><span>Only myself</span></p>
+            </div>
+        </label>
+        <input id="u291_input" type="radio" value="radio" name="Resume Availibility"/>
+    </div>
+
+    <!-- Not all schools (Radio Button) -->
+    <div id="u292" class="ax_default radio_button" data-label="Not all schools">
+        <label for="u292_input" style="position: absolute; left: 0px;">
+            <div id="u292_text" class="text ">
+                <p><span>Unblocked schools</span></p>
+            </div>
+        </label>
+        <input id="u292_input" type="radio" value="radio" name="Resume Availibility"/>
+    </div>
+
+    <!-- Not all schools (Radio Button) [footnote] -->
+    <div id="u292_ann" class="annotation"></div>
+
+    <!-- Unnamed (Shape) -->
+    <div id="u293" class="ax_default icon">
+        <img id="u293_img" class="img "
+             src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u293.png?token=8760118d47ac942e9ba36d113bf9d2ed"/>
+    </div>
+
+    <!-- Unnamed (Shape) -->
+    <div id="u294" class="ax_default icon">
+        <img id="u294_img" class="img "
+             src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u294.png?token=5de16ef710b24cc14a7bc7bdcf047fc0"/>
+    </div>
+
+    <!-- Unnamed (Shape) -->
+    <div id="u295" class="ax_default icon">
+        <img id="u295_img" class="img "
+             src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u295.png?token=8b2a1d40dbb9533636aba750abdc18b9"/>
+    </div>
+
+    <!-- Basic Info (Dynamic Panel) -->
+    <div id="u296" class="ax_default" data-label="Basic Info">
+        <div id="u296_state0" class="panel_state" data-label="Basic info_edit" style="">
+            <div id="u296_state0_content" class="panel_state_content">
+
+                <!-- Unnamed (Image) -->
+                <div id="u297" class="ax_default image">
+                    <img id="u297_img" class="img "
+                         src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u297.png?token=2c0f8b2634ff4deae29afb6929359046"/>
+                </div>
+
+                <!-- Unnamed (Table) -->
+                <div id="u298" class="ax_default">
+
+                    <!-- Unnamed (Table Cell) -->
+                    <div id="u299" class="ax_default table_cell">
+                        <img id="u299_img" class="img "
+                             src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u299.png?token=a2e9c21eec53046c7f39fdcce77a0ab2"/>
+                        <div id="u299_text" class="text ">
+                            <p><span>Nationality</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Nationality2 (Table Cell) -->
+                    <div id="u300" class="ax_default table_cell" data-label="Nationality2">
+                        <img id="u300_img" class="img "
+                             src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/nationality2_u300.png?token=47372a06837c2fc60fc222031c49400d"/>
+                    </div>
+
+                    <!-- Unnamed (Table Cell) -->
+                    <div id="u301" class="ax_default table_cell">
+                        <img id="u301_img" class="img "
+                             src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u301.png?token=d0a79c09d3600e4cd8894bc4d9d4612a"/>
+                        <div id="u301_text" class="text ">
+                            <p><span>Gender</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Gender2 (Table Cell) -->
+                    <div id="u302" class="ax_default table_cell" data-label="Gender2">
+                        <img id="u302_img" class="img "
+                             src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/gender2_u302.png?token=babdb13fda4f8124bd8f6801d0121106"/>
+                    </div>
+
+                    <!-- Unnamed (Table Cell) -->
+                    <div id="u303" class="ax_default table_cell">
+                        <img id="u303_img" class="img "
+                             src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u303.png?token=306c0fe942e0a71b887b83f2e8ff36de"/>
+                        <div id="u303_text" class="text ">
+                            <p><span>Date of Brith</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Date of Birth2 (Table Cell) -->
+                    <div id="u304" class="ax_default table_cell" data-label="Date of Birth2">
+                        <img id="u304_img" class="img "
+                             src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/date_of_birth2_u304.png?token=40a6817e453ab75dd20d192125514fde"/>
+                    </div>
+
+                    <!-- Unnamed (Table Cell) -->
+                    <div id="u305" class="ax_default table_cell">
+                        <img id="u305_img" class="img "
+                             src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u305.png?token=98da7fd6d499bfacb4066583a2a423e1"/>
+                        <div id="u305_text" class="text ">
+                            <p><span>Education Level</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Education Level2 (Table Cell) -->
+                    <div id="u306" class="ax_default table_cell" data-label="Education Level2">
+                        <img id="u306_img" class="img "
+                             src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/education_level2_u306.png?token=86416f9167af55fa5e8f4ddbd6a299bc"/>
+                    </div>
+
+                    <!-- Unnamed (Table Cell) -->
+                    <div id="u307" class="ax_default table_cell">
+                        <img id="u307_img" class="img "
+                             src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u299.png?token=a2e9c21eec53046c7f39fdcce77a0ab2"/>
+                        <div id="u307_text" class="text ">
+                            <p><span>E-mail</span></p>
+                        </div>
+                    </div>
+
+                    <!-- E-mail2 (Table Cell) -->
+                    <div id="u308" class="ax_default table_cell" data-label="E-mail2">
+                        <img id="u308_img" class="img "
+                             src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/nationality2_u300.png?token=47372a06837c2fc60fc222031c49400d"/>
+                    </div>
+
+                    <!-- Unnamed (Table Cell) -->
+                    <div id="u309" class="ax_default table_cell">
+                        <img id="u309_img" class="img "
+                             src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u301.png?token=d0a79c09d3600e4cd8894bc4d9d4612a"/>
+                        <div id="u309_text" class="text ">
+                            <p><span>Skype</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Skype2 (Table Cell) -->
+                    <div id="u310" class="ax_default table_cell" data-label="Skype2">
+                        <img id="u310_img" class="img "
+                             src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/gender2_u302.png?token=babdb13fda4f8124bd8f6801d0121106"/>
+                    </div>
+
+                    <!-- Unnamed (Table Cell) -->
+                    <div id="u311" class="ax_default table_cell">
+                        <img id="u311_img" class="img "
+                             src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u299.png?token=a2e9c21eec53046c7f39fdcce77a0ab2"/>
+                        <div id="u311_text" class="text ">
+                            <p><span>Phone Number</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Phone_code (Table Cell) -->
+                    <div id="u312" class="ax_default table_cell" data-label="Phone_code">
+                        <img id="u312_img" class="img "
+                             src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/nationality2_u300.png?token=47372a06837c2fc60fc222031c49400d"/>
+                    </div>
+
+                    <!-- Phone_number (Table Cell) -->
+                    <div id="u313" class="ax_default table_cell" data-label="Phone_number">
+                        <img id="u313_img" class="img "
+                             src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u301.png?token=d0a79c09d3600e4cd8894bc4d9d4612a"/>
+                    </div>
+
+                    <!-- Unnamed (Table Cell) -->
+                    <div id="u314" class="ax_default table_cell">
+                        <img id="u314_img" class="img "
+                             src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/gender2_u302.png?token=babdb13fda4f8124bd8f6801d0121106"/>
+                    </div>
+
+                    <!-- Unnamed (Table Cell) -->
+                    <div id="u315" class="ax_default table_cell">
+                        <img id="u315_img" class="img "
+                             src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u315.png?token=0a0baee0c8538dab28f44e4cf8948ad3"/>
+                        <div id="u315_text" class="text ">
+                            <p><span>Wechat(if have)</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Wechat (Table Cell) -->
+                    <div id="u316" class="ax_default table_cell" data-label="Wechat">
+                        <img id="u316_img" class="img "
+                             src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/wechat_u316.png?token=b480d81349cda1bad2b2e911001e43c5"/>
+                    </div>
+
+                    <!-- Unnamed (Table Cell) -->
+                    <div id="u317" class="ax_default table_cell">
+                        <img id="u317_img" class="img "
+                             src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u317.png?token=a499f08f976fa501efde450cb05bca52"/>
+                    </div>
+
+                    <!-- Unnamed (Table Cell) -->
+                    <div id="u318" class="ax_default table_cell">
+                        <img id="u318_img" class="img "
+                             src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u318.png?token=c0cf296cec0831dd5e8744c5060cdf57"/>
+                    </div>
+                </div>
+
+                <!-- Nationality_fill in (Text Field) -->
+                <div id="u319" class="ax_default text_field" data-label="Nationality_fill in">
+                    <input id="u319_input" type="text" value=""/>
+                </div>
+
+                <!-- DOB_fill in (Text Field) -->
+                <div id="u320" class="ax_default text_field" data-label="DOB_fill in">
+                    <input id="u320_input" type="text" value=""/>
+                </div>
+
+                <!-- E-mail_fill in (Text Field) -->
+                <div id="u321" class="ax_default text_field" data-label="E-mail_fill in">
+                    <input id="u321_input" type="text" value=""/>
+                </div>
+
+                <!-- Code_fill in (Text Field) -->
+                <div id="u322" class="ax_default text_field" data-label="Code_fill in">
+                    <input id="u322_input" type="number" value=""/>
+                </div>
+
+                <!-- Number_fill in (Text Field) -->
+                <div id="u323" class="ax_default text_field" data-label="Number_fill in">
+                    <input id="u323_input" type="number" value=""/>
+                </div>
+
+                <!-- Skype_fill in (Text Field) -->
+                <div id="u324" class="ax_default text_field" data-label="Skype_fill in">
+                    <input id="u324_input" type="text" value=""/>
+                </div>
+
+                <!-- Education Level_fill in (Droplist) -->
+                <div id="u325" class="ax_default droplist" data-label="Education Level_fill in">
+                    <select id="u325_input">
+                        <option value="Associate">Associate</option>
+                        <option value="Bachelor">Bachelor</option>
+                        <option value="Doctorate and above">Doctorate and above</option>
+                    </select>
+                </div>
+
+                <!-- Gender_fill in (Droplist) -->
+                <div id="u326" class="ax_default droplist" data-label="Gender_fill in">
+                    <select id="u326_input">
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                    </select>
+                </div>
+
+                <!-- Wechat_fill in (Text Field) -->
+                <div id="u327" class="ax_default text_field" data-label="Wechat_fill in">
+                    <input id="u327_input" type="text" value=""/>
+                </div>
+
+                <!-- Last Name_fill in (Text Field) -->
+                <div id="u328" class="ax_default text_field" data-label="Last Name_fill in">
+                    <input id="u328_input" type="text" value=""/>
+                </div>
+
+                <!-- First Name_fill in (Text Field) -->
+                <div id="u329" class="ax_default text_field" data-label="First Name_fill in">
+                    <input id="u329_input" type="text" value=""/>
+                </div>
+
+                <!-- Unnamed (Rectangle) -->
+                <div id="u330" class="ax_default primary_button">
+                    <div id="u330_div" class=""></div>
+                    <div id="u330_text" class="text ">
+                        <p><span>Save</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="u296_state1" class="panel_state" data-label="Basic info_formal" style="visibility: hidden;">
+            <div id="u296_state1_content" class="panel_state_content">
+
+                <!-- Unnamed (Table) -->
+                <div id="u331" class="ax_default">
+
+                    <!-- Unnamed (Table Cell) -->
+                    <div id="u332" class="ax_default table_cell">
+                        <img id="u332_img" class="img "
+                             src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u299.png?token=a2e9c21eec53046c7f39fdcce77a0ab2"/>
+                        <div id="u332_text" class="text ">
+                            <p><span>Nationality</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Nationality2 (Table Cell) -->
+                    <div id="u333" class="ax_default table_cell" data-label="Nationality2">
+                        <img id="u333_img" class="img "
+                             src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/nationality2_u300.png?token=47372a06837c2fc60fc222031c49400d"/>
+                    </div>
+
+                    <!-- Unnamed (Table Cell) -->
+                    <div id="u334" class="ax_default table_cell">
+                        <img id="u334_img" class="img "
+                             src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u301.png?token=d0a79c09d3600e4cd8894bc4d9d4612a"/>
+                        <div id="u334_text" class="text ">
+                            <p><span>Gender</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Gender2 (Table Cell) -->
+                    <div id="u335" class="ax_default table_cell" data-label="Gender2">
+                        <img id="u335_img" class="img "
+                             src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/gender2_u302.png?token=babdb13fda4f8124bd8f6801d0121106"/>
+                    </div>
+
+                    <!-- Unnamed (Table Cell) -->
+                    <div id="u336" class="ax_default table_cell">
+                        <img id="u336_img" class="img "
+                             src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u336.png?token=fbfb9bc6e9a9725fb6039e295f538fb7"/>
+                        <div id="u336_text" class="text ">
+                            <p><span>Date of Brith</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Date of Birth2 (Table Cell) -->
+                    <div id="u337" class="ax_default table_cell" data-label="Date of Birth2">
+                        <img id="u337_img" class="img "
+                             src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/date_of_birth2_u337.png?token=418e588bc223ff96aee63ca4e7bfec47"/>
+                    </div>
+
+                    <!-- Unnamed (Table Cell) -->
+                    <div id="u338" class="ax_default table_cell">
+                        <img id="u338_img" class="img "
+                             src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u338.png?token=6520a5b45e5b30bb1ffcbeae6eacacfd"/>
+                        <div id="u338_text" class="text ">
+                            <p><span>Education Level</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Education Level2 (Table Cell) -->
+                    <div id="u339" class="ax_default table_cell" data-label="Education Level2">
+                        <img id="u339_img" class="img "
+                             src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/education_level2_u339.png?token=08d1f7d4d23c1019f4bca34392140b67"/>
+                    </div>
+
+                    <!-- Unnamed (Table Cell) -->
+                    <div id="u340" class="ax_default table_cell">
+                        <img id="u340_img" class="img "
+                             src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u340.png?token=e543f0c3f317febaff872cfb911d0da7"/>
+                        <div id="u340_text" class="text ">
+                            <p><span>E-mail</span></p>
+                        </div>
+                    </div>
+
+                    <!-- E-mail2 (Table Cell) -->
+                    <div id="u341" class="ax_default table_cell" data-label="E-mail2">
+                        <img id="u341_img" class="img "
+                             src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/e-mail2_u341.png?token=6acaba1e81f73b0516cbf379f30642a5"/>
+                    </div>
+
+                    <!-- Unnamed (Table Cell) -->
+                    <div id="u342" class="ax_default table_cell">
+                        <img id="u342_img" class="img "
+                             src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u342.png?token=1f6a83142004e3c5301c3e72e9c49de8"/>
+                        <div id="u342_text" class="text ">
+                            <p><span>Skype</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Skype2 (Table Cell) -->
+                    <div id="u343" class="ax_default table_cell" data-label="Skype2">
+                        <img id="u343_img" class="img "
+                             src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/skype2_u343.png?token=218994d1c5039625601e84056c6f7859"/>
+                    </div>
+
+                    <!-- Unnamed (Table Cell) -->
+                    <div id="u344" class="ax_default table_cell">
+                        <img id="u344_img" class="img "
+                             src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u299.png?token=a2e9c21eec53046c7f39fdcce77a0ab2"/>
+                        <div id="u344_text" class="text ">
+                            <p><span>Phone Number</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Phone_code (Table Cell) -->
+                    <div id="u345" class="ax_default table_cell" data-label="Phone_code">
+                        <img id="u345_img" class="img "
+                             src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/nationality2_u300.png?token=47372a06837c2fc60fc222031c49400d"/>
+                    </div>
+
+                    <!-- Phone_number (Table Cell) -->
+                    <div id="u346" class="ax_default table_cell" data-label="Phone_number">
+                        <img id="u346_img" class="img "
+                             src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u301.png?token=d0a79c09d3600e4cd8894bc4d9d4612a"/>
+                    </div>
+
+                    <!-- Unnamed (Table Cell) -->
+                    <div id="u347" class="ax_default table_cell">
+                        <img id="u347_img" class="img "
+                             src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/gender2_u302.png?token=babdb13fda4f8124bd8f6801d0121106"/>
+                    </div>
+
+                    <!-- Unnamed (Table Cell) -->
+                    <div id="u348" class="ax_default table_cell">
+                        <img id="u348_img" class="img "
+                             src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u299.png?token=a2e9c21eec53046c7f39fdcce77a0ab2"/>
+                        <div id="u348_text" class="text ">
+                            <p><span>Wechat(if have)</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Wechat (Table Cell) -->
+                    <div id="u349" class="ax_default table_cell" data-label="Wechat">
+                        <img id="u349_img" class="img "
+                             src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/nationality2_u300.png?token=47372a06837c2fc60fc222031c49400d"/>
+                    </div>
+
+                    <!-- Unnamed (Table Cell) -->
+                    <div id="u350" class="ax_default table_cell">
+                        <img id="u350_img" class="img "
+                             src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u301.png?token=d0a79c09d3600e4cd8894bc4d9d4612a"/>
+                    </div>
+
+                    <!-- Unnamed (Table Cell) -->
+                    <div id="u351" class="ax_default table_cell">
+                        <img id="u351_img" class="img "
+                             src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/gender2_u302.png?token=babdb13fda4f8124bd8f6801d0121106"/>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Image) -->
+                <div id="u352" class="ax_default image">
+                    <img id="u352_img" class="img "
+                         src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u297.png?token=2c0f8b2634ff4deae29afb6929359046"/>
+                </div>
+
+                <!-- Gender_formal (Rectangle) -->
+                <div id="u353" class="ax_default label" data-label="Gender_formal">
+                    <div id="u353_div" class=""></div>
+                    <div id="u353_text" class="text ">
+                        <p><span>Label</span></p>
+                    </div>
+                </div>
+
+                <!-- Nationality_formal (Rectangle) -->
+                <div id="u354" class="ax_default label" data-label="Nationality_formal">
+                    <div id="u354_div" class=""></div>
+                    <div id="u354_text" class="text ">
+                        <p><span>Label</span></p>
+                    </div>
+                </div>
+
+                <!-- DOB_formal (Rectangle) -->
+                <div id="u355" class="ax_default label" data-label="DOB_formal">
+                    <div id="u355_div" class=""></div>
+                    <div id="u355_text" class="text ">
+                        <p><span>Label</span></p>
+                    </div>
+                </div>
+
+                <!-- Edu L_formal (Rectangle) -->
+                <div id="u356" class="ax_default label" data-label="Edu L_formal">
+                    <div id="u356_div" class=""></div>
+                    <div id="u356_text" class="text ">
+                        <p><span>Label</span></p>
+                    </div>
+                </div>
+
+                <!-- E-mail_formal (Rectangle) -->
+                <div id="u357" class="ax_default label" data-label="E-mail_formal">
+                    <div id="u357_div" class=""></div>
+                    <div id="u357_text" class="text ">
+                        <p><span>Label</span></p>
+                    </div>
+                </div>
+
+                <!-- Skype_formal (Rectangle) -->
+                <div id="u358" class="ax_default label" data-label="Skype_formal">
+                    <div id="u358_div" class=""></div>
+                    <div id="u358_text" class="text ">
+                        <p><span>Label</span></p>
+                    </div>
+                </div>
+
+                <!-- Code_formal (Rectangle) -->
+                <div id="u359" class="ax_default label" data-label="Code_formal">
+                    <div id="u359_div" class=""></div>
+                    <div id="u359_text" class="text ">
+                        <p><span>Label</span></p>
+                    </div>
+                </div>
+
+                <!-- Number_formal (Rectangle) -->
+                <div id="u360" class="ax_default label" data-label="Number_formal">
+                    <div id="u360_div" class=""></div>
+                    <div id="u360_text" class="text ">
+                        <p><span>Label</span></p>
+                    </div>
+                </div>
+
+                <!-- wechat_formal (Rectangle) -->
+                <div id="u361" class="ax_default label" data-label="wechat_formal">
+                    <div id="u361_div" class=""></div>
+                    <div id="u361_text" class="text ">
+                        <p><span>Label</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Rectangle) -->
+                <div id="u362" class="ax_default primary_button">
+                    <div id="u362_div" class=""></div>
+                    <div id="u362_text" class="text ">
+                        <p><span>Edit</span></p>
+                    </div>
+                </div>
+
+                <!-- Full Name (Repeater) -->
+                <div id="u363" class="ax_default" data-label="Full Name">
+                    <script id="u363_script" type="axure-repeater-template" data-label="Full Name">
+
+                        <!-- Reapter_last name (Rectangle) -->
+                        <div id="u364" class="ax_default heading_3 u364" data-label="Reapter_last name">
+                            <div id="u364_div" class="u364_div"></div>
+                            <div id="u364_text" class="text u364_text">
+                                <p><span
+                                    style="font-family:'Helvetica-Bold', 'Helvetica Bold', 'Helvetica';font-weight:700;">Heading 3</span>
+                                </p>
+                            </div>
+                        </div>
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Unnamed (Menu) -->
+    <div id="u365" class="ax_default">
+        <img id="u365_menu" class="img "
+             src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u365_menu.png?token=c2efcd5e2b6aaa4f7d36b34018241c17"
+             alt="u365_menu"/>
+
+        <!-- Unnamed (Table) -->
+        <div id="u366" class="ax_default">
+
+            <!-- Unnamed (Menu Item) -->
+            <div id="u367" class="ax_default menu_item">
+                <img id="u367_img" class="img "
+                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u367.png?token=5758114a88f1c1d8a8d05bd01b37e41a"/>
+                <div id="u367_text" class="text ">
+                    <p><span>Basic Information</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (Menu Item) -->
+            <div id="u368" class="ax_default menu_item">
+                <img id="u368_img" class="img "
+                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u367.png?token=5758114a88f1c1d8a8d05bd01b37e41a"/>
+                <div id="u368_text" class="text ">
+                    <p><span>Working Experience</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (Menu Item) -->
+            <div id="u369" class="ax_default menu_item">
+                <img id="u369_img" class="img "
+                     src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u369.png?token=2d42913744e778399d35ed709cec4bea"/>
+                <div id="u369_text" class="text ">
+                    <p><span>Education Background</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (Menu Item) -->
+            <div id="u370" class="ax_default menu_item">
+                <img id="u370_img" class="img "
+                     src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u370.png?token=d711902e86dc40ca62df8cf9581ee029"/>
+                <div id="u370_text" class="text ">
+                    <p><span>Skills</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Unnamed (Rectangle) -->
+    <div id="u371" class="ax_default box_1">
+        <div id="u371_div" class=""></div>
+    </div>
+
+    <!-- Working Experience (Rectangle) -->
+    <div id="u372" class="ax_default heading_1" data-label="Working Experience">
+        <div id="u372_div" class=""></div>
+        <div id="u372_text" class="text ">
+            <p><span>Working Experience</span></p>
+        </div>
+    </div>
+
+    <!-- Unnamed (Horizontal Line) -->
+    <div id="u373" class="ax_default line">
+        <img id="u373_img" class="img "
+             src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u373.png?token=8bada7d51c9976e9aa70a92420f806d8"/>
+    </div>
+
+    <!-- Working Experience (Repeater) -->
+    <div id="u374" class="ax_default" data-label="Working Experience">
+        <script id="u374_script" type="axure-repeater-template" data-label="Working Experience">
+
+            <!-- Unnamed (Table) -->
+            <div id="u375" class="ax_default u375">
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u376" class="ax_default table_cell u376">
+                    <img id="u376_img" class="img u376_img"
+                         src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u376.png?token=a8004f8f1b524728cf03a19669bf81e9"/>
+                    <div id="u376_text" class="text u376_text">
+                        <p><span>From</span></p>
+                    </div>
+                </div>
+
+                <!-- from_final (Table Cell) -->
+                <div id="u377" class="ax_default table_cell u377" data-label="from_final">
+                    <img id="u377_img" class="img u377_img"
+                         src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u376.png?token=a8004f8f1b524728cf03a19669bf81e9"/>
+                    <div id="u377_text" class="text u377_text">
+                        <p><span>To</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u378" class="ax_default table_cell u378">
+                    <img id="u378_img" class="img u378_img"
+                         src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u376.png?token=a8004f8f1b524728cf03a19669bf81e9"/>
+                </div>
+
+                <!-- to_final (Table Cell) -->
+                <div id="u379" class="ax_default table_cell u379" data-label="to_final">
+                    <img id="u379_img" class="img u379_img"
+                         src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/to_final_u379.png?token=5cac344a4d9d07b5a05502bb653d9071"/>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u380" class="ax_default table_cell u380">
+                    <img id="u380_img" class="img u380_img"
+                         src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u380.png?token=f4c8c6b765b3e6e8b9194c2b96297450"/>
+                    <div id="u380_text" class="text u380_text">
+                        <p><span>School </span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u381" class="ax_default table_cell u381">
+                    <img id="u381_img" class="img u381_img"
+                         src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u380.png?token=f4c8c6b765b3e6e8b9194c2b96297450"/>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u382" class="ax_default table_cell u382">
+                    <img id="u382_img" class="img u382_img"
+                         src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u380.png?token=f4c8c6b765b3e6e8b9194c2b96297450"/>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u383" class="ax_default table_cell u383">
+                    <img id="u383_img" class="img u383_img"
+                         src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u383.png?token=66f2ab22146feb78a05dadd14628845c"/>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u384" class="ax_default table_cell u384">
+                    <img id="u384_img" class="img u384_img"
+                         src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u376.png?token=a8004f8f1b524728cf03a19669bf81e9"/>
+                    <div id="u384_text" class="text u384_text">
+                        <p><span>Grade</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u385" class="ax_default table_cell u385">
+                    <img id="u385_img" class="img u385_img"
+                         src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u376.png?token=a8004f8f1b524728cf03a19669bf81e9"/>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u386" class="ax_default table_cell u386">
+                    <img id="u386_img" class="img u386_img"
+                         src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u376.png?token=a8004f8f1b524728cf03a19669bf81e9"/>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u387" class="ax_default table_cell u387">
+                    <img id="u387_img" class="img u387_img"
+                         src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/to_final_u379.png?token=5cac344a4d9d07b5a05502bb653d9071"/>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u388" class="ax_default table_cell u388">
+                    <img id="u388_img" class="img u388_img"
+                         src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u376.png?token=a8004f8f1b524728cf03a19669bf81e9"/>
+                    <div id="u388_text" class="text u388_text">
+                        <p><span>Location</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u389" class="ax_default table_cell u389">
+                    <img id="u389_img" class="img u389_img"
+                         src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u376.png?token=a8004f8f1b524728cf03a19669bf81e9"/>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u390" class="ax_default table_cell u390">
+                    <img id="u390_img" class="img u390_img"
+                         src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u376.png?token=a8004f8f1b524728cf03a19669bf81e9"/>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u391" class="ax_default table_cell u391">
+                    <img id="u391_img" class="img u391_img"
+                         src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/to_final_u379.png?token=5cac344a4d9d07b5a05502bb653d9071"/>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u392" class="ax_default table_cell u392">
+                    <img id="u392_img" class="img u392_img"
+                         src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u380.png?token=f4c8c6b765b3e6e8b9194c2b96297450"/>
+                    <div id="u392_text" class="text u392_text">
+                        <p><span>Title</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u393" class="ax_default table_cell u393">
+                    <img id="u393_img" class="img u393_img"
+                         src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u380.png?token=f4c8c6b765b3e6e8b9194c2b96297450"/>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u394" class="ax_default table_cell u394">
+                    <img id="u394_img" class="img u394_img"
+                         src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u380.png?token=f4c8c6b765b3e6e8b9194c2b96297450"/>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u395" class="ax_default table_cell u395">
+                    <img id="u395_img" class="img u395_img"
+                         src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u383.png?token=66f2ab22146feb78a05dadd14628845c"/>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u396" class="ax_default table_cell u396">
+                    <img id="u396_img" class="img u396_img"
+                         src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u376.png?token=a8004f8f1b524728cf03a19669bf81e9"/>
+                    <div id="u396_text" class="text u396_text">
+                        <p><span>Responsibility</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u397" class="ax_default table_cell u397">
+                    <img id="u397_img" class="img u397_img"
+                         src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u376.png?token=a8004f8f1b524728cf03a19669bf81e9"/>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u398" class="ax_default table_cell u398">
+                    <img id="u398_img" class="img u398_img"
+                         src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u376.png?token=a8004f8f1b524728cf03a19669bf81e9"/>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u399" class="ax_default table_cell u399">
+                    <img id="u399_img" class="img u399_img"
+                         src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/to_final_u379.png?token=5cac344a4d9d07b5a05502bb653d9071"/>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u400" class="ax_default table_cell u400">
+                    <img id="u400_img" class="img u400_img"
+                         src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u400.png?token=dff8f207c4898f903111b7c7ff06a9b1"/>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u401" class="ax_default table_cell u401">
+                    <img id="u401_img" class="img u401_img"
+                         src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u400.png?token=dff8f207c4898f903111b7c7ff06a9b1"/>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u402" class="ax_default table_cell u402">
+                    <img id="u402_img" class="img u402_img"
+                         src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u400.png?token=dff8f207c4898f903111b7c7ff06a9b1"/>
+                </div>
+
+                <!-- Unnamed (Table Cell) -->
+                <div id="u403" class="ax_default table_cell u403">
+                    <img id="u403_img" class="img u403_img"
+                         src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u403.png?token=4c2113902b39b5caab40b3baa321c01a"/>
+                </div>
+            </div>
+
+            <!-- From_Mon_Formal (Rectangle) -->
+            <div id="u404" class="ax_default label u404" data-label="From_Mon_Formal">
+                <div id="u404_div" class="u404_div"></div>
+                <div id="u404_text" class="text u404_text">
+                    <p><span>Label</span></p>
+                </div>
+            </div>
+
+            <!-- To_Mon_formal (Rectangle) -->
+            <div id="u405" class="ax_default label u405" data-label="To_Mon_formal">
+                <div id="u405_div" class="u405_div"></div>
+                <div id="u405_text" class="text u405_text">
+                    <p><span>Label</span></p>
+                </div>
+            </div>
+
+            <!-- School_formal (Rectangle) -->
+            <div id="u406" class="ax_default label u406" data-label="School_formal">
+                <div id="u406_div" class="u406_div"></div>
+                <div id="u406_text" class="text u406_text">
+                    <p><span>Label</span></p>
+                </div>
+            </div>
+
+            <!-- Location_formal (Rectangle) -->
+            <div id="u407" class="ax_default label u407" data-label="Location_formal">
+                <div id="u407_div" class="u407_div"></div>
+                <div id="u407_text" class="text u407_text">
+                    <p><span>Label</span></p>
+                </div>
+            </div>
+
+            <!-- Title_formal (Rectangle) -->
+            <div id="u408" class="ax_default label u408" data-label="Title_formal">
+                <div id="u408_div" class="u408_div"></div>
+                <div id="u408_text" class="text u408_text">
+                    <p><span>Label</span></p>
+                </div>
+            </div>
+
+            <!-- Responsibility_formal (Rectangle) -->
+            <div id="u409" class="ax_default label u409" data-label="Responsibility_formal">
+                <div id="u409_div" class="u409_div"></div>
+                <div id="u409_text" class="text u409_text">
+                    <p><span>Label</span></p>
+                </div>
+            </div>
+
+            <!-- Grade_formal (Rectangle) -->
+            <div id="u410" class="ax_default label u410" data-label="Grade_formal">
+                <div id="u410_div" class="u410_div"></div>
+                <div id="u410_text" class="text u410_text">
+                    <p><span>Label</span></p>
+                </div>
+            </div>
+
+            <!-- exp_edit (Rectangle) -->
+            <div id="u411" class="ax_default button u411" data-label="exp_edit">
+                <div id="u411_div" class="u411_div"></div>
+                <div id="u411_text" class="text u411_text">
+                    <p><span>Edit</span></p>
+                </div>
+            </div>
+
+            <!-- exp_delete (Rectangle) -->
+            <div id="u412" class="ax_default button u412" data-label="exp_delete">
+                <div id="u412_div" class="u412_div"></div>
+                <div id="u412_text" class="text u412_text">
+                    <p><span>Delete</span></p>
+                </div>
+            </div>
+        </script>
+    </div>
+
+    <!-- Add Exp (Group) -->
+    <div id="u413" class="ax_default" data-label="Add Exp" data-left="935" data-top="389" data-width="15"
+         data-height="15">
+
+        <!-- Unnamed (Image) -->
+        <div id="u414" class="ax_default image">
+            <img id="u414_img" class="img "
+                 src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u414.png?token=255a595cafd73a4d394a87e2f409f2ee"/>
+        </div>
+
+        <!-- Unnamed (Image) -->
+        <div id="u415" class="ax_default image">
+            <img id="u415_img" class="img "
+                 src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u415.png?token=8bb6fbc5eacc44a0dd9d8ce98d00fc85"/>
+        </div>
+    </div>
+
+    <!-- Education (Dynamic Panel) -->
+    <div id="u416" class="ax_default" data-label="Education">
+        <div id="u416_state0" class="panel_state" data-label="Initial Status_edu" style="">
+            <div id="u416_state0_content" class="panel_state_content">
+
+                <!-- Unnamed (Rectangle) -->
+                <div id="u417" class="ax_default box_1">
+                    <div id="u417_div" class=""></div>
+                </div>
+
+                <!-- Education Background (Rectangle) -->
+                <div id="u418" class="ax_default heading_1" data-label="Education Background">
+                    <div id="u418_div" class=""></div>
+                    <div id="u418_text" class="text ">
+                        <p><span>Education Background</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Horizontal Line) -->
+                <div id="u419" class="ax_default line">
+                    <img id="u419_img" class="img "
+                         src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u373.png?token=8bada7d51c9976e9aa70a92420f806d8"/>
+                </div>
+
+                <!-- Add Background_edu (Group) -->
+                <div id="u420" class="ax_default" data-label="Add Background_edu" data-left="629" data-top="3"
+                     data-width="15" data-height="15">
+
+                    <!-- Unnamed (Image) -->
+                    <div id="u421" class="ax_default image">
+                        <img id="u421_img" class="img "
+                             src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u414.png?token=255a595cafd73a4d394a87e2f409f2ee"/>
+                    </div>
+
+                    <!-- Unnamed (Image) -->
+                    <div id="u422" class="ax_default image">
+                        <img id="u422_img" class="img "
+                             src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u415.png?token=8bb6fbc5eacc44a0dd9d8ce98d00fc85"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="u416_state1" class="panel_state" data-label="Edu background_formal" style="visibility: hidden;">
+            <div id="u416_state1_content" class="panel_state_content">
+
+                <!-- Education Background (Rectangle) -->
+                <div id="u423" class="ax_default heading_1" data-label="Education Background">
+                    <div id="u423_div" class=""></div>
+                    <div id="u423_text" class="text ">
+                        <p><span>Education Background</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Horizontal Line) -->
+                <div id="u424" class="ax_default line">
+                    <img id="u424_img" class="img "
+                         src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u373.png?token=8bada7d51c9976e9aa70a92420f806d8"/>
+                </div>
+
+                <!-- Add Background_edu (Group) -->
+                <div id="u425" class="ax_default" data-label="Add Background_edu" data-left="629" data-top="3"
+                     data-width="15" data-height="15">
+
+                    <!-- Unnamed (Image) -->
+                    <div id="u426" class="ax_default image">
+                        <img id="u426_img" class="img "
+                             src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u414.png?token=255a595cafd73a4d394a87e2f409f2ee"/>
+                    </div>
+
+                    <!-- Unnamed (Image) -->
+                    <div id="u427" class="ax_default image">
+                        <img id="u427_img" class="img "
+                             src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u415.png?token=8bb6fbc5eacc44a0dd9d8ce98d00fc85"/>
+                    </div>
+                </div>
+
+                <!-- Edu background (Repeater) -->
+                <div id="u428" class="ax_default" data-label="Edu background">
+                    <script id="u428_script" type="axure-repeater-template" data-label="Edu background">
+
+                        <!-- Unnamed (Table) -->
+                        <div id="u429" class="ax_default u429">
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u430" class="ax_default table_cell u430">
+                                <img id="u430_img" class="img u430_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u430.png?token=7b4e32a34c6e7c5802c488ecb2c9294f"/>
+                                <div id="u430_text" class="text u430_text">
+                                    <p><span>From</span></p>
+                                </div>
+                            </div>
+
+                            <!-- from_final (Table Cell) -->
+                            <div id="u431" class="ax_default table_cell u431" data-label="from_final">
+                                <img id="u431_img" class="img u431_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u430.png?token=7b4e32a34c6e7c5802c488ecb2c9294f"/>
+                                <div id="u431_text" class="text u431_text">
+                                    <p><span>To</span></p>
+                                </div>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u432" class="ax_default table_cell u432">
+                                <img id="u432_img" class="img u432_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u430.png?token=7b4e32a34c6e7c5802c488ecb2c9294f"/>
+                            </div>
+
+                            <!-- to_final (Table Cell) -->
+                            <div id="u433" class="ax_default table_cell u433" data-label="to_final">
+                                <img id="u433_img" class="img u433_img"
+                                     src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/to_final_u433.png?token=695e6cc3f6ded1551be1fb3296430ee9"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u434" class="ax_default table_cell u434">
+                                <img id="u434_img" class="img u434_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u430.png?token=7b4e32a34c6e7c5802c488ecb2c9294f"/>
+                                <div id="u434_text" class="text u434_text">
+                                    <p><span>School </span></p>
+                                </div>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u435" class="ax_default table_cell u435">
+                                <img id="u435_img" class="img u435_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u430.png?token=7b4e32a34c6e7c5802c488ecb2c9294f"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u436" class="ax_default table_cell u436">
+                                <img id="u436_img" class="img u436_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u430.png?token=7b4e32a34c6e7c5802c488ecb2c9294f"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u437" class="ax_default table_cell u437">
+                                <img id="u437_img" class="img u437_img"
+                                     src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/to_final_u433.png?token=695e6cc3f6ded1551be1fb3296430ee9"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u438" class="ax_default table_cell u438">
+                                <img id="u438_img" class="img u438_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u430.png?token=7b4e32a34c6e7c5802c488ecb2c9294f"/>
+                                <div id="u438_text" class="text u438_text">
+                                    <p><span>Degree</span></p>
+                                </div>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u439" class="ax_default table_cell u439">
+                                <img id="u439_img" class="img u439_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u430.png?token=7b4e32a34c6e7c5802c488ecb2c9294f"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u440" class="ax_default table_cell u440">
+                                <img id="u440_img" class="img u440_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u430.png?token=7b4e32a34c6e7c5802c488ecb2c9294f"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u441" class="ax_default table_cell u441">
+                                <img id="u441_img" class="img u441_img"
+                                     src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/to_final_u433.png?token=695e6cc3f6ded1551be1fb3296430ee9"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u442" class="ax_default table_cell u442">
+                                <img id="u442_img" class="img u442_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u430.png?token=7b4e32a34c6e7c5802c488ecb2c9294f"/>
+                                <div id="u442_text" class="text u442_text">
+                                    <p><span>Major</span></p>
+                                </div>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u443" class="ax_default table_cell u443">
+                                <img id="u443_img" class="img u443_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u430.png?token=7b4e32a34c6e7c5802c488ecb2c9294f"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u444" class="ax_default table_cell u444">
+                                <img id="u444_img" class="img u444_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u430.png?token=7b4e32a34c6e7c5802c488ecb2c9294f"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u445" class="ax_default table_cell u445">
+                                <img id="u445_img" class="img u445_img"
+                                     src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/to_final_u433.png?token=695e6cc3f6ded1551be1fb3296430ee9"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u446" class="ax_default table_cell u446">
+                                <img id="u446_img" class="img u446_img"
+                                     src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u446.png?token=bc858d9459efa28d9e6f13ffb70497aa"/>
+                                <div id="u446_text" class="text u446_text">
+                                    <p><span>Location</span></p>
+                                </div>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u447" class="ax_default table_cell u447">
+                                <img id="u447_img" class="img u447_img"
+                                     src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u446.png?token=bc858d9459efa28d9e6f13ffb70497aa"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u448" class="ax_default table_cell u448">
+                                <img id="u448_img" class="img u448_img"
+                                     src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u446.png?token=bc858d9459efa28d9e6f13ffb70497aa"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u449" class="ax_default table_cell u449">
+                                <img id="u449_img" class="img u449_img"
+                                     src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u449.png?token=e2c7700b8a9cdf63f15beb7dcc453b63"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u450" class="ax_default table_cell u450">
+                                <img id="u450_img" class="img u450_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u430.png?token=7b4e32a34c6e7c5802c488ecb2c9294f"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u451" class="ax_default table_cell u451">
+                                <img id="u451_img" class="img u451_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u430.png?token=7b4e32a34c6e7c5802c488ecb2c9294f"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u452" class="ax_default table_cell u452">
+                                <img id="u452_img" class="img u452_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u430.png?token=7b4e32a34c6e7c5802c488ecb2c9294f"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u453" class="ax_default table_cell u453">
+                                <img id="u453_img" class="img u453_img"
+                                     src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/to_final_u433.png?token=695e6cc3f6ded1551be1fb3296430ee9"/>
+                            </div>
+                        </div>
+
+                        <!-- edu_From_Formal (Rectangle) -->
+                        <div id="u454" class="ax_default label u454" data-label="edu_From_Formal">
+                            <div id="u454_div" class="u454_div"></div>
+                            <div id="u454_text" class="text u454_text">
+                                <p><span>Label</span></p>
+                            </div>
+                        </div>
+
+                        <!-- edu_To_formal (Rectangle) -->
+                        <div id="u455" class="ax_default label u455" data-label="edu_To_formal">
+                            <div id="u455_div" class="u455_div"></div>
+                            <div id="u455_text" class="text u455_text">
+                                <p><span>Label</span></p>
+                            </div>
+                        </div>
+
+                        <!-- edu_School_formal (Rectangle) -->
+                        <div id="u456" class="ax_default label u456" data-label="edu_School_formal">
+                            <div id="u456_div" class="u456_div"></div>
+                            <div id="u456_text" class="text u456_text">
+                                <p><span>Label</span></p>
+                            </div>
+                        </div>
+
+                        <!-- edu_degree_formal (Rectangle) -->
+                        <div id="u457" class="ax_default label u457" data-label="edu_degree_formal">
+                            <div id="u457_div" class="u457_div"></div>
+                            <div id="u457_text" class="text u457_text">
+                                <p><span>Label</span></p>
+                            </div>
+                        </div>
+
+                        <!-- edu_major_formal (Rectangle) -->
+                        <div id="u458" class="ax_default label u458" data-label="edu_major_formal">
+                            <div id="u458_div" class="u458_div"></div>
+                            <div id="u458_text" class="text u458_text">
+                                <p><span>Label</span></p>
+                            </div>
+                        </div>
+
+                        <!-- edu_location_formal (Rectangle) -->
+                        <div id="u459" class="ax_default label u459" data-label="edu_location_formal">
+                            <div id="u459_div" class="u459_div"></div>
+                            <div id="u459_text" class="text u459_text">
+                                <p><span>Label</span></p>
+                            </div>
+                        </div>
+
+                        <!-- edu_edit (Rectangle) -->
+                        <div id="u460" class="ax_default button u460" data-label="edu_edit">
+                            <div id="u460_div" class="u460_div"></div>
+                            <div id="u460_text" class="text u460_text">
+                                <p><span>Edit</span></p>
+                            </div>
+                        </div>
+
+                        <!-- edu_delete (Rectangle) -->
+                        <div id="u461" class="ax_default button u461" data-label="edu_delete">
+                            <div id="u461_div" class="u461_div"></div>
+                            <div id="u461_text" class="text u461_text">
+                                <p><span>Delete</span></p>
+                            </div>
+                        </div>
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Professional Development (Dynamic Panel) -->
+    <div id="u462" class="ax_default" data-label="Professional Development">
+        <div id="u462_state0" class="panel_state" data-label="Initial Status_PD" style="">
+            <div id="u462_state0_content" class="panel_state_content">
+
+                <!-- Unnamed (Rectangle) -->
+                <div id="u463" class="ax_default box_1">
+                    <div id="u463_div" class=""></div>
+                </div>
+
+                <!-- PD (Rectangle) -->
+                <div id="u464" class="ax_default heading_1" data-label="PD">
+                    <div id="u464_div" class=""></div>
+                    <div id="u464_text" class="text ">
+                        <p><span>Professional Development</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Horizontal Line) -->
+                <div id="u465" class="ax_default line">
+                    <img id="u465_img" class="img "
+                         src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u373.png?token=8bada7d51c9976e9aa70a92420f806d8"/>
+                </div>
+
+                <!-- Add Background_edu (Group) -->
+                <div id="u466" class="ax_default" data-label="Add Background_edu" data-left="629" data-top="3"
+                     data-width="15" data-height="15">
+
+                    <!-- Unnamed (Image) -->
+                    <div id="u467" class="ax_default image">
+                        <img id="u467_img" class="img "
+                             src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u414.png?token=255a595cafd73a4d394a87e2f409f2ee"/>
+                    </div>
+
+                    <!-- Unnamed (Image) -->
+                    <div id="u468" class="ax_default image">
+                        <img id="u468_img" class="img "
+                             src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u415.png?token=8bb6fbc5eacc44a0dd9d8ce98d00fc85"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="u462_state1" class="panel_state" data-label="Formal Status_PD" style="visibility: hidden;">
+            <div id="u462_state1_content" class="panel_state_content">
+
+                <!-- Education Background (Rectangle) -->
+                <div id="u469" class="ax_default heading_1" data-label="Education Background">
+                    <div id="u469_div" class=""></div>
+                    <div id="u469_text" class="text ">
+                        <p><span>Professional Development</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Horizontal Line) -->
+                <div id="u470" class="ax_default line">
+                    <img id="u470_img" class="img "
+                         src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u373.png?token=8bada7d51c9976e9aa70a92420f806d8"/>
+                </div>
+
+                <!-- Add Background_edu (Group) -->
+                <div id="u471" class="ax_default" data-label="Add Background_edu" data-left="629" data-top="3"
+                     data-width="15" data-height="15">
+
+                    <!-- Unnamed (Image) -->
+                    <div id="u472" class="ax_default image">
+                        <img id="u472_img" class="img "
+                             src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u414.png?token=255a595cafd73a4d394a87e2f409f2ee"/>
+                    </div>
+
+                    <!-- Unnamed (Image) -->
+                    <div id="u473" class="ax_default image">
+                        <img id="u473_img" class="img "
+                             src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u415.png?token=8bb6fbc5eacc44a0dd9d8ce98d00fc85"/>
+                    </div>
+                </div>
+
+                <!-- PD_formal (Repeater) -->
+                <div id="u474" class="ax_default" data-label="PD_formal">
+                    <script id="u474_script" type="axure-repeater-template" data-label="PD_formal">
+
+                        <!-- Unnamed (Table) -->
+                        <div id="u475" class="ax_default u475">
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u476" class="ax_default table_cell u476">
+                                <img id="u476_img" class="img u476_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u430.png?token=7b4e32a34c6e7c5802c488ecb2c9294f"/>
+                            </div>
+
+                            <!-- from_final (Table Cell) -->
+                            <div id="u477" class="ax_default table_cell u477" data-label="from_final">
+                                <img id="u477_img" class="img u477_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u430.png?token=7b4e32a34c6e7c5802c488ecb2c9294f"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u478" class="ax_default table_cell u478">
+                                <img id="u478_img" class="img u478_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u430.png?token=7b4e32a34c6e7c5802c488ecb2c9294f"/>
+                            </div>
+
+                            <!-- to_final (Table Cell) -->
+                            <div id="u479" class="ax_default table_cell u479" data-label="to_final">
+                                <img id="u479_img" class="img u479_img"
+                                     src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/to_final_u433.png?token=695e6cc3f6ded1551be1fb3296430ee9"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u480" class="ax_default table_cell u480">
+                                <img id="u480_img" class="img u480_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u480.png?token=ee8f9268078dad03f7fab74c0ab029e3"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u481" class="ax_default table_cell u481">
+                                <img id="u481_img" class="img u481_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u480.png?token=ee8f9268078dad03f7fab74c0ab029e3"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u482" class="ax_default table_cell u482">
+                                <img id="u482_img" class="img u482_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u480.png?token=ee8f9268078dad03f7fab74c0ab029e3"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u483" class="ax_default table_cell u483">
+                                <img id="u483_img" class="img u483_img"
+                                     src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u483.png?token=db77946e286b8685179d84307f514efc"/>
+                            </div>
+                        </div>
+
+                        <!-- PD_From_Formal (Rectangle) -->
+                        <div id="u484" class="ax_default label u484" data-label="PD_From_Formal">
+                            <div id="u484_div" class="u484_div"></div>
+                            <div id="u484_text" class="text u484_text">
+                                <p><span>Label</span></p>
+                            </div>
+                        </div>
+
+                        <!-- PD_To_formal (Rectangle) -->
+                        <div id="u485" class="ax_default label u485" data-label="PD_To_formal">
+                            <div id="u485_div" class="u485_div"></div>
+                            <div id="u485_text" class="text u485_text">
+                                <p><span>Label</span></p>
+                            </div>
+                        </div>
+
+                        <!-- edu_edit (Rectangle) -->
+                        <div id="u486" class="ax_default button u486" data-label="edu_edit">
+                            <div id="u486_div" class="u486_div"></div>
+                            <div id="u486_text" class="text u486_text">
+                                <p><span>Edit</span></p>
+                            </div>
+                        </div>
+
+                        <!-- edu_delete (Rectangle) -->
+                        <div id="u487" class="ax_default button u487" data-label="edu_delete">
+                            <div id="u487_div" class="u487_div"></div>
+                            <div id="u487_text" class="text u487_text">
+                                <p><span>Detete</span></p>
+                            </div>
+                        </div>
+
+                        <!-- PD name_formal (Rectangle) -->
+                        <div id="u488" class="ax_default label u488" data-label="PD name_formal">
+                            <div id="u488_div" class="u488_div"></div>
+                            <div id="u488_text" class="text u488_text">
+                                <p><span>Label</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (Horizontal Line) -->
+                        <div id="u489" class="ax_default line u489">
+                            <img id="u489_img" class="img u489_img"
+                                 src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u489.png?token=6d7d29147553d06ab17c1341c81ea6ac"/>
+                        </div>
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Language (Dynamic Panel) -->
+    <div id="u490" class="ax_default" data-label="Language">
+        <div id="u490_state0" class="panel_state" data-label="Initial Status_Language" style="">
+            <div id="u490_state0_content" class="panel_state_content">
+
+                <!-- Unnamed (Rectangle) -->
+                <div id="u491" class="ax_default box_1">
+                    <div id="u491_div" class=""></div>
+                </div>
+
+                <!-- PD (Rectangle) -->
+                <div id="u492" class="ax_default heading_1" data-label="PD">
+                    <div id="u492_div" class=""></div>
+                    <div id="u492_text" class="text ">
+                        <p><span>Language</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Horizontal Line) -->
+                <div id="u493" class="ax_default line">
+                    <img id="u493_img" class="img "
+                         src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u373.png?token=8bada7d51c9976e9aa70a92420f806d8"/>
+                </div>
+
+                <!-- Add Background_edu (Group) -->
+                <div id="u494" class="ax_default" data-label="Add Background_edu" data-left="629" data-top="3"
+                     data-width="15" data-height="15">
+
+                    <!-- Unnamed (Image) -->
+                    <div id="u495" class="ax_default image">
+                        <img id="u495_img" class="img "
+                             src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u414.png?token=255a595cafd73a4d394a87e2f409f2ee"/>
+                    </div>
+
+                    <!-- Unnamed (Image) -->
+                    <div id="u496" class="ax_default image">
+                        <img id="u496_img" class="img "
+                             src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u415.png?token=8bb6fbc5eacc44a0dd9d8ce98d00fc85"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="u490_state1" class="panel_state" data-label="Language_formal" style="visibility: hidden;">
+            <div id="u490_state1_content" class="panel_state_content">
+
+                <!-- Education Background (Rectangle) -->
+                <div id="u497" class="ax_default heading_1" data-label="Education Background">
+                    <div id="u497_div" class=""></div>
+                    <div id="u497_text" class="text ">
+                        <p><span>Language</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Horizontal Line) -->
+                <div id="u498" class="ax_default line">
+                    <img id="u498_img" class="img "
+                         src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u373.png?token=8bada7d51c9976e9aa70a92420f806d8"/>
+                </div>
+
+                <!-- Add Background_edu (Group) -->
+                <div id="u499" class="ax_default" data-label="Add Background_edu" data-left="629" data-top="3"
+                     data-width="15" data-height="15">
+
+                    <!-- Unnamed (Image) -->
+                    <div id="u500" class="ax_default image">
+                        <img id="u500_img" class="img "
+                             src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u414.png?token=255a595cafd73a4d394a87e2f409f2ee"/>
+                    </div>
+
+                    <!-- Unnamed (Image) -->
+                    <div id="u501" class="ax_default image">
+                        <img id="u501_img" class="img "
+                             src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u415.png?token=8bb6fbc5eacc44a0dd9d8ce98d00fc85"/>
+                    </div>
+                </div>
+
+                <!-- Language_formal (Repeater) -->
+                <div id="u502" class="ax_default" data-label="Language_formal">
+                    <script id="u502_script" type="axure-repeater-template" data-label="Language_formal">
+
+                        <!-- Unnamed (Table) -->
+                        <div id="u503" class="ax_default u503">
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u504" class="ax_default table_cell u504">
+                                <img id="u504_img" class="img u504_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u430.png?token=7b4e32a34c6e7c5802c488ecb2c9294f"/>
+                            </div>
+
+                            <!-- from_final (Table Cell) -->
+                            <div id="u505" class="ax_default table_cell u505" data-label="from_final">
+                                <img id="u505_img" class="img u505_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u430.png?token=7b4e32a34c6e7c5802c488ecb2c9294f"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u506" class="ax_default table_cell u506">
+                                <img id="u506_img" class="img u506_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u430.png?token=7b4e32a34c6e7c5802c488ecb2c9294f"/>
+                            </div>
+
+                            <!-- to_final (Table Cell) -->
+                            <div id="u507" class="ax_default table_cell u507" data-label="to_final">
+                                <img id="u507_img" class="img u507_img"
+                                     src="http://d2v8ggac1o0f6z.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/to_final_u433.png?token=695e6cc3f6ded1551be1fb3296430ee9"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u508" class="ax_default table_cell u508">
+                                <img id="u508_img" class="img u508_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u480.png?token=ee8f9268078dad03f7fab74c0ab029e3"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u509" class="ax_default table_cell u509">
+                                <img id="u509_img" class="img u509_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u480.png?token=ee8f9268078dad03f7fab74c0ab029e3"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u510" class="ax_default table_cell u510">
+                                <img id="u510_img" class="img u510_img"
+                                     src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u480.png?token=ee8f9268078dad03f7fab74c0ab029e3"/>
+                            </div>
+
+                            <!-- Unnamed (Table Cell) -->
+                            <div id="u511" class="ax_default table_cell u511">
+                                <img id="u511_img" class="img u511_img"
+                                     src="http://d26uhratvi024l.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u483.png?token=db77946e286b8685179d84307f514efc"/>
+                            </div>
+                        </div>
+
+                        <!-- Language Name_Formal (Rectangle) -->
+                        <div id="u512" class="ax_default label u512" data-label="Language Name_Formal">
+                            <div id="u512_div" class="u512_div"></div>
+                            <div id="u512_text" class="text u512_text">
+                                <p><span>Label</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Language_edit (Rectangle) -->
+                        <div id="u513" class="ax_default button u513" data-label="Language_edit">
+                            <div id="u513_div" class="u513_div"></div>
+                            <div id="u513_text" class="text u513_text">
+                                <p><span>Edit</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Language_delete (Rectangle) -->
+                        <div id="u514" class="ax_default button u514" data-label="Language_delete">
+                            <div id="u514_div" class="u514_div"></div>
+                            <div id="u514_text" class="text u514_text">
+                                <p><span>Detete</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Language Level_Formal (Rectangle) -->
+                        <div id="u515" class="ax_default label u515" data-label="Language Level_Formal">
+                            <div id="u515_div" class="u515_div"></div>
+                            <div id="u515_text" class="text u515_text">
+                                <p><span>Label</span></p>
+                            </div>
+                        </div>
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Others (Dynamic Panel) -->
+    <div id="u516" class="ax_default" data-label="Others">
+        <div id="u516_state0" class="panel_state" data-label="Initial Status_Others" style="">
+            <div id="u516_state0_content" class="panel_state_content">
+
+                <!-- Unnamed (Rectangle) -->
+                <div id="u517" class="ax_default box_1">
+                    <div id="u517_div" class=""></div>
+                </div>
+
+                <!-- PD (Rectangle) -->
+                <div id="u518" class="ax_default heading_1" data-label="PD">
+                    <div id="u518_div" class=""></div>
+                    <div id="u518_text" class="text ">
+                        <p><span>Others</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Horizontal Line) -->
+                <div id="u519" class="ax_default line">
+                    <img id="u519_img" class="img "
+                         src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u373.png?token=8bada7d51c9976e9aa70a92420f806d8"/>
+                </div>
+
+                <!-- Add Background_edu (Group) -->
+                <div id="u520" class="ax_default" data-label="Add Background_edu" data-left="629" data-top="3"
+                     data-width="15" data-height="15">
+
+                    <!-- Unnamed (Image) -->
+                    <div id="u521" class="ax_default image">
+                        <img id="u521_img" class="img "
+                             src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u414.png?token=255a595cafd73a4d394a87e2f409f2ee"/>
+                    </div>
+
+                    <!-- Unnamed (Image) -->
+                    <div id="u522" class="ax_default image">
+                        <img id="u522_img" class="img "
+                             src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u415.png?token=8bb6fbc5eacc44a0dd9d8ce98d00fc85"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="u516_state1" class="panel_state" data-label="Others_formal" style="visibility: hidden;">
+            <div id="u516_state1_content" class="panel_state_content">
+
+                <!-- Education Background (Rectangle) -->
+                <div id="u523" class="ax_default heading_1" data-label="Education Background">
+                    <div id="u523_div" class=""></div>
+                    <div id="u523_text" class="text ">
+                        <p><span>Others</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Horizontal Line) -->
+                <div id="u524" class="ax_default line">
+                    <img id="u524_img" class="img "
+                         src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u373.png?token=8bada7d51c9976e9aa70a92420f806d8"/>
+                </div>
+
+                <!-- Add Background_edu (Group) -->
+                <div id="u525" class="ax_default" data-label="Add Background_edu" data-left="629" data-top="3"
+                     data-width="15" data-height="15">
+
+                    <!-- Unnamed (Image) -->
+                    <div id="u526" class="ax_default image">
+                        <img id="u526_img" class="img "
+                             src="http://d2t44wh9rnwl5y.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u414.png?token=255a595cafd73a4d394a87e2f409f2ee"/>
+                    </div>
+
+                    <!-- Unnamed (Image) -->
+                    <div id="u527" class="ax_default image">
+                        <img id="u527_img" class="img "
+                             src="http://dxlfb468n8ekd.cloudfront.net/gsc/GG7TM7/e1/16/36/e11636f0bdaa48b699a48728d6aceb52/images/resume_v2/u415.png?token=8bb6fbc5eacc44a0dd9d8ce98d00fc85"/>
+                    </div>
+                </div>
+
+                <!-- Marriage Status (Rectangle) -->
+                <div id="u528" class="ax_default label" data-label="Marriage Status">
+                    <div id="u528_div" class=""></div>
+                    <div id="u528_text" class="text ">
+                        <p><span>Marriage Status</span></p>
+                    </div>
+                </div>
+
+                <!-- Marrstatus (Droplist) -->
+                <div id="u529" class="ax_default droplist" data-label="Marrstatus">
+                    <select id="u529_input">
+                        <option value="Single">Single</option>
+                        <option value="Single with kid(s)">Single with kid(s)</option>
+                        <option value="Married">Married</option>
+                        <option value="Married with kid(s)">Married with kid(s)</option>
+                    </select>
+                </div>
+
+                <!-- depentdent info (Dynamic Panel) -->
+                <div id="u530" class="ax_default" data-label="depentdent info">
+                    <div id="u530_state0" class="panel_state" data-label="Single with kid(s)" style="">
+                        <div id="u530_state0_content" class="panel_state_content">
+
+                            <!-- Unnamed (Rectangle) -->
+                            <div id="u531" class="ax_default box_1">
+                                <div id="u531_div" class=""></div>
+                            </div>
+
+                            <!-- single with kid(s) (Repeater) -->
+                            <div id="u532" class="ax_default" data-label="single with kid(s)">
+                                <script id="u532_script" type="axure-repeater-template" data-label="single with kid(s)">
+
+                                    <!-- kid name (Rectangle) -->
+                                    <div id="u533" class="ax_default label u533" data-label="kid name">
+                                        <div id="u533_div" class="u533_div"></div>
+                                        <div id="u533_text" class="text u533_text">
+                                            <p><span>Label</span></p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Kid gender (Rectangle) -->
+                                    <div id="u534" class="ax_default label u534" data-label="Kid gender">
+                                        <div id="u534_div" class="u534_div"></div>
+                                        <div id="u534_text" class="text u534_text">
+                                            <p><span>Label</span></p>
+                                        </div>
+                                    </div>
+
+                                    <!-- kid DOB (Rectangle) -->
+                                    <div id="u535" class="ax_default label u535" data-label="kid DOB">
+                                        <div id="u535_div" class="u535_div"></div>
+                                        <div id="u535_text" class="text u535_text">
+                                            <p><span>Label</span></p>
+                                        </div>
+                                    </div>
+                                </script>
+                                <div id="u532-1" class="" style="width: 204px; height: 32px;">
+
+                                    <!-- kid name (Rectangle) -->
+                                    <div id="u533-1" class="ax_default label u533" data-label="kid name"
+                                         style="width: 36px; height: 17px; left: 22px; top: 15px;visibility: inherit">
+                                        <div id="u533-1_div" class="u533_div"
+                                             style="width: 36px; height: 17px;visibility: inherit"></div>
+                                        <div id="u533-1_text" class="text u533_text"
+                                             style="position: absolute;left: 0px;top: 0px;width: 33px;visibility: inherit">
+                                            <p><span>Label</span></p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Kid gender (Rectangle) -->
+                                    <div id="u534-1" class="ax_default label u534" data-label="Kid gender"
+                                         style="width: 36px; height: 17px; left: 89px; top: 15px;visibility: inherit">
+                                        <div id="u534-1_div" class="u534_div"
+                                             style="width: 36px; height: 17px;visibility: inherit"></div>
+                                        <div id="u534-1_text" class="text u534_text"
+                                             style="position: absolute;left: 0px;top: 0px;width: 33px;visibility: inherit">
+                                            <p><span>Label</span></p>
+                                        </div>
+                                    </div>
+
+                                    <!-- kid DOB (Rectangle) -->
+                                    <div id="u535-1" class="ax_default label u535" data-label="kid DOB"
+                                         style="width: 36px; height: 17px; left: 168px; top: 15px;visibility: inherit">
+                                        <div id="u535-1_div" class="u535_div"
+                                             style="width: 36px; height: 17px;visibility: inherit"></div>
+                                        <div id="u535-1_text" class="text u535_text"
+                                             style="position: absolute;left: 0px;top: 0px;width: 33px;visibility: inherit">
+                                            <p><span>Label</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="u530_state1" class="panel_state" data-label="Married" style="visibility: hidden;">
+                        <div id="u530_state1_content" class="panel_state_content">
+
+                            <!-- Unnamed (Rectangle) -->
+                            <div id="u536" class="ax_default label">
+                                <div id="u536_div" class=""></div>
+                                <div id="u536_text" class="text ">
+                                    <p><span style="text-decoration:underline;">Spouse's Information</span></p>
+                                </div>
+                            </div>
+
+                            <!-- spouse first name (Rectangle) -->
+                            <div id="u537" class="ax_default label" data-label="spouse first name">
+                                <div id="u537_div" class=""></div>
+                                <div id="u537_text" class="text ">
+                                    <p><span>Label</span></p>
+                                </div>
+                            </div>
+
+                            <!-- spouse last name (Rectangle) -->
+                            <div id="u538" class="ax_default label" data-label="spouse last name">
+                                <div id="u538_div" class=""></div>
+                                <div id="u538_text" class="text ">
+                                    <p><span>Label</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="u530_state2" class="panel_state" data-label="Married with kid(s)"
+                         style="visibility: hidden;">
+                        <div id="u530_state2_content" class="panel_state_content">
+                        </div>
+                    </div>
+                    <div id="u530_state3" class="panel_state" data-label="Add info_Married" style="visibility: hidden;">
+                        <div id="u530_state3_content" class="panel_state_content">
+
+                            <!-- Unnamed (Rectangle) -->
+                            <div id="u539" class="ax_default box_1">
+                                <div id="u539_div" class=""></div>
+                            </div>
+
+                            <!-- Spouse first name (Text Field) -->
+                            <div id="u540" class="ax_default text_field" data-label="Spouse first name">
+                                <input id="u540_input" type="text" value=""/>
+                            </div>
+
+                            <!-- Spouse last name (Text Field) -->
+                            <div id="u541" class="ax_default text_field" data-label="Spouse last name">
+                                <input id="u541_input" type="text" value=""/>
+                            </div>
+
+                            <!-- Unnamed (Checkbox) -->
+                            <div id="u542" class="ax_default checkbox">
+                                <label for="u542_input" style="position: absolute; left: 0px;">
+                                    <div id="u542_text" class="text ">
+                                        <p><span>Is Spouse a teacher? </span></p>
+                                    </div>
+                                </label>
+                                <input id="u542_input" type="checkbox" value="checkbox"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

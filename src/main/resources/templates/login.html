@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+    <title>Login One</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/auth/css/font-awesome.min.css}" />
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/auth/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/auth/css/bootstrap-theme.min.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/auth/css/templatemo_style.css}"/>
+
+</head>
+<body class="templatemo-bg-gray">
+<div class="container">
+    <div class="col-md-12">
+        <h1 class="margin-bottom-15">Sign-In</h1>
+        <form class="form-horizontal templatemo-container templatemo-login-form-1 margin-bottom-30" role="form"
+              id="loginForm" name="loginForm"
+              th:action="@{/login}" method="POST">
+
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <div class="control-wrapper">
+                        <label for="username" class="control-label fa-label"><i class="fa fa-user fa-medium"></i>
+                        </label>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Username"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="control-wrapper">
+                        <label for="password" class="control-label fa-label"><i class="fa fa-lock fa-medium"></i>
+                        </label>
+                        <input type="password" class="form-control" id="password" placeholder="Password"
+                               name="password"/>
+                        <!--/*@thymesVar id="error" type="java.lang.Boolean"*/-->
+                        <!--/*@thymesVar id="error" type=""*/-->
+                        <div class="alert alert-danger alert-dismissible" th:if="${param.error}">
+                            Username or password error
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="checkbox control-wrapper">
+                        <label>
+                            <input type="checkbox" name="remember-me"/> Remember me
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="control-wrapper">
+                        <input type="submit" value="Log in" class="btn btn-info"/>
+                        <a href="/register/forgotPassword" class="text-right pull-right">Forgot password?</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+
+        <div class="text-center">
+            <a href="/register" class="templatemo-create-new">Create new account <i
+                class="fa fa-arrow-circle-o-right"></i></a>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

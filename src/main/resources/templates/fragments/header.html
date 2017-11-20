@@ -1,0 +1,28 @@
+<div th:fragment="header" class="mojob-header" xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <img src="images/logo_u45.png" alt="" class='logo'/>
+    <ul class='navBar'>
+        <li><a href="">Jobs</a></li>
+        <li><a href="">Schools</a></li>
+        <li><a href="">Applications</a></li>
+        <li><a href="">Messages</a></li>
+        <li><a href="">Resume</a></li>
+    </ul>
+
+
+    <div class="logIn" sec:authorize="!isAuthenticated()">
+        <form th:action="@{/login}" method="post">
+            <img src="images/u57.png" alt="" class='user'/>
+            <input type="text" class='userName' placeholder='User Name' name="username"/>
+            <input type="password" class='password' placeholder='Password' name="password"/>
+            <button>Log In</button>
+            <a href="#" class='register'>register</a>
+        </form>
+    </div>
+
+    <span sec:authorize="isAuthenticated()" >
+                | Logged user: <span sec:authentication="name"></span> |
+                Roles: <span sec:authentication="principal.authorities"></span> |
+                <a th:href="@{/logout}">Sign Out</a>
+            </span>
+</div>
