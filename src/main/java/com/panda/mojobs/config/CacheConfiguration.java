@@ -44,6 +44,28 @@ public class CacheConfiguration {
             cm.createCache(com.panda.mojobs.domain.PersistentToken.class.getName(), jcacheConfiguration);
             cm.createCache(com.panda.mojobs.domain.User.class.getName() + ".persistentTokens", jcacheConfiguration);
             cm.createCache(com.panda.mojobs.domain.SocialUserConnection.class.getName(), jcacheConfiguration);
+            cm.createCache(com.panda.mojobs.domain.JobSubType.class.getName(), jcacheConfiguration);
+            cm.createCache(com.panda.mojobs.domain.Province.class.getName(), jcacheConfiguration);
+            cm.createCache(com.panda.mojobs.domain.City.class.getName(), jcacheConfiguration);
+            cm.createCache(com.panda.mojobs.domain.Town.class.getName(), jcacheConfiguration);
+            cm.createCache(com.panda.mojobs.domain.Address.class.getName(), jcacheConfiguration);
+            cm.createCache(com.panda.mojobs.domain.Mjob.class.getName(), jcacheConfiguration);
+            cm.createCache(com.panda.mojobs.domain.School.class.getName(), jcacheConfiguration);
+            cm.createCache(com.panda.mojobs.domain.School.class.getName() + ".jobs", jcacheConfiguration);
+            cm.createCache(com.panda.mojobs.domain.MojobImage.class.getName(), jcacheConfiguration);
+            cm.createCache(com.panda.mojobs.domain.Resume.class.getName(), jcacheConfiguration);
+            cm.createCache(com.panda.mojobs.domain.Resume.class.getName() + ".experiencies", jcacheConfiguration);
+            cm.createCache(com.panda.mojobs.domain.Resume.class.getName() + ".educationBackgrounds", jcacheConfiguration);
+            cm.createCache(com.panda.mojobs.domain.Resume.class.getName() + ".professionalDevelopments", jcacheConfiguration);
+            cm.createCache(com.panda.mojobs.domain.Resume.class.getName() + ".languages", jcacheConfiguration);
+            cm.createCache(com.panda.mojobs.domain.BasicInformation.class.getName(), jcacheConfiguration);
+            cm.createCache(com.panda.mojobs.domain.Experience.class.getName(), jcacheConfiguration);
+            cm.createCache(com.panda.mojobs.domain.EducationBackground.class.getName(), jcacheConfiguration);
+            cm.createCache(com.panda.mojobs.domain.ProfessionalDevelopment.class.getName(), jcacheConfiguration);
+            cm.createCache(com.panda.mojobs.domain.MLanguage.class.getName(), jcacheConfiguration);
+            cm.createCache(com.panda.mojobs.domain.Invitation.class.getName(), jcacheConfiguration);
+            cm.createCache(com.panda.mojobs.domain.ApplyJobResume.class.getName(), jcacheConfiguration);
+            cm.createCache(com.panda.mojobs.domain.ChatMessage.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }
