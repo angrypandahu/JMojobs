@@ -1,0 +1,45 @@
+
+<div *ngIf="school">
+    <h2><span>School</span> {{school.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{school.name}}</span>
+        </dd>
+        <dt><span>Level</span></dt>
+        <dd>
+            <span>{{school.level}}</span>
+        </dd>
+        <dt><span>School Type</span></dt>
+        <dd>
+            <span>{{school.schoolType}}</span>
+        </dd>
+        <dt><span>Logo</span></dt>
+        <dd>
+            <div *ngIf="school.logoId">
+                <a [routerLink]="['/mojob-image-mojobs', school.logoId]">{{school.logoName}}</a>
+            </div>
+        </dd>
+        <dt><span>Address</span></dt>
+        <dd>
+            <div *ngIf="school.addressId">
+                <a [routerLink]="['/address-mojobs', school.addressId]">{{school.addressName}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'school-mojobs/'+ school.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

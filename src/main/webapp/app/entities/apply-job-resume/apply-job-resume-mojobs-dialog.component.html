@@ -1,0 +1,78 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myApplyJobResumeLabel">Create or edit a Apply Job Resume</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!applyJobResume.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="applyJobResume.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_applyDate">Apply Date</label>
+            <div class="input-group">
+                <input id="field_applyDate" type="text" class="form-control" name="applyDate" ngbDatepicker  #applyDateDp="ngbDatepicker" [(ngModel)]="applyJobResume.applyDate"
+                required/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-secondary" (click)="applyDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.applyDate?.dirty && editForm.controls.applyDate?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.applyDate?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_content">Content</label>
+            <textarea class="form-control" name="content" id="field_content"
+                [(ngModel)]="applyJobResume.content" required ></textarea>
+            <div [hidden]="!(editForm.controls.content?.dirty && editForm.controls.content?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.content?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_resume">Resume</label>
+            <select class="form-control" id="field_resume" name="resume" [(ngModel)]="applyJobResume.resumeId"  required>
+                <option *ngIf="!editForm.value.resume" [ngValue]="null" selected></option>
+                <option [ngValue]="resumeOption.id" *ngFor="let resumeOption of resumes; trackBy: trackResumeById">{{resumeOption.name}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.resume?.dirty && editForm.controls.resume?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.resume?.errors?.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_mjob">Mjob</label>
+            <select class="form-control" id="field_mjob" name="mjob" [(ngModel)]="applyJobResume.mjobId"  required>
+                <option *ngIf="!editForm.value.mjob" [ngValue]="null" selected></option>
+                <option [ngValue]="mjobOption.id" *ngFor="let mjobOption of mjobs; trackBy: trackMjobById">{{mjobOption.name}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.mjob?.dirty && editForm.controls.mjob?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.mjob?.errors?.required">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

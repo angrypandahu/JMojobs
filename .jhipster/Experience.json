@@ -1,0 +1,77 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "resume",
+            "otherEntityName": "resume",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "school",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "grade",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "location",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "fromDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "toDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "currentlyWorkHere",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "responsibility",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 2000
+        }
+    ],
+    "changelogDate": "20171120095341",
+    "entityTableName": "experience",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "angularJSSuffix": "mojobs"
+}

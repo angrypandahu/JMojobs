@@ -1,0 +1,75 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "basicInformation",
+            "otherEntityName": "basicInformation",
+            "otherEntityField": "firstName",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "resume(name)"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "experiencies",
+            "otherEntityName": "experience",
+            "otherEntityRelationshipName": "resume"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "educationBackgrounds",
+            "otherEntityName": "educationBackground",
+            "otherEntityRelationshipName": "resume"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "professionalDevelopments",
+            "otherEntityName": "professionalDevelopment",
+            "otherEntityRelationshipName": "resume"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "languages",
+            "otherEntityName": "mLanguage",
+            "otherEntityRelationshipName": "resume"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "login"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "canBeReadBy",
+            "fieldType": "CanBeReadBy",
+            "fieldValues": "ALL_SCHOOLS,UNBLOCKED_SCHOOLS,ONLY_MYSELF"
+        },
+        {
+            "fieldName": "others",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 2000
+        }
+    ],
+    "changelogDate": "20171120095339",
+    "entityTableName": "resume",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "angularJSSuffix": "mojobs"
+}
