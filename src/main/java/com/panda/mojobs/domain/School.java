@@ -46,9 +46,14 @@ public class School implements Serializable {
     @Column(name = "school_type", nullable = false)
     private SchoolType schoolType;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private MojobImage logo;
+    @NotNull
+    @Size(max = 5000000)
+    @Lob
+    @Column(name = "logo", nullable = false)
+    private byte[] logo;
+
+    @Column(name = "logo_content_type", nullable = false)
+    private String logoContentType;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -107,17 +112,30 @@ public class School implements Serializable {
         this.schoolType = schoolType;
     }
 
-    public MojobImage getLogo() {
+    public byte[] getLogo() {
         return logo;
     }
 
-    public School logo(MojobImage mojobImage) {
-        this.logo = mojobImage;
+    public School logo(byte[] logo) {
+        this.logo = logo;
         return this;
     }
 
-    public void setLogo(MojobImage mojobImage) {
-        this.logo = mojobImage;
+    public void setLogo(byte[] logo) {
+        this.logo = logo;
+    }
+
+    public String getLogoContentType() {
+        return logoContentType;
+    }
+
+    public School logoContentType(String logoContentType) {
+        this.logoContentType = logoContentType;
+        return this;
+    }
+
+    public void setLogoContentType(String logoContentType) {
+        this.logoContentType = logoContentType;
     }
 
     public Address getAddress() {
@@ -186,6 +204,8 @@ public class School implements Serializable {
             ", name='" + getName() + "'" +
             ", level='" + getLevel() + "'" +
             ", schoolType='" + getSchoolType() + "'" +
+            ", logo='" + getLogo() + "'" +
+            ", logoContentType='" + logoContentType + "'" +
             "}";
     }
 }

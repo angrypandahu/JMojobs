@@ -23,6 +23,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -52,6 +53,11 @@ public class SchoolResourceIntTest {
 
     private static final SchoolType DEFAULT_SCHOOL_TYPE = SchoolType.INTERNATIONAL_BILINGUAL_SCHOOL;
     private static final SchoolType UPDATED_SCHOOL_TYPE = SchoolType.LANGUAGE_TRAINING;
+
+    private static final byte[] DEFAULT_LOGO = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_LOGO = TestUtil.createByteArray(5000000, "1");
+    private static final String DEFAULT_LOGO_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_LOGO_CONTENT_TYPE = "image/png";
 
     @Autowired
     private SchoolRepository schoolRepository;
@@ -102,7 +108,9 @@ public class SchoolResourceIntTest {
         School school = new School()
             .name(DEFAULT_NAME)
             .level(DEFAULT_LEVEL)
-            .schoolType(DEFAULT_SCHOOL_TYPE);
+            .schoolType(DEFAULT_SCHOOL_TYPE)
+            .logo(DEFAULT_LOGO)
+            .logoContentType(DEFAULT_LOGO_CONTENT_TYPE);
         return school;
     }
 
@@ -131,6 +139,8 @@ public class SchoolResourceIntTest {
         assertThat(testSchool.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testSchool.getLevel()).isEqualTo(DEFAULT_LEVEL);
         assertThat(testSchool.getSchoolType()).isEqualTo(DEFAULT_SCHOOL_TYPE);
+        assertThat(testSchool.getLogo()).isEqualTo(DEFAULT_LOGO);
+        assertThat(testSchool.getLogoContentType()).isEqualTo(DEFAULT_LOGO_CONTENT_TYPE);
 
         // Validate the School in Elasticsearch
         School schoolEs = schoolSearchRepository.findOne(testSchool.getId());
@@ -216,6 +226,25 @@ public class SchoolResourceIntTest {
 
     @Test
     @Transactional
+    public void checkLogoIsRequired() throws Exception {
+        int databaseSizeBeforeTest = schoolRepository.findAll().size();
+        // set the field null
+        school.setLogo(null);
+
+        // Create the School, which fails.
+        SchoolDTO schoolDTO = schoolMapper.toDto(school);
+
+        restSchoolMockMvc.perform(post("/api/schools")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(schoolDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<School> schoolList = schoolRepository.findAll();
+        assertThat(schoolList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllSchools() throws Exception {
         // Initialize the database
         schoolRepository.saveAndFlush(school);
@@ -227,7 +256,9 @@ public class SchoolResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(school.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].level").value(hasItem(DEFAULT_LEVEL.toString())))
-            .andExpect(jsonPath("$.[*].schoolType").value(hasItem(DEFAULT_SCHOOL_TYPE.toString())));
+            .andExpect(jsonPath("$.[*].schoolType").value(hasItem(DEFAULT_SCHOOL_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].logoContentType").value(hasItem(DEFAULT_LOGO_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].logo").value(hasItem(Base64Utils.encodeToString(DEFAULT_LOGO))));
     }
 
     @Test
@@ -243,7 +274,9 @@ public class SchoolResourceIntTest {
             .andExpect(jsonPath("$.id").value(school.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.level").value(DEFAULT_LEVEL.toString()))
-            .andExpect(jsonPath("$.schoolType").value(DEFAULT_SCHOOL_TYPE.toString()));
+            .andExpect(jsonPath("$.schoolType").value(DEFAULT_SCHOOL_TYPE.toString()))
+            .andExpect(jsonPath("$.logoContentType").value(DEFAULT_LOGO_CONTENT_TYPE))
+            .andExpect(jsonPath("$.logo").value(Base64Utils.encodeToString(DEFAULT_LOGO)));
     }
 
     @Test
@@ -267,7 +300,9 @@ public class SchoolResourceIntTest {
         updatedSchool
             .name(UPDATED_NAME)
             .level(UPDATED_LEVEL)
-            .schoolType(UPDATED_SCHOOL_TYPE);
+            .schoolType(UPDATED_SCHOOL_TYPE)
+            .logo(UPDATED_LOGO)
+            .logoContentType(UPDATED_LOGO_CONTENT_TYPE);
         SchoolDTO schoolDTO = schoolMapper.toDto(updatedSchool);
 
         restSchoolMockMvc.perform(put("/api/schools")
@@ -282,6 +317,8 @@ public class SchoolResourceIntTest {
         assertThat(testSchool.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testSchool.getLevel()).isEqualTo(UPDATED_LEVEL);
         assertThat(testSchool.getSchoolType()).isEqualTo(UPDATED_SCHOOL_TYPE);
+        assertThat(testSchool.getLogo()).isEqualTo(UPDATED_LOGO);
+        assertThat(testSchool.getLogoContentType()).isEqualTo(UPDATED_LOGO_CONTENT_TYPE);
 
         // Validate the School in Elasticsearch
         School schoolEs = schoolSearchRepository.findOne(testSchool.getId());
@@ -343,7 +380,9 @@ public class SchoolResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(school.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].level").value(hasItem(DEFAULT_LEVEL.toString())))
-            .andExpect(jsonPath("$.[*].schoolType").value(hasItem(DEFAULT_SCHOOL_TYPE.toString())));
+            .andExpect(jsonPath("$.[*].schoolType").value(hasItem(DEFAULT_SCHOOL_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].logoContentType").value(hasItem(DEFAULT_LOGO_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].logo").value(hasItem(Base64Utils.encodeToString(DEFAULT_LOGO))));
     }
 
     @Test

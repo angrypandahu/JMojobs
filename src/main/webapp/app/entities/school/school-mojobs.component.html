@@ -33,7 +33,7 @@
             <th jhiSortBy="name"><span>Name</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="level"><span>Level</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="schoolType"><span>School Type</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="logoName"><span>Logo</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="logo"><span>Logo</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="addressName"><span>Address</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
@@ -45,9 +45,10 @@
                 <td>{{school.level}}</td>
                 <td>{{school.schoolType}}</td>
                 <td>
-                    <div *ngIf="school.logoId">
-                        <a [routerLink]="['../mojob-image-mojobs', school.logoId  ]" >{{school.logoName}}</a>
-                    </div>
+                    <a *ngIf="school.logo" (click)="openFile(school.logoContentType, school.logo)">
+                        <img [src]="'data:' + school.logoContentType + ';base64,' + school.logo" style="max-height: 30px;" alt="school image"/>
+                    </a>
+                    <span *ngIf="school.logo">{{school.logoContentType}}, {{byteSize(school.logo)}}</span>
                 </td>
                 <td>
                     <div *ngIf="school.addressId">

@@ -56,14 +56,34 @@
                 </small>
             </div>
         </div>
-
         <div class="form-group">
             <label class="form-control-label" for="field_logo">Logo</label>
-            <select class="form-control" id="field_logo" name="logo" [(ngModel)]="school.logoId">
-                <option [ngValue]="null"></option>
-                <option [ngValue]="mojobImageOption.id" *ngFor="let mojobImageOption of logos; trackBy: trackMojobImageById">{{mojobImageOption.name}}</option>
-            </select>
+            <div>
+                <img [src]="'data:' + school.logoContentType + ';base64,' + school.logo" style="max-height: 100px;" *ngIf="school.logo" alt="school image"/>
+                <div *ngIf="school.logo" class="form-text text-danger clearfix">
+                    <span class="pull-left">{{school.logoContentType}}, {{byteSize(school.logo)}}</span>
+                    <button type="button" (click)="clearInputImage('logo', 'logoContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <input type="file" id="file_logo" (change)="setFileData($event, school, 'logo', true)" accept="image/*"/>
+            </div>
+            <input type="hidden" class="form-control" name="logo" id="field_logo"
+                [(ngModel)]="school.logo" required maxbytes="5000000" />
+            <input type="hidden" class="form-control" name="logoContentType" id="field_logoContentType"
+                [(ngModel)]="school.logoContentType" />
+            <div [hidden]="!(editForm.controls.logo?.dirty && editForm.controls.logo?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.logo?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.logo?.errors?.maxbytes">
+                    This field cannot be more than 5000000.
+                </small>
+            </div>
         </div>
+
         <div class="form-group">
             <label class="form-control-label" for="field_address">Address</label>
             <select class="form-control" id="field_address" name="address" [(ngModel)]="school.addressId">

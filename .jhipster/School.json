@@ -3,14 +3,6 @@
     "relationships": [
         {
             "relationshipType": "one-to-one",
-            "relationshipName": "logo",
-            "otherEntityName": "mojobImage",
-            "otherEntityField": "name",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "school"
-        },
-        {
-            "relationshipType": "one-to-one",
             "relationshipName": "address",
             "otherEntityName": "address",
             "otherEntityField": "name",
@@ -49,13 +41,23 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "logo",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image",
+            "fieldValidateRules": [
+                "required",
+                "maxbytes"
+            ],
+            "fieldValidateRulesMaxbytes": 5000000
         }
     ],
     "changelogDate": "20171120095337",
-    "entityTableName": "school",
     "dto": "mapstruct",
-    "pagination": "pagination",
     "service": "serviceImpl",
+    "entityTableName": "school",
     "jpaMetamodelFiltering": false,
+    "pagination": "pagination",
     "angularJSSuffix": "mojobs"
 }

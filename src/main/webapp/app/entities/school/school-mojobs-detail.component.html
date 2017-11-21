@@ -18,8 +18,11 @@
         </dd>
         <dt><span>Logo</span></dt>
         <dd>
-            <div *ngIf="school.logoId">
-                <a [routerLink]="['/mojob-image-mojobs', school.logoId]">{{school.logoName}}</a>
+            <div *ngIf="school.logo">
+                <a (click)="openFile(school.logoContentType, school.logo)">
+                    <img [src]="'data:' + school.logoContentType + ';base64,' + school.logo" style="max-width: 100%;" alt="school image"/>
+                </a>
+                {{school.logoContentType}}, {{byteSize(school.logo)}}
             </div>
         </dd>
         <dt><span>Address</span></dt>

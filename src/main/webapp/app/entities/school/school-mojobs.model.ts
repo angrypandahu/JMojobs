@@ -19,7 +19,8 @@ export class SchoolMojobs implements BaseEntity {
         public name?: string,
         public level?: SchoolLevel,
         public schoolType?: SchoolType,
-        public logoId?: number,
+        public logoContentType?: string,
+        public logo?: any,
         public addressId?: number,
         public jobs?: BaseEntity[],
     ) {

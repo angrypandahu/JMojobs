@@ -8,16 +8,13 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity School and its DTO SchoolDTO.
  */
-@Mapper(componentModel = "spring", uses = {MojobImageMapper.class, AddressMapper.class})
+@Mapper(componentModel = "spring", uses = {AddressMapper.class})
 public interface SchoolMapper extends EntityMapper<SchoolDTO, School> {
 
-    @Mapping(source = "logo.id", target = "logoId")
-    @Mapping(source = "logo.name", target = "logoName")
     @Mapping(source = "address.id", target = "addressId")
     @Mapping(source = "address.name", target = "addressName")
     SchoolDTO toDto(School school); 
 
-    @Mapping(source = "logoId", target = "logo")
     @Mapping(source = "addressId", target = "address")
     @Mapping(target = "jobs", ignore = true)
     School toEntity(SchoolDTO schoolDTO);
