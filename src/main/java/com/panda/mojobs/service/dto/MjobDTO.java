@@ -39,6 +39,17 @@ public class MjobDTO implements Serializable {
 
     private String subTypeName;
 
+    private String displayAddress;
+
+    public void setDisplayAddress(String displayAddress) {
+        this.displayAddress = displayAddress;
+    }
+
+    public String getDisplayAddress() {
+
+        return displayAddress;
+    }
+
     public Long getId() {
         return id;
     }

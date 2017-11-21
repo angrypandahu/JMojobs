@@ -5,7 +5,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -57,6 +58,13 @@ public class Address implements Serializable {
     @ManyToOne(optional = false)
     @NotNull
     private Town town;
+
+    @Transient
+    private String displayAddress;
+
+    public String getDisplayAddress() {
+        return province.getName() + "," + city.getName() + "," + town.getName() + "," + line;
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {

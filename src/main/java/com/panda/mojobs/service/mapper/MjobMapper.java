@@ -13,11 +13,12 @@ public interface MjobMapper extends EntityMapper<MjobDTO, Mjob> {
 
     @Mapping(source = "address.id", target = "addressId")
     @Mapping(source = "address.name", target = "addressName")
+    @Mapping(source = "address.displayAddress", target = "displayAddress")
     @Mapping(source = "school.id", target = "schoolId")
     @Mapping(source = "school.name", target = "schoolName")
     @Mapping(source = "subType.id", target = "subTypeId")
     @Mapping(source = "subType.name", target = "subTypeName")
-    MjobDTO toDto(Mjob mjob); 
+    MjobDTO toDto(Mjob mjob);
 
     @Mapping(source = "addressId", target = "address")
     @Mapping(source = "schoolId", target = "school")
