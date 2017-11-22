@@ -1,13 +1,13 @@
 package com.panda.mojobs.service.dto;
 
 
-import javax.validation.constraints.*;
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
-import javax.persistence.Lob;
 import com.panda.mojobs.domain.enumeration.JobType;
+
+import javax.persistence.Lob;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * A DTO for the Mjob entity.
@@ -40,6 +40,26 @@ public class MjobDTO implements Serializable {
     private String subTypeName;
 
     private String displayAddress;
+
+    private String logoBase64;
+
+    private String shortAddress;
+
+    public String getShortAddress() {
+        return shortAddress;
+    }
+
+    public void setShortAddress(String shortAddress) {
+        this.shortAddress = shortAddress;
+    }
+
+    public String getLogoBase64() {
+        return logoBase64;
+    }
+
+    public void setLogoBase64(String logoBase64) {
+        this.logoBase64 = logoBase64;
+    }
 
     public void setDisplayAddress(String displayAddress) {
         this.displayAddress = displayAddress;
@@ -140,7 +160,7 @@ public class MjobDTO implements Serializable {
         }
 
         MjobDTO mjobDTO = (MjobDTO) o;
-        if(mjobDTO.getId() == null || getId() == null) {
+        if (mjobDTO.getId() == null || getId() == null) {
             return false;
         }
         return Objects.equals(getId(), mjobDTO.getId());

@@ -5,6 +5,8 @@ import com.panda.mojobs.service.dto.MjobDTO;
 import io.swagger.annotations.ApiParam;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +26,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "", method = {RequestMethod.GET})
-    public String home(@RequestParam(required = false,defaultValue = "") String query, @ApiParam Pageable pageable,Model model) {
+    public String home(@RequestParam(required = false,defaultValue = "") String query, @PageableDefault(value = 1, sort = { "id" }, direction = Sort.Direction.DESC)  Pageable pageable, Model model) {
         Page<MjobDTO> mjobDTOPage = mjobService.findAll(pageable);
         model.addAttribute("page",mjobDTOPage);
         return "home/home";

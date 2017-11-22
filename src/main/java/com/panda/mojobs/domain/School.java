@@ -1,20 +1,20 @@
 package com.panda.mojobs.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.panda.mojobs.domain.enumeration.SchoolLevel;
+import com.panda.mojobs.domain.enumeration.SchoolType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.security.crypto.codec.Base64;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
-
-import com.panda.mojobs.domain.enumeration.SchoolLevel;
-
-import com.panda.mojobs.domain.enumeration.SchoolType;
+import java.util.Set;
 
 /**
  * A School.
@@ -176,6 +176,16 @@ public class School implements Serializable {
         this.jobs = mjobs;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
+    @Transient
+    private String logoBase64;
+
+    public String getLogoBase64() {
+        if (this.logo != null) {
+            return "data:"+logoContentType+";base64," + new String(Base64.encode(logo));
+        }
+        return null;
+    }
 
     @Override
     public boolean equals(Object o) {

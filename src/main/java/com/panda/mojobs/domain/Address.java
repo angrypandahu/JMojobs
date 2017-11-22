@@ -62,8 +62,19 @@ public class Address implements Serializable {
     @Transient
     private String displayAddress;
 
+    @Transient
+    private String shortAddress;
+
+    public String getShortAddress() {
+        if (province != null && city != null && town != null)
+            return province.getName() + "," + city.getName();
+        else return "";
+    }
+
     public String getDisplayAddress() {
-        return province.getName() + "," + city.getName() + "," + town.getName() + "," + line;
+        if (province != null && city != null && town != null)
+            return province.getName() + "," + city.getName() + "," + town.getName() + "," + line;
+        else return "";
     }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
