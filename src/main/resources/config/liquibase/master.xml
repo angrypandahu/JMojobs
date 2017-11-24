@@ -37,4 +37,6 @@
     <include file="config/liquibase/changelog/20171120095346_added_entity_constraints_ApplyJobResume.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171120095347_added_entity_constraints_ChatMessage.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+    <include file="config/liquibase/changelog/20171122065225_changelog.xml" relativeToChangelogFile="false"/>
+
 </databaseChangeLog>

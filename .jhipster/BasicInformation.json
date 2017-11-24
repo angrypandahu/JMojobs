@@ -93,13 +93,22 @@
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "photo",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image",
+            "fieldValidateRules": [
+                "maxbytes"
+            ],
+            "fieldValidateRulesMaxbytes": 5000000
         }
     ],
     "changelogDate": "20171120095340",
-    "entityTableName": "basic_information",
     "dto": "mapstruct",
-    "pagination": "no",
     "service": "serviceImpl",
+    "entityTableName": "basic_information",
     "jpaMetamodelFiltering": false,
+    "pagination": "no",
     "angularJSSuffix": "mojobs"
 }

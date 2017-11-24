@@ -44,6 +44,15 @@
         <dd>
             <span>{{basicInformation.wechat}}</span>
         </dd>
+        <dt><span>Photo</span></dt>
+        <dd>
+            <div *ngIf="basicInformation.photo">
+                <a (click)="openFile(basicInformation.photoContentType, basicInformation.photo)">
+                    <img [src]="'data:' + basicInformation.photoContentType + ';base64,' + basicInformation.photo" style="max-width: 100%;" alt="basicInformation image"/>
+                </a>
+                {{basicInformation.photoContentType}}, {{byteSize(basicInformation.photo)}}
+            </div>
+        </dd>
     </dl>
 
     <button type="submit"

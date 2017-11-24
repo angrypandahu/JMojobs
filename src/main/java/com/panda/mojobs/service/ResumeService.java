@@ -1,6 +1,8 @@
 package com.panda.mojobs.service;
 
+import com.panda.mojobs.service.data.ResumeData;
 import com.panda.mojobs.service.dto.ResumeDTO;
+
 import java.util.List;
 
 /**
@@ -17,33 +19,39 @@ public interface ResumeService {
     ResumeDTO save(ResumeDTO resumeDTO);
 
     /**
-     *  Get all the resumes.
+     * Get all the resumes.
      *
-     *  @return the list of entities
+     * @return the list of entities
      */
     List<ResumeDTO> findAll();
 
     /**
-     *  Get the "id" resume.
+     * Get the "id" resume.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     ResumeDTO findOne(Long id);
 
     /**
-     *  Delete the "id" resume.
+     * Delete the "id" resume.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     void delete(Long id);
 
     /**
      * Search for the resume corresponding to the query.
      *
-     *  @param query the query of the search
-     *  
-     *  @return the list of entities
+     * @param query the query of the search
+     * @return the list of entities
      */
     List<ResumeDTO> search(String query);
+
+
+    List<ResumeDTO> findByCurrentUser();
+
+    List<ResumeData> findDataByCurrentUser();
+
+
 }

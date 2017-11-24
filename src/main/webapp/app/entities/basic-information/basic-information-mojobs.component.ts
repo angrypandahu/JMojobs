@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import { JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { BasicInformationMojobs } from './basic-information-mojobs.model';
 import { BasicInformationMojobsService } from './basic-information-mojobs.service';
@@ -20,6 +20,7 @@ basicInformations: BasicInformationMojobs[];
     constructor(
         private basicInformationService: BasicInformationMojobsService,
         private jhiAlertService: JhiAlertService,
+        private dataUtils: JhiDataUtils,
         private eventManager: JhiEventManager,
         private activatedRoute: ActivatedRoute,
         private principal: Principal
@@ -72,6 +73,14 @@ basicInformations: BasicInformationMojobs[];
 
     trackId(index: number, item: BasicInformationMojobs) {
         return item.id;
+    }
+
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
     }
     registerChangeInBasicInformations() {
         this.eventSubscriber = this.eventManager.subscribe('basicInformationListModification', (response) => this.loadAll());

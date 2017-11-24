@@ -40,6 +40,7 @@
             <th><span>Skype</span></th>
             <th><span>Phone</span></th>
             <th><span>Wechat</span></th>
+            <th><span>Photo</span></th>
             <th></th>
             </tr>
             </thead>
@@ -56,6 +57,12 @@
                 <td>{{basicInformation.skype}}</td>
                 <td>{{basicInformation.phone}}</td>
                 <td>{{basicInformation.wechat}}</td>
+                <td>
+                    <a *ngIf="basicInformation.photo" (click)="openFile(basicInformation.photoContentType, basicInformation.photo)">
+                        <img [src]="'data:' + basicInformation.photoContentType + ';base64,' + basicInformation.photo" style="max-height: 30px;" alt="basicInformation image"/>
+                    </a>
+                    <span *ngIf="basicInformation.photo">{{basicInformation.photoContentType}}, {{byteSize(basicInformation.photo)}}</span>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

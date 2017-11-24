@@ -25,6 +25,8 @@ export class BasicInformationMojobs implements BaseEntity {
         public skype?: string,
         public phone?: string,
         public wechat?: string,
+        public photoContentType?: string,
+        public photo?: any,
         public resumeId?: number,
     ) {
     }

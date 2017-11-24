@@ -1,41 +1,50 @@
 package com.panda.mojobs.service.impl;
 
-import com.panda.mojobs.service.ResumeService;
+import com.panda.mojobs.domain.Experience;
 import com.panda.mojobs.domain.Resume;
 import com.panda.mojobs.repository.ResumeRepository;
 import com.panda.mojobs.repository.search.ResumeSearchRepository;
+import com.panda.mojobs.service.ResumeService;
+import com.panda.mojobs.service.data.ResumeData;
 import com.panda.mojobs.service.dto.ResumeDTO;
+import com.panda.mojobs.service.mapper.BasicInformationMapper;
+import com.panda.mojobs.service.mapper.ExperienceMapper;
 import com.panda.mojobs.service.mapper.ResumeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing Resume.
  */
 @Service
 @Transactional
-public class ResumeServiceImpl implements ResumeService{
+public class ResumeServiceImpl implements ResumeService {
 
     private final Logger log = LoggerFactory.getLogger(ResumeServiceImpl.class);
 
     private final ResumeRepository resumeRepository;
 
     private final ResumeMapper resumeMapper;
+    private final BasicInformationMapper basicInformationMapper;
+    private final ExperienceMapper experienceMapper;
 
     private final ResumeSearchRepository resumeSearchRepository;
 
-    public ResumeServiceImpl(ResumeRepository resumeRepository, ResumeMapper resumeMapper, ResumeSearchRepository resumeSearchRepository) {
+    public ResumeServiceImpl(ResumeRepository resumeRepository, ResumeMapper resumeMapper, BasicInformationMapper basicInformationMapper, ExperienceMapper experienceMapper, ResumeSearchRepository resumeSearchRepository) {
         this.resumeRepository = resumeRepository;
         this.resumeMapper = resumeMapper;
+        this.basicInformationMapper = basicInformationMapper;
+        this.experienceMapper = experienceMapper;
         this.resumeSearchRepository = resumeSearchRepository;
     }
 
@@ -56,9 +65,9 @@ public class ResumeServiceImpl implements ResumeService{
     }
 
     /**
-     *  Get all the resumes.
+     * Get all the resumes.
      *
-     *  @return the list of entities
+     * @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
@@ -70,10 +79,10 @@ public class ResumeServiceImpl implements ResumeService{
     }
 
     /**
-     *  Get one resume by id.
+     * Get one resume by id.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     @Override
     @Transactional(readOnly = true)
@@ -84,9 +93,9 @@ public class ResumeServiceImpl implements ResumeService{
     }
 
     /**
-     *  Delete the  resume by id.
+     * Delete the  resume by id.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     @Override
     public void delete(Long id) {
@@ -98,8 +107,8 @@ public class ResumeServiceImpl implements ResumeService{
     /**
      * Search for the resume corresponding to the query.
      *
-     *  @param query the query of the search
-     *  @return the list of entities
+     * @param query the query of the search
+     * @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
@@ -109,5 +118,30 @@ public class ResumeServiceImpl implements ResumeService{
             .stream(resumeSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .map(resumeMapper::toDto)
             .collect(Collectors.toList());
+    }
+
+
+    @Override
+    public List<ResumeDTO> findByCurrentUser() {
+        List<Resume> resumeList = resumeRepository.findByUserIsCurrentUser();
+        return resumeList.stream().map(resumeMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ResumeData> findDataByCurrentUser() {
+        List<Resume> resumeList = resumeRepository.findByUserIsCurrentUser();
+        List<ResumeData> resumeDataList = new ArrayList<>();
+        if (resumeList != null && resumeList.size() > 0) {
+            for (Resume resume : resumeList) {
+                ResumeData resumeData = new ResumeData();
+                resumeData.setResumeDTO(resumeMapper.toDto(resume));
+                resumeData.setBasicInformationDTO(basicInformationMapper.toDto(resume.getBasicInformation()));
+                List<Experience> experienceList = new ArrayList<>();
+                experienceList.addAll(resume.getExperiencies());
+                resumeData.setExperienceDTOList(experienceMapper.toDto(experienceList));
+                resumeDataList.add(resumeData);
+            }
+        }
+        return resumeDataList;
     }
 }

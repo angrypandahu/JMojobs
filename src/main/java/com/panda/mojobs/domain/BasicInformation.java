@@ -76,6 +76,14 @@ public class BasicInformation implements Serializable {
     @Column(name = "wechat", length = 255)
     private String wechat;
 
+    @Size(max = 5000000)
+    @Lob
+    @Column(name = "photo")
+    private byte[] photo;
+
+    @Column(name = "photo_content_type")
+    private String photoContentType;
+
     @OneToOne(mappedBy = "basicInformation")
     @JsonIgnore
     private Resume resume;
@@ -219,6 +227,32 @@ public class BasicInformation implements Serializable {
         this.wechat = wechat;
     }
 
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public BasicInformation photo(byte[] photo) {
+        this.photo = photo;
+        return this;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public String getPhotoContentType() {
+        return photoContentType;
+    }
+
+    public BasicInformation photoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
+        return this;
+    }
+
+    public void setPhotoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
+    }
+
     public Resume getResume() {
         return resume;
     }
@@ -267,6 +301,8 @@ public class BasicInformation implements Serializable {
             ", skype='" + getSkype() + "'" +
             ", phone='" + getPhone() + "'" +
             ", wechat='" + getWechat() + "'" +
+            ", photo='" + getPhoto() + "'" +
+            ", photoContentType='" + photoContentType + "'" +
             "}";
     }
 }

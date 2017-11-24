@@ -1,333 +1,203 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
       layout:decorator="layout">
 <head>
 
+    <script>
+        $(function () {
+            //job选择联动
+            $('.jobs').change(function () {
+                var value = $(this).children('option:selected').val();
+                var index = $(this).children('option:selected').index();
+                var list = $(this).children();
+                if (value == $(list[index]).val()) {
+                    $('.subject' + index).addClass('active').siblings().removeClass('active');
+                }
+
+            })
+
+        })
+
+    </script>
 </head>
 <body>
-<div layout:fragment="content">
-    <!-- Advanced Search (Group) -->
-    <div id="u0" class="ax_default" data-label="Advanced Search" data-left="0" data-top="430" data-width="1280"
-         data-height="71">
 
-        <!-- Advanced Search 框 (Rectangle) -->
-        <div id="u1" class="ax_default box_1" data-label="Advanced Search 框">
-            <div id="u1_div" class=""></div>
-        </div>
-
-        <!-- Position (Rectangle) -->
-        <div id="u2" class="ax_default label" data-label="Position">
-            <div id="u2_div" class=""></div>
-            <div id="u2_text" class="text " style="left: 0px; width: 30px; transform-origin: 15px 8px 0px;">
-                <p><span>Jobs</span></p>
+<div layout:fragment="content" class="homeContent">
+    <!-- 轮播图 -->
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="carousel slide" id="carousel-758712">
+                    <ol class="carousel-indicators">
+                        <li data-slide-to="0" data-target="#carousel-758712">
+                        </li>
+                        <li data-slide-to="1" data-target="#carousel-758712">
+                        </li>
+                        <li data-slide-to="2" data-target="#carousel-758712" class="active">
+                        </li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="item">
+                            <img alt="" src="http://www.bootcss.com/p/layoutit/img/3.jpg"/>
+                            <div class="carousel-caption">
+                                <h4>
+                                    棒球
+                                </h4>
+                                <p>
+                                    棒球运动是一种以棒打球为主要特点，集体性、对抗性很强的球类运动项目，在美国、日本尤为盛行。
+                                </p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img alt="" src="http://www.bootcss.com/p/layoutit/img/3.jpg"/>
+                            <div class="carousel-caption">
+                                <h4>
+                                    冲浪
+                                </h4>
+                                <p>
+                                    冲浪是以海浪为动力，利用自身的高超技巧和平衡能力，搏击海浪的一项运动。运动员站立在冲浪板上，或利用腹板、跪板、充气的橡皮垫、划艇、皮艇等驾驭海浪的一项水上运动。
+                                </p>
+                            </div>
+                        </div>
+                        <div class="item active">
+                            <img alt="" src="http://www.bootcss.com/p/layoutit/img/3.jpg"/>
+                            <div class="carousel-caption">
+                                <h4>
+                                    自行车
+                                </h4>
+                                <p>
+                                    以自行车为工具比赛骑行速度的体育运动。1896年第一届奥林匹克运动会上被列为正式比赛项目。环法赛为最著名的世界自行车锦标赛。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <a data-slide="prev" href="#carousel-758712" class="left carousel-control">‹</a> <a
+                    data-slide="next" href="#carousel-758712" class="right carousel-control">›</a>
+                </div>
             </div>
         </div>
-
-        <!-- Jobs (Droplist) -->
-        <div id="u3" class="ax_default droplist" data-label="Jobs">
-            <select id="u3_input">
+    </div>
+    <div class="searchContainer">
+        <input type="text" class='searchInput' placeholder='searchJobs name'/>
+        <select class='searchSelect'>
+            <option value="All Locations">All Locations</option>
+            <option value="Pudong, Shanghai">Pudong, Shanghai</option>
+            <option value="Jiangsu">Jiangsu</option>
+        </select>
+        <a href="" class='searchBtn'><img th:src="@{/images/search.png}" alt=""/></a>
+    </div>
+    <div class="zoneContainer flexbox">
+        <div>Advanced <br/>Search</div>
+        <div>Jobs <br/>
+            <select class='jobs'>
                 <option value="Faculty">Faculty</option>
                 <option value="Principal">Principal</option>
                 <option value="Support Staff">Support Staff</option>
             </select>
         </div>
-
-        <!-- Unnamed (Rectangle) -->
-        <div id="u4" class="ax_default label">
-            <div id="u4_div" class=""></div>
-            <div id="u4_text" class="text " style="left: 0px; width: 104px; transform-origin: 52px 8px 0px;">
-                <p><span>Subject / Position</span></p>
-            </div>
-        </div>
-
-        <!-- 二级职位菜单 (Dynamic Panel) -->
-        <div id="u5" class="ax_default" data-label="二级职位菜单">
-
-
-            <div id="u5_state2" class="panel_state" data-label="choose Support Staffs">
-                <div id="u5_state2_content" class="panel_state_content">
-
-                    <!-- Support 对应的菜单 (Droplist) -->
-                    <div id="u8" class="ax_default droplist" data-label="Support 对应的菜单">
-                        <select id="u8_input">
-                            <option value="Human Resources">Human Resources</option>
-                            <option value="Admissions">Admissions</option>
-                            <option value="Communications">Communications</option>
-                            <option value="Marketing ">Marketing</option>
-                            <option value="Alumni">Alumni</option>
-                            <option value="IT">IT</option>
-                            <option value="Finance">Finance</option>
-                            <option value="Facilities">Facilities</option>
-                            <option value="Secretary">Secretary</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div id="u5_state0" class="panel_state" data-label="choose Faculty"
-                 style="">
-                <div id="u5_state0_content" class="panel_state_content">
-
-                    <!-- Faculty 对应的菜单 (Droplist) -->
-                    <div id="u6" class="ax_default droplist" data-label="Faculty 对应的菜单">
-                        <select id="u6_input">
-                            <option value="Art">Art</option>
-                            <option value="Computer Education/Technology">Computer Education/Technology</option>
-                            <option value="Counselling/Psychology">Counselling/Psychology</option>
-                            <option value="Early Childhood Education">Early Childhood Education</option>
-                            <option value="Elementary Classroom Teacher">Elementary Classroom Teacher</option>
-                            <option value="English as an Additional Language">English as an Additional Language</option>
-                            <option value="Foreign Language （Except English）">Foreign Language （Except English）</option>
-                            <option value="Humanities">Humanities</option>
-                            <option value="Library/Media">Library/Media</option>
-                            <option value="Mathematics">Mathematics</option>
-                            <option value="Miscellaneous">Miscellaneous</option>
-                            <option value="Music">Music</option>
-                            <option value="Performing Arts">Performing Arts</option>
-                            <option value="Physical Education/Health">Physical Education/Health</option>
-                            <option value="Science">Science</option>
-                            <option value="Social Studies/History">Social Studies/History</option>
-                            <option value="Special Education">Special Education</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div id="u5_state1" class="panel_state" data-label="choose Principal">
-                <div id="u5_state1_content" class="panel_state_content">
-
-                    <!-- Unnamed (Droplist) -->
-                    <div id="u7" class="ax_default droplist">
-                        <select id="u7_input" disabled="">
-                            <option value="NA">NA</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- School Level (Rectangle) -->
-        <div id="u9" class="ax_default label" data-label="School Level">
-            <div id="u9_div" class=""></div>
-            <div id="u9_text" class="text " style="left: 0px; width: 76px; transform-origin: 38px 8px 0px;">
-                <p><span>School Level</span></p>
-            </div>
-        </div>
-
-        <!-- School Level (Droplist) -->
-        <div id="u10" class="ax_default droplist" data-label="School Level">
-            <select id="u10_input">
-                <option value="Kindergarten">Kindergarten</option>
-                <option value="Elementary School">Elementary School</option>
-                <option value="Middle School">Middle School</option>
-                <option value="High School">High School</option>
-                <option value="University">University</option>
+        <div class='subjects'>Subject/Position<br/>
+            <select class='subject subject0 active'>
+                <option value="Art">Art</option>
+                <option value="Computer Education/Technology">Computer Education/Technology</option>
+                <option value="Counselling/Psychology">Counselling/Psychology</option>
+                <option value="Early Childhood Education">Early Childhood Education</option>
+                <option value="Elementary Classroom Teacher">Elementary Classroom Teacher</option>
+                <option value="English as an Additional Language">English as an Additional Language</option>
+                <option value="Foreign Language （Except English）">Foreign Language （Except English）</option>
+                <option value="Humanities">Humanities</option>
+                <option value="Library/Media">Library/Media</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Miscellaneous">Miscellaneous</option>
+                <option value="Music">Music</option>
+                <option value="Performing Arts">Performing Arts</option>
+                <option value="Physical Education/Health">Physical Education/Health</option>
+                <option value="Science">Science</option>
+                <option value="Social Studies/History">Social Studies/History</option>
+                <option value="Special Education">Special Education</option>
+            </select>
+            <select class='subject subject1'>
+                <option value="NA">NA</option>
+            </select>
+            <select class='subject subject2'>
+                <option value="Human Resources">Human Resources</option>
+                <option value="Admissions">Admissions</option>
+                <option value="Communications">Communications</option>
+                <option value="Marketing ">Marketing</option>
+                <option value="Alumni">Alumni</option>
+                <option value="IT">IT</option>
+                <option value="Finance">Finance</option>
+                <option value="Facilities">Facilities</option>
+                <option value="Secretary">Secretary</option>
             </select>
         </div>
-
-        <!-- School Type (Rectangle) -->
-        <div id="u11" class="ax_default label" data-label="School Type">
-            <div id="u11_div" class=""></div>
-            <div id="u11_text" class="text " style="left: 0px; width: 74px; transform-origin: 37px 8px 0px;">
-                <p><span>School Type</span></p>
-            </div>
+        <div>School Level<br/>
+            <select class='schoolLevel'>
+                <option value="All Locations">All Locations</option>
+                <option value="Pudong, Shanghai">Pudong, Shanghai</option>
+                <option value="Jiangsu">Jiangsu</option>
+            </select>
         </div>
-
-        <!-- Unnamed (Droplist) -->
-        <div id="u12" class="ax_default droplist">
-            <select id="u12_input">
-                <option value="International / Bilingual School">International / Bilingual School</option>
-                <option value="Language Training">Language Training</option>
+        <div>School Type<br/>
+            <select class='schoolType'>
+                <option value="All Locations">All Locations</option>
+                <option value="Pudong, Shanghai">Pudong, Shanghai</option>
+                <option value="Jiangsu">Jiangsu</option>
             </select>
         </div>
     </div>
-    <!-- 搜索栏 篮框 (Rectangle) -->
-    <div id="u13" class="ax_default box_1" data-label="搜索栏 篮框">
-        <div id="u13_div" class=""></div>
-    </div>
+    <!--/*@thymesVar id="page" type="org.springframework.data.domain.Slice<com.panda.mojobs.service.dto.MjobDTO>"*/-->
 
-    <!-- Unnamed (Droplist) -->
-    <div id="u14" class="ax_default droplist">
-        <select id="u14_input">
-            <option value="All Locations">All Locations</option>
-            <option value="Pudong, Shanghai">Pudong, Shanghai</option>
-            <option value="Puxi, Shanghai">Puxi, Shanghai</option>
-            <option value="Jiangsu">Jiangsu</option>
-            <option value="Zhejiang">Zhejiang</option>
-        </select>
-    </div>
-
-    <!-- Unnamed (Shape) -->
-    <div id="u15" class="ax_default icon">
-        <img id="u15_img" class="img " th:src="@{/css/thymeleaf/Home_files/u15.png}"/>
-    </div>
-
-    <!-- Search job 搜索框 (Text Field) -->
-    <div id="u16" class="ax_default droplist" data-label="Search job 搜索框">
-        <input id="u16_input" type="text" value="" style="color: rgb(153, 153, 153);"/>
-    </div>
-
-    <!-- 轮播 (Dynamic Panel) -->
-    <div id="u17" class="ax_default" data-label="轮播" tabindex="0" style="cursor: pointer; outline: none;">
-
-
-        <div id="u17_state1" class="panel_state" data-label="图片more jobs"
-             style="visibility: hidden; position: absolute; display: none;">
-            <div id="u17_state1_content" class="panel_state_content">
-
-                <!-- Unnamed (Image) -->
-                <div id="u19" class="ax_default image">
-                    <img id="u19_img" class="img " th:src="@{/css/thymeleaf/Home_files/u19.jpg}"/>
+    <div class="interestedJob">
+        <h3>JOBS YOU MAY BE INTERESTED IN</h3>
+        <div class="applyContainerList clearfix">
+            <div class="applyContainer col-md-3 col-xs-6" th:each="job,jobStat : ${page}">
+                <!--/*@thymesVar id="job" type="com.panda.mojobs.service.dto.MjobDTO"*/-->
+                <img th:src="${job.logoBase64}" alt="" class='jobImg'/>
+                <div class="applyDescription">
+                    <p>Schools: <span th:text="${job.getSchoolName()}">Shanghai American School</span></p>
+                    <p>Position: <span th:text="${job.getSubTypeName()}">Shanghai American School</span></p>
+                    <p>Location: <span th:text="${job.getShortAddress()}">Shanghai American School</span></p>
+                    <a class='moreDetails'>>>More details</a>
+                    <a class='applyBtn'>Apply</a>
                 </div>
             </div>
-        </div>
-        <div id="u17_state0" class="panel_state" data-label="图片bigger world"
-             style="visibility: inherit; position: absolute;">
-            <div id="u17_state0_content" class="panel_state_content">
 
-                <!-- Unnamed (Image) -->
-                <div id="u18" class="ax_default image">
-                    <img id="u18_img" class="img " th:src="@{/css/thymeleaf/Home_files/u18.jpg}"/>
-                </div>
-            </div>
         </div>
-    </div>
+        <div class="pagination" th:object="${page}">
+            <!--/*@thymesVar id="pageUrl" type="java.lang.String"*/-->
+            <!--/*@thymesVar id="i" type="java.lang.Integer"*/-->
 
-    <!-- Advanced Search (Rectangle) -->
-    <div id="u20" class="ax_default label" data-label="Advanced Search">
-        <div id="u20_div" class=""></div>
-        <div id="u20_text" class="text ">
-            <p><span>Advanced&nbsp; Search</span></p>
+            <ul>
+                <!-- 上一页 -->
+                <li class="page-item" data-th-classappend="*{first} ? 'disabled' : ''">
+                    <a th:href="@{${pageUrl}(page=${page.number - 1})}" class="page-link"
+                       data-th-attr="pageIndex=${page.number} - 1"
+                       aria-label="Previous">
+                        <span aria-hidden="true">«</span>
+                    </a>
+                </li>
+
+                <!-- 迭代生成页码 -->
+                <li class="page-item" data-th-each="i : ${#numbers.sequence(1, page.totalPages)}"
+                    data-th-classappend="${(page.number + 1) eq i} ? 'active' : ''">
+                    <a class="page-link" data-th-attr="pageIndex=${i} - 1" th:href="@{${pageUrl}(page=${i - 1})}">
+                        <span data-th-text="${i}"></span>
+                    </a>
+                </li>
+
+                <!-- 下一页 -->
+                <li class="page-item" data-th-classappend="*{last} ? 'disabled' : ''">
+
+                    <a th:href="@{${pageUrl}(page=${page.number + 1})}" class="page-link"
+                       data-th-attr="pageIndex=${page.number} + 1"
+                       aria-label="Next">
+                        <span aria-hidden="true">»</span>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
-
-    <!-- Unnamed (Rectangle) -->
-    <div id="u21" class="ax_default label">
-        <img id="u21_img" class="img " th:src="@{/css/thymeleaf/Home_files/u21.png}"/>
-        <div id="u21_text" class="text " style="left: 0px; width: 279px; transform-origin: 139.5px 9.5px 0px;">
-            <p><span>JOBS YOU MAY BE INTERESTED IN</span></p>
-        </div>
-    </div>
-
-    <!-- Unnamed (bottom) -->
-
-
-    <!-- Reapter Job List (Repeater) -->
-    <div id="u29" class="ax_default" data-label="Reapter Job List">
-        <!--/*@thymesVar id="page" type="org.springframework.data.domain.Page<com.panda.mojobs.service.dto.MjobDTO>"*/-->
-        <div  class="" style="width: 303px; height: 230px;" th:each="job,jobStat : ${page}">
-
-            <!-- Job List 框 (Rectangle) -->
-            <div  class="ax_default box_1 u30" data-label="Job List 框"
-                 style="width: 300px; height: 230px; left: 3px; top: 0px;visibility: inherit">
-                <div  class="u30_div" style="width: 300px; height: 230px;visibility: inherit"></div>
-            </div>
-
-            <!-- School Logo (Image) -->
-            <div  class="ax_default image u31" data-label="School Logo"
-                 style="width: 58px; height: 58px; left: 31px; top: 16px;visibility: inherit">
-                <img  class="img u31_img" th:src="${job.logoBase64}"
-                     style="border-radius: 0px; width: 58px; height: 58px;"/>
-                <div  style="position: absolute; border-radius: 0px;"></div>
-            </div>
-
-            <!-- Job quick view (Rectangle) -->
-            <div  class="ax_default label u32" data-label="Job quick view"
-                 style="width: 58px; height: 19px; left: 31px; top: 85px;visibility: inherit">
-                <div  class="u32_div" style="width: 58px; height: 19px;visibility: inherit"></div>
-                <div  class="text u32_text"
-                     style="position: absolute;left: 0px;top: 0px;width: 58px;visibility: inherit">
-                    <p><span style="font-family:&#39;Helvetica&#39;;">School</span><span
-                        style="font-family:&#39;PingFangSC-Regular&#39;, &#39;PingFang SC&#39;;">：</span></p>
-                </div>
-            </div>
-
-            <!-- Unnamed (Group) -->
-            <div class="ax_default u33" style="visibility: inherit" data-left="31" data-top="177"
-                 data-width="87" data-height="15">
-
-                <!-- More Details (Rectangle) -->
-                <div  class="ax_default label u34" data-label="More Details"
-                     style="width: 68px; height: 14px; left: 50px; top: 178px;visibility: inherit">
-                    <div  class="u34_div" style="width: 68px; height: 14px;visibility: inherit"></div>
-                    <div  class="text u34_text"
-                         style="position: absolute; left: 0px; top: 0px; width: 68px; visibility: inherit; transform-origin: 34px 7px 0px;">
-                        <p><span>More details</span></p>
-                    </div>
-                </div>
-
-                <!-- Unnamed (Shape) -->
-                <div  class="ax_default icon u35"
-                     style="width: 13px; height: 15px; left: 31px; top: 177px;visibility: inherit">
-                    <img  class="img u35_img" th:src="@{/css/thymeleaf/Home_files/u35.png}"/>
-                </div>
-            </div>
-
-            <!-- Apply (Rectangle) -->
-            <div class="ax_default primary_button u36" data-label="Apply"
-                 style="width: 47px; height: 29px; left: 172px; top: 170px;visibility: inherit">
-                <div class="u36_div" style="width: 47px; height: 29px;visibility: inherit"></div>
-                <div  class="text u36_text"
-                     style="position: absolute; left: 2px; top: 9px; width: 43px; visibility: inherit; transform-origin: 21.5px 5.5px 0px;">
-                    <p><span>Apply</span></p>
-                </div>
-            </div>
-
-            <!-- School_1 (Rectangle) -->
-            <div class="ax_default label u37" data-label="School_1"
-                 style="width: 36px; height: 17px; left: 110px; top: 85px;visibility: inherit">
-                <div  class="u37_div" style="width: 36px; height: 17px;visibility: inherit"></div>
-                <div  class="text u37_text"
-                     style="position: absolute; left: 0px; top: 0px; width: 36px; visibility: inherit; transform-origin: 18px 9px 0px;">
-                    <p id="cache4"><span id="cache5" th:text="${job.getSchoolName()}">Shanghai American School</span></p>
-                </div>
-            </div>
-
-            <!-- Job quick view (Rectangle) -->
-            <div  class="ax_default label u38" data-label="Job quick view"
-                 style="width: 67px; height: 19px; left: 31px; top: 105px;visibility: inherit">
-                <div class="u38_div" style="width: 67px; height: 19px;visibility: inherit"></div>
-                <div  class="text u38_text"
-                     style="position: absolute;left: 0px;top: 0px;width: 67px;visibility: inherit">
-                    <p><span style="font-family:&#39;Helvetica&#39;;">Position</span><span
-                        style="font-family:&#39;PingFangSC-Regular&#39;, &#39;PingFang SC&#39;;">：</span></p>
-                </div>
-            </div>
-
-            <!-- Job quick view (Rectangle) -->
-            <div  class="ax_default label u39" data-label="Job quick view"
-                 style="width: 77px; height: 19px; left: 31px; top: 125px;visibility: inherit">
-                <div  class="u39_div" style="width: 77px; height: 19px;visibility: inherit"></div>
-                <div  class="text u39_text"
-                     style="position: absolute;left: 0px;top: 0px;width: 77px;visibility: inherit">
-                    <p><span style="font-family:&#39;Helvetica&#39;;">Location</span><span
-                        style="font-family:&#39;PingFangSC-Regular&#39;, &#39;PingFang SC&#39;;">：</span></p>
-                </div>
-            </div>
-
-            <!-- Position_1 (Rectangle) -->
-            <div  class="ax_default label u40" data-label="Position_1"
-                 style="width: 36px; height: 17px; left: 110px; top: 105px;visibility: inherit">
-                <div class="u40_div" style="width: 36px; height: 17px;visibility: inherit"></div>
-                <div  class="text u40_text"
-                     style="position: absolute; left: 0px; top: 0px; width: 36px; visibility: inherit; transform-origin: 18px 9px 0px;">
-                    <p id="cache2"><span id="cache3" th:text="${job.getSubTypeName()}">Classroom TA, Middle School</span></p>
-                </div>
-            </div>
-
-            <!-- Location_1 (Rectangle) -->
-            <div  class="ax_default label u41" data-label="Location_1"
-                 style="width: 36px; height: 17px; left: 110px; top: 125px;visibility: inherit">
-                <div  class="u41_div" style="width: 36px; height: 17px;visibility: inherit"></div>
-                <div  class="text u41_text"
-                     style="position: absolute; left: 0px; top: 0px; width: 36px; visibility: inherit; transform-origin: 18px 9px 0px;">
-                    <p id="cache0"><span id="cache1" th:text="${job.getShortAddress()}">Pudong, Shanghai</span></p>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
 </div>
-
 
 </body>
 </html>
