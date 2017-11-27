@@ -7,7 +7,7 @@
 <!--/*@thymesVar id="page" type="org.springframework.data.domain.Page"*/-->
 
 <div th:fragment="pager">
-    <div class="pagination" th:object="${page}" th:with="displayTotoalPage =2" th:if="${page.totalPages > 0}">
+    <div class="pagination" th:object="${page}" th:with="displayTotoalPage =2" th:if="${page.totalPages > 1}">
         <!--/*@thymesVar id="pageUrl" type="java.lang.String"*/-->
         <!--/*@thymesVar id="i" type="java.lang.Integer"*/-->
 
