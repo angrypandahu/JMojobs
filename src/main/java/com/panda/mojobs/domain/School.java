@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.security.crypto.codec.Base64;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -174,6 +175,16 @@ public class School implements Serializable {
         this.jobs = mjobs;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
+    @Transient
+    private String logoBase64;
+
+    public String getLogoBase64() {
+        if (this.logo != null) {
+            return "data:"+logoContentType+";base64," + new String(Base64.encode(logo));
+        }
+        return null;
+    }
 
     @Override
     public boolean equals(Object o) {
