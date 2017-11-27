@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="page">
+<body>
+<!--/*@thymesVar id="page" type="org.springframework.data.domain.Page"*/-->
+
+<div th:fragment="pager">
+    <div class="pagination" th:object="${page}" th:with="displayTotoalPage =2" th:if="${page.totalPages > 0}">
+        <!--/*@thymesVar id="pageUrl" type="java.lang.String"*/-->
+        <!--/*@thymesVar id="i" type="java.lang.Integer"*/-->
+
+        <ul>
+            <!-- 上一页 -->
+            <li class="page-item" th:classappend="*{first} ? 'disabled' : ''">
+                <a th:href="@{${pageUrl}(page=${page.number - 1})}"
+                   th:if="not *{first}"
+                   class="page-link"
+                   th:attr="pageIndex=${page.number} - 1"
+                   aria-label="Previous">
+                    <span aria-hidden="true">«</span>
+                </a>
+                <a th:if="*{first}" href="javascript:void(0);" class="page-link"> <span aria-hidden="true">«</span></a>
+
+            </li>
+
+            <!-- 迭代生成页码 -->
+
+            <li class="page-item" th:each="i : ${#numbers.sequence(1, page.totalPages)}"
+                th:classappend="${(page.number + 1) eq i} ? 'active' : ''">
+                <a class="page-link" th:attr="pageIndex=${i} - 1" th:href="@{${pageUrl}(page=${i - 1})}"
+                   th:if="${T(java.lang.Math).abs(page.number + 1 - i) lt displayTotoalPage}">
+                    <span data-th-text="${i}"></span>
+                </a>
+
+                <a href="javascript:void(0);" class="page-link"
+                   th:if="${T(java.lang.Math).abs(page.number + 1 - i) eq displayTotoalPage}">
+                    <span aria-hidden="true">...</span>
+                </a>
+            </li>
+
+
+            <!-- 下一页 -->
+            <li class="page-item" th:classappend="*{last} ? 'disabled' : ''">
+                <a th:href="@{${pageUrl}(page=${page.number + 1})}"
+                   th:if="not *{last}"
+                   class="page-link"
+                   th:attr="pageIndex=${page.number} + 1"
+                   aria-label="Next">
+                    <span aria-hidden="true">»</span>
+                </a>
+                <a th:if="*{last}" href="javascript:void(0);" class="page-link"> <span aria-hidden="true">»</span></a>
+            </li>
+        </ul>
+
+
+    </div>
+</div>
+
+</body>
+</html>
