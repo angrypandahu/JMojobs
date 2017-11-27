@@ -3,6 +3,7 @@
       layout:decorator="layout">
 <head>
 
+
     <script>
         $(function () {
             //job选择联动
@@ -145,7 +146,7 @@
             </select>
         </div>
     </div>
-    <!--/*@thymesVar id="page" type="org.springframework.data.domain.Slice<com.panda.mojobs.service.dto.MjobDTO>"*/-->
+    <!--/*@thymesVar id="page" type="org.springframework.data.domain.Page<com.panda.mojobs.service.dto.MjobDTO>"*/-->
 
     <div class="interestedJob">
         <h3>JOBS YOU MAY BE INTERESTED IN</h3>
@@ -163,39 +164,7 @@
             </div>
 
         </div>
-        <div class="pagination" th:object="${page}">
-            <!--/*@thymesVar id="pageUrl" type="java.lang.String"*/-->
-            <!--/*@thymesVar id="i" type="java.lang.Integer"*/-->
-
-            <ul>
-                <!-- 上一页 -->
-                <li class="page-item" data-th-classappend="*{first} ? 'disabled' : ''">
-                    <a th:href="@{${pageUrl}(page=${page.number - 1})}" class="page-link"
-                       data-th-attr="pageIndex=${page.number} - 1"
-                       aria-label="Previous">
-                        <span aria-hidden="true">«</span>
-                    </a>
-                </li>
-
-                <!-- 迭代生成页码 -->
-                <li class="page-item" data-th-each="i : ${#numbers.sequence(1, page.totalPages)}"
-                    data-th-classappend="${(page.number + 1) eq i} ? 'active' : ''">
-                    <a class="page-link" data-th-attr="pageIndex=${i} - 1" th:href="@{${pageUrl}(page=${i - 1})}">
-                        <span data-th-text="${i}"></span>
-                    </a>
-                </li>
-
-                <!-- 下一页 -->
-                <li class="page-item" data-th-classappend="*{last} ? 'disabled' : ''">
-
-                    <a th:href="@{${pageUrl}(page=${page.number + 1})}" class="page-link"
-                       data-th-attr="pageIndex=${page.number} + 1"
-                       aria-label="Next">
-                        <span aria-hidden="true">»</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+        <div th:replace="page::pager"></div>
     </div>
 </div>
 
