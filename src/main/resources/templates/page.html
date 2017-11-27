@@ -13,11 +13,11 @@
 
         <ul>
             <!-- 上一页 -->
-            <li class="page-item" data-th-classappend="*{first} ? 'disabled' : ''">
+            <li class="page-item" th:classappend="*{first} ? 'disabled' : ''">
                 <a th:href="@{${pageUrl}(page=${page.number - 1})}"
                    th:if="not *{first}"
                    class="page-link"
-                   data-th-attr="pageIndex=${page.number} - 1"
+                   th:attr="pageIndex=${page.number} - 1"
                    aria-label="Previous">
                     <span aria-hidden="true">«</span>
                 </a>
@@ -27,9 +27,9 @@
 
             <!-- 迭代生成页码 -->
 
-            <li class="page-item" data-th-each="i : ${#numbers.sequence(1, page.totalPages)}"
-                data-th-classappend="${(page.number + 1) eq i} ? 'active' : ''">
-                <a class="page-link" data-th-attr="pageIndex=${i} - 1" th:href="@{${pageUrl}(page=${i - 1})}"
+            <li class="page-item" th:each="i : ${#numbers.sequence(1, page.totalPages)}"
+                th:classappend="${(page.number + 1) eq i} ? 'active' : ''">
+                <a class="page-link" th:attr="pageIndex=${i} - 1" th:href="@{${pageUrl}(page=${i - 1})}"
                    th:if="${T(java.lang.Math).abs(page.number + 1 - i) lt displayTotoalPage}">
                     <span data-th-text="${i}"></span>
                 </a>
@@ -42,11 +42,11 @@
 
 
             <!-- 下一页 -->
-            <li class="page-item" data-th-classappend="*{last} ? 'disabled' : ''">
+            <li class="page-item" th:classappend="*{last} ? 'disabled' : ''">
                 <a th:href="@{${pageUrl}(page=${page.number + 1})}"
                    th:if="not *{last}"
                    class="page-link"
-                   data-th-attr="pageIndex=${page.number} + 1"
+                   th:attr="pageIndex=${page.number} + 1"
                    aria-label="Next">
                     <span aria-hidden="true">»</span>
                 </a>
