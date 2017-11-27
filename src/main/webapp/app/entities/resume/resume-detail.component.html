@@ -1,0 +1,43 @@
+
+<div *ngIf="resume">
+    <h2><span>Resume</span> {{resume.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{resume.name}}</span>
+        </dd>
+        <dt><span>Can Be Read By</span></dt>
+        <dd>
+            <span>{{resume.canBeReadBy}}</span>
+        </dd>
+        <dt><span>Others</span></dt>
+        <dd>
+            <span>{{resume.others}}</span>
+        </dd>
+        <dt><span>Basic Information</span></dt>
+        <dd>
+            <div *ngIf="resume.basicInformationId">
+                <a [routerLink]="['/basic-information', resume.basicInformationId]">{{resume.basicInformationFirstName}}</a>
+            </div>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+            {{resume.userLogin}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'resume/'+ resume.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

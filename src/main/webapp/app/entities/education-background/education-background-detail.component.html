@@ -1,0 +1,51 @@
+
+<div *ngIf="educationBackground">
+    <h2><span>Education Background</span> {{educationBackground.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>School</span></dt>
+        <dd>
+            <span>{{educationBackground.school}}</span>
+        </dd>
+        <dt><span>Major</span></dt>
+        <dd>
+            <span>{{educationBackground.major}}</span>
+        </dd>
+        <dt><span>Degree</span></dt>
+        <dd>
+            <span>{{educationBackground.degree}}</span>
+        </dd>
+        <dt><span>Location</span></dt>
+        <dd>
+            <span>{{educationBackground.location}}</span>
+        </dd>
+        <dt><span>From Date</span></dt>
+        <dd>
+            <span>{{educationBackground.fromDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>To Date</span></dt>
+        <dd>
+            <span>{{educationBackground.toDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Resume</span></dt>
+        <dd>
+            <div *ngIf="educationBackground.resumeId">
+                <a [routerLink]="['/resume', educationBackground.resumeId]">{{educationBackground.resumeName}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'education-background/'+ educationBackground.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

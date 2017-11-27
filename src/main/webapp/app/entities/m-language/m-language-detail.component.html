@@ -1,0 +1,35 @@
+
+<div *ngIf="mLanguage">
+    <h2><span>M Language</span> {{mLanguage.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{mLanguage.name}}</span>
+        </dd>
+        <dt><span>Level</span></dt>
+        <dd>
+            <span>{{mLanguage.level}}</span>
+        </dd>
+        <dt><span>Resume</span></dt>
+        <dd>
+            <div *ngIf="mLanguage.resumeId">
+                <a [routerLink]="['/resume', mLanguage.resumeId]">{{mLanguage.resumeName}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'm-language/'+ mLanguage.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

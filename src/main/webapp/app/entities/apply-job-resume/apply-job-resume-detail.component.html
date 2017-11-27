@@ -1,0 +1,41 @@
+
+<div *ngIf="applyJobResume">
+    <h2><span>Apply Job Resume</span> {{applyJobResume.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Apply Date</span></dt>
+        <dd>
+            <span>{{applyJobResume.applyDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Content</span></dt>
+        <dd>
+            <span>{{applyJobResume.content}}</span>
+        </dd>
+        <dt><span>Resume</span></dt>
+        <dd>
+            <div *ngIf="applyJobResume.resumeId">
+                <a [routerLink]="['/resume', applyJobResume.resumeId]">{{applyJobResume.resumeName}}</a>
+            </div>
+        </dd>
+        <dt><span>Mjob</span></dt>
+        <dd>
+            <div *ngIf="applyJobResume.mjobId">
+                <a [routerLink]="['/mjob', applyJobResume.mjobId]">{{applyJobResume.mjobName}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'apply-job-resume/'+ applyJobResume.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

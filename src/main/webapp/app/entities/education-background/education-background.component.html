@@ -1,0 +1,85 @@
+<div>
+    <h2>
+        <span>Education Backgrounds</span>
+        <button class="btn btn-primary float-right jh-create-entity create-education-background" [routerLink]="['/', { outlets: { popup: ['education-background-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down" >
+            Create new Education Background
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Query">
+                    <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="educationBackgrounds">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>School</span></th>
+            <th><span>Major</span></th>
+            <th><span>Degree</span></th>
+            <th><span>Location</span></th>
+            <th><span>From Date</span></th>
+            <th><span>To Date</span></th>
+            <th><span>Resume</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let educationBackground of educationBackgrounds ;trackBy: trackId">
+                <td><a [routerLink]="['../education-background', educationBackground.id ]">{{educationBackground.id}}</a></td>
+                <td>{{educationBackground.school}}</td>
+                <td>{{educationBackground.major}}</td>
+                <td>{{educationBackground.degree}}</td>
+                <td>{{educationBackground.location}}</td>
+                <td>{{educationBackground.fromDate | date:'mediumDate'}}</td>
+                <td>{{educationBackground.toDate | date:'mediumDate'}}</td>
+                <td>
+                    <div *ngIf="educationBackground.resumeId">
+                        <a [routerLink]="['../resume', educationBackground.resumeId  ]" >{{educationBackground.resumeName}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../education-background', educationBackground.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'education-background/'+ educationBackground.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'education-background/'+ educationBackground.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

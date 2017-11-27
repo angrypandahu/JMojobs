@@ -5,6 +5,29 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171127055941_added_entity_JobSubType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171127055942_added_entity_Address.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171127055943_added_entity_Mjob.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171127055944_added_entity_School.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171127055945_added_entity_Resume.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171127055946_added_entity_BasicInformation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171127055947_added_entity_Experience.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171127055948_added_entity_EducationBackground.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171127055949_added_entity_ProfessionalDevelopment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171127055950_added_entity_MLanguage.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171127055951_added_entity_Invitation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171127055952_added_entity_ApplyJobResume.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171127055953_added_entity_ChatMessage.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20171127055943_added_entity_constraints_Mjob.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171127055944_added_entity_constraints_School.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171127055945_added_entity_constraints_Resume.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171127055947_added_entity_constraints_Experience.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171127055948_added_entity_constraints_EducationBackground.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171127055949_added_entity_constraints_ProfessionalDevelopment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171127055950_added_entity_constraints_MLanguage.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171127055951_added_entity_constraints_Invitation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171127055952_added_entity_constraints_ApplyJobResume.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171127055953_added_entity_constraints_ChatMessage.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

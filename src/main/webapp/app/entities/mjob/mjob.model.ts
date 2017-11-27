@@ -1,0 +1,20 @@
+import { BaseEntity } from './../../shared';
+
+export const enum JobType {
+    'FACULTY',
+    'PRINCIPAL',
+    'SUPPORT_STAFF'
+}
+
+export class Mjob implements BaseEntity {
+    constructor(
+        public id?: number,
+        public name?: string,
+        public jobDescription?: any,
+        public type?: JobType,
+        public addressId?: number,
+        public schoolId?: number,
+        public subTypeId?: number,
+    ) {
+    }
+}

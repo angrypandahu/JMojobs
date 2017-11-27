@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity ApplyJobResume.
+    -->
+    <changeSet id="20171127055952-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="resume_id"
+                                 baseTableName="apply_job_resume"
+                                 constraintName="fk_apply_job_resume_resume_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="resume"/>
+
+        <addForeignKeyConstraint baseColumnNames="mjob_id"
+                                 baseTableName="apply_job_resume"
+                                 constraintName="fk_apply_job_resume_mjob_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="mjob"/>
+
+    </changeSet>
+</databaseChangeLog>
