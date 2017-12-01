@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
-    <title>Login One</title>
-    <link rel="stylesheet" href="css/auth/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="css/auth/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="css/auth/css/bootstrap-theme.min.css"/>
-    <link rel="stylesheet" href="css/auth/css/templatemo_style.css"/>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/auth/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/auth/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/auth/css/bootstrap-theme.min.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/auth/css/templatemo_style.css}"/>
+    <script th:src='@{/css/bootstrap/js/jquery.min.js}'></script>
+    <script th:src="@{/css/bootstrap/js/bootstrap.min.js}"></script>
 
 </head>
 <body class="templatemo-bg-gray">
@@ -19,9 +19,60 @@
     <h1 class="margin-bottom-15">Create Account</h1>
 
     <div class="col-md-12">
+        <!--/*@thymesVar id="registerForm" type="com.panda.mojobs.web.controller.form.RegisterForm"*/-->
+        <form class="form-horizontal templatemo-create-account templatemo-container" role="form" id="registerForm"
+              th:object="${registerForm}"
+              th:action="@{/common/register}" method="post">
+            <div class="form-inner">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors()}">
+                            <a href="#" class="close" data-dismiss="alert">&times;</a>
+                            <p th:each="err : ${#fields.detailedErrors()}"
+                               th:text="${err.fieldName + ' : ' + err.getMessage()}"></p>
+                        </div>
+                        <label for="email" class="control-label">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="" name="email"
+                               th:value="*{email}"
+                               value=""/>
+                    </div>
+                </div>
 
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label for="username" class="control-label">Username</label>
+                        <input type="text" class="form-control" id="username" placeholder="" name="login"
+                               th:value="*{login}"
+                               value=""/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <label for="password" class="control-label">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="" name="password"
+                               th:value="*{password}"/>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="password" class="control-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="password_confirm" placeholder=""
+                               name="password2"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input type="submit" value="Create account" class="btn btn-info pull-right"/>
+                        <a th:href="@{/login}" class="">Login</a>
+                    </div>
+                </div>
+            </div>
+        </form>
 
     </div>
 </div>
+
+
 </body>
 </html>

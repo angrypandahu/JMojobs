@@ -95,7 +95,7 @@ jhipster:
         #allow-credentials: true
         #max-age: 1800
     mail:
-        from: jmojobs@localhost
+        from: mojobs@126.com
     swagger:
         default-include-pattern: /api/.*
         title: jmojobs API

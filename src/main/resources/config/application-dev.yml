@@ -54,10 +54,10 @@ spring:
                     logs: target/elasticsearch/log
                     data: target/elasticsearch/data
     mail:
-        host: localhost
+        host: smtp.126.com
         port: 25
-        username:
-        password:
+        username: mojobs@126.com
+        password: mojobs2017
     messages:
         cache-seconds: 1
     thymeleaf:
@@ -111,8 +111,8 @@ jhipster:
             # security key (this key should be unique for your application, and kept secret)
             key: 8116cb900dfdb7431409a7dd73678244a8d55147
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: jmojobs@localhost
-        base-url: http://127.0.0.1:8080
+        from: mojobs@126.com
+        base-url: http://127.0.0.1:8080/common
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
         graphite: # Use the "graphite" Maven profile to have the Graphite dependencies

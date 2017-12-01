@@ -79,13 +79,19 @@
         </div>
     </div>
     <div class="searchContainer">
-        <input type="text" class='searchInput' placeholder='searchJobs name'/>
-        <select class='searchSelect'>
-            <option value="All Locations">All Locations</option>
-            <option value="Pudong, Shanghai">Pudong, Shanghai</option>
-            <option value="Jiangsu">Jiangsu</option>
-        </select>
-        <a href="" class='searchBtn'><img th:src="@{/images/search.png}" alt=""/></a>
+        <!--/*@thymesVar id="mjobSearchForm" type="com.panda.mojobs.web.controller.form.MjobSearchForm"*/-->
+        <form th:action="@{''}" th:method="get" th:object="${mjobSearchForm}" id="mjobSearchForm">
+            <input type="text" name="name" class='searchInput' placeholder='searchJobs name' th:value="*{name}"/>
+            <select class='searchSelect' name="location">
+                <option value="">All locations</option>
+                <!--/*@thymesVar id="locations" type="java.util.LinkedHashMap<com.panda.mojobs.domain.enumeration.Location>"*/-->
+                <option th:each="location : ${locations}" th:value="${location.key}"
+                        th:selected="${location.key == mjobSearchForm.location}"
+                        th:text="${location.value}"></option>
+            </select>
+            <a onclick="document.getElementById('mjobSearchForm').submit();return false" class='searchBtn'><img
+                th:src="@{/images/search.png}" alt="" src=""/></a>
+        </form>
     </div>
     <div class="zoneContainer flexbox">
         <div>Advanced <br/>Search</div>
@@ -131,19 +137,23 @@
                 <option value="Secretary">Secretary</option>
             </select>
         </div>
-        <div>School Level<br/>
-            <select class='schoolLevel'>
-                <option value="All Locations">All Locations</option>
-                <option value="Pudong, Shanghai">Pudong, Shanghai</option>
-                <option value="Jiangsu">Jiangsu</option>
-            </select>
+        <div> School Level<br/>
+            <label>
+                <select class='schoolLevel'>
+                    <option value="">All</option>
+                    <!--/*@thymesVar id="schoolLevels" type="java.util.LinkedHashMap"*/-->
+                    <option th:each="level : ${schoolLevels}" th:value="${level.key}" th:text="${level.value}"></option>
+                </select>
+            </label>
         </div>
         <div>School Type<br/>
-            <select class='schoolType'>
-                <option value="All Locations">All Locations</option>
-                <option value="Pudong, Shanghai">Pudong, Shanghai</option>
-                <option value="Jiangsu">Jiangsu</option>
-            </select>
+            <label>
+                <select class='schoolType'>
+                    <option value="">All</option>
+                    <!--/*@thymesVar id="schoolTypes" type="java.util.LinkedHashMap"*/-->
+                    <option th:each="type : ${schoolTypes}" th:value="${type.key}" th:text="${type.value}"></option>
+                </select>
+            </label>
         </div>
     </div>
     <!--/*@thymesVar id="page" type="org.springframework.data.domain.Page<com.panda.mojobs.service.dto.MjobDTO>"*/-->

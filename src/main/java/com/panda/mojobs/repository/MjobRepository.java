@@ -11,6 +11,6 @@ import org.springframework.data.jpa.repository.*;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface MjobRepository extends JpaRepository<Mjob, Long> {
+public interface MjobRepository extends JpaRepository<Mjob, Long>,JpaSpecificationExecutor<Mjob>{
 
 }

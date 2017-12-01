@@ -33,11 +33,11 @@
             <input type="text" class='userName' placeholder='User Name' name="username"/>
             <input type="password" class='password' placeholder='Password' name="password"/>
             <button>Log In</button>
-            <a href="#" class='register'>register</a>
+            <a th:href="@{/common/register}" class='register'>register</a>
         </form>
     </div>
 
-    <span sec:authorize="isAuthenticated()" >
+    <span sec:authorize="isAuthenticated()">
                 | Logged user: <span sec:authentication="name"></span> |
                 Roles: <span sec:authentication="principal.authorities"></span> |
                 <a th:href="@{/logout}">Sign Out</a>
@@ -48,12 +48,11 @@
 
 <footer>
     <p>Contact us</p>
-    <p>Phone:  021- 12345678</p>
+    <p>Phone: 021- 12345678</p>
     <p>E-mail: info@mojobs.com.cn</p>
-    <p>MoJobs copyright@2015-2017   All Right Reserved XXX</p>
+    <p>MoJobs copyright@2015-2017 All Right Reserved XXX</p>
     <img th:src="@{/images/timg.jpg}" class='ewmImg'/>
 </footer>
-
 
 
 </body>

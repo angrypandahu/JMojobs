@@ -5,13 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
     <title>Login One</title>
-    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/auth/css/font-awesome.min.css}" />
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/auth/css/font-awesome.min.css}"/>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/auth/css/bootstrap.min.css}"/>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/auth/css/bootstrap-theme.min.css}"/>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/auth/css/templatemo_style.css}"/>
-
+    <script th:src='@{/css/bootstrap/js/jquery.min.js}'></script>
+    <script th:src="@{/css/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body class="templatemo-bg-gray">
+<!--/*@thymesVar id="global_success_message" type="java.lang.String"*/-->
+<div class="alert alert-danger"
+     th:if="${global_success_message}">
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+    <p th:text="#{${global_success_message}}"></p>
+</div>
 <div class="container">
     <div class="col-md-12">
         <h1 class="margin-bottom-15">Sign-In</h1>
@@ -37,7 +44,7 @@
                         <input type="password" class="form-control" id="password" placeholder="Password"
                                name="password"/>
                         <!--/*@thymesVar id="error" type="java.lang.Boolean"*/-->
-                        <!--/*@thymesVar id="error" type=""*/-->
+
                         <div class="alert alert-danger alert-dismissible" th:if="${param.error}">
                             Username or password error
                         </div>
@@ -61,7 +68,7 @@
                 <div class="col-md-12">
                     <div class="control-wrapper">
                         <input type="submit" value="Log in" class="btn btn-info"/>
-                        <a href="/register/forgotPassword" class="text-right pull-right">Forgot password?</a>
+                        <a th:href="@{/common/forgotPassword}" class="text-right pull-right">Forgot password?</a>
                     </div>
                 </div>
 
@@ -70,7 +77,7 @@
         </form>
 
         <div class="text-center">
-            <a href="/register" class="templatemo-create-new">Create new account <i
+            <a th:href="@{/common/register}" class="templatemo-create-new">Create new account <i
                 class="fa fa-arrow-circle-o-right"></i></a>
         </div>
 

@@ -168,7 +168,7 @@ public class MultiHttpSecurityConfig {
         protected void configure(HttpSecurity http) throws Exception {
             http.csrf().disable();
             http.authorizeRequests()
-                .antMatchers("/","/css/**", "/js/**", "/images/**").permitAll()
+                .antMatchers("/", "/css/**", "/js/**", "/images/**", "/common/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

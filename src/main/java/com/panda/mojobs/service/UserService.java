@@ -1,18 +1,18 @@
 package com.panda.mojobs.service;
 
+import com.panda.mojobs.config.Constants;
 import com.panda.mojobs.domain.Authority;
 import com.panda.mojobs.domain.User;
 import com.panda.mojobs.repository.AuthorityRepository;
 import com.panda.mojobs.repository.PersistentTokenRepository;
-import com.panda.mojobs.config.Constants;
 import com.panda.mojobs.repository.UserRepository;
 import com.panda.mojobs.repository.search.UserSearchRepository;
 import com.panda.mojobs.security.AuthoritiesConstants;
 import com.panda.mojobs.security.SecurityUtils;
-import com.panda.mojobs.service.util.RandomUtil;
 import com.panda.mojobs.service.dto.UserDTO;
+import com.panda.mojobs.service.util.RandomUtil;
+import com.panda.mojobs.web.controller.form.RegisterForm;
 import com.panda.mojobs.web.rest.vm.ManagedUserVM;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
@@ -23,8 +23,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -79,17 +79,17 @@ public class UserService {
     }
 
     public Optional<User> completePasswordReset(String newPassword, String key) {
-       log.debug("Reset user password for reset key {}", key);
+        log.debug("Reset user password for reset key {}", key);
 
-       return userRepository.findOneByResetKey(key)
-           .filter(user -> user.getResetDate().isAfter(Instant.now().minusSeconds(86400)))
-           .map(user -> {
+        return userRepository.findOneByResetKey(key)
+            .filter(user -> user.getResetDate().isAfter(Instant.now().minusSeconds(86400)))
+            .map(user -> {
                 user.setPassword(passwordEncoder.encode(newPassword));
                 user.setResetKey(null);
                 user.setResetDate(null);
                 cacheManager.getCache(USERS_CACHE).evict(user.getLogin());
                 return user;
-           });
+            });
     }
 
     public Optional<User> requestPasswordReset(String mail) {
@@ -117,6 +117,30 @@ public class UserService {
         newUser.setEmail(userDTO.getEmail());
         newUser.setImageUrl(userDTO.getImageUrl());
         newUser.setLangKey(userDTO.getLangKey());
+        // new user is not active
+        newUser.setActivated(false);
+        // new user gets registration key
+        newUser.setActivationKey(RandomUtil.generateActivationKey());
+        authorities.add(authority);
+        newUser.setAuthorities(authorities);
+        userRepository.save(newUser);
+        userSearchRepository.save(newUser);
+        log.debug("Created Information for User: {}", newUser);
+        return newUser;
+    }
+
+
+    public User registerUser(RegisterForm userDTO) {
+
+        User newUser = new User();
+        Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
+        Set<Authority> authorities = new HashSet<>();
+        String encryptedPassword = passwordEncoder.encode(userDTO.getPassword());
+        newUser.setLogin(userDTO.getLogin());
+        // new user gets initially a generated password
+        newUser.setPassword(encryptedPassword);
+        newUser.setEmail(userDTO.getEmail());
+        newUser.setLangKey(Locale.ENGLISH.toLanguageTag());
         // new user is not active
         newUser.setActivated(false);
         // new user gets registration key
@@ -162,10 +186,10 @@ public class UserService {
      * Update basic information (first name, last name, email, language) for the current user.
      *
      * @param firstName first name of user
-     * @param lastName last name of user
-     * @param email email id of user
-     * @param langKey language key
-     * @param imageUrl image URL of user
+     * @param lastName  last name of user
+     * @param email     email id of user
+     * @param langKey   language key
+     * @param imageUrl  image URL of user
      */
     public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl) {
         userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(user -> {
