@@ -1,5 +1,6 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layout">
 <head>
 
 </head>
@@ -7,7 +8,24 @@
 <div layout:fragment="content">
 
 </div>
+<div class="interestedJob">
+    <h3>JOBS YOU MAY BE INTERESTED IN</h3>
+    <div class="applyContainerList clearfix">
+        <div class="applyContainer col-md-3 col-xs-6" th:each="job,jobStat : ${page}">
+            <!--/*@thymesVar id="job" type="com.panda.mojobs.service.dto.MjobDTO"*/-->
+            <img th:src="${job.logoBase64}" alt="" class='jobImg'/>
+            <div class="applyDescription">
+                <p>Schools: <span th:text="${job.getSchoolName()}">Shanghai American School</span></p>
+                <p>Position: <span th:text="${job.getSubTypeName()}">Shanghai American School</span></p>
+                <p>Location: <span th:text="${job.getAddressName()}">Shanghai American School</span></p>
+                <a class='moreDetails'>>>More details</a>
+                <a class='applyBtn'>Apply</a>
+            </div>
+        </div>
 
+    </div>
+    <div th:replace="page::pager"></div>
+</div>
 
 </body>
 </html>

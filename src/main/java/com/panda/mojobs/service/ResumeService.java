@@ -1,5 +1,6 @@
 package com.panda.mojobs.service;
 
+import com.panda.mojobs.domain.Resume;
 import com.panda.mojobs.service.data.ResumeData;
 import com.panda.mojobs.service.dto.ResumeDTO;
 
@@ -53,5 +54,10 @@ public interface ResumeService {
 
     List<ResumeData> findDataByCurrentUser();
 
+    ResumeData toResumeData(ResumeDTO resumeDTO);
+
+    ResumeData toResumeData(Resume resume);
+
+    ResumeDTO createByLoginUser();
 
 }

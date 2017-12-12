@@ -1,8 +1,6 @@
 package com.panda.mojobs.web.controller.util;
 
-import com.panda.mojobs.domain.enumeration.Location;
-import com.panda.mojobs.domain.enumeration.SchoolLevel;
-import com.panda.mojobs.domain.enumeration.SchoolType;
+import com.panda.mojobs.domain.enumeration.*;
 
 import java.util.LinkedHashMap;
 
@@ -35,5 +33,23 @@ public class EnumUtil {
         locationStringLinkedHashMap.put(SchoolLevel.HIGH_SCHOOL, "High School");
         locationStringLinkedHashMap.put(SchoolLevel.UNIVERSITY, "University");
         return locationStringLinkedHashMap;
+    }
+
+    public static LinkedHashMap<Gender, String> getGender() {
+        LinkedHashMap<Gender, String> genderStringLinkedHashMap = new LinkedHashMap<>();
+        genderStringLinkedHashMap.put(Gender.MALE, "Male");
+        genderStringLinkedHashMap.put(Gender.FEMALE, "Female");
+        return genderStringLinkedHashMap;
+
+    }
+
+    public static LinkedHashMap<EducationLevel, String> getEducationLevel() {
+        LinkedHashMap<EducationLevel, String> educationLevelStringLinkedHashMap = new LinkedHashMap<>();
+        educationLevelStringLinkedHashMap.put(EducationLevel.ASSOCIATE, "Associate");
+        educationLevelStringLinkedHashMap.put(EducationLevel.BACHELOR, "Bachelor");
+        educationLevelStringLinkedHashMap.put(EducationLevel.MASTER, "Master");
+        educationLevelStringLinkedHashMap.put(EducationLevel.DOCTORATE, "Doctorate and above");
+        return educationLevelStringLinkedHashMap;
+
     }
 }

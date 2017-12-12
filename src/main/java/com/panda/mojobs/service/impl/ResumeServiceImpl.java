@@ -2,10 +2,15 @@ package com.panda.mojobs.service.impl;
 
 import com.panda.mojobs.domain.Experience;
 import com.panda.mojobs.domain.Resume;
+import com.panda.mojobs.domain.User;
 import com.panda.mojobs.repository.ResumeRepository;
+import com.panda.mojobs.repository.UserRepository;
 import com.panda.mojobs.repository.search.ResumeSearchRepository;
+import com.panda.mojobs.security.SecurityUtils;
 import com.panda.mojobs.service.ResumeService;
 import com.panda.mojobs.service.data.ResumeData;
+import com.panda.mojobs.service.dto.BasicInformationDTO;
+import com.panda.mojobs.service.dto.ExperienceDTO;
 import com.panda.mojobs.service.dto.ResumeDTO;
 import com.panda.mojobs.service.mapper.BasicInformationMapper;
 import com.panda.mojobs.service.mapper.ExperienceMapper;
@@ -18,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -40,12 +46,15 @@ public class ResumeServiceImpl implements ResumeService {
 
     private final ResumeSearchRepository resumeSearchRepository;
 
-    public ResumeServiceImpl(ResumeRepository resumeRepository, ResumeMapper resumeMapper, BasicInformationMapper basicInformationMapper, ExperienceMapper experienceMapper, ResumeSearchRepository resumeSearchRepository) {
+    private final UserRepository userRepository;
+
+    public ResumeServiceImpl(ResumeRepository resumeRepository, ResumeMapper resumeMapper, BasicInformationMapper basicInformationMapper, ExperienceMapper experienceMapper, ResumeSearchRepository resumeSearchRepository, UserRepository userRepository) {
         this.resumeRepository = resumeRepository;
         this.resumeMapper = resumeMapper;
         this.basicInformationMapper = basicInformationMapper;
         this.experienceMapper = experienceMapper;
         this.resumeSearchRepository = resumeSearchRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -132,16 +141,43 @@ public class ResumeServiceImpl implements ResumeService {
         List<Resume> resumeList = resumeRepository.findByUserIsCurrentUser();
         List<ResumeData> resumeDataList = new ArrayList<>();
         if (resumeList != null && resumeList.size() > 0) {
-            for (Resume resume : resumeList) {
-                ResumeData resumeData = new ResumeData();
-                resumeData.setResumeDTO(resumeMapper.toDto(resume));
-                resumeData.setBasicInformationDTO(basicInformationMapper.toDto(resume.getBasicInformation()));
-                List<Experience> experienceList = new ArrayList<>();
-                experienceList.addAll(resume.getExperiencies());
-                resumeData.setExperienceDTOList(experienceMapper.toDto(experienceList));
-                resumeDataList.add(resumeData);
-            }
+            return resumeList.stream().map(this::toResumeData).collect(Collectors.toList());
         }
         return resumeDataList;
+    }
+
+    @Override
+    public ResumeData toResumeData(Resume resume) {
+        ResumeData resumeData = new ResumeData();
+        resumeData.setResumeDTO(resumeMapper.toDto(resume));
+        BasicInformationDTO basicInformationDTO = basicInformationMapper.toDto(resume.getBasicInformation());
+        resumeData.setBasicInformationDTO(basicInformationDTO == null ? new BasicInformationDTO() : basicInformationDTO);
+        List<Experience> experienceList = new ArrayList<>();
+        experienceList.addAll(resume.getExperiencies());
+        List<ExperienceDTO> experienceDTOList = experienceMapper.toDto(experienceList);
+        if (experienceDTOList == null) {
+            experienceDTOList = new ArrayList<>();
+        }
+        resumeData.setExperienceDTOList(experienceDTOList);
+        return resumeData;
+    }
+
+    @Override
+    public ResumeData toResumeData(ResumeDTO resumeDTO) {
+        Resume resume = resumeRepository.findOne(resumeDTO.getId());
+        return toResumeData(resume);
+    }
+
+    @Override
+    public ResumeDTO createByLoginUser() {
+        Optional<User> oneByLogin = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+        if (oneByLogin.isPresent()) {
+            User user = oneByLogin.get();
+            ResumeDTO resumeDTO = new ResumeDTO();
+            resumeDTO.setUserId(user.getId());
+            resumeDTO.setName(user.getLogin());
+            return save(resumeDTO);
+        }
+        return null;
     }
 }
