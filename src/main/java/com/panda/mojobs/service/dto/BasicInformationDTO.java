@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+import javax.persistence.Lob;
 import com.panda.mojobs.domain.enumeration.Gender;
 import com.panda.mojobs.domain.enumeration.EducationLevel;
 
@@ -50,6 +51,11 @@ public class BasicInformationDTO implements Serializable {
 
     @Size(max = 255)
     private String wechat;
+
+    @Size(max = 5000000)
+    @Lob
+    private byte[] photo;
+    private String photoContentType;
 
     public Long getId() {
         return id;
@@ -139,6 +145,22 @@ public class BasicInformationDTO implements Serializable {
         this.wechat = wechat;
     }
 
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public String getPhotoContentType() {
+        return photoContentType;
+    }
+
+    public void setPhotoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -174,6 +196,7 @@ public class BasicInformationDTO implements Serializable {
             ", skype='" + getSkype() + "'" +
             ", phone='" + getPhone() + "'" +
             ", wechat='" + getWechat() + "'" +
+            ", photo='" + getPhoto() + "'" +
             "}";
     }
 }
