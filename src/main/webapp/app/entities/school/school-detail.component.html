@@ -8,15 +8,6 @@
         <dd>
             <span>{{school.name}}</span>
         </dd>
-        <dt><span>Logo</span></dt>
-        <dd>
-            <div *ngIf="school.logo">
-                <a (click)="openFile(school.logoContentType, school.logo)">
-                    <img [src]="'data:' + school.logoContentType + ';base64,' + school.logo" style="max-width: 100%;" alt="school image"/>
-                </a>
-                {{school.logoContentType}}, {{byteSize(school.logo)}}
-            </div>
-        </dd>
         <dt><span>Level</span></dt>
         <dd>
             <span>{{school.level}}</span>
@@ -29,6 +20,12 @@
         <dd>
             <div *ngIf="school.addressId">
                 <a [routerLink]="['/address', school.addressId]">{{school.addressName}}</a>
+            </div>
+        </dd>
+        <dt><span>Image</span></dt>
+        <dd>
+            <div *ngIf="school.imageId">
+                <a [routerLink]="['/image', school.imageId]">{{school.imageId}}</a>
             </div>
         </dd>
     </dl>

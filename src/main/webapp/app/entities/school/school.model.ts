@@ -17,11 +17,10 @@ export class School implements BaseEntity {
     constructor(
         public id?: number,
         public name?: string,
-        public logoContentType?: string,
-        public logo?: any,
         public level?: SchoolLevel,
         public schoolType?: SchoolType,
         public addressId?: number,
+        public imageId?: number,
         public jobs?: BaseEntity[],
     ) {
     }

@@ -14,6 +14,7 @@ import {
     ResumeDeleteDialogComponent,
     resumeRoute,
     resumePopupRoute,
+    ResumeResolvePagingParams,
 } from './';
 
 const ENTITY_STATES = [
@@ -45,6 +46,7 @@ const ENTITY_STATES = [
     providers: [
         ResumeService,
         ResumePopupService,
+        ResumeResolvePagingParams,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

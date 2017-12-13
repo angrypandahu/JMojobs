@@ -1,6 +1,8 @@
 package com.panda.mojobs.service;
 
 import com.panda.mojobs.service.dto.BasicInformationDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 /**
@@ -19,9 +21,10 @@ public interface BasicInformationService {
     /**
      *  Get all the basicInformations.
      *
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
-    List<BasicInformationDTO> findAll();
+    Page<BasicInformationDTO> findAll(Pageable pageable);
     /**
      *  Get all the BasicInformationDTO where Resume is null.
      *
@@ -49,7 +52,8 @@ public interface BasicInformationService {
      *
      *  @param query the query of the search
      *  
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
-    List<BasicInformationDTO> search(String query);
+    Page<BasicInformationDTO> search(String query, Pageable pageable);
 }

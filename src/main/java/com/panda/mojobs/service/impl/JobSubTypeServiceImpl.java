@@ -8,13 +8,11 @@ import com.panda.mojobs.service.dto.JobSubTypeDTO;
 import com.panda.mojobs.service.mapper.JobSubTypeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -58,15 +56,15 @@ public class JobSubTypeServiceImpl implements JobSubTypeService{
     /**
      *  Get all the jobSubTypes.
      *
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
-    public List<JobSubTypeDTO> findAll() {
+    public Page<JobSubTypeDTO> findAll(Pageable pageable) {
         log.debug("Request to get all JobSubTypes");
-        return jobSubTypeRepository.findAll().stream()
-            .map(jobSubTypeMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+        return jobSubTypeRepository.findAll(pageable)
+            .map(jobSubTypeMapper::toDto);
     }
 
     /**
@@ -99,15 +97,14 @@ public class JobSubTypeServiceImpl implements JobSubTypeService{
      * Search for the jobSubType corresponding to the query.
      *
      *  @param query the query of the search
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
-    public List<JobSubTypeDTO> search(String query) {
-        log.debug("Request to search JobSubTypes for query {}", query);
-        return StreamSupport
-            .stream(jobSubTypeSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .map(jobSubTypeMapper::toDto)
-            .collect(Collectors.toList());
+    public Page<JobSubTypeDTO> search(String query, Pageable pageable) {
+        log.debug("Request to search for a page of JobSubTypes for query {}", query);
+        Page<JobSubType> result = jobSubTypeSearchRepository.search(queryStringQuery(query), pageable);
+        return result.map(jobSubTypeMapper::toDto);
     }
 }

@@ -3,11 +3,9 @@ package com.panda.mojobs.domain;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.security.crypto.codec.Base64;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -36,17 +34,6 @@ public class Image implements Serializable {
     private String imgContentType;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
-    @Transient
-    private String imgBase64;
-
-    public String getImgBase64() {
-        if (img != null) {
-            return "data:" + imgContentType + ";base64," + new String(Base64.encode(img));
-        }
-        return null;
-    }
-
-
     public Long getId() {
         return id;
     }

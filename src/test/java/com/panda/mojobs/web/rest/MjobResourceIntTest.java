@@ -3,6 +3,7 @@ package com.panda.mojobs.web.rest;
 import com.panda.mojobs.JmojobsApp;
 
 import com.panda.mojobs.domain.Mjob;
+import com.panda.mojobs.domain.Address;
 import com.panda.mojobs.domain.School;
 import com.panda.mojobs.domain.JobSubType;
 import com.panda.mojobs.repository.MjobRepository;
@@ -11,6 +12,8 @@ import com.panda.mojobs.repository.search.MjobSearchRepository;
 import com.panda.mojobs.service.dto.MjobDTO;
 import com.panda.mojobs.service.mapper.MjobMapper;
 import com.panda.mojobs.web.rest.errors.ExceptionTranslator;
+import com.panda.mojobs.service.dto.MjobCriteria;
+import com.panda.mojobs.service.MjobQueryService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -68,6 +71,9 @@ public class MjobResourceIntTest {
     private MjobSearchRepository mjobSearchRepository;
 
     @Autowired
+    private MjobQueryService mjobQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -86,7 +92,7 @@ public class MjobResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final MjobResource mjobResource = new MjobResource(mjobService);
+        final MjobResource mjobResource = new MjobResource(mjobService, mjobQueryService);
         this.restMjobMockMvc = MockMvcBuilders.standaloneSetup(mjobResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -257,6 +263,165 @@ public class MjobResourceIntTest {
             .andExpect(jsonPath("$.jobDescription").value(DEFAULT_JOB_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()));
     }
+
+    @Test
+    @Transactional
+    public void getAllMjobsByNameIsEqualToSomething() throws Exception {
+        // Initialize the database
+        mjobRepository.saveAndFlush(mjob);
+
+        // Get all the mjobList where name equals to DEFAULT_NAME
+        defaultMjobShouldBeFound("name.equals=" + DEFAULT_NAME);
+
+        // Get all the mjobList where name equals to UPDATED_NAME
+        defaultMjobShouldNotBeFound("name.equals=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMjobsByNameIsInShouldWork() throws Exception {
+        // Initialize the database
+        mjobRepository.saveAndFlush(mjob);
+
+        // Get all the mjobList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultMjobShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
+
+        // Get all the mjobList where name equals to UPDATED_NAME
+        defaultMjobShouldNotBeFound("name.in=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMjobsByNameIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        mjobRepository.saveAndFlush(mjob);
+
+        // Get all the mjobList where name is not null
+        defaultMjobShouldBeFound("name.specified=true");
+
+        // Get all the mjobList where name is null
+        defaultMjobShouldNotBeFound("name.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllMjobsByTypeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        mjobRepository.saveAndFlush(mjob);
+
+        // Get all the mjobList where type equals to DEFAULT_TYPE
+        defaultMjobShouldBeFound("type.equals=" + DEFAULT_TYPE);
+
+        // Get all the mjobList where type equals to UPDATED_TYPE
+        defaultMjobShouldNotBeFound("type.equals=" + UPDATED_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMjobsByTypeIsInShouldWork() throws Exception {
+        // Initialize the database
+        mjobRepository.saveAndFlush(mjob);
+
+        // Get all the mjobList where type in DEFAULT_TYPE or UPDATED_TYPE
+        defaultMjobShouldBeFound("type.in=" + DEFAULT_TYPE + "," + UPDATED_TYPE);
+
+        // Get all the mjobList where type equals to UPDATED_TYPE
+        defaultMjobShouldNotBeFound("type.in=" + UPDATED_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMjobsByTypeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        mjobRepository.saveAndFlush(mjob);
+
+        // Get all the mjobList where type is not null
+        defaultMjobShouldBeFound("type.specified=true");
+
+        // Get all the mjobList where type is null
+        defaultMjobShouldNotBeFound("type.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllMjobsByAddressIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Address address = AddressResourceIntTest.createEntity(em);
+        em.persist(address);
+        em.flush();
+        mjob.setAddress(address);
+        mjobRepository.saveAndFlush(mjob);
+        Long addressId = address.getId();
+
+        // Get all the mjobList where address equals to addressId
+        defaultMjobShouldBeFound("addressId.equals=" + addressId);
+
+        // Get all the mjobList where address equals to addressId + 1
+        defaultMjobShouldNotBeFound("addressId.equals=" + (addressId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllMjobsBySchoolIsEqualToSomething() throws Exception {
+        // Initialize the database
+        School school = SchoolResourceIntTest.createEntity(em);
+        em.persist(school);
+        em.flush();
+        mjob.setSchool(school);
+        mjobRepository.saveAndFlush(mjob);
+        Long schoolId = school.getId();
+
+        // Get all the mjobList where school equals to schoolId
+        defaultMjobShouldBeFound("schoolId.equals=" + schoolId);
+
+        // Get all the mjobList where school equals to schoolId + 1
+        defaultMjobShouldNotBeFound("schoolId.equals=" + (schoolId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllMjobsBySubTypeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        JobSubType subType = JobSubTypeResourceIntTest.createEntity(em);
+        em.persist(subType);
+        em.flush();
+        mjob.setSubType(subType);
+        mjobRepository.saveAndFlush(mjob);
+        Long subTypeId = subType.getId();
+
+        // Get all the mjobList where subType equals to subTypeId
+        defaultMjobShouldBeFound("subTypeId.equals=" + subTypeId);
+
+        // Get all the mjobList where subType equals to subTypeId + 1
+        defaultMjobShouldNotBeFound("subTypeId.equals=" + (subTypeId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultMjobShouldBeFound(String filter) throws Exception {
+        restMjobMockMvc.perform(get("/api/mjobs?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(mjob.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].jobDescription").value(hasItem(DEFAULT_JOB_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultMjobShouldNotBeFound(String filter) throws Exception {
+        restMjobMockMvc.perform(get("/api/mjobs?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+    }
+
 
     @Test
     @Transactional

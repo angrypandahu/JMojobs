@@ -28,23 +28,6 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="form-control-label" for="field_logo">Logo</label>
-            <div>
-                <img [src]="'data:' + school.logoContentType + ';base64,' + school.logo" style="max-height: 100px;" *ngIf="school.logo" alt="school image"/>
-                <div *ngIf="school.logo" class="form-text text-danger clearfix">
-                    <span class="pull-left">{{school.logoContentType}}, {{byteSize(school.logo)}}</span>
-                    <button type="button" (click)="clearInputImage('logo', 'logoContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
-                        <span class="fa fa-times"></span>
-                    </button>
-                </div>
-                <input type="file" id="file_logo" (change)="setFileData($event, school, 'logo', true)" accept="image/*"/>
-            </div>
-            <input type="hidden" class="form-control" name="logo" id="field_logo"
-                [(ngModel)]="school.logo"  />
-            <input type="hidden" class="form-control" name="logoContentType" id="field_logoContentType"
-                [(ngModel)]="school.logoContentType" />
-        </div>
-        <div class="form-group">
             <label class="form-control-label" for="field_level">Level</label>
             <select class="form-control" name="level" [(ngModel)]="school.level" id="field_level"  required>
                 <option value="KINDERGARTEN">KINDERGARTEN</option>
@@ -79,6 +62,13 @@
             <select class="form-control" id="field_address" name="address" [(ngModel)]="school.addressId">
                 <option [ngValue]="null"></option>
                 <option [ngValue]="addressOption.id" *ngFor="let addressOption of addresses; trackBy: trackAddressById">{{addressOption.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_image">Image</label>
+            <select class="form-control" id="field_image" name="image" [(ngModel)]="school.imageId">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="imageOption.id" *ngFor="let imageOption of images; trackBy: trackImageById">{{imageOption.id}}</option>
             </select>
         </div>
     </div>

@@ -4,10 +4,18 @@ import com.codahale.metrics.annotation.Timed;
 import com.panda.mojobs.service.BasicInformationService;
 import com.panda.mojobs.web.rest.errors.BadRequestAlertException;
 import com.panda.mojobs.web.rest.util.HeaderUtil;
+import com.panda.mojobs.web.rest.util.PaginationUtil;
 import com.panda.mojobs.service.dto.BasicInformationDTO;
+import com.panda.mojobs.service.dto.BasicInformationCriteria;
+import com.panda.mojobs.service.BasicInformationQueryService;
+import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,8 +42,11 @@ public class BasicInformationResource {
 
     private final BasicInformationService basicInformationService;
 
-    public BasicInformationResource(BasicInformationService basicInformationService) {
+    private final BasicInformationQueryService basicInformationQueryService;
+
+    public BasicInformationResource(BasicInformationService basicInformationService, BasicInformationQueryService basicInformationQueryService) {
         this.basicInformationService = basicInformationService;
+        this.basicInformationQueryService = basicInformationQueryService;
     }
 
     /**
@@ -83,19 +94,18 @@ public class BasicInformationResource {
     /**
      * GET  /basic-informations : get all the basicInformations.
      *
-     * @param filter the filter of the request
+     * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of basicInformations in body
      */
     @GetMapping("/basic-informations")
     @Timed
-    public List<BasicInformationDTO> getAllBasicInformations(@RequestParam(required = false) String filter) {
-        if ("resume-is-null".equals(filter)) {
-            log.debug("REST request to get all BasicInformations where resume is null");
-            return basicInformationService.findAllWhereResumeIsNull();
-        }
-        log.debug("REST request to get all BasicInformations");
-        return basicInformationService.findAll();
-        }
+    public ResponseEntity<List<BasicInformationDTO>> getAllBasicInformations(BasicInformationCriteria criteria,@ApiParam Pageable pageable) {
+        log.debug("REST request to get BasicInformations by criteria: {}", criteria);
+        Page<BasicInformationDTO> page = basicInformationQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/basic-informations");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 
     /**
      * GET  /basic-informations/:id : get the "id" basicInformation.
@@ -130,13 +140,16 @@ public class BasicInformationResource {
      * to the query.
      *
      * @param query the query of the basicInformation search
+     * @param pageable the pagination information
      * @return the result of the search
      */
     @GetMapping("/_search/basic-informations")
     @Timed
-    public List<BasicInformationDTO> searchBasicInformations(@RequestParam String query) {
-        log.debug("REST request to search BasicInformations for query {}", query);
-        return basicInformationService.search(query);
+    public ResponseEntity<List<BasicInformationDTO>> searchBasicInformations(@RequestParam String query, @ApiParam Pageable pageable) {
+        log.debug("REST request to search for a page of BasicInformations for query {}", query);
+        Page<BasicInformationDTO> page = basicInformationService.search(query, pageable);
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/basic-informations");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
 }

@@ -6,6 +6,8 @@ import com.panda.mojobs.web.rest.errors.BadRequestAlertException;
 import com.panda.mojobs.web.rest.util.HeaderUtil;
 import com.panda.mojobs.web.rest.util.PaginationUtil;
 import com.panda.mojobs.service.dto.ChatMessageDTO;
+import com.panda.mojobs.service.dto.ChatMessageCriteria;
+import com.panda.mojobs.service.ChatMessageQueryService;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -40,8 +42,11 @@ public class ChatMessageResource {
 
     private final ChatMessageService chatMessageService;
 
-    public ChatMessageResource(ChatMessageService chatMessageService) {
+    private final ChatMessageQueryService chatMessageQueryService;
+
+    public ChatMessageResource(ChatMessageService chatMessageService, ChatMessageQueryService chatMessageQueryService) {
         this.chatMessageService = chatMessageService;
+        this.chatMessageQueryService = chatMessageQueryService;
     }
 
     /**
@@ -90,13 +95,14 @@ public class ChatMessageResource {
      * GET  /chat-messages : get all the chatMessages.
      *
      * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of chatMessages in body
      */
     @GetMapping("/chat-messages")
     @Timed
-    public ResponseEntity<List<ChatMessageDTO>> getAllChatMessages(@ApiParam Pageable pageable) {
-        log.debug("REST request to get a page of ChatMessages");
-        Page<ChatMessageDTO> page = chatMessageService.findAll(pageable);
+    public ResponseEntity<List<ChatMessageDTO>> getAllChatMessages(ChatMessageCriteria criteria,@ApiParam Pageable pageable) {
+        log.debug("REST request to get ChatMessages by criteria: {}", criteria);
+        Page<ChatMessageDTO> page = chatMessageQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/chat-messages");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

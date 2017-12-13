@@ -5,6 +5,8 @@ import com.panda.mojobs.service.MLanguageService;
 import com.panda.mojobs.web.rest.errors.BadRequestAlertException;
 import com.panda.mojobs.web.rest.util.HeaderUtil;
 import com.panda.mojobs.service.dto.MLanguageDTO;
+import com.panda.mojobs.service.dto.MLanguageCriteria;
+import com.panda.mojobs.service.MLanguageQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,8 +36,11 @@ public class MLanguageResource {
 
     private final MLanguageService mLanguageService;
 
-    public MLanguageResource(MLanguageService mLanguageService) {
+    private final MLanguageQueryService mLanguageQueryService;
+
+    public MLanguageResource(MLanguageService mLanguageService, MLanguageQueryService mLanguageQueryService) {
         this.mLanguageService = mLanguageService;
+        this.mLanguageQueryService = mLanguageQueryService;
     }
 
     /**
@@ -83,14 +88,16 @@ public class MLanguageResource {
     /**
      * GET  /m-languages : get all the mLanguages.
      *
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of mLanguages in body
      */
     @GetMapping("/m-languages")
     @Timed
-    public List<MLanguageDTO> getAllMLanguages() {
-        log.debug("REST request to get all MLanguages");
-        return mLanguageService.findAll();
-        }
+    public ResponseEntity<List<MLanguageDTO>> getAllMLanguages(MLanguageCriteria criteria) {
+        log.debug("REST request to get MLanguages by criteria: {}", criteria);
+        List<MLanguageDTO> entityList = mLanguageQueryService.findByCriteria(criteria);
+        return ResponseEntity.ok().body(entityList);
+    }
 
     /**
      * GET  /m-languages/:id : get the "id" mLanguage.

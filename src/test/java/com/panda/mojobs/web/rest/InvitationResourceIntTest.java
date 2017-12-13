@@ -11,6 +11,8 @@ import com.panda.mojobs.repository.search.InvitationSearchRepository;
 import com.panda.mojobs.service.dto.InvitationDTO;
 import com.panda.mojobs.service.mapper.InvitationMapper;
 import com.panda.mojobs.web.rest.errors.ExceptionTranslator;
+import com.panda.mojobs.service.dto.InvitationCriteria;
+import com.panda.mojobs.service.InvitationQueryService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -71,6 +73,9 @@ public class InvitationResourceIntTest {
     private InvitationSearchRepository invitationSearchRepository;
 
     @Autowired
+    private InvitationQueryService invitationQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -89,7 +94,7 @@ public class InvitationResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final InvitationResource invitationResource = new InvitationResource(invitationService);
+        final InvitationResource invitationResource = new InvitationResource(invitationService, invitationQueryService);
         this.restInvitationMockMvc = MockMvcBuilders.standaloneSetup(invitationResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -283,6 +288,252 @@ public class InvitationResourceIntTest {
             .andExpect(jsonPath("$.fromDate").value(DEFAULT_FROM_DATE.toString()))
             .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()));
     }
+
+    @Test
+    @Transactional
+    public void getAllInvitationsByNameIsEqualToSomething() throws Exception {
+        // Initialize the database
+        invitationRepository.saveAndFlush(invitation);
+
+        // Get all the invitationList where name equals to DEFAULT_NAME
+        defaultInvitationShouldBeFound("name.equals=" + DEFAULT_NAME);
+
+        // Get all the invitationList where name equals to UPDATED_NAME
+        defaultInvitationShouldNotBeFound("name.equals=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllInvitationsByNameIsInShouldWork() throws Exception {
+        // Initialize the database
+        invitationRepository.saveAndFlush(invitation);
+
+        // Get all the invitationList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultInvitationShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
+
+        // Get all the invitationList where name equals to UPDATED_NAME
+        defaultInvitationShouldNotBeFound("name.in=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllInvitationsByNameIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        invitationRepository.saveAndFlush(invitation);
+
+        // Get all the invitationList where name is not null
+        defaultInvitationShouldBeFound("name.specified=true");
+
+        // Get all the invitationList where name is null
+        defaultInvitationShouldNotBeFound("name.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllInvitationsBySubjectIsEqualToSomething() throws Exception {
+        // Initialize the database
+        invitationRepository.saveAndFlush(invitation);
+
+        // Get all the invitationList where subject equals to DEFAULT_SUBJECT
+        defaultInvitationShouldBeFound("subject.equals=" + DEFAULT_SUBJECT);
+
+        // Get all the invitationList where subject equals to UPDATED_SUBJECT
+        defaultInvitationShouldNotBeFound("subject.equals=" + UPDATED_SUBJECT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllInvitationsBySubjectIsInShouldWork() throws Exception {
+        // Initialize the database
+        invitationRepository.saveAndFlush(invitation);
+
+        // Get all the invitationList where subject in DEFAULT_SUBJECT or UPDATED_SUBJECT
+        defaultInvitationShouldBeFound("subject.in=" + DEFAULT_SUBJECT + "," + UPDATED_SUBJECT);
+
+        // Get all the invitationList where subject equals to UPDATED_SUBJECT
+        defaultInvitationShouldNotBeFound("subject.in=" + UPDATED_SUBJECT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllInvitationsBySubjectIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        invitationRepository.saveAndFlush(invitation);
+
+        // Get all the invitationList where subject is not null
+        defaultInvitationShouldBeFound("subject.specified=true");
+
+        // Get all the invitationList where subject is null
+        defaultInvitationShouldNotBeFound("subject.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllInvitationsByFromDateIsEqualToSomething() throws Exception {
+        // Initialize the database
+        invitationRepository.saveAndFlush(invitation);
+
+        // Get all the invitationList where fromDate equals to DEFAULT_FROM_DATE
+        defaultInvitationShouldBeFound("fromDate.equals=" + DEFAULT_FROM_DATE);
+
+        // Get all the invitationList where fromDate equals to UPDATED_FROM_DATE
+        defaultInvitationShouldNotBeFound("fromDate.equals=" + UPDATED_FROM_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllInvitationsByFromDateIsInShouldWork() throws Exception {
+        // Initialize the database
+        invitationRepository.saveAndFlush(invitation);
+
+        // Get all the invitationList where fromDate in DEFAULT_FROM_DATE or UPDATED_FROM_DATE
+        defaultInvitationShouldBeFound("fromDate.in=" + DEFAULT_FROM_DATE + "," + UPDATED_FROM_DATE);
+
+        // Get all the invitationList where fromDate equals to UPDATED_FROM_DATE
+        defaultInvitationShouldNotBeFound("fromDate.in=" + UPDATED_FROM_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllInvitationsByFromDateIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        invitationRepository.saveAndFlush(invitation);
+
+        // Get all the invitationList where fromDate is not null
+        defaultInvitationShouldBeFound("fromDate.specified=true");
+
+        // Get all the invitationList where fromDate is null
+        defaultInvitationShouldNotBeFound("fromDate.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllInvitationsByFromDateIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        invitationRepository.saveAndFlush(invitation);
+
+        // Get all the invitationList where fromDate greater than or equals to DEFAULT_FROM_DATE
+        defaultInvitationShouldBeFound("fromDate.greaterOrEqualThan=" + DEFAULT_FROM_DATE);
+
+        // Get all the invitationList where fromDate greater than or equals to UPDATED_FROM_DATE
+        defaultInvitationShouldNotBeFound("fromDate.greaterOrEqualThan=" + UPDATED_FROM_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllInvitationsByFromDateIsLessThanSomething() throws Exception {
+        // Initialize the database
+        invitationRepository.saveAndFlush(invitation);
+
+        // Get all the invitationList where fromDate less than or equals to DEFAULT_FROM_DATE
+        defaultInvitationShouldNotBeFound("fromDate.lessThan=" + DEFAULT_FROM_DATE);
+
+        // Get all the invitationList where fromDate less than or equals to UPDATED_FROM_DATE
+        defaultInvitationShouldBeFound("fromDate.lessThan=" + UPDATED_FROM_DATE);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllInvitationsByContentIsEqualToSomething() throws Exception {
+        // Initialize the database
+        invitationRepository.saveAndFlush(invitation);
+
+        // Get all the invitationList where content equals to DEFAULT_CONTENT
+        defaultInvitationShouldBeFound("content.equals=" + DEFAULT_CONTENT);
+
+        // Get all the invitationList where content equals to UPDATED_CONTENT
+        defaultInvitationShouldNotBeFound("content.equals=" + UPDATED_CONTENT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllInvitationsByContentIsInShouldWork() throws Exception {
+        // Initialize the database
+        invitationRepository.saveAndFlush(invitation);
+
+        // Get all the invitationList where content in DEFAULT_CONTENT or UPDATED_CONTENT
+        defaultInvitationShouldBeFound("content.in=" + DEFAULT_CONTENT + "," + UPDATED_CONTENT);
+
+        // Get all the invitationList where content equals to UPDATED_CONTENT
+        defaultInvitationShouldNotBeFound("content.in=" + UPDATED_CONTENT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllInvitationsByContentIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        invitationRepository.saveAndFlush(invitation);
+
+        // Get all the invitationList where content is not null
+        defaultInvitationShouldBeFound("content.specified=true");
+
+        // Get all the invitationList where content is null
+        defaultInvitationShouldNotBeFound("content.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllInvitationsBySchoolIsEqualToSomething() throws Exception {
+        // Initialize the database
+        School school = SchoolResourceIntTest.createEntity(em);
+        em.persist(school);
+        em.flush();
+        invitation.setSchool(school);
+        invitationRepository.saveAndFlush(invitation);
+        Long schoolId = school.getId();
+
+        // Get all the invitationList where school equals to schoolId
+        defaultInvitationShouldBeFound("schoolId.equals=" + schoolId);
+
+        // Get all the invitationList where school equals to schoolId + 1
+        defaultInvitationShouldNotBeFound("schoolId.equals=" + (schoolId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllInvitationsByUserIsEqualToSomething() throws Exception {
+        // Initialize the database
+        User user = UserResourceIntTest.createEntity(em);
+        em.persist(user);
+        em.flush();
+        invitation.setUser(user);
+        invitationRepository.saveAndFlush(invitation);
+        Long userId = user.getId();
+
+        // Get all the invitationList where user equals to userId
+        defaultInvitationShouldBeFound("userId.equals=" + userId);
+
+        // Get all the invitationList where user equals to userId + 1
+        defaultInvitationShouldNotBeFound("userId.equals=" + (userId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultInvitationShouldBeFound(String filter) throws Exception {
+        restInvitationMockMvc.perform(get("/api/invitations?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(invitation.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].subject").value(hasItem(DEFAULT_SUBJECT.toString())))
+            .andExpect(jsonPath("$.[*].fromDate").value(hasItem(DEFAULT_FROM_DATE.toString())))
+            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultInvitationShouldNotBeFound(String filter) throws Exception {
+        restInvitationMockMvc.perform(get("/api/invitations?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+    }
+
 
     @Test
     @Transactional

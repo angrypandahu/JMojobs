@@ -13,6 +13,7 @@ import {
     ExperienceDeleteDialogComponent,
     experienceRoute,
     experiencePopupRoute,
+    ExperienceResolvePagingParams,
 } from './';
 
 const ENTITY_STATES = [
@@ -43,6 +44,7 @@ const ENTITY_STATES = [
     providers: [
         ExperienceService,
         ExperiencePopupService,
+        ExperienceResolvePagingParams,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

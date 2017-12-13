@@ -11,6 +11,6 @@ import org.springframework.data.jpa.repository.*;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface EducationBackgroundRepository extends JpaRepository<EducationBackground, Long> {
+public interface EducationBackgroundRepository extends JpaRepository<EducationBackground, Long>, JpaSpecificationExecutor<EducationBackground> {
 
 }

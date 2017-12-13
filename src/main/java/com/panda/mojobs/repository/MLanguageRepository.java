@@ -11,6 +11,6 @@ import org.springframework.data.jpa.repository.*;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface MLanguageRepository extends JpaRepository<MLanguage, Long> {
+public interface MLanguageRepository extends JpaRepository<MLanguage, Long>, JpaSpecificationExecutor<MLanguage> {
 
 }

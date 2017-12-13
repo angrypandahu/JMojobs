@@ -9,10 +9,29 @@ import { BasicInformationDetailComponent } from './basic-information-detail.comp
 import { BasicInformationPopupComponent } from './basic-information-dialog.component';
 import { BasicInformationDeletePopupComponent } from './basic-information-delete-dialog.component';
 
+@Injectable()
+export class BasicInformationResolvePagingParams implements Resolve<any> {
+
+    constructor(private paginationUtil: JhiPaginationUtil) {}
+
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        const page = route.queryParams['page'] ? route.queryParams['page'] : '1';
+        const sort = route.queryParams['sort'] ? route.queryParams['sort'] : 'id,asc';
+        return {
+            page: this.paginationUtil.parsePage(page),
+            predicate: this.paginationUtil.parsePredicate(sort),
+            ascending: this.paginationUtil.parseAscending(sort)
+      };
+    }
+}
+
 export const basicInformationRoute: Routes = [
     {
         path: 'basic-information',
         component: BasicInformationComponent,
+        resolve: {
+            'pagingParams': BasicInformationResolvePagingParams
+        },
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'BasicInformations'

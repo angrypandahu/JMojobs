@@ -1,7 +1,8 @@
 package com.panda.mojobs.service;
 
 import com.panda.mojobs.service.dto.ExperienceDTO;
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Service Interface for managing Experience.
@@ -19,9 +20,10 @@ public interface ExperienceService {
     /**
      *  Get all the experiences.
      *
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
-    List<ExperienceDTO> findAll();
+    Page<ExperienceDTO> findAll(Pageable pageable);
 
     /**
      *  Get the "id" experience.
@@ -43,7 +45,8 @@ public interface ExperienceService {
      *
      *  @param query the query of the search
      *  
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
-    List<ExperienceDTO> search(String query);
+    Page<ExperienceDTO> search(String query, Pageable pageable);
 }

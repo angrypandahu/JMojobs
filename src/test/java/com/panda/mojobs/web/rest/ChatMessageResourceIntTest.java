@@ -11,6 +11,8 @@ import com.panda.mojobs.repository.search.ChatMessageSearchRepository;
 import com.panda.mojobs.service.dto.ChatMessageDTO;
 import com.panda.mojobs.service.mapper.ChatMessageMapper;
 import com.panda.mojobs.web.rest.errors.ExceptionTranslator;
+import com.panda.mojobs.service.dto.ChatMessageCriteria;
+import com.panda.mojobs.service.ChatMessageQueryService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -65,6 +67,9 @@ public class ChatMessageResourceIntTest {
     private ChatMessageSearchRepository chatMessageSearchRepository;
 
     @Autowired
+    private ChatMessageQueryService chatMessageQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -83,7 +88,7 @@ public class ChatMessageResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ChatMessageResource chatMessageResource = new ChatMessageResource(chatMessageService);
+        final ChatMessageResource chatMessageResource = new ChatMessageResource(chatMessageService, chatMessageQueryService);
         this.restChatMessageMockMvc = MockMvcBuilders.standaloneSetup(chatMessageResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -231,6 +236,172 @@ public class ChatMessageResourceIntTest {
             .andExpect(jsonPath("$.sendTime").value(DEFAULT_SEND_TIME.toString()))
             .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()));
     }
+
+    @Test
+    @Transactional
+    public void getAllChatMessagesBySendTimeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        chatMessageRepository.saveAndFlush(chatMessage);
+
+        // Get all the chatMessageList where sendTime equals to DEFAULT_SEND_TIME
+        defaultChatMessageShouldBeFound("sendTime.equals=" + DEFAULT_SEND_TIME);
+
+        // Get all the chatMessageList where sendTime equals to UPDATED_SEND_TIME
+        defaultChatMessageShouldNotBeFound("sendTime.equals=" + UPDATED_SEND_TIME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllChatMessagesBySendTimeIsInShouldWork() throws Exception {
+        // Initialize the database
+        chatMessageRepository.saveAndFlush(chatMessage);
+
+        // Get all the chatMessageList where sendTime in DEFAULT_SEND_TIME or UPDATED_SEND_TIME
+        defaultChatMessageShouldBeFound("sendTime.in=" + DEFAULT_SEND_TIME + "," + UPDATED_SEND_TIME);
+
+        // Get all the chatMessageList where sendTime equals to UPDATED_SEND_TIME
+        defaultChatMessageShouldNotBeFound("sendTime.in=" + UPDATED_SEND_TIME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllChatMessagesBySendTimeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        chatMessageRepository.saveAndFlush(chatMessage);
+
+        // Get all the chatMessageList where sendTime is not null
+        defaultChatMessageShouldBeFound("sendTime.specified=true");
+
+        // Get all the chatMessageList where sendTime is null
+        defaultChatMessageShouldNotBeFound("sendTime.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllChatMessagesBySendTimeIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        chatMessageRepository.saveAndFlush(chatMessage);
+
+        // Get all the chatMessageList where sendTime greater than or equals to DEFAULT_SEND_TIME
+        defaultChatMessageShouldBeFound("sendTime.greaterOrEqualThan=" + DEFAULT_SEND_TIME);
+
+        // Get all the chatMessageList where sendTime greater than or equals to UPDATED_SEND_TIME
+        defaultChatMessageShouldNotBeFound("sendTime.greaterOrEqualThan=" + UPDATED_SEND_TIME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllChatMessagesBySendTimeIsLessThanSomething() throws Exception {
+        // Initialize the database
+        chatMessageRepository.saveAndFlush(chatMessage);
+
+        // Get all the chatMessageList where sendTime less than or equals to DEFAULT_SEND_TIME
+        defaultChatMessageShouldNotBeFound("sendTime.lessThan=" + DEFAULT_SEND_TIME);
+
+        // Get all the chatMessageList where sendTime less than or equals to UPDATED_SEND_TIME
+        defaultChatMessageShouldBeFound("sendTime.lessThan=" + UPDATED_SEND_TIME);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllChatMessagesByContentIsEqualToSomething() throws Exception {
+        // Initialize the database
+        chatMessageRepository.saveAndFlush(chatMessage);
+
+        // Get all the chatMessageList where content equals to DEFAULT_CONTENT
+        defaultChatMessageShouldBeFound("content.equals=" + DEFAULT_CONTENT);
+
+        // Get all the chatMessageList where content equals to UPDATED_CONTENT
+        defaultChatMessageShouldNotBeFound("content.equals=" + UPDATED_CONTENT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllChatMessagesByContentIsInShouldWork() throws Exception {
+        // Initialize the database
+        chatMessageRepository.saveAndFlush(chatMessage);
+
+        // Get all the chatMessageList where content in DEFAULT_CONTENT or UPDATED_CONTENT
+        defaultChatMessageShouldBeFound("content.in=" + DEFAULT_CONTENT + "," + UPDATED_CONTENT);
+
+        // Get all the chatMessageList where content equals to UPDATED_CONTENT
+        defaultChatMessageShouldNotBeFound("content.in=" + UPDATED_CONTENT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllChatMessagesByContentIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        chatMessageRepository.saveAndFlush(chatMessage);
+
+        // Get all the chatMessageList where content is not null
+        defaultChatMessageShouldBeFound("content.specified=true");
+
+        // Get all the chatMessageList where content is null
+        defaultChatMessageShouldNotBeFound("content.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllChatMessagesByFromUserIsEqualToSomething() throws Exception {
+        // Initialize the database
+        User fromUser = UserResourceIntTest.createEntity(em);
+        em.persist(fromUser);
+        em.flush();
+        chatMessage.setFromUser(fromUser);
+        chatMessageRepository.saveAndFlush(chatMessage);
+        Long fromUserId = fromUser.getId();
+
+        // Get all the chatMessageList where fromUser equals to fromUserId
+        defaultChatMessageShouldBeFound("fromUserId.equals=" + fromUserId);
+
+        // Get all the chatMessageList where fromUser equals to fromUserId + 1
+        defaultChatMessageShouldNotBeFound("fromUserId.equals=" + (fromUserId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllChatMessagesByToUserIsEqualToSomething() throws Exception {
+        // Initialize the database
+        User toUser = UserResourceIntTest.createEntity(em);
+        em.persist(toUser);
+        em.flush();
+        chatMessage.setToUser(toUser);
+        chatMessageRepository.saveAndFlush(chatMessage);
+        Long toUserId = toUser.getId();
+
+        // Get all the chatMessageList where toUser equals to toUserId
+        defaultChatMessageShouldBeFound("toUserId.equals=" + toUserId);
+
+        // Get all the chatMessageList where toUser equals to toUserId + 1
+        defaultChatMessageShouldNotBeFound("toUserId.equals=" + (toUserId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultChatMessageShouldBeFound(String filter) throws Exception {
+        restChatMessageMockMvc.perform(get("/api/chat-messages?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(chatMessage.getId().intValue())))
+            .andExpect(jsonPath("$.[*].sendTime").value(hasItem(DEFAULT_SEND_TIME.toString())))
+            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultChatMessageShouldNotBeFound(String filter) throws Exception {
+        restChatMessageMockMvc.perform(get("/api/chat-messages?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+    }
+
 
     @Test
     @Transactional

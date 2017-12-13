@@ -1,7 +1,8 @@
 package com.panda.mojobs.service;
 
 import com.panda.mojobs.service.dto.JobSubTypeDTO;
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Service Interface for managing JobSubType.
@@ -19,9 +20,10 @@ public interface JobSubTypeService {
     /**
      *  Get all the jobSubTypes.
      *
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
-    List<JobSubTypeDTO> findAll();
+    Page<JobSubTypeDTO> findAll(Pageable pageable);
 
     /**
      *  Get the "id" jobSubType.
@@ -43,7 +45,8 @@ public interface JobSubTypeService {
      *
      *  @param query the query of the search
      *  
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
-    List<JobSubTypeDTO> search(String query);
+    Page<JobSubTypeDTO> search(String query, Pageable pageable);
 }

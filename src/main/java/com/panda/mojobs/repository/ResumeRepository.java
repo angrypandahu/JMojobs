@@ -11,7 +11,7 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface ResumeRepository extends JpaRepository<Resume, Long> {
+public interface ResumeRepository extends JpaRepository<Resume, Long>, JpaSpecificationExecutor<Resume> {
 
     @Query("select resume from Resume resume where resume.user.login = ?#{principal.username}")
     List<Resume> findByUserIsCurrentUser();

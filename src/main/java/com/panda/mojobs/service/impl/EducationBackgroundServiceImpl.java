@@ -8,13 +8,11 @@ import com.panda.mojobs.service.dto.EducationBackgroundDTO;
 import com.panda.mojobs.service.mapper.EducationBackgroundMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -58,15 +56,15 @@ public class EducationBackgroundServiceImpl implements EducationBackgroundServic
     /**
      *  Get all the educationBackgrounds.
      *
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
-    public List<EducationBackgroundDTO> findAll() {
+    public Page<EducationBackgroundDTO> findAll(Pageable pageable) {
         log.debug("Request to get all EducationBackgrounds");
-        return educationBackgroundRepository.findAll().stream()
-            .map(educationBackgroundMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+        return educationBackgroundRepository.findAll(pageable)
+            .map(educationBackgroundMapper::toDto);
     }
 
     /**
@@ -99,15 +97,14 @@ public class EducationBackgroundServiceImpl implements EducationBackgroundServic
      * Search for the educationBackground corresponding to the query.
      *
      *  @param query the query of the search
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
-    public List<EducationBackgroundDTO> search(String query) {
-        log.debug("Request to search EducationBackgrounds for query {}", query);
-        return StreamSupport
-            .stream(educationBackgroundSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .map(educationBackgroundMapper::toDto)
-            .collect(Collectors.toList());
+    public Page<EducationBackgroundDTO> search(String query, Pageable pageable) {
+        log.debug("Request to search for a page of EducationBackgrounds for query {}", query);
+        Page<EducationBackground> result = educationBackgroundSearchRepository.search(queryStringQuery(query), pageable);
+        return result.map(educationBackgroundMapper::toDto);
     }
 }

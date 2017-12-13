@@ -13,6 +13,7 @@ import {
     BasicInformationDeleteDialogComponent,
     basicInformationRoute,
     basicInformationPopupRoute,
+    BasicInformationResolvePagingParams,
 } from './';
 
 const ENTITY_STATES = [
@@ -43,6 +44,7 @@ const ENTITY_STATES = [
     providers: [
         BasicInformationService,
         BasicInformationPopupService,
+        BasicInformationResolvePagingParams,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

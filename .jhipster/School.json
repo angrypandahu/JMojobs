@@ -10,11 +10,20 @@
             "otherEntityRelationshipName": "school"
         },
         {
+            "relationshipName": "image",
+            "otherEntityName": "image",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "school"
+        },
+        {
             "relationshipType": "one-to-many",
             "relationshipName": "jobs",
             "otherEntityName": "mjob",
             "otherEntityRelationshipName": "school"
         }
+
     ],
     "fields": [
         {
@@ -26,11 +35,7 @@
             ],
             "fieldValidateRulesMaxlength": 100
         },
-        {
-            "fieldName": "logo",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "image"
-        },
+
         {
             "fieldName": "level",
             "fieldType": "SchoolLevel",
@@ -53,5 +58,5 @@
     "dto": "mapstruct",
     "pagination": "pagination",
     "service": "serviceImpl",
-    "jpaMetamodelFiltering": false
+    "jpaMetamodelFiltering": true
 }

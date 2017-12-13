@@ -6,6 +6,8 @@ import com.panda.mojobs.web.rest.errors.BadRequestAlertException;
 import com.panda.mojobs.web.rest.util.HeaderUtil;
 import com.panda.mojobs.web.rest.util.PaginationUtil;
 import com.panda.mojobs.service.dto.ApplyJobResumeDTO;
+import com.panda.mojobs.service.dto.ApplyJobResumeCriteria;
+import com.panda.mojobs.service.ApplyJobResumeQueryService;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -40,8 +42,11 @@ public class ApplyJobResumeResource {
 
     private final ApplyJobResumeService applyJobResumeService;
 
-    public ApplyJobResumeResource(ApplyJobResumeService applyJobResumeService) {
+    private final ApplyJobResumeQueryService applyJobResumeQueryService;
+
+    public ApplyJobResumeResource(ApplyJobResumeService applyJobResumeService, ApplyJobResumeQueryService applyJobResumeQueryService) {
         this.applyJobResumeService = applyJobResumeService;
+        this.applyJobResumeQueryService = applyJobResumeQueryService;
     }
 
     /**
@@ -90,13 +95,14 @@ public class ApplyJobResumeResource {
      * GET  /apply-job-resumes : get all the applyJobResumes.
      *
      * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of applyJobResumes in body
      */
     @GetMapping("/apply-job-resumes")
     @Timed
-    public ResponseEntity<List<ApplyJobResumeDTO>> getAllApplyJobResumes(@ApiParam Pageable pageable) {
-        log.debug("REST request to get a page of ApplyJobResumes");
-        Page<ApplyJobResumeDTO> page = applyJobResumeService.findAll(pageable);
+    public ResponseEntity<List<ApplyJobResumeDTO>> getAllApplyJobResumes(ApplyJobResumeCriteria criteria,@ApiParam Pageable pageable) {
+        log.debug("REST request to get ApplyJobResumes by criteria: {}", criteria);
+        Page<ApplyJobResumeDTO> page = applyJobResumeQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/apply-job-resumes");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

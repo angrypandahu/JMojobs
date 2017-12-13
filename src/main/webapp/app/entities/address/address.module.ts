@@ -13,6 +13,7 @@ import {
     AddressDeleteDialogComponent,
     addressRoute,
     addressPopupRoute,
+    AddressResolvePagingParams,
 } from './';
 
 const ENTITY_STATES = [
@@ -43,6 +44,7 @@ const ENTITY_STATES = [
     providers: [
         AddressService,
         AddressPopupService,
+        AddressResolvePagingParams,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

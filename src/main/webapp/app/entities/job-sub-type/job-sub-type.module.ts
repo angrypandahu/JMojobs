@@ -13,6 +13,7 @@ import {
     JobSubTypeDeleteDialogComponent,
     jobSubTypeRoute,
     jobSubTypePopupRoute,
+    JobSubTypeResolvePagingParams,
 } from './';
 
 const ENTITY_STATES = [
@@ -43,6 +44,7 @@ const ENTITY_STATES = [
     providers: [
         JobSubTypeService,
         JobSubTypePopupService,
+        JobSubTypeResolvePagingParams,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

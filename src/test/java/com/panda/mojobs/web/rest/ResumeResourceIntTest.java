@@ -3,6 +3,11 @@ package com.panda.mojobs.web.rest;
 import com.panda.mojobs.JmojobsApp;
 
 import com.panda.mojobs.domain.Resume;
+import com.panda.mojobs.domain.BasicInformation;
+import com.panda.mojobs.domain.Experience;
+import com.panda.mojobs.domain.EducationBackground;
+import com.panda.mojobs.domain.ProfessionalDevelopment;
+import com.panda.mojobs.domain.MLanguage;
 import com.panda.mojobs.domain.User;
 import com.panda.mojobs.repository.ResumeRepository;
 import com.panda.mojobs.service.ResumeService;
@@ -10,6 +15,8 @@ import com.panda.mojobs.repository.search.ResumeSearchRepository;
 import com.panda.mojobs.service.dto.ResumeDTO;
 import com.panda.mojobs.service.mapper.ResumeMapper;
 import com.panda.mojobs.web.rest.errors.ExceptionTranslator;
+import com.panda.mojobs.service.dto.ResumeCriteria;
+import com.panda.mojobs.service.ResumeQueryService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -66,6 +73,9 @@ public class ResumeResourceIntTest {
     private ResumeSearchRepository resumeSearchRepository;
 
     @Autowired
+    private ResumeQueryService resumeQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -84,7 +94,7 @@ public class ResumeResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ResumeResource resumeResource = new ResumeResource(resumeService);
+        final ResumeResource resumeResource = new ResumeResource(resumeService, resumeQueryService);
         this.restResumeMockMvc = MockMvcBuilders.standaloneSetup(resumeResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -212,6 +222,261 @@ public class ResumeResourceIntTest {
             .andExpect(jsonPath("$.canBeReadBy").value(DEFAULT_CAN_BE_READ_BY.toString()))
             .andExpect(jsonPath("$.others").value(DEFAULT_OTHERS.toString()));
     }
+
+    @Test
+    @Transactional
+    public void getAllResumesByNameIsEqualToSomething() throws Exception {
+        // Initialize the database
+        resumeRepository.saveAndFlush(resume);
+
+        // Get all the resumeList where name equals to DEFAULT_NAME
+        defaultResumeShouldBeFound("name.equals=" + DEFAULT_NAME);
+
+        // Get all the resumeList where name equals to UPDATED_NAME
+        defaultResumeShouldNotBeFound("name.equals=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllResumesByNameIsInShouldWork() throws Exception {
+        // Initialize the database
+        resumeRepository.saveAndFlush(resume);
+
+        // Get all the resumeList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultResumeShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
+
+        // Get all the resumeList where name equals to UPDATED_NAME
+        defaultResumeShouldNotBeFound("name.in=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllResumesByNameIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        resumeRepository.saveAndFlush(resume);
+
+        // Get all the resumeList where name is not null
+        defaultResumeShouldBeFound("name.specified=true");
+
+        // Get all the resumeList where name is null
+        defaultResumeShouldNotBeFound("name.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllResumesByCanBeReadByIsEqualToSomething() throws Exception {
+        // Initialize the database
+        resumeRepository.saveAndFlush(resume);
+
+        // Get all the resumeList where canBeReadBy equals to DEFAULT_CAN_BE_READ_BY
+        defaultResumeShouldBeFound("canBeReadBy.equals=" + DEFAULT_CAN_BE_READ_BY);
+
+        // Get all the resumeList where canBeReadBy equals to UPDATED_CAN_BE_READ_BY
+        defaultResumeShouldNotBeFound("canBeReadBy.equals=" + UPDATED_CAN_BE_READ_BY);
+    }
+
+    @Test
+    @Transactional
+    public void getAllResumesByCanBeReadByIsInShouldWork() throws Exception {
+        // Initialize the database
+        resumeRepository.saveAndFlush(resume);
+
+        // Get all the resumeList where canBeReadBy in DEFAULT_CAN_BE_READ_BY or UPDATED_CAN_BE_READ_BY
+        defaultResumeShouldBeFound("canBeReadBy.in=" + DEFAULT_CAN_BE_READ_BY + "," + UPDATED_CAN_BE_READ_BY);
+
+        // Get all the resumeList where canBeReadBy equals to UPDATED_CAN_BE_READ_BY
+        defaultResumeShouldNotBeFound("canBeReadBy.in=" + UPDATED_CAN_BE_READ_BY);
+    }
+
+    @Test
+    @Transactional
+    public void getAllResumesByCanBeReadByIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        resumeRepository.saveAndFlush(resume);
+
+        // Get all the resumeList where canBeReadBy is not null
+        defaultResumeShouldBeFound("canBeReadBy.specified=true");
+
+        // Get all the resumeList where canBeReadBy is null
+        defaultResumeShouldNotBeFound("canBeReadBy.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllResumesByOthersIsEqualToSomething() throws Exception {
+        // Initialize the database
+        resumeRepository.saveAndFlush(resume);
+
+        // Get all the resumeList where others equals to DEFAULT_OTHERS
+        defaultResumeShouldBeFound("others.equals=" + DEFAULT_OTHERS);
+
+        // Get all the resumeList where others equals to UPDATED_OTHERS
+        defaultResumeShouldNotBeFound("others.equals=" + UPDATED_OTHERS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllResumesByOthersIsInShouldWork() throws Exception {
+        // Initialize the database
+        resumeRepository.saveAndFlush(resume);
+
+        // Get all the resumeList where others in DEFAULT_OTHERS or UPDATED_OTHERS
+        defaultResumeShouldBeFound("others.in=" + DEFAULT_OTHERS + "," + UPDATED_OTHERS);
+
+        // Get all the resumeList where others equals to UPDATED_OTHERS
+        defaultResumeShouldNotBeFound("others.in=" + UPDATED_OTHERS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllResumesByOthersIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        resumeRepository.saveAndFlush(resume);
+
+        // Get all the resumeList where others is not null
+        defaultResumeShouldBeFound("others.specified=true");
+
+        // Get all the resumeList where others is null
+        defaultResumeShouldNotBeFound("others.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllResumesByBasicInformationIsEqualToSomething() throws Exception {
+        // Initialize the database
+        BasicInformation basicInformation = BasicInformationResourceIntTest.createEntity(em);
+        em.persist(basicInformation);
+        em.flush();
+        resume.setBasicInformation(basicInformation);
+        resumeRepository.saveAndFlush(resume);
+        Long basicInformationId = basicInformation.getId();
+
+        // Get all the resumeList where basicInformation equals to basicInformationId
+        defaultResumeShouldBeFound("basicInformationId.equals=" + basicInformationId);
+
+        // Get all the resumeList where basicInformation equals to basicInformationId + 1
+        defaultResumeShouldNotBeFound("basicInformationId.equals=" + (basicInformationId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllResumesByExperienciesIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Experience experiencies = ExperienceResourceIntTest.createEntity(em);
+        em.persist(experiencies);
+        em.flush();
+        resume.addExperiencies(experiencies);
+        resumeRepository.saveAndFlush(resume);
+        Long experienciesId = experiencies.getId();
+
+        // Get all the resumeList where experiencies equals to experienciesId
+        defaultResumeShouldBeFound("experienciesId.equals=" + experienciesId);
+
+        // Get all the resumeList where experiencies equals to experienciesId + 1
+        defaultResumeShouldNotBeFound("experienciesId.equals=" + (experienciesId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllResumesByEducationBackgroundsIsEqualToSomething() throws Exception {
+        // Initialize the database
+        EducationBackground educationBackgrounds = EducationBackgroundResourceIntTest.createEntity(em);
+        em.persist(educationBackgrounds);
+        em.flush();
+        resume.addEducationBackgrounds(educationBackgrounds);
+        resumeRepository.saveAndFlush(resume);
+        Long educationBackgroundsId = educationBackgrounds.getId();
+
+        // Get all the resumeList where educationBackgrounds equals to educationBackgroundsId
+        defaultResumeShouldBeFound("educationBackgroundsId.equals=" + educationBackgroundsId);
+
+        // Get all the resumeList where educationBackgrounds equals to educationBackgroundsId + 1
+        defaultResumeShouldNotBeFound("educationBackgroundsId.equals=" + (educationBackgroundsId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllResumesByProfessionalDevelopmentsIsEqualToSomething() throws Exception {
+        // Initialize the database
+        ProfessionalDevelopment professionalDevelopments = ProfessionalDevelopmentResourceIntTest.createEntity(em);
+        em.persist(professionalDevelopments);
+        em.flush();
+        resume.addProfessionalDevelopments(professionalDevelopments);
+        resumeRepository.saveAndFlush(resume);
+        Long professionalDevelopmentsId = professionalDevelopments.getId();
+
+        // Get all the resumeList where professionalDevelopments equals to professionalDevelopmentsId
+        defaultResumeShouldBeFound("professionalDevelopmentsId.equals=" + professionalDevelopmentsId);
+
+        // Get all the resumeList where professionalDevelopments equals to professionalDevelopmentsId + 1
+        defaultResumeShouldNotBeFound("professionalDevelopmentsId.equals=" + (professionalDevelopmentsId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllResumesByLanguagesIsEqualToSomething() throws Exception {
+        // Initialize the database
+        MLanguage languages = MLanguageResourceIntTest.createEntity(em);
+        em.persist(languages);
+        em.flush();
+        resume.addLanguages(languages);
+        resumeRepository.saveAndFlush(resume);
+        Long languagesId = languages.getId();
+
+        // Get all the resumeList where languages equals to languagesId
+        defaultResumeShouldBeFound("languagesId.equals=" + languagesId);
+
+        // Get all the resumeList where languages equals to languagesId + 1
+        defaultResumeShouldNotBeFound("languagesId.equals=" + (languagesId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllResumesByUserIsEqualToSomething() throws Exception {
+        // Initialize the database
+        User user = UserResourceIntTest.createEntity(em);
+        em.persist(user);
+        em.flush();
+        resume.setUser(user);
+        resumeRepository.saveAndFlush(resume);
+        Long userId = user.getId();
+
+        // Get all the resumeList where user equals to userId
+        defaultResumeShouldBeFound("userId.equals=" + userId);
+
+        // Get all the resumeList where user equals to userId + 1
+        defaultResumeShouldNotBeFound("userId.equals=" + (userId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultResumeShouldBeFound(String filter) throws Exception {
+        restResumeMockMvc.perform(get("/api/resumes?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(resume.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].canBeReadBy").value(hasItem(DEFAULT_CAN_BE_READ_BY.toString())))
+            .andExpect(jsonPath("$.[*].others").value(hasItem(DEFAULT_OTHERS.toString())));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultResumeShouldNotBeFound(String filter) throws Exception {
+        restResumeMockMvc.perform(get("/api/resumes?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+    }
+
 
     @Test
     @Transactional

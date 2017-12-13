@@ -3,12 +3,15 @@ package com.panda.mojobs.web.rest;
 import com.panda.mojobs.JmojobsApp;
 
 import com.panda.mojobs.domain.ProfessionalDevelopment;
+import com.panda.mojobs.domain.Resume;
 import com.panda.mojobs.repository.ProfessionalDevelopmentRepository;
 import com.panda.mojobs.service.ProfessionalDevelopmentService;
 import com.panda.mojobs.repository.search.ProfessionalDevelopmentSearchRepository;
 import com.panda.mojobs.service.dto.ProfessionalDevelopmentDTO;
 import com.panda.mojobs.service.mapper.ProfessionalDevelopmentMapper;
 import com.panda.mojobs.web.rest.errors.ExceptionTranslator;
+import com.panda.mojobs.service.dto.ProfessionalDevelopmentCriteria;
+import com.panda.mojobs.service.ProfessionalDevelopmentQueryService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -66,6 +69,9 @@ public class ProfessionalDevelopmentResourceIntTest {
     private ProfessionalDevelopmentSearchRepository professionalDevelopmentSearchRepository;
 
     @Autowired
+    private ProfessionalDevelopmentQueryService professionalDevelopmentQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -84,7 +90,7 @@ public class ProfessionalDevelopmentResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ProfessionalDevelopmentResource professionalDevelopmentResource = new ProfessionalDevelopmentResource(professionalDevelopmentService);
+        final ProfessionalDevelopmentResource professionalDevelopmentResource = new ProfessionalDevelopmentResource(professionalDevelopmentService, professionalDevelopmentQueryService);
         this.restProfessionalDevelopmentMockMvc = MockMvcBuilders.standaloneSetup(professionalDevelopmentResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -245,6 +251,220 @@ public class ProfessionalDevelopmentResourceIntTest {
             .andExpect(jsonPath("$.fromDate").value(DEFAULT_FROM_DATE.toString()))
             .andExpect(jsonPath("$.toDate").value(DEFAULT_TO_DATE.toString()));
     }
+
+    @Test
+    @Transactional
+    public void getAllProfessionalDevelopmentsByNameIsEqualToSomething() throws Exception {
+        // Initialize the database
+        professionalDevelopmentRepository.saveAndFlush(professionalDevelopment);
+
+        // Get all the professionalDevelopmentList where name equals to DEFAULT_NAME
+        defaultProfessionalDevelopmentShouldBeFound("name.equals=" + DEFAULT_NAME);
+
+        // Get all the professionalDevelopmentList where name equals to UPDATED_NAME
+        defaultProfessionalDevelopmentShouldNotBeFound("name.equals=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfessionalDevelopmentsByNameIsInShouldWork() throws Exception {
+        // Initialize the database
+        professionalDevelopmentRepository.saveAndFlush(professionalDevelopment);
+
+        // Get all the professionalDevelopmentList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultProfessionalDevelopmentShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
+
+        // Get all the professionalDevelopmentList where name equals to UPDATED_NAME
+        defaultProfessionalDevelopmentShouldNotBeFound("name.in=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfessionalDevelopmentsByNameIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        professionalDevelopmentRepository.saveAndFlush(professionalDevelopment);
+
+        // Get all the professionalDevelopmentList where name is not null
+        defaultProfessionalDevelopmentShouldBeFound("name.specified=true");
+
+        // Get all the professionalDevelopmentList where name is null
+        defaultProfessionalDevelopmentShouldNotBeFound("name.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfessionalDevelopmentsByFromDateIsEqualToSomething() throws Exception {
+        // Initialize the database
+        professionalDevelopmentRepository.saveAndFlush(professionalDevelopment);
+
+        // Get all the professionalDevelopmentList where fromDate equals to DEFAULT_FROM_DATE
+        defaultProfessionalDevelopmentShouldBeFound("fromDate.equals=" + DEFAULT_FROM_DATE);
+
+        // Get all the professionalDevelopmentList where fromDate equals to UPDATED_FROM_DATE
+        defaultProfessionalDevelopmentShouldNotBeFound("fromDate.equals=" + UPDATED_FROM_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfessionalDevelopmentsByFromDateIsInShouldWork() throws Exception {
+        // Initialize the database
+        professionalDevelopmentRepository.saveAndFlush(professionalDevelopment);
+
+        // Get all the professionalDevelopmentList where fromDate in DEFAULT_FROM_DATE or UPDATED_FROM_DATE
+        defaultProfessionalDevelopmentShouldBeFound("fromDate.in=" + DEFAULT_FROM_DATE + "," + UPDATED_FROM_DATE);
+
+        // Get all the professionalDevelopmentList where fromDate equals to UPDATED_FROM_DATE
+        defaultProfessionalDevelopmentShouldNotBeFound("fromDate.in=" + UPDATED_FROM_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfessionalDevelopmentsByFromDateIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        professionalDevelopmentRepository.saveAndFlush(professionalDevelopment);
+
+        // Get all the professionalDevelopmentList where fromDate is not null
+        defaultProfessionalDevelopmentShouldBeFound("fromDate.specified=true");
+
+        // Get all the professionalDevelopmentList where fromDate is null
+        defaultProfessionalDevelopmentShouldNotBeFound("fromDate.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfessionalDevelopmentsByFromDateIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        professionalDevelopmentRepository.saveAndFlush(professionalDevelopment);
+
+        // Get all the professionalDevelopmentList where fromDate greater than or equals to DEFAULT_FROM_DATE
+        defaultProfessionalDevelopmentShouldBeFound("fromDate.greaterOrEqualThan=" + DEFAULT_FROM_DATE);
+
+        // Get all the professionalDevelopmentList where fromDate greater than or equals to UPDATED_FROM_DATE
+        defaultProfessionalDevelopmentShouldNotBeFound("fromDate.greaterOrEqualThan=" + UPDATED_FROM_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfessionalDevelopmentsByFromDateIsLessThanSomething() throws Exception {
+        // Initialize the database
+        professionalDevelopmentRepository.saveAndFlush(professionalDevelopment);
+
+        // Get all the professionalDevelopmentList where fromDate less than or equals to DEFAULT_FROM_DATE
+        defaultProfessionalDevelopmentShouldNotBeFound("fromDate.lessThan=" + DEFAULT_FROM_DATE);
+
+        // Get all the professionalDevelopmentList where fromDate less than or equals to UPDATED_FROM_DATE
+        defaultProfessionalDevelopmentShouldBeFound("fromDate.lessThan=" + UPDATED_FROM_DATE);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllProfessionalDevelopmentsByToDateIsEqualToSomething() throws Exception {
+        // Initialize the database
+        professionalDevelopmentRepository.saveAndFlush(professionalDevelopment);
+
+        // Get all the professionalDevelopmentList where toDate equals to DEFAULT_TO_DATE
+        defaultProfessionalDevelopmentShouldBeFound("toDate.equals=" + DEFAULT_TO_DATE);
+
+        // Get all the professionalDevelopmentList where toDate equals to UPDATED_TO_DATE
+        defaultProfessionalDevelopmentShouldNotBeFound("toDate.equals=" + UPDATED_TO_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfessionalDevelopmentsByToDateIsInShouldWork() throws Exception {
+        // Initialize the database
+        professionalDevelopmentRepository.saveAndFlush(professionalDevelopment);
+
+        // Get all the professionalDevelopmentList where toDate in DEFAULT_TO_DATE or UPDATED_TO_DATE
+        defaultProfessionalDevelopmentShouldBeFound("toDate.in=" + DEFAULT_TO_DATE + "," + UPDATED_TO_DATE);
+
+        // Get all the professionalDevelopmentList where toDate equals to UPDATED_TO_DATE
+        defaultProfessionalDevelopmentShouldNotBeFound("toDate.in=" + UPDATED_TO_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfessionalDevelopmentsByToDateIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        professionalDevelopmentRepository.saveAndFlush(professionalDevelopment);
+
+        // Get all the professionalDevelopmentList where toDate is not null
+        defaultProfessionalDevelopmentShouldBeFound("toDate.specified=true");
+
+        // Get all the professionalDevelopmentList where toDate is null
+        defaultProfessionalDevelopmentShouldNotBeFound("toDate.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfessionalDevelopmentsByToDateIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        professionalDevelopmentRepository.saveAndFlush(professionalDevelopment);
+
+        // Get all the professionalDevelopmentList where toDate greater than or equals to DEFAULT_TO_DATE
+        defaultProfessionalDevelopmentShouldBeFound("toDate.greaterOrEqualThan=" + DEFAULT_TO_DATE);
+
+        // Get all the professionalDevelopmentList where toDate greater than or equals to UPDATED_TO_DATE
+        defaultProfessionalDevelopmentShouldNotBeFound("toDate.greaterOrEqualThan=" + UPDATED_TO_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfessionalDevelopmentsByToDateIsLessThanSomething() throws Exception {
+        // Initialize the database
+        professionalDevelopmentRepository.saveAndFlush(professionalDevelopment);
+
+        // Get all the professionalDevelopmentList where toDate less than or equals to DEFAULT_TO_DATE
+        defaultProfessionalDevelopmentShouldNotBeFound("toDate.lessThan=" + DEFAULT_TO_DATE);
+
+        // Get all the professionalDevelopmentList where toDate less than or equals to UPDATED_TO_DATE
+        defaultProfessionalDevelopmentShouldBeFound("toDate.lessThan=" + UPDATED_TO_DATE);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllProfessionalDevelopmentsByResumeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Resume resume = ResumeResourceIntTest.createEntity(em);
+        em.persist(resume);
+        em.flush();
+        professionalDevelopment.setResume(resume);
+        professionalDevelopmentRepository.saveAndFlush(professionalDevelopment);
+        Long resumeId = resume.getId();
+
+        // Get all the professionalDevelopmentList where resume equals to resumeId
+        defaultProfessionalDevelopmentShouldBeFound("resumeId.equals=" + resumeId);
+
+        // Get all the professionalDevelopmentList where resume equals to resumeId + 1
+        defaultProfessionalDevelopmentShouldNotBeFound("resumeId.equals=" + (resumeId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultProfessionalDevelopmentShouldBeFound(String filter) throws Exception {
+        restProfessionalDevelopmentMockMvc.perform(get("/api/professional-developments?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(professionalDevelopment.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].fromDate").value(hasItem(DEFAULT_FROM_DATE.toString())))
+            .andExpect(jsonPath("$.[*].toDate").value(hasItem(DEFAULT_TO_DATE.toString())));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultProfessionalDevelopmentShouldNotBeFound(String filter) throws Exception {
+        restProfessionalDevelopmentMockMvc.perform(get("/api/professional-developments?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+    }
+
 
     @Test
     @Transactional

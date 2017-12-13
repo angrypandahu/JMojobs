@@ -4,10 +4,18 @@ import com.codahale.metrics.annotation.Timed;
 import com.panda.mojobs.service.JobSubTypeService;
 import com.panda.mojobs.web.rest.errors.BadRequestAlertException;
 import com.panda.mojobs.web.rest.util.HeaderUtil;
+import com.panda.mojobs.web.rest.util.PaginationUtil;
 import com.panda.mojobs.service.dto.JobSubTypeDTO;
+import com.panda.mojobs.service.dto.JobSubTypeCriteria;
+import com.panda.mojobs.service.JobSubTypeQueryService;
+import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,8 +42,11 @@ public class JobSubTypeResource {
 
     private final JobSubTypeService jobSubTypeService;
 
-    public JobSubTypeResource(JobSubTypeService jobSubTypeService) {
+    private final JobSubTypeQueryService jobSubTypeQueryService;
+
+    public JobSubTypeResource(JobSubTypeService jobSubTypeService, JobSubTypeQueryService jobSubTypeQueryService) {
         this.jobSubTypeService = jobSubTypeService;
+        this.jobSubTypeQueryService = jobSubTypeQueryService;
     }
 
     /**
@@ -83,14 +94,18 @@ public class JobSubTypeResource {
     /**
      * GET  /job-sub-types : get all the jobSubTypes.
      *
+     * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of jobSubTypes in body
      */
     @GetMapping("/job-sub-types")
     @Timed
-    public List<JobSubTypeDTO> getAllJobSubTypes() {
-        log.debug("REST request to get all JobSubTypes");
-        return jobSubTypeService.findAll();
-        }
+    public ResponseEntity<List<JobSubTypeDTO>> getAllJobSubTypes(JobSubTypeCriteria criteria,@ApiParam Pageable pageable) {
+        log.debug("REST request to get JobSubTypes by criteria: {}", criteria);
+        Page<JobSubTypeDTO> page = jobSubTypeQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/job-sub-types");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 
     /**
      * GET  /job-sub-types/:id : get the "id" jobSubType.
@@ -125,13 +140,16 @@ public class JobSubTypeResource {
      * to the query.
      *
      * @param query the query of the jobSubType search
+     * @param pageable the pagination information
      * @return the result of the search
      */
     @GetMapping("/_search/job-sub-types")
     @Timed
-    public List<JobSubTypeDTO> searchJobSubTypes(@RequestParam String query) {
-        log.debug("REST request to search JobSubTypes for query {}", query);
-        return jobSubTypeService.search(query);
+    public ResponseEntity<List<JobSubTypeDTO>> searchJobSubTypes(@RequestParam String query, @ApiParam Pageable pageable) {
+        log.debug("REST request to search for a page of JobSubTypes for query {}", query);
+        Page<JobSubTypeDTO> page = jobSubTypeService.search(query, pageable);
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/job-sub-types");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
 }

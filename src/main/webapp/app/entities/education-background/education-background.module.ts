@@ -13,6 +13,7 @@ import {
     EducationBackgroundDeleteDialogComponent,
     educationBackgroundRoute,
     educationBackgroundPopupRoute,
+    EducationBackgroundResolvePagingParams,
 } from './';
 
 const ENTITY_STATES = [
@@ -43,6 +44,7 @@ const ENTITY_STATES = [
     providers: [
         EducationBackgroundService,
         EducationBackgroundPopupService,
+        EducationBackgroundResolvePagingParams,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

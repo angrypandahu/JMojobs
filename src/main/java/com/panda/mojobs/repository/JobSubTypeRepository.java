@@ -11,6 +11,6 @@ import org.springframework.data.jpa.repository.*;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface JobSubTypeRepository extends JpaRepository<JobSubType, Long> {
+public interface JobSubTypeRepository extends JpaRepository<JobSubType, Long>, JpaSpecificationExecutor<JobSubType> {
 
 }

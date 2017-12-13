@@ -4,10 +4,18 @@ import com.codahale.metrics.annotation.Timed;
 import com.panda.mojobs.service.EducationBackgroundService;
 import com.panda.mojobs.web.rest.errors.BadRequestAlertException;
 import com.panda.mojobs.web.rest.util.HeaderUtil;
+import com.panda.mojobs.web.rest.util.PaginationUtil;
 import com.panda.mojobs.service.dto.EducationBackgroundDTO;
+import com.panda.mojobs.service.dto.EducationBackgroundCriteria;
+import com.panda.mojobs.service.EducationBackgroundQueryService;
+import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,8 +42,11 @@ public class EducationBackgroundResource {
 
     private final EducationBackgroundService educationBackgroundService;
 
-    public EducationBackgroundResource(EducationBackgroundService educationBackgroundService) {
+    private final EducationBackgroundQueryService educationBackgroundQueryService;
+
+    public EducationBackgroundResource(EducationBackgroundService educationBackgroundService, EducationBackgroundQueryService educationBackgroundQueryService) {
         this.educationBackgroundService = educationBackgroundService;
+        this.educationBackgroundQueryService = educationBackgroundQueryService;
     }
 
     /**
@@ -83,14 +94,18 @@ public class EducationBackgroundResource {
     /**
      * GET  /education-backgrounds : get all the educationBackgrounds.
      *
+     * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of educationBackgrounds in body
      */
     @GetMapping("/education-backgrounds")
     @Timed
-    public List<EducationBackgroundDTO> getAllEducationBackgrounds() {
-        log.debug("REST request to get all EducationBackgrounds");
-        return educationBackgroundService.findAll();
-        }
+    public ResponseEntity<List<EducationBackgroundDTO>> getAllEducationBackgrounds(EducationBackgroundCriteria criteria,@ApiParam Pageable pageable) {
+        log.debug("REST request to get EducationBackgrounds by criteria: {}", criteria);
+        Page<EducationBackgroundDTO> page = educationBackgroundQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/education-backgrounds");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 
     /**
      * GET  /education-backgrounds/:id : get the "id" educationBackground.
@@ -125,13 +140,16 @@ public class EducationBackgroundResource {
      * to the query.
      *
      * @param query the query of the educationBackground search
+     * @param pageable the pagination information
      * @return the result of the search
      */
     @GetMapping("/_search/education-backgrounds")
     @Timed
-    public List<EducationBackgroundDTO> searchEducationBackgrounds(@RequestParam String query) {
-        log.debug("REST request to search EducationBackgrounds for query {}", query);
-        return educationBackgroundService.search(query);
+    public ResponseEntity<List<EducationBackgroundDTO>> searchEducationBackgrounds(@RequestParam String query, @ApiParam Pageable pageable) {
+        log.debug("REST request to search for a page of EducationBackgrounds for query {}", query);
+        Page<EducationBackgroundDTO> page = educationBackgroundService.search(query, pageable);
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/education-backgrounds");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
 }

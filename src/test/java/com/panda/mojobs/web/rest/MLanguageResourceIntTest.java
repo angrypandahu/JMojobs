@@ -3,12 +3,15 @@ package com.panda.mojobs.web.rest;
 import com.panda.mojobs.JmojobsApp;
 
 import com.panda.mojobs.domain.MLanguage;
+import com.panda.mojobs.domain.Resume;
 import com.panda.mojobs.repository.MLanguageRepository;
 import com.panda.mojobs.service.MLanguageService;
 import com.panda.mojobs.repository.search.MLanguageSearchRepository;
 import com.panda.mojobs.service.dto.MLanguageDTO;
 import com.panda.mojobs.service.mapper.MLanguageMapper;
 import com.panda.mojobs.web.rest.errors.ExceptionTranslator;
+import com.panda.mojobs.service.dto.MLanguageCriteria;
+import com.panda.mojobs.service.MLanguageQueryService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -63,6 +66,9 @@ public class MLanguageResourceIntTest {
     private MLanguageSearchRepository mLanguageSearchRepository;
 
     @Autowired
+    private MLanguageQueryService mLanguageQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -81,7 +87,7 @@ public class MLanguageResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final MLanguageResource mLanguageResource = new MLanguageResource(mLanguageService);
+        final MLanguageResource mLanguageResource = new MLanguageResource(mLanguageService, mLanguageQueryService);
         this.restMLanguageMockMvc = MockMvcBuilders.standaloneSetup(mLanguageResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -219,6 +225,126 @@ public class MLanguageResourceIntTest {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.level").value(DEFAULT_LEVEL.toString()));
     }
+
+    @Test
+    @Transactional
+    public void getAllMLanguagesByNameIsEqualToSomething() throws Exception {
+        // Initialize the database
+        mLanguageRepository.saveAndFlush(mLanguage);
+
+        // Get all the mLanguageList where name equals to DEFAULT_NAME
+        defaultMLanguageShouldBeFound("name.equals=" + DEFAULT_NAME);
+
+        // Get all the mLanguageList where name equals to UPDATED_NAME
+        defaultMLanguageShouldNotBeFound("name.equals=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMLanguagesByNameIsInShouldWork() throws Exception {
+        // Initialize the database
+        mLanguageRepository.saveAndFlush(mLanguage);
+
+        // Get all the mLanguageList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultMLanguageShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
+
+        // Get all the mLanguageList where name equals to UPDATED_NAME
+        defaultMLanguageShouldNotBeFound("name.in=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMLanguagesByNameIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        mLanguageRepository.saveAndFlush(mLanguage);
+
+        // Get all the mLanguageList where name is not null
+        defaultMLanguageShouldBeFound("name.specified=true");
+
+        // Get all the mLanguageList where name is null
+        defaultMLanguageShouldNotBeFound("name.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllMLanguagesByLevelIsEqualToSomething() throws Exception {
+        // Initialize the database
+        mLanguageRepository.saveAndFlush(mLanguage);
+
+        // Get all the mLanguageList where level equals to DEFAULT_LEVEL
+        defaultMLanguageShouldBeFound("level.equals=" + DEFAULT_LEVEL);
+
+        // Get all the mLanguageList where level equals to UPDATED_LEVEL
+        defaultMLanguageShouldNotBeFound("level.equals=" + UPDATED_LEVEL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMLanguagesByLevelIsInShouldWork() throws Exception {
+        // Initialize the database
+        mLanguageRepository.saveAndFlush(mLanguage);
+
+        // Get all the mLanguageList where level in DEFAULT_LEVEL or UPDATED_LEVEL
+        defaultMLanguageShouldBeFound("level.in=" + DEFAULT_LEVEL + "," + UPDATED_LEVEL);
+
+        // Get all the mLanguageList where level equals to UPDATED_LEVEL
+        defaultMLanguageShouldNotBeFound("level.in=" + UPDATED_LEVEL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMLanguagesByLevelIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        mLanguageRepository.saveAndFlush(mLanguage);
+
+        // Get all the mLanguageList where level is not null
+        defaultMLanguageShouldBeFound("level.specified=true");
+
+        // Get all the mLanguageList where level is null
+        defaultMLanguageShouldNotBeFound("level.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllMLanguagesByResumeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Resume resume = ResumeResourceIntTest.createEntity(em);
+        em.persist(resume);
+        em.flush();
+        mLanguage.setResume(resume);
+        mLanguageRepository.saveAndFlush(mLanguage);
+        Long resumeId = resume.getId();
+
+        // Get all the mLanguageList where resume equals to resumeId
+        defaultMLanguageShouldBeFound("resumeId.equals=" + resumeId);
+
+        // Get all the mLanguageList where resume equals to resumeId + 1
+        defaultMLanguageShouldNotBeFound("resumeId.equals=" + (resumeId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultMLanguageShouldBeFound(String filter) throws Exception {
+        restMLanguageMockMvc.perform(get("/api/m-languages?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(mLanguage.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].level").value(hasItem(DEFAULT_LEVEL.toString())));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultMLanguageShouldNotBeFound(String filter) throws Exception {
+        restMLanguageMockMvc.perform(get("/api/m-languages?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+    }
+
 
     @Test
     @Transactional

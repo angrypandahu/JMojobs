@@ -8,13 +8,11 @@ import com.panda.mojobs.service.dto.ExperienceDTO;
 import com.panda.mojobs.service.mapper.ExperienceMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -58,15 +56,15 @@ public class ExperienceServiceImpl implements ExperienceService{
     /**
      *  Get all the experiences.
      *
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
-    public List<ExperienceDTO> findAll() {
+    public Page<ExperienceDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Experiences");
-        return experienceRepository.findAll().stream()
-            .map(experienceMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+        return experienceRepository.findAll(pageable)
+            .map(experienceMapper::toDto);
     }
 
     /**
@@ -99,15 +97,14 @@ public class ExperienceServiceImpl implements ExperienceService{
      * Search for the experience corresponding to the query.
      *
      *  @param query the query of the search
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
-    public List<ExperienceDTO> search(String query) {
-        log.debug("Request to search Experiences for query {}", query);
-        return StreamSupport
-            .stream(experienceSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .map(experienceMapper::toDto)
-            .collect(Collectors.toList());
+    public Page<ExperienceDTO> search(String query, Pageable pageable) {
+        log.debug("Request to search for a page of Experiences for query {}", query);
+        Page<Experience> result = experienceSearchRepository.search(queryStringQuery(query), pageable);
+        return result.map(experienceMapper::toDto);
     }
 }

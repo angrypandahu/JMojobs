@@ -39,15 +39,6 @@ public class MjobDTO implements Serializable {
 
     private String subTypeName;
 
-    private String logoBase64;
-
-    public String getLogoBase64() {
-        return logoBase64;
-    }
-
-    public void setLogoBase64(String logoBase64) {
-        this.logoBase64 = logoBase64;
-    }
     public Long getId() {
         return id;
     }

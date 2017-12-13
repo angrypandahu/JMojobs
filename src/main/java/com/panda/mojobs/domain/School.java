@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.security.crypto.codec.Base64;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -37,13 +36,6 @@ public class School implements Serializable {
     @Column(name = "name", length = 100, nullable = false)
     private String name;
 
-    @Lob
-    @Column(name = "logo")
-    private byte[] logo;
-
-    @Column(name = "logo_content_type")
-    private String logoContentType;
-
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "jhi_level", nullable = false)
@@ -57,6 +49,10 @@ public class School implements Serializable {
     @OneToOne
     @JoinColumn(unique = true)
     private Address address;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Image image;
 
     @OneToMany(mappedBy = "school")
     @JsonIgnore
@@ -83,32 +79,6 @@ public class School implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public byte[] getLogo() {
-        return logo;
-    }
-
-    public School logo(byte[] logo) {
-        this.logo = logo;
-        return this;
-    }
-
-    public void setLogo(byte[] logo) {
-        this.logo = logo;
-    }
-
-    public String getLogoContentType() {
-        return logoContentType;
-    }
-
-    public School logoContentType(String logoContentType) {
-        this.logoContentType = logoContentType;
-        return this;
-    }
-
-    public void setLogoContentType(String logoContentType) {
-        this.logoContentType = logoContentType;
     }
 
     public SchoolLevel getLevel() {
@@ -150,6 +120,19 @@ public class School implements Serializable {
         this.address = address;
     }
 
+    public Image getImage() {
+        return image;
+    }
+
+    public School image(Image image) {
+        this.image = image;
+        return this;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
     public Set<Mjob> getJobs() {
         return jobs;
     }
@@ -176,16 +159,6 @@ public class School implements Serializable {
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
-    @Transient
-    private String logoBase64;
-
-    public String getLogoBase64() {
-        if (this.logo != null) {
-            return "data:"+logoContentType+";base64," + new String(Base64.encode(logo));
-        }
-        return null;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -211,8 +184,6 @@ public class School implements Serializable {
         return "School{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", logo='" + getLogo() + "'" +
-            ", logoContentType='" + logoContentType + "'" +
             ", level='" + getLevel() + "'" +
             ", schoolType='" + getSchoolType() + "'" +
             "}";

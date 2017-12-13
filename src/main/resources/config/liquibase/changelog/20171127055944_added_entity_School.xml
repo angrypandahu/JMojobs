@@ -26,13 +26,6 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="logo" type="longblob">
-                <constraints nullable="true" />
-            </column>
-            <column name="logo_content_type" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
             <column name="jhi_level" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
@@ -41,6 +34,8 @@
                 <constraints nullable="false" />
             </column>
             <column name="address_id" type="bigint">
+                <constraints unique="true" nullable="true" />
+            </column>            <column name="image_id" type="bigint">
                 <constraints unique="true" nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->

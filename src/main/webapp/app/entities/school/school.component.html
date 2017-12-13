@@ -31,10 +31,10 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="name"><span>Name</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="logo"><span>Logo</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="level"><span>Level</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="schoolType"><span>School Type</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="addressName"><span>Address</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="imageId"><span>Image</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -42,17 +42,16 @@
             <tr *ngFor="let school of schools ;trackBy: trackId">
                 <td><a [routerLink]="['../school', school.id ]">{{school.id}}</a></td>
                 <td>{{school.name}}</td>
-                <td>
-                    <a *ngIf="school.logo" (click)="openFile(school.logoContentType, school.logo)">
-                        <img [src]="'data:' + school.logoContentType + ';base64,' + school.logo" style="max-height: 30px;" alt="school image"/>
-                    </a>
-                    <span *ngIf="school.logo">{{school.logoContentType}}, {{byteSize(school.logo)}}</span>
-                </td>
                 <td>{{school.level}}</td>
                 <td>{{school.schoolType}}</td>
                 <td>
                     <div *ngIf="school.addressId">
                         <a [routerLink]="['../address', school.addressId  ]" >{{school.addressName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="school.imageId">
+                        <a [routerLink]="['../image', school.imageId  ]" >{{school.imageId}}</a>
                     </div>
                 </td>
                 <td class="text-right">

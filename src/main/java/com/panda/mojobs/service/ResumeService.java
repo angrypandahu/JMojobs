@@ -1,10 +1,8 @@
 package com.panda.mojobs.service;
 
-import com.panda.mojobs.domain.Resume;
-import com.panda.mojobs.service.data.ResumeData;
 import com.panda.mojobs.service.dto.ResumeDTO;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Service Interface for managing Resume.
@@ -20,44 +18,35 @@ public interface ResumeService {
     ResumeDTO save(ResumeDTO resumeDTO);
 
     /**
-     * Get all the resumes.
+     *  Get all the resumes.
      *
-     * @return the list of entities
+     *  @param pageable the pagination information
+     *  @return the list of entities
      */
-    List<ResumeDTO> findAll();
+    Page<ResumeDTO> findAll(Pageable pageable);
 
     /**
-     * Get the "id" resume.
+     *  Get the "id" resume.
      *
-     * @param id the id of the entity
-     * @return the entity
+     *  @param id the id of the entity
+     *  @return the entity
      */
     ResumeDTO findOne(Long id);
 
     /**
-     * Delete the "id" resume.
+     *  Delete the "id" resume.
      *
-     * @param id the id of the entity
+     *  @param id the id of the entity
      */
     void delete(Long id);
 
     /**
      * Search for the resume corresponding to the query.
      *
-     * @param query the query of the search
-     * @return the list of entities
+     *  @param query the query of the search
+     *  
+     *  @param pageable the pagination information
+     *  @return the list of entities
      */
-    List<ResumeDTO> search(String query);
-
-
-    List<ResumeDTO> findByCurrentUser();
-
-    List<ResumeData> findDataByCurrentUser();
-
-    ResumeData toResumeData(ResumeDTO resumeDTO);
-
-    ResumeData toResumeData(Resume resume);
-
-    ResumeDTO createByLoginUser();
-
+    Page<ResumeDTO> search(String query, Pageable pageable);
 }

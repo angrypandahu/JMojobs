@@ -1,7 +1,8 @@
 package com.panda.mojobs.service;
 
 import com.panda.mojobs.service.dto.AddressDTO;
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Service Interface for managing Address.
@@ -19,9 +20,10 @@ public interface AddressService {
     /**
      *  Get all the addresses.
      *
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
-    List<AddressDTO> findAll();
+    Page<AddressDTO> findAll(Pageable pageable);
 
     /**
      *  Get the "id" address.
@@ -43,7 +45,8 @@ public interface AddressService {
      *
      *  @param query the query of the search
      *  
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
-    List<AddressDTO> search(String query);
+    Page<AddressDTO> search(String query, Pageable pageable);
 }

@@ -22,7 +22,7 @@
     "changelogDate": "20171127055941",
     "entityTableName": "job_sub_type",
     "dto": "mapstruct",
-    "pagination": "no",
+    "pagination": "pagination",
     "service": "serviceImpl",
-    "jpaMetamodelFiltering": false
+    "jpaMetamodelFiltering": true
 }

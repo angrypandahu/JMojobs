@@ -1,7 +1,6 @@
 package com.panda.mojobs.service;
 
 import com.panda.mojobs.service.dto.MjobDTO;
-import com.panda.mojobs.web.controller.form.MjobSearchForm;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -19,36 +18,35 @@ public interface MjobService {
     MjobDTO save(MjobDTO mjobDTO);
 
     /**
-     * Get all the mjobs.
+     *  Get all the mjobs.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     *  @param pageable the pagination information
+     *  @return the list of entities
      */
     Page<MjobDTO> findAll(Pageable pageable);
 
-    Page<MjobDTO> findAll(MjobSearchForm mjobSearchForm, Pageable pageable);
-
     /**
-     * Get the "id" mjob.
+     *  Get the "id" mjob.
      *
-     * @param id the id of the entity
-     * @return the entity
+     *  @param id the id of the entity
+     *  @return the entity
      */
     MjobDTO findOne(Long id);
 
     /**
-     * Delete the "id" mjob.
+     *  Delete the "id" mjob.
      *
-     * @param id the id of the entity
+     *  @param id the id of the entity
      */
     void delete(Long id);
 
     /**
      * Search for the mjob corresponding to the query.
      *
-     * @param query    the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
+     *  @param query the query of the search
+     *  
+     *  @param pageable the pagination information
+     *  @return the list of entities
      */
     Page<MjobDTO> search(String query, Pageable pageable);
 }

@@ -6,6 +6,8 @@ import com.panda.mojobs.web.rest.errors.BadRequestAlertException;
 import com.panda.mojobs.web.rest.util.HeaderUtil;
 import com.panda.mojobs.web.rest.util.PaginationUtil;
 import com.panda.mojobs.service.dto.SchoolDTO;
+import com.panda.mojobs.service.dto.SchoolCriteria;
+import com.panda.mojobs.service.SchoolQueryService;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -40,8 +42,11 @@ public class SchoolResource {
 
     private final SchoolService schoolService;
 
-    public SchoolResource(SchoolService schoolService) {
+    private final SchoolQueryService schoolQueryService;
+
+    public SchoolResource(SchoolService schoolService, SchoolQueryService schoolQueryService) {
         this.schoolService = schoolService;
+        this.schoolQueryService = schoolQueryService;
     }
 
     /**
@@ -90,13 +95,14 @@ public class SchoolResource {
      * GET  /schools : get all the schools.
      *
      * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of schools in body
      */
     @GetMapping("/schools")
     @Timed
-    public ResponseEntity<List<SchoolDTO>> getAllSchools(@ApiParam Pageable pageable) {
-        log.debug("REST request to get a page of Schools");
-        Page<SchoolDTO> page = schoolService.findAll(pageable);
+    public ResponseEntity<List<SchoolDTO>> getAllSchools(SchoolCriteria criteria,@ApiParam Pageable pageable) {
+        log.debug("REST request to get Schools by criteria: {}", criteria);
+        Page<SchoolDTO> page = schoolQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/schools");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

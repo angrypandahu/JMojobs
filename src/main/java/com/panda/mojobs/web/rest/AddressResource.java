@@ -4,10 +4,18 @@ import com.codahale.metrics.annotation.Timed;
 import com.panda.mojobs.service.AddressService;
 import com.panda.mojobs.web.rest.errors.BadRequestAlertException;
 import com.panda.mojobs.web.rest.util.HeaderUtil;
+import com.panda.mojobs.web.rest.util.PaginationUtil;
 import com.panda.mojobs.service.dto.AddressDTO;
+import com.panda.mojobs.service.dto.AddressCriteria;
+import com.panda.mojobs.service.AddressQueryService;
+import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,8 +42,11 @@ public class AddressResource {
 
     private final AddressService addressService;
 
-    public AddressResource(AddressService addressService) {
+    private final AddressQueryService addressQueryService;
+
+    public AddressResource(AddressService addressService, AddressQueryService addressQueryService) {
         this.addressService = addressService;
+        this.addressQueryService = addressQueryService;
     }
 
     /**
@@ -83,14 +94,18 @@ public class AddressResource {
     /**
      * GET  /addresses : get all the addresses.
      *
+     * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of addresses in body
      */
     @GetMapping("/addresses")
     @Timed
-    public List<AddressDTO> getAllAddresses() {
-        log.debug("REST request to get all Addresses");
-        return addressService.findAll();
-        }
+    public ResponseEntity<List<AddressDTO>> getAllAddresses(AddressCriteria criteria,@ApiParam Pageable pageable) {
+        log.debug("REST request to get Addresses by criteria: {}", criteria);
+        Page<AddressDTO> page = addressQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/addresses");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 
     /**
      * GET  /addresses/:id : get the "id" address.
@@ -125,13 +140,16 @@ public class AddressResource {
      * to the query.
      *
      * @param query the query of the address search
+     * @param pageable the pagination information
      * @return the result of the search
      */
     @GetMapping("/_search/addresses")
     @Timed
-    public List<AddressDTO> searchAddresses(@RequestParam String query) {
-        log.debug("REST request to search Addresses for query {}", query);
-        return addressService.search(query);
+    public ResponseEntity<List<AddressDTO>> searchAddresses(@RequestParam String query, @ApiParam Pageable pageable) {
+        log.debug("REST request to search for a page of Addresses for query {}", query);
+        Page<AddressDTO> page = addressService.search(query, pageable);
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/addresses");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
 }

@@ -6,6 +6,8 @@ import com.panda.mojobs.web.rest.errors.BadRequestAlertException;
 import com.panda.mojobs.web.rest.util.HeaderUtil;
 import com.panda.mojobs.web.rest.util.PaginationUtil;
 import com.panda.mojobs.service.dto.InvitationDTO;
+import com.panda.mojobs.service.dto.InvitationCriteria;
+import com.panda.mojobs.service.InvitationQueryService;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -40,8 +42,11 @@ public class InvitationResource {
 
     private final InvitationService invitationService;
 
-    public InvitationResource(InvitationService invitationService) {
+    private final InvitationQueryService invitationQueryService;
+
+    public InvitationResource(InvitationService invitationService, InvitationQueryService invitationQueryService) {
         this.invitationService = invitationService;
+        this.invitationQueryService = invitationQueryService;
     }
 
     /**
@@ -90,13 +95,14 @@ public class InvitationResource {
      * GET  /invitations : get all the invitations.
      *
      * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of invitations in body
      */
     @GetMapping("/invitations")
     @Timed
-    public ResponseEntity<List<InvitationDTO>> getAllInvitations(@ApiParam Pageable pageable) {
-        log.debug("REST request to get a page of Invitations");
-        Page<InvitationDTO> page = invitationService.findAll(pageable);
+    public ResponseEntity<List<InvitationDTO>> getAllInvitations(InvitationCriteria criteria,@ApiParam Pageable pageable) {
+        log.debug("REST request to get Invitations by criteria: {}", criteria);
+        Page<InvitationDTO> page = invitationQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/invitations");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

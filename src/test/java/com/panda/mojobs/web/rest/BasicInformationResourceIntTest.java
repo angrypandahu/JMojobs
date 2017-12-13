@@ -4,12 +4,15 @@ import com.panda.mojobs.JmojobsApp;
 
 import com.panda.mojobs.domain.BasicInformation;
 import com.panda.mojobs.domain.Resume;
+import com.panda.mojobs.domain.Image;
 import com.panda.mojobs.repository.BasicInformationRepository;
 import com.panda.mojobs.service.BasicInformationService;
 import com.panda.mojobs.repository.search.BasicInformationSearchRepository;
 import com.panda.mojobs.service.dto.BasicInformationDTO;
 import com.panda.mojobs.service.mapper.BasicInformationMapper;
 import com.panda.mojobs.web.rest.errors.ExceptionTranslator;
+import com.panda.mojobs.service.dto.BasicInformationCriteria;
+import com.panda.mojobs.service.BasicInformationQueryService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -90,6 +93,9 @@ public class BasicInformationResourceIntTest {
     private BasicInformationSearchRepository basicInformationSearchRepository;
 
     @Autowired
+    private BasicInformationQueryService basicInformationQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -108,7 +114,7 @@ public class BasicInformationResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final BasicInformationResource basicInformationResource = new BasicInformationResource(basicInformationService);
+        final BasicInformationResource basicInformationResource = new BasicInformationResource(basicInformationService, basicInformationQueryService);
         this.restBasicInformationMockMvc = MockMvcBuilders.standaloneSetup(basicInformationResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -378,6 +384,493 @@ public class BasicInformationResourceIntTest {
             .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE.toString()))
             .andExpect(jsonPath("$.wechat").value(DEFAULT_WECHAT.toString()));
     }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByLastNameIsEqualToSomething() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where lastName equals to DEFAULT_LAST_NAME
+        defaultBasicInformationShouldBeFound("lastName.equals=" + DEFAULT_LAST_NAME);
+
+        // Get all the basicInformationList where lastName equals to UPDATED_LAST_NAME
+        defaultBasicInformationShouldNotBeFound("lastName.equals=" + UPDATED_LAST_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByLastNameIsInShouldWork() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where lastName in DEFAULT_LAST_NAME or UPDATED_LAST_NAME
+        defaultBasicInformationShouldBeFound("lastName.in=" + DEFAULT_LAST_NAME + "," + UPDATED_LAST_NAME);
+
+        // Get all the basicInformationList where lastName equals to UPDATED_LAST_NAME
+        defaultBasicInformationShouldNotBeFound("lastName.in=" + UPDATED_LAST_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByLastNameIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where lastName is not null
+        defaultBasicInformationShouldBeFound("lastName.specified=true");
+
+        // Get all the basicInformationList where lastName is null
+        defaultBasicInformationShouldNotBeFound("lastName.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByFirstNameIsEqualToSomething() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where firstName equals to DEFAULT_FIRST_NAME
+        defaultBasicInformationShouldBeFound("firstName.equals=" + DEFAULT_FIRST_NAME);
+
+        // Get all the basicInformationList where firstName equals to UPDATED_FIRST_NAME
+        defaultBasicInformationShouldNotBeFound("firstName.equals=" + UPDATED_FIRST_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByFirstNameIsInShouldWork() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where firstName in DEFAULT_FIRST_NAME or UPDATED_FIRST_NAME
+        defaultBasicInformationShouldBeFound("firstName.in=" + DEFAULT_FIRST_NAME + "," + UPDATED_FIRST_NAME);
+
+        // Get all the basicInformationList where firstName equals to UPDATED_FIRST_NAME
+        defaultBasicInformationShouldNotBeFound("firstName.in=" + UPDATED_FIRST_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByFirstNameIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where firstName is not null
+        defaultBasicInformationShouldBeFound("firstName.specified=true");
+
+        // Get all the basicInformationList where firstName is null
+        defaultBasicInformationShouldNotBeFound("firstName.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByNationalityIsEqualToSomething() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where nationality equals to DEFAULT_NATIONALITY
+        defaultBasicInformationShouldBeFound("nationality.equals=" + DEFAULT_NATIONALITY);
+
+        // Get all the basicInformationList where nationality equals to UPDATED_NATIONALITY
+        defaultBasicInformationShouldNotBeFound("nationality.equals=" + UPDATED_NATIONALITY);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByNationalityIsInShouldWork() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where nationality in DEFAULT_NATIONALITY or UPDATED_NATIONALITY
+        defaultBasicInformationShouldBeFound("nationality.in=" + DEFAULT_NATIONALITY + "," + UPDATED_NATIONALITY);
+
+        // Get all the basicInformationList where nationality equals to UPDATED_NATIONALITY
+        defaultBasicInformationShouldNotBeFound("nationality.in=" + UPDATED_NATIONALITY);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByNationalityIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where nationality is not null
+        defaultBasicInformationShouldBeFound("nationality.specified=true");
+
+        // Get all the basicInformationList where nationality is null
+        defaultBasicInformationShouldNotBeFound("nationality.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByGenderIsEqualToSomething() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where gender equals to DEFAULT_GENDER
+        defaultBasicInformationShouldBeFound("gender.equals=" + DEFAULT_GENDER);
+
+        // Get all the basicInformationList where gender equals to UPDATED_GENDER
+        defaultBasicInformationShouldNotBeFound("gender.equals=" + UPDATED_GENDER);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByGenderIsInShouldWork() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where gender in DEFAULT_GENDER or UPDATED_GENDER
+        defaultBasicInformationShouldBeFound("gender.in=" + DEFAULT_GENDER + "," + UPDATED_GENDER);
+
+        // Get all the basicInformationList where gender equals to UPDATED_GENDER
+        defaultBasicInformationShouldNotBeFound("gender.in=" + UPDATED_GENDER);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByGenderIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where gender is not null
+        defaultBasicInformationShouldBeFound("gender.specified=true");
+
+        // Get all the basicInformationList where gender is null
+        defaultBasicInformationShouldNotBeFound("gender.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByDateofBrithIsEqualToSomething() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where dateofBrith equals to DEFAULT_DATEOF_BRITH
+        defaultBasicInformationShouldBeFound("dateofBrith.equals=" + DEFAULT_DATEOF_BRITH);
+
+        // Get all the basicInformationList where dateofBrith equals to UPDATED_DATEOF_BRITH
+        defaultBasicInformationShouldNotBeFound("dateofBrith.equals=" + UPDATED_DATEOF_BRITH);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByDateofBrithIsInShouldWork() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where dateofBrith in DEFAULT_DATEOF_BRITH or UPDATED_DATEOF_BRITH
+        defaultBasicInformationShouldBeFound("dateofBrith.in=" + DEFAULT_DATEOF_BRITH + "," + UPDATED_DATEOF_BRITH);
+
+        // Get all the basicInformationList where dateofBrith equals to UPDATED_DATEOF_BRITH
+        defaultBasicInformationShouldNotBeFound("dateofBrith.in=" + UPDATED_DATEOF_BRITH);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByDateofBrithIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where dateofBrith is not null
+        defaultBasicInformationShouldBeFound("dateofBrith.specified=true");
+
+        // Get all the basicInformationList where dateofBrith is null
+        defaultBasicInformationShouldNotBeFound("dateofBrith.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByDateofBrithIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where dateofBrith greater than or equals to DEFAULT_DATEOF_BRITH
+        defaultBasicInformationShouldBeFound("dateofBrith.greaterOrEqualThan=" + DEFAULT_DATEOF_BRITH);
+
+        // Get all the basicInformationList where dateofBrith greater than or equals to UPDATED_DATEOF_BRITH
+        defaultBasicInformationShouldNotBeFound("dateofBrith.greaterOrEqualThan=" + UPDATED_DATEOF_BRITH);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByDateofBrithIsLessThanSomething() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where dateofBrith less than or equals to DEFAULT_DATEOF_BRITH
+        defaultBasicInformationShouldNotBeFound("dateofBrith.lessThan=" + DEFAULT_DATEOF_BRITH);
+
+        // Get all the basicInformationList where dateofBrith less than or equals to UPDATED_DATEOF_BRITH
+        defaultBasicInformationShouldBeFound("dateofBrith.lessThan=" + UPDATED_DATEOF_BRITH);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByEducationLevelIsEqualToSomething() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where educationLevel equals to DEFAULT_EDUCATION_LEVEL
+        defaultBasicInformationShouldBeFound("educationLevel.equals=" + DEFAULT_EDUCATION_LEVEL);
+
+        // Get all the basicInformationList where educationLevel equals to UPDATED_EDUCATION_LEVEL
+        defaultBasicInformationShouldNotBeFound("educationLevel.equals=" + UPDATED_EDUCATION_LEVEL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByEducationLevelIsInShouldWork() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where educationLevel in DEFAULT_EDUCATION_LEVEL or UPDATED_EDUCATION_LEVEL
+        defaultBasicInformationShouldBeFound("educationLevel.in=" + DEFAULT_EDUCATION_LEVEL + "," + UPDATED_EDUCATION_LEVEL);
+
+        // Get all the basicInformationList where educationLevel equals to UPDATED_EDUCATION_LEVEL
+        defaultBasicInformationShouldNotBeFound("educationLevel.in=" + UPDATED_EDUCATION_LEVEL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByEducationLevelIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where educationLevel is not null
+        defaultBasicInformationShouldBeFound("educationLevel.specified=true");
+
+        // Get all the basicInformationList where educationLevel is null
+        defaultBasicInformationShouldNotBeFound("educationLevel.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByEmailIsEqualToSomething() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where email equals to DEFAULT_EMAIL
+        defaultBasicInformationShouldBeFound("email.equals=" + DEFAULT_EMAIL);
+
+        // Get all the basicInformationList where email equals to UPDATED_EMAIL
+        defaultBasicInformationShouldNotBeFound("email.equals=" + UPDATED_EMAIL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByEmailIsInShouldWork() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where email in DEFAULT_EMAIL or UPDATED_EMAIL
+        defaultBasicInformationShouldBeFound("email.in=" + DEFAULT_EMAIL + "," + UPDATED_EMAIL);
+
+        // Get all the basicInformationList where email equals to UPDATED_EMAIL
+        defaultBasicInformationShouldNotBeFound("email.in=" + UPDATED_EMAIL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByEmailIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where email is not null
+        defaultBasicInformationShouldBeFound("email.specified=true");
+
+        // Get all the basicInformationList where email is null
+        defaultBasicInformationShouldNotBeFound("email.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsBySkypeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where skype equals to DEFAULT_SKYPE
+        defaultBasicInformationShouldBeFound("skype.equals=" + DEFAULT_SKYPE);
+
+        // Get all the basicInformationList where skype equals to UPDATED_SKYPE
+        defaultBasicInformationShouldNotBeFound("skype.equals=" + UPDATED_SKYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsBySkypeIsInShouldWork() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where skype in DEFAULT_SKYPE or UPDATED_SKYPE
+        defaultBasicInformationShouldBeFound("skype.in=" + DEFAULT_SKYPE + "," + UPDATED_SKYPE);
+
+        // Get all the basicInformationList where skype equals to UPDATED_SKYPE
+        defaultBasicInformationShouldNotBeFound("skype.in=" + UPDATED_SKYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsBySkypeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where skype is not null
+        defaultBasicInformationShouldBeFound("skype.specified=true");
+
+        // Get all the basicInformationList where skype is null
+        defaultBasicInformationShouldNotBeFound("skype.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByPhoneIsEqualToSomething() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where phone equals to DEFAULT_PHONE
+        defaultBasicInformationShouldBeFound("phone.equals=" + DEFAULT_PHONE);
+
+        // Get all the basicInformationList where phone equals to UPDATED_PHONE
+        defaultBasicInformationShouldNotBeFound("phone.equals=" + UPDATED_PHONE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByPhoneIsInShouldWork() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where phone in DEFAULT_PHONE or UPDATED_PHONE
+        defaultBasicInformationShouldBeFound("phone.in=" + DEFAULT_PHONE + "," + UPDATED_PHONE);
+
+        // Get all the basicInformationList where phone equals to UPDATED_PHONE
+        defaultBasicInformationShouldNotBeFound("phone.in=" + UPDATED_PHONE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByPhoneIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where phone is not null
+        defaultBasicInformationShouldBeFound("phone.specified=true");
+
+        // Get all the basicInformationList where phone is null
+        defaultBasicInformationShouldNotBeFound("phone.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByWechatIsEqualToSomething() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where wechat equals to DEFAULT_WECHAT
+        defaultBasicInformationShouldBeFound("wechat.equals=" + DEFAULT_WECHAT);
+
+        // Get all the basicInformationList where wechat equals to UPDATED_WECHAT
+        defaultBasicInformationShouldNotBeFound("wechat.equals=" + UPDATED_WECHAT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByWechatIsInShouldWork() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where wechat in DEFAULT_WECHAT or UPDATED_WECHAT
+        defaultBasicInformationShouldBeFound("wechat.in=" + DEFAULT_WECHAT + "," + UPDATED_WECHAT);
+
+        // Get all the basicInformationList where wechat equals to UPDATED_WECHAT
+        defaultBasicInformationShouldNotBeFound("wechat.in=" + UPDATED_WECHAT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByWechatIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        basicInformationRepository.saveAndFlush(basicInformation);
+
+        // Get all the basicInformationList where wechat is not null
+        defaultBasicInformationShouldBeFound("wechat.specified=true");
+
+        // Get all the basicInformationList where wechat is null
+        defaultBasicInformationShouldNotBeFound("wechat.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByResumeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Resume resume = ResumeResourceIntTest.createEntity(em);
+        em.persist(resume);
+        em.flush();
+        basicInformation.setResume(resume);
+        resume.setBasicInformation(basicInformation);
+        basicInformationRepository.saveAndFlush(basicInformation);
+        Long resumeId = resume.getId();
+
+        // Get all the basicInformationList where resume equals to resumeId
+        defaultBasicInformationShouldBeFound("resumeId.equals=" + resumeId);
+
+        // Get all the basicInformationList where resume equals to resumeId + 1
+        defaultBasicInformationShouldNotBeFound("resumeId.equals=" + (resumeId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllBasicInformationsByImageIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Image image = ImageResourceIntTest.createEntity(em);
+        em.persist(image);
+        em.flush();
+        basicInformation.setImage(image);
+        basicInformationRepository.saveAndFlush(basicInformation);
+        Long imageId = image.getId();
+
+        // Get all the basicInformationList where image equals to imageId
+        defaultBasicInformationShouldBeFound("imageId.equals=" + imageId);
+
+        // Get all the basicInformationList where image equals to imageId + 1
+        defaultBasicInformationShouldNotBeFound("imageId.equals=" + (imageId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultBasicInformationShouldBeFound(String filter) throws Exception {
+        restBasicInformationMockMvc.perform(get("/api/basic-informations?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(basicInformation.getId().intValue())))
+            .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME.toString())))
+            .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME.toString())))
+            .andExpect(jsonPath("$.[*].nationality").value(hasItem(DEFAULT_NATIONALITY.toString())))
+            .andExpect(jsonPath("$.[*].gender").value(hasItem(DEFAULT_GENDER.toString())))
+            .andExpect(jsonPath("$.[*].dateofBrith").value(hasItem(DEFAULT_DATEOF_BRITH.toString())))
+            .andExpect(jsonPath("$.[*].educationLevel").value(hasItem(DEFAULT_EDUCATION_LEVEL.toString())))
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
+            .andExpect(jsonPath("$.[*].skype").value(hasItem(DEFAULT_SKYPE.toString())))
+            .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE.toString())))
+            .andExpect(jsonPath("$.[*].wechat").value(hasItem(DEFAULT_WECHAT.toString())));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultBasicInformationShouldNotBeFound(String filter) throws Exception {
+        restBasicInformationMockMvc.perform(get("/api/basic-informations?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+    }
+
 
     @Test
     @Transactional

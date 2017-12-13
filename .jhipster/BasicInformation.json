@@ -107,6 +107,6 @@
     "dto": "mapstruct",
     "service": "serviceImpl",
     "entityTableName": "basic_information",
-    "jpaMetamodelFiltering": false,
-    "pagination": "no"
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
 }

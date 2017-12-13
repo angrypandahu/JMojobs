@@ -6,7 +6,6 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
-import javax.persistence.Lob;
 import com.panda.mojobs.domain.enumeration.SchoolLevel;
 import com.panda.mojobs.domain.enumeration.SchoolType;
 
@@ -21,10 +20,6 @@ public class SchoolDTO implements Serializable {
     @Size(max = 100)
     private String name;
 
-    @Lob
-    private byte[] logo;
-    private String logoContentType;
-
     @NotNull
     private SchoolLevel level;
 
@@ -34,6 +29,8 @@ public class SchoolDTO implements Serializable {
     private Long addressId;
 
     private String addressName;
+
+    private Long imageId;
 
     public Long getId() {
         return id;
@@ -49,22 +46,6 @@ public class SchoolDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public byte[] getLogo() {
-        return logo;
-    }
-
-    public void setLogo(byte[] logo) {
-        this.logo = logo;
-    }
-
-    public String getLogoContentType() {
-        return logoContentType;
-    }
-
-    public void setLogoContentType(String logoContentType) {
-        this.logoContentType = logoContentType;
     }
 
     public SchoolLevel getLevel() {
@@ -99,6 +80,14 @@ public class SchoolDTO implements Serializable {
         this.addressName = addressName;
     }
 
+    public Long getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(Long imageId) {
+        this.imageId = imageId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -125,7 +114,6 @@ public class SchoolDTO implements Serializable {
         return "SchoolDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", logo='" + getLogo() + "'" +
             ", level='" + getLevel() + "'" +
             ", schoolType='" + getSchoolType() + "'" +
             "}";

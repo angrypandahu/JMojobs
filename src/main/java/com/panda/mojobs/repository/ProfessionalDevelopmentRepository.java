@@ -11,6 +11,6 @@ import org.springframework.data.jpa.repository.*;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface ProfessionalDevelopmentRepository extends JpaRepository<ProfessionalDevelopment, Long> {
+public interface ProfessionalDevelopmentRepository extends JpaRepository<ProfessionalDevelopment, Long>, JpaSpecificationExecutor<ProfessionalDevelopment> {
 
 }

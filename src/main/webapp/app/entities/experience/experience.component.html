@@ -28,17 +28,17 @@
     <div class="table-responsive" *ngIf="experiences">
         <table class="table table-striped">
             <thead>
-            <tr>
-            <th><span>ID</span></th>
-            <th><span>Title</span></th>
-            <th><span>School</span></th>
-            <th><span>Grade</span></th>
-            <th><span>Location</span></th>
-            <th><span>From Date</span></th>
-            <th><span>To Date</span></th>
-            <th><span>Currently Work Here</span></th>
-            <th><span>Responsibility</span></th>
-            <th><span>Resume</span></th>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="title"><span>Title</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="school"><span>School</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="grade"><span>Grade</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="location"><span>Location</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="fromDate"><span>From Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="toDate"><span>To Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="currentlyWorkHere"><span>Currently Work Here</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="responsibility"><span>Responsibility</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="resumeName"><span>Resume</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -86,4 +86,12 @@
             </tbody>
         </table>
     </div>
+        <div *ngIf="experiences && experiences.length">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [maxSize]="5" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
 </div>

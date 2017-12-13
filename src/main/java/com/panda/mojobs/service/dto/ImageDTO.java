@@ -1,11 +1,10 @@
 package com.panda.mojobs.service.dto;
 
 
-import javax.persistence.Lob;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Lob;
 
 /**
  * A DTO for the Image entity.
@@ -19,16 +18,6 @@ public class ImageDTO implements Serializable {
     @Lob
     private byte[] img;
     private String imgContentType;
-
-    private String imgBase64;
-
-    public String getImgBase64() {
-        return imgBase64;
-    }
-
-    public void setImgBase64(String imgBase64) {
-        this.imgBase64 = imgBase64;
-    }
 
     public Long getId() {
         return id;
@@ -64,7 +53,7 @@ public class ImageDTO implements Serializable {
         }
 
         ImageDTO imageDTO = (ImageDTO) o;
-        if (imageDTO.getId() == null || getId() == null) {
+        if(imageDTO.getId() == null || getId() == null) {
             return false;
         }
         return Objects.equals(getId(), imageDTO.getId());

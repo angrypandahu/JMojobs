@@ -1,7 +1,8 @@
 package com.panda.mojobs.service;
 
 import com.panda.mojobs.service.dto.EducationBackgroundDTO;
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Service Interface for managing EducationBackground.
@@ -19,9 +20,10 @@ public interface EducationBackgroundService {
     /**
      *  Get all the educationBackgrounds.
      *
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
-    List<EducationBackgroundDTO> findAll();
+    Page<EducationBackgroundDTO> findAll(Pageable pageable);
 
     /**
      *  Get the "id" educationBackground.
@@ -43,7 +45,8 @@ public interface EducationBackgroundService {
      *
      *  @param query the query of the search
      *  
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
-    List<EducationBackgroundDTO> search(String query);
+    Page<EducationBackgroundDTO> search(String query, Pageable pageable);
 }

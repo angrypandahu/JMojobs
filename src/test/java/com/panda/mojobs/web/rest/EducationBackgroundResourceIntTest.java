@@ -3,12 +3,15 @@ package com.panda.mojobs.web.rest;
 import com.panda.mojobs.JmojobsApp;
 
 import com.panda.mojobs.domain.EducationBackground;
+import com.panda.mojobs.domain.Resume;
 import com.panda.mojobs.repository.EducationBackgroundRepository;
 import com.panda.mojobs.service.EducationBackgroundService;
 import com.panda.mojobs.repository.search.EducationBackgroundSearchRepository;
 import com.panda.mojobs.service.dto.EducationBackgroundDTO;
 import com.panda.mojobs.service.mapper.EducationBackgroundMapper;
 import com.panda.mojobs.web.rest.errors.ExceptionTranslator;
+import com.panda.mojobs.service.dto.EducationBackgroundCriteria;
+import com.panda.mojobs.service.EducationBackgroundQueryService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -76,6 +79,9 @@ public class EducationBackgroundResourceIntTest {
     private EducationBackgroundSearchRepository educationBackgroundSearchRepository;
 
     @Autowired
+    private EducationBackgroundQueryService educationBackgroundQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -94,7 +100,7 @@ public class EducationBackgroundResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final EducationBackgroundResource educationBackgroundResource = new EducationBackgroundResource(educationBackgroundService);
+        final EducationBackgroundResource educationBackgroundResource = new EducationBackgroundResource(educationBackgroundService, educationBackgroundQueryService);
         this.restEducationBackgroundMockMvc = MockMvcBuilders.standaloneSetup(educationBackgroundResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -324,6 +330,340 @@ public class EducationBackgroundResourceIntTest {
             .andExpect(jsonPath("$.fromDate").value(DEFAULT_FROM_DATE.toString()))
             .andExpect(jsonPath("$.toDate").value(DEFAULT_TO_DATE.toString()));
     }
+
+    @Test
+    @Transactional
+    public void getAllEducationBackgroundsBySchoolIsEqualToSomething() throws Exception {
+        // Initialize the database
+        educationBackgroundRepository.saveAndFlush(educationBackground);
+
+        // Get all the educationBackgroundList where school equals to DEFAULT_SCHOOL
+        defaultEducationBackgroundShouldBeFound("school.equals=" + DEFAULT_SCHOOL);
+
+        // Get all the educationBackgroundList where school equals to UPDATED_SCHOOL
+        defaultEducationBackgroundShouldNotBeFound("school.equals=" + UPDATED_SCHOOL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllEducationBackgroundsBySchoolIsInShouldWork() throws Exception {
+        // Initialize the database
+        educationBackgroundRepository.saveAndFlush(educationBackground);
+
+        // Get all the educationBackgroundList where school in DEFAULT_SCHOOL or UPDATED_SCHOOL
+        defaultEducationBackgroundShouldBeFound("school.in=" + DEFAULT_SCHOOL + "," + UPDATED_SCHOOL);
+
+        // Get all the educationBackgroundList where school equals to UPDATED_SCHOOL
+        defaultEducationBackgroundShouldNotBeFound("school.in=" + UPDATED_SCHOOL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllEducationBackgroundsBySchoolIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        educationBackgroundRepository.saveAndFlush(educationBackground);
+
+        // Get all the educationBackgroundList where school is not null
+        defaultEducationBackgroundShouldBeFound("school.specified=true");
+
+        // Get all the educationBackgroundList where school is null
+        defaultEducationBackgroundShouldNotBeFound("school.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllEducationBackgroundsByMajorIsEqualToSomething() throws Exception {
+        // Initialize the database
+        educationBackgroundRepository.saveAndFlush(educationBackground);
+
+        // Get all the educationBackgroundList where major equals to DEFAULT_MAJOR
+        defaultEducationBackgroundShouldBeFound("major.equals=" + DEFAULT_MAJOR);
+
+        // Get all the educationBackgroundList where major equals to UPDATED_MAJOR
+        defaultEducationBackgroundShouldNotBeFound("major.equals=" + UPDATED_MAJOR);
+    }
+
+    @Test
+    @Transactional
+    public void getAllEducationBackgroundsByMajorIsInShouldWork() throws Exception {
+        // Initialize the database
+        educationBackgroundRepository.saveAndFlush(educationBackground);
+
+        // Get all the educationBackgroundList where major in DEFAULT_MAJOR or UPDATED_MAJOR
+        defaultEducationBackgroundShouldBeFound("major.in=" + DEFAULT_MAJOR + "," + UPDATED_MAJOR);
+
+        // Get all the educationBackgroundList where major equals to UPDATED_MAJOR
+        defaultEducationBackgroundShouldNotBeFound("major.in=" + UPDATED_MAJOR);
+    }
+
+    @Test
+    @Transactional
+    public void getAllEducationBackgroundsByMajorIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        educationBackgroundRepository.saveAndFlush(educationBackground);
+
+        // Get all the educationBackgroundList where major is not null
+        defaultEducationBackgroundShouldBeFound("major.specified=true");
+
+        // Get all the educationBackgroundList where major is null
+        defaultEducationBackgroundShouldNotBeFound("major.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllEducationBackgroundsByDegreeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        educationBackgroundRepository.saveAndFlush(educationBackground);
+
+        // Get all the educationBackgroundList where degree equals to DEFAULT_DEGREE
+        defaultEducationBackgroundShouldBeFound("degree.equals=" + DEFAULT_DEGREE);
+
+        // Get all the educationBackgroundList where degree equals to UPDATED_DEGREE
+        defaultEducationBackgroundShouldNotBeFound("degree.equals=" + UPDATED_DEGREE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllEducationBackgroundsByDegreeIsInShouldWork() throws Exception {
+        // Initialize the database
+        educationBackgroundRepository.saveAndFlush(educationBackground);
+
+        // Get all the educationBackgroundList where degree in DEFAULT_DEGREE or UPDATED_DEGREE
+        defaultEducationBackgroundShouldBeFound("degree.in=" + DEFAULT_DEGREE + "," + UPDATED_DEGREE);
+
+        // Get all the educationBackgroundList where degree equals to UPDATED_DEGREE
+        defaultEducationBackgroundShouldNotBeFound("degree.in=" + UPDATED_DEGREE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllEducationBackgroundsByDegreeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        educationBackgroundRepository.saveAndFlush(educationBackground);
+
+        // Get all the educationBackgroundList where degree is not null
+        defaultEducationBackgroundShouldBeFound("degree.specified=true");
+
+        // Get all the educationBackgroundList where degree is null
+        defaultEducationBackgroundShouldNotBeFound("degree.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllEducationBackgroundsByLocationIsEqualToSomething() throws Exception {
+        // Initialize the database
+        educationBackgroundRepository.saveAndFlush(educationBackground);
+
+        // Get all the educationBackgroundList where location equals to DEFAULT_LOCATION
+        defaultEducationBackgroundShouldBeFound("location.equals=" + DEFAULT_LOCATION);
+
+        // Get all the educationBackgroundList where location equals to UPDATED_LOCATION
+        defaultEducationBackgroundShouldNotBeFound("location.equals=" + UPDATED_LOCATION);
+    }
+
+    @Test
+    @Transactional
+    public void getAllEducationBackgroundsByLocationIsInShouldWork() throws Exception {
+        // Initialize the database
+        educationBackgroundRepository.saveAndFlush(educationBackground);
+
+        // Get all the educationBackgroundList where location in DEFAULT_LOCATION or UPDATED_LOCATION
+        defaultEducationBackgroundShouldBeFound("location.in=" + DEFAULT_LOCATION + "," + UPDATED_LOCATION);
+
+        // Get all the educationBackgroundList where location equals to UPDATED_LOCATION
+        defaultEducationBackgroundShouldNotBeFound("location.in=" + UPDATED_LOCATION);
+    }
+
+    @Test
+    @Transactional
+    public void getAllEducationBackgroundsByLocationIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        educationBackgroundRepository.saveAndFlush(educationBackground);
+
+        // Get all the educationBackgroundList where location is not null
+        defaultEducationBackgroundShouldBeFound("location.specified=true");
+
+        // Get all the educationBackgroundList where location is null
+        defaultEducationBackgroundShouldNotBeFound("location.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllEducationBackgroundsByFromDateIsEqualToSomething() throws Exception {
+        // Initialize the database
+        educationBackgroundRepository.saveAndFlush(educationBackground);
+
+        // Get all the educationBackgroundList where fromDate equals to DEFAULT_FROM_DATE
+        defaultEducationBackgroundShouldBeFound("fromDate.equals=" + DEFAULT_FROM_DATE);
+
+        // Get all the educationBackgroundList where fromDate equals to UPDATED_FROM_DATE
+        defaultEducationBackgroundShouldNotBeFound("fromDate.equals=" + UPDATED_FROM_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllEducationBackgroundsByFromDateIsInShouldWork() throws Exception {
+        // Initialize the database
+        educationBackgroundRepository.saveAndFlush(educationBackground);
+
+        // Get all the educationBackgroundList where fromDate in DEFAULT_FROM_DATE or UPDATED_FROM_DATE
+        defaultEducationBackgroundShouldBeFound("fromDate.in=" + DEFAULT_FROM_DATE + "," + UPDATED_FROM_DATE);
+
+        // Get all the educationBackgroundList where fromDate equals to UPDATED_FROM_DATE
+        defaultEducationBackgroundShouldNotBeFound("fromDate.in=" + UPDATED_FROM_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllEducationBackgroundsByFromDateIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        educationBackgroundRepository.saveAndFlush(educationBackground);
+
+        // Get all the educationBackgroundList where fromDate is not null
+        defaultEducationBackgroundShouldBeFound("fromDate.specified=true");
+
+        // Get all the educationBackgroundList where fromDate is null
+        defaultEducationBackgroundShouldNotBeFound("fromDate.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllEducationBackgroundsByFromDateIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        educationBackgroundRepository.saveAndFlush(educationBackground);
+
+        // Get all the educationBackgroundList where fromDate greater than or equals to DEFAULT_FROM_DATE
+        defaultEducationBackgroundShouldBeFound("fromDate.greaterOrEqualThan=" + DEFAULT_FROM_DATE);
+
+        // Get all the educationBackgroundList where fromDate greater than or equals to UPDATED_FROM_DATE
+        defaultEducationBackgroundShouldNotBeFound("fromDate.greaterOrEqualThan=" + UPDATED_FROM_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllEducationBackgroundsByFromDateIsLessThanSomething() throws Exception {
+        // Initialize the database
+        educationBackgroundRepository.saveAndFlush(educationBackground);
+
+        // Get all the educationBackgroundList where fromDate less than or equals to DEFAULT_FROM_DATE
+        defaultEducationBackgroundShouldNotBeFound("fromDate.lessThan=" + DEFAULT_FROM_DATE);
+
+        // Get all the educationBackgroundList where fromDate less than or equals to UPDATED_FROM_DATE
+        defaultEducationBackgroundShouldBeFound("fromDate.lessThan=" + UPDATED_FROM_DATE);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllEducationBackgroundsByToDateIsEqualToSomething() throws Exception {
+        // Initialize the database
+        educationBackgroundRepository.saveAndFlush(educationBackground);
+
+        // Get all the educationBackgroundList where toDate equals to DEFAULT_TO_DATE
+        defaultEducationBackgroundShouldBeFound("toDate.equals=" + DEFAULT_TO_DATE);
+
+        // Get all the educationBackgroundList where toDate equals to UPDATED_TO_DATE
+        defaultEducationBackgroundShouldNotBeFound("toDate.equals=" + UPDATED_TO_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllEducationBackgroundsByToDateIsInShouldWork() throws Exception {
+        // Initialize the database
+        educationBackgroundRepository.saveAndFlush(educationBackground);
+
+        // Get all the educationBackgroundList where toDate in DEFAULT_TO_DATE or UPDATED_TO_DATE
+        defaultEducationBackgroundShouldBeFound("toDate.in=" + DEFAULT_TO_DATE + "," + UPDATED_TO_DATE);
+
+        // Get all the educationBackgroundList where toDate equals to UPDATED_TO_DATE
+        defaultEducationBackgroundShouldNotBeFound("toDate.in=" + UPDATED_TO_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllEducationBackgroundsByToDateIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        educationBackgroundRepository.saveAndFlush(educationBackground);
+
+        // Get all the educationBackgroundList where toDate is not null
+        defaultEducationBackgroundShouldBeFound("toDate.specified=true");
+
+        // Get all the educationBackgroundList where toDate is null
+        defaultEducationBackgroundShouldNotBeFound("toDate.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllEducationBackgroundsByToDateIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        educationBackgroundRepository.saveAndFlush(educationBackground);
+
+        // Get all the educationBackgroundList where toDate greater than or equals to DEFAULT_TO_DATE
+        defaultEducationBackgroundShouldBeFound("toDate.greaterOrEqualThan=" + DEFAULT_TO_DATE);
+
+        // Get all the educationBackgroundList where toDate greater than or equals to UPDATED_TO_DATE
+        defaultEducationBackgroundShouldNotBeFound("toDate.greaterOrEqualThan=" + UPDATED_TO_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllEducationBackgroundsByToDateIsLessThanSomething() throws Exception {
+        // Initialize the database
+        educationBackgroundRepository.saveAndFlush(educationBackground);
+
+        // Get all the educationBackgroundList where toDate less than or equals to DEFAULT_TO_DATE
+        defaultEducationBackgroundShouldNotBeFound("toDate.lessThan=" + DEFAULT_TO_DATE);
+
+        // Get all the educationBackgroundList where toDate less than or equals to UPDATED_TO_DATE
+        defaultEducationBackgroundShouldBeFound("toDate.lessThan=" + UPDATED_TO_DATE);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllEducationBackgroundsByResumeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Resume resume = ResumeResourceIntTest.createEntity(em);
+        em.persist(resume);
+        em.flush();
+        educationBackground.setResume(resume);
+        educationBackgroundRepository.saveAndFlush(educationBackground);
+        Long resumeId = resume.getId();
+
+        // Get all the educationBackgroundList where resume equals to resumeId
+        defaultEducationBackgroundShouldBeFound("resumeId.equals=" + resumeId);
+
+        // Get all the educationBackgroundList where resume equals to resumeId + 1
+        defaultEducationBackgroundShouldNotBeFound("resumeId.equals=" + (resumeId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultEducationBackgroundShouldBeFound(String filter) throws Exception {
+        restEducationBackgroundMockMvc.perform(get("/api/education-backgrounds?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(educationBackground.getId().intValue())))
+            .andExpect(jsonPath("$.[*].school").value(hasItem(DEFAULT_SCHOOL.toString())))
+            .andExpect(jsonPath("$.[*].major").value(hasItem(DEFAULT_MAJOR.toString())))
+            .andExpect(jsonPath("$.[*].degree").value(hasItem(DEFAULT_DEGREE.toString())))
+            .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION.toString())))
+            .andExpect(jsonPath("$.[*].fromDate").value(hasItem(DEFAULT_FROM_DATE.toString())))
+            .andExpect(jsonPath("$.[*].toDate").value(hasItem(DEFAULT_TO_DATE.toString())));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultEducationBackgroundShouldNotBeFound(String filter) throws Exception {
+        restEducationBackgroundMockMvc.perform(get("/api/education-backgrounds?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+    }
+
 
     @Test
     @Transactional

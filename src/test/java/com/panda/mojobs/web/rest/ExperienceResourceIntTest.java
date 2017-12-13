@@ -3,12 +3,15 @@ package com.panda.mojobs.web.rest;
 import com.panda.mojobs.JmojobsApp;
 
 import com.panda.mojobs.domain.Experience;
+import com.panda.mojobs.domain.Resume;
 import com.panda.mojobs.repository.ExperienceRepository;
 import com.panda.mojobs.service.ExperienceService;
 import com.panda.mojobs.repository.search.ExperienceSearchRepository;
 import com.panda.mojobs.service.dto.ExperienceDTO;
 import com.panda.mojobs.service.mapper.ExperienceMapper;
 import com.panda.mojobs.web.rest.errors.ExceptionTranslator;
+import com.panda.mojobs.service.dto.ExperienceCriteria;
+import com.panda.mojobs.service.ExperienceQueryService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -81,6 +84,9 @@ public class ExperienceResourceIntTest {
     private ExperienceSearchRepository experienceSearchRepository;
 
     @Autowired
+    private ExperienceQueryService experienceQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -99,7 +105,7 @@ public class ExperienceResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ExperienceResource experienceResource = new ExperienceResource(experienceService);
+        final ExperienceResource experienceResource = new ExperienceResource(experienceService, experienceQueryService);
         this.restExperienceMockMvc = MockMvcBuilders.standaloneSetup(experienceResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -318,6 +324,420 @@ public class ExperienceResourceIntTest {
             .andExpect(jsonPath("$.currentlyWorkHere").value(DEFAULT_CURRENTLY_WORK_HERE.booleanValue()))
             .andExpect(jsonPath("$.responsibility").value(DEFAULT_RESPONSIBILITY.toString()));
     }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByTitleIsEqualToSomething() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where title equals to DEFAULT_TITLE
+        defaultExperienceShouldBeFound("title.equals=" + DEFAULT_TITLE);
+
+        // Get all the experienceList where title equals to UPDATED_TITLE
+        defaultExperienceShouldNotBeFound("title.equals=" + UPDATED_TITLE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByTitleIsInShouldWork() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where title in DEFAULT_TITLE or UPDATED_TITLE
+        defaultExperienceShouldBeFound("title.in=" + DEFAULT_TITLE + "," + UPDATED_TITLE);
+
+        // Get all the experienceList where title equals to UPDATED_TITLE
+        defaultExperienceShouldNotBeFound("title.in=" + UPDATED_TITLE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByTitleIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where title is not null
+        defaultExperienceShouldBeFound("title.specified=true");
+
+        // Get all the experienceList where title is null
+        defaultExperienceShouldNotBeFound("title.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesBySchoolIsEqualToSomething() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where school equals to DEFAULT_SCHOOL
+        defaultExperienceShouldBeFound("school.equals=" + DEFAULT_SCHOOL);
+
+        // Get all the experienceList where school equals to UPDATED_SCHOOL
+        defaultExperienceShouldNotBeFound("school.equals=" + UPDATED_SCHOOL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesBySchoolIsInShouldWork() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where school in DEFAULT_SCHOOL or UPDATED_SCHOOL
+        defaultExperienceShouldBeFound("school.in=" + DEFAULT_SCHOOL + "," + UPDATED_SCHOOL);
+
+        // Get all the experienceList where school equals to UPDATED_SCHOOL
+        defaultExperienceShouldNotBeFound("school.in=" + UPDATED_SCHOOL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesBySchoolIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where school is not null
+        defaultExperienceShouldBeFound("school.specified=true");
+
+        // Get all the experienceList where school is null
+        defaultExperienceShouldNotBeFound("school.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByGradeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where grade equals to DEFAULT_GRADE
+        defaultExperienceShouldBeFound("grade.equals=" + DEFAULT_GRADE);
+
+        // Get all the experienceList where grade equals to UPDATED_GRADE
+        defaultExperienceShouldNotBeFound("grade.equals=" + UPDATED_GRADE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByGradeIsInShouldWork() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where grade in DEFAULT_GRADE or UPDATED_GRADE
+        defaultExperienceShouldBeFound("grade.in=" + DEFAULT_GRADE + "," + UPDATED_GRADE);
+
+        // Get all the experienceList where grade equals to UPDATED_GRADE
+        defaultExperienceShouldNotBeFound("grade.in=" + UPDATED_GRADE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByGradeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where grade is not null
+        defaultExperienceShouldBeFound("grade.specified=true");
+
+        // Get all the experienceList where grade is null
+        defaultExperienceShouldNotBeFound("grade.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByLocationIsEqualToSomething() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where location equals to DEFAULT_LOCATION
+        defaultExperienceShouldBeFound("location.equals=" + DEFAULT_LOCATION);
+
+        // Get all the experienceList where location equals to UPDATED_LOCATION
+        defaultExperienceShouldNotBeFound("location.equals=" + UPDATED_LOCATION);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByLocationIsInShouldWork() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where location in DEFAULT_LOCATION or UPDATED_LOCATION
+        defaultExperienceShouldBeFound("location.in=" + DEFAULT_LOCATION + "," + UPDATED_LOCATION);
+
+        // Get all the experienceList where location equals to UPDATED_LOCATION
+        defaultExperienceShouldNotBeFound("location.in=" + UPDATED_LOCATION);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByLocationIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where location is not null
+        defaultExperienceShouldBeFound("location.specified=true");
+
+        // Get all the experienceList where location is null
+        defaultExperienceShouldNotBeFound("location.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByFromDateIsEqualToSomething() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where fromDate equals to DEFAULT_FROM_DATE
+        defaultExperienceShouldBeFound("fromDate.equals=" + DEFAULT_FROM_DATE);
+
+        // Get all the experienceList where fromDate equals to UPDATED_FROM_DATE
+        defaultExperienceShouldNotBeFound("fromDate.equals=" + UPDATED_FROM_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByFromDateIsInShouldWork() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where fromDate in DEFAULT_FROM_DATE or UPDATED_FROM_DATE
+        defaultExperienceShouldBeFound("fromDate.in=" + DEFAULT_FROM_DATE + "," + UPDATED_FROM_DATE);
+
+        // Get all the experienceList where fromDate equals to UPDATED_FROM_DATE
+        defaultExperienceShouldNotBeFound("fromDate.in=" + UPDATED_FROM_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByFromDateIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where fromDate is not null
+        defaultExperienceShouldBeFound("fromDate.specified=true");
+
+        // Get all the experienceList where fromDate is null
+        defaultExperienceShouldNotBeFound("fromDate.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByFromDateIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where fromDate greater than or equals to DEFAULT_FROM_DATE
+        defaultExperienceShouldBeFound("fromDate.greaterOrEqualThan=" + DEFAULT_FROM_DATE);
+
+        // Get all the experienceList where fromDate greater than or equals to UPDATED_FROM_DATE
+        defaultExperienceShouldNotBeFound("fromDate.greaterOrEqualThan=" + UPDATED_FROM_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByFromDateIsLessThanSomething() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where fromDate less than or equals to DEFAULT_FROM_DATE
+        defaultExperienceShouldNotBeFound("fromDate.lessThan=" + DEFAULT_FROM_DATE);
+
+        // Get all the experienceList where fromDate less than or equals to UPDATED_FROM_DATE
+        defaultExperienceShouldBeFound("fromDate.lessThan=" + UPDATED_FROM_DATE);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByToDateIsEqualToSomething() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where toDate equals to DEFAULT_TO_DATE
+        defaultExperienceShouldBeFound("toDate.equals=" + DEFAULT_TO_DATE);
+
+        // Get all the experienceList where toDate equals to UPDATED_TO_DATE
+        defaultExperienceShouldNotBeFound("toDate.equals=" + UPDATED_TO_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByToDateIsInShouldWork() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where toDate in DEFAULT_TO_DATE or UPDATED_TO_DATE
+        defaultExperienceShouldBeFound("toDate.in=" + DEFAULT_TO_DATE + "," + UPDATED_TO_DATE);
+
+        // Get all the experienceList where toDate equals to UPDATED_TO_DATE
+        defaultExperienceShouldNotBeFound("toDate.in=" + UPDATED_TO_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByToDateIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where toDate is not null
+        defaultExperienceShouldBeFound("toDate.specified=true");
+
+        // Get all the experienceList where toDate is null
+        defaultExperienceShouldNotBeFound("toDate.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByToDateIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where toDate greater than or equals to DEFAULT_TO_DATE
+        defaultExperienceShouldBeFound("toDate.greaterOrEqualThan=" + DEFAULT_TO_DATE);
+
+        // Get all the experienceList where toDate greater than or equals to UPDATED_TO_DATE
+        defaultExperienceShouldNotBeFound("toDate.greaterOrEqualThan=" + UPDATED_TO_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByToDateIsLessThanSomething() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where toDate less than or equals to DEFAULT_TO_DATE
+        defaultExperienceShouldNotBeFound("toDate.lessThan=" + DEFAULT_TO_DATE);
+
+        // Get all the experienceList where toDate less than or equals to UPDATED_TO_DATE
+        defaultExperienceShouldBeFound("toDate.lessThan=" + UPDATED_TO_DATE);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByCurrentlyWorkHereIsEqualToSomething() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where currentlyWorkHere equals to DEFAULT_CURRENTLY_WORK_HERE
+        defaultExperienceShouldBeFound("currentlyWorkHere.equals=" + DEFAULT_CURRENTLY_WORK_HERE);
+
+        // Get all the experienceList where currentlyWorkHere equals to UPDATED_CURRENTLY_WORK_HERE
+        defaultExperienceShouldNotBeFound("currentlyWorkHere.equals=" + UPDATED_CURRENTLY_WORK_HERE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByCurrentlyWorkHereIsInShouldWork() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where currentlyWorkHere in DEFAULT_CURRENTLY_WORK_HERE or UPDATED_CURRENTLY_WORK_HERE
+        defaultExperienceShouldBeFound("currentlyWorkHere.in=" + DEFAULT_CURRENTLY_WORK_HERE + "," + UPDATED_CURRENTLY_WORK_HERE);
+
+        // Get all the experienceList where currentlyWorkHere equals to UPDATED_CURRENTLY_WORK_HERE
+        defaultExperienceShouldNotBeFound("currentlyWorkHere.in=" + UPDATED_CURRENTLY_WORK_HERE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByCurrentlyWorkHereIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where currentlyWorkHere is not null
+        defaultExperienceShouldBeFound("currentlyWorkHere.specified=true");
+
+        // Get all the experienceList where currentlyWorkHere is null
+        defaultExperienceShouldNotBeFound("currentlyWorkHere.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByResponsibilityIsEqualToSomething() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where responsibility equals to DEFAULT_RESPONSIBILITY
+        defaultExperienceShouldBeFound("responsibility.equals=" + DEFAULT_RESPONSIBILITY);
+
+        // Get all the experienceList where responsibility equals to UPDATED_RESPONSIBILITY
+        defaultExperienceShouldNotBeFound("responsibility.equals=" + UPDATED_RESPONSIBILITY);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByResponsibilityIsInShouldWork() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where responsibility in DEFAULT_RESPONSIBILITY or UPDATED_RESPONSIBILITY
+        defaultExperienceShouldBeFound("responsibility.in=" + DEFAULT_RESPONSIBILITY + "," + UPDATED_RESPONSIBILITY);
+
+        // Get all the experienceList where responsibility equals to UPDATED_RESPONSIBILITY
+        defaultExperienceShouldNotBeFound("responsibility.in=" + UPDATED_RESPONSIBILITY);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByResponsibilityIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        experienceRepository.saveAndFlush(experience);
+
+        // Get all the experienceList where responsibility is not null
+        defaultExperienceShouldBeFound("responsibility.specified=true");
+
+        // Get all the experienceList where responsibility is null
+        defaultExperienceShouldNotBeFound("responsibility.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllExperiencesByResumeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Resume resume = ResumeResourceIntTest.createEntity(em);
+        em.persist(resume);
+        em.flush();
+        experience.setResume(resume);
+        experienceRepository.saveAndFlush(experience);
+        Long resumeId = resume.getId();
+
+        // Get all the experienceList where resume equals to resumeId
+        defaultExperienceShouldBeFound("resumeId.equals=" + resumeId);
+
+        // Get all the experienceList where resume equals to resumeId + 1
+        defaultExperienceShouldNotBeFound("resumeId.equals=" + (resumeId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultExperienceShouldBeFound(String filter) throws Exception {
+        restExperienceMockMvc.perform(get("/api/experiences?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(experience.getId().intValue())))
+            .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE.toString())))
+            .andExpect(jsonPath("$.[*].school").value(hasItem(DEFAULT_SCHOOL.toString())))
+            .andExpect(jsonPath("$.[*].grade").value(hasItem(DEFAULT_GRADE.toString())))
+            .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION.toString())))
+            .andExpect(jsonPath("$.[*].fromDate").value(hasItem(DEFAULT_FROM_DATE.toString())))
+            .andExpect(jsonPath("$.[*].toDate").value(hasItem(DEFAULT_TO_DATE.toString())))
+            .andExpect(jsonPath("$.[*].currentlyWorkHere").value(hasItem(DEFAULT_CURRENTLY_WORK_HERE.booleanValue())))
+            .andExpect(jsonPath("$.[*].responsibility").value(hasItem(DEFAULT_RESPONSIBILITY.toString())));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultExperienceShouldNotBeFound(String filter) throws Exception {
+        restExperienceMockMvc.perform(get("/api/experiences?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+    }
+
 
     @Test
     @Transactional

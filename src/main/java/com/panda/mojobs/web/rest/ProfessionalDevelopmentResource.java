@@ -5,6 +5,8 @@ import com.panda.mojobs.service.ProfessionalDevelopmentService;
 import com.panda.mojobs.web.rest.errors.BadRequestAlertException;
 import com.panda.mojobs.web.rest.util.HeaderUtil;
 import com.panda.mojobs.service.dto.ProfessionalDevelopmentDTO;
+import com.panda.mojobs.service.dto.ProfessionalDevelopmentCriteria;
+import com.panda.mojobs.service.ProfessionalDevelopmentQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,8 +36,11 @@ public class ProfessionalDevelopmentResource {
 
     private final ProfessionalDevelopmentService professionalDevelopmentService;
 
-    public ProfessionalDevelopmentResource(ProfessionalDevelopmentService professionalDevelopmentService) {
+    private final ProfessionalDevelopmentQueryService professionalDevelopmentQueryService;
+
+    public ProfessionalDevelopmentResource(ProfessionalDevelopmentService professionalDevelopmentService, ProfessionalDevelopmentQueryService professionalDevelopmentQueryService) {
         this.professionalDevelopmentService = professionalDevelopmentService;
+        this.professionalDevelopmentQueryService = professionalDevelopmentQueryService;
     }
 
     /**
@@ -83,14 +88,16 @@ public class ProfessionalDevelopmentResource {
     /**
      * GET  /professional-developments : get all the professionalDevelopments.
      *
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of professionalDevelopments in body
      */
     @GetMapping("/professional-developments")
     @Timed
-    public List<ProfessionalDevelopmentDTO> getAllProfessionalDevelopments() {
-        log.debug("REST request to get all ProfessionalDevelopments");
-        return professionalDevelopmentService.findAll();
-        }
+    public ResponseEntity<List<ProfessionalDevelopmentDTO>> getAllProfessionalDevelopments(ProfessionalDevelopmentCriteria criteria) {
+        log.debug("REST request to get ProfessionalDevelopments by criteria: {}", criteria);
+        List<ProfessionalDevelopmentDTO> entityList = professionalDevelopmentQueryService.findByCriteria(criteria);
+        return ResponseEntity.ok().body(entityList);
+    }
 
     /**
      * GET  /professional-developments/:id : get the "id" professionalDevelopment.

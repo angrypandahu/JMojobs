@@ -9,6 +9,8 @@ import com.panda.mojobs.repository.search.AddressSearchRepository;
 import com.panda.mojobs.service.dto.AddressDTO;
 import com.panda.mojobs.service.mapper.AddressMapper;
 import com.panda.mojobs.web.rest.errors.ExceptionTranslator;
+import com.panda.mojobs.service.dto.AddressCriteria;
+import com.panda.mojobs.service.AddressQueryService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -71,6 +73,9 @@ public class AddressResourceIntTest {
     private AddressSearchRepository addressSearchRepository;
 
     @Autowired
+    private AddressQueryService addressQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -89,7 +94,7 @@ public class AddressResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final AddressResource addressResource = new AddressResource(addressService);
+        final AddressResource addressResource = new AddressResource(addressService, addressQueryService);
         this.restAddressMockMvc = MockMvcBuilders.standaloneSetup(addressResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -220,6 +225,227 @@ public class AddressResourceIntTest {
             .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE.toString()))
             .andExpect(jsonPath("$.line").value(DEFAULT_LINE.toString()));
     }
+
+    @Test
+    @Transactional
+    public void getAllAddressesByNameIsEqualToSomething() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where name equals to DEFAULT_NAME
+        defaultAddressShouldBeFound("name.equals=" + DEFAULT_NAME);
+
+        // Get all the addressList where name equals to UPDATED_NAME
+        defaultAddressShouldNotBeFound("name.equals=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllAddressesByNameIsInShouldWork() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultAddressShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
+
+        // Get all the addressList where name equals to UPDATED_NAME
+        defaultAddressShouldNotBeFound("name.in=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllAddressesByNameIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where name is not null
+        defaultAddressShouldBeFound("name.specified=true");
+
+        // Get all the addressList where name is null
+        defaultAddressShouldNotBeFound("name.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllAddressesByMobileIsEqualToSomething() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where mobile equals to DEFAULT_MOBILE
+        defaultAddressShouldBeFound("mobile.equals=" + DEFAULT_MOBILE);
+
+        // Get all the addressList where mobile equals to UPDATED_MOBILE
+        defaultAddressShouldNotBeFound("mobile.equals=" + UPDATED_MOBILE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllAddressesByMobileIsInShouldWork() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where mobile in DEFAULT_MOBILE or UPDATED_MOBILE
+        defaultAddressShouldBeFound("mobile.in=" + DEFAULT_MOBILE + "," + UPDATED_MOBILE);
+
+        // Get all the addressList where mobile equals to UPDATED_MOBILE
+        defaultAddressShouldNotBeFound("mobile.in=" + UPDATED_MOBILE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllAddressesByMobileIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where mobile is not null
+        defaultAddressShouldBeFound("mobile.specified=true");
+
+        // Get all the addressList where mobile is null
+        defaultAddressShouldNotBeFound("mobile.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllAddressesByEmailIsEqualToSomething() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where email equals to DEFAULT_EMAIL
+        defaultAddressShouldBeFound("email.equals=" + DEFAULT_EMAIL);
+
+        // Get all the addressList where email equals to UPDATED_EMAIL
+        defaultAddressShouldNotBeFound("email.equals=" + UPDATED_EMAIL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllAddressesByEmailIsInShouldWork() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where email in DEFAULT_EMAIL or UPDATED_EMAIL
+        defaultAddressShouldBeFound("email.in=" + DEFAULT_EMAIL + "," + UPDATED_EMAIL);
+
+        // Get all the addressList where email equals to UPDATED_EMAIL
+        defaultAddressShouldNotBeFound("email.in=" + UPDATED_EMAIL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllAddressesByEmailIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where email is not null
+        defaultAddressShouldBeFound("email.specified=true");
+
+        // Get all the addressList where email is null
+        defaultAddressShouldNotBeFound("email.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllAddressesByPhoneIsEqualToSomething() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where phone equals to DEFAULT_PHONE
+        defaultAddressShouldBeFound("phone.equals=" + DEFAULT_PHONE);
+
+        // Get all the addressList where phone equals to UPDATED_PHONE
+        defaultAddressShouldNotBeFound("phone.equals=" + UPDATED_PHONE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllAddressesByPhoneIsInShouldWork() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where phone in DEFAULT_PHONE or UPDATED_PHONE
+        defaultAddressShouldBeFound("phone.in=" + DEFAULT_PHONE + "," + UPDATED_PHONE);
+
+        // Get all the addressList where phone equals to UPDATED_PHONE
+        defaultAddressShouldNotBeFound("phone.in=" + UPDATED_PHONE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllAddressesByPhoneIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where phone is not null
+        defaultAddressShouldBeFound("phone.specified=true");
+
+        // Get all the addressList where phone is null
+        defaultAddressShouldNotBeFound("phone.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllAddressesByLineIsEqualToSomething() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where line equals to DEFAULT_LINE
+        defaultAddressShouldBeFound("line.equals=" + DEFAULT_LINE);
+
+        // Get all the addressList where line equals to UPDATED_LINE
+        defaultAddressShouldNotBeFound("line.equals=" + UPDATED_LINE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllAddressesByLineIsInShouldWork() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where line in DEFAULT_LINE or UPDATED_LINE
+        defaultAddressShouldBeFound("line.in=" + DEFAULT_LINE + "," + UPDATED_LINE);
+
+        // Get all the addressList where line equals to UPDATED_LINE
+        defaultAddressShouldNotBeFound("line.in=" + UPDATED_LINE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllAddressesByLineIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where line is not null
+        defaultAddressShouldBeFound("line.specified=true");
+
+        // Get all the addressList where line is null
+        defaultAddressShouldNotBeFound("line.specified=false");
+    }
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultAddressShouldBeFound(String filter) throws Exception {
+        restAddressMockMvc.perform(get("/api/addresses?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(address.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].mobile").value(hasItem(DEFAULT_MOBILE.toString())))
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
+            .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE.toString())))
+            .andExpect(jsonPath("$.[*].line").value(hasItem(DEFAULT_LINE.toString())));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultAddressShouldNotBeFound(String filter) throws Exception {
+        restAddressMockMvc.perform(get("/api/addresses?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+    }
+
 
     @Test
     @Transactional

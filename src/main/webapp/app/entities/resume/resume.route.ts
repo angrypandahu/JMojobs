@@ -9,10 +9,29 @@ import { ResumeDetailComponent } from './resume-detail.component';
 import { ResumePopupComponent } from './resume-dialog.component';
 import { ResumeDeletePopupComponent } from './resume-delete-dialog.component';
 
+@Injectable()
+export class ResumeResolvePagingParams implements Resolve<any> {
+
+    constructor(private paginationUtil: JhiPaginationUtil) {}
+
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        const page = route.queryParams['page'] ? route.queryParams['page'] : '1';
+        const sort = route.queryParams['sort'] ? route.queryParams['sort'] : 'id,asc';
+        return {
+            page: this.paginationUtil.parsePage(page),
+            predicate: this.paginationUtil.parsePredicate(sort),
+            ascending: this.paginationUtil.parseAscending(sort)
+      };
+    }
+}
+
 export const resumeRoute: Routes = [
     {
         path: 'resume',
         component: ResumeComponent,
+        resolve: {
+            'pagingParams': ResumeResolvePagingParams
+        },
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'Resumes'

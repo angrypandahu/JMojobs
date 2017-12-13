@@ -6,6 +6,8 @@ import com.panda.mojobs.web.rest.errors.BadRequestAlertException;
 import com.panda.mojobs.web.rest.util.HeaderUtil;
 import com.panda.mojobs.web.rest.util.PaginationUtil;
 import com.panda.mojobs.service.dto.MjobDTO;
+import com.panda.mojobs.service.dto.MjobCriteria;
+import com.panda.mojobs.service.MjobQueryService;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -40,8 +42,11 @@ public class MjobResource {
 
     private final MjobService mjobService;
 
-    public MjobResource(MjobService mjobService) {
+    private final MjobQueryService mjobQueryService;
+
+    public MjobResource(MjobService mjobService, MjobQueryService mjobQueryService) {
         this.mjobService = mjobService;
+        this.mjobQueryService = mjobQueryService;
     }
 
     /**
@@ -90,13 +95,14 @@ public class MjobResource {
      * GET  /mjobs : get all the mjobs.
      *
      * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of mjobs in body
      */
     @GetMapping("/mjobs")
     @Timed
-    public ResponseEntity<List<MjobDTO>> getAllMjobs(@ApiParam Pageable pageable) {
-        log.debug("REST request to get a page of Mjobs");
-        Page<MjobDTO> page = mjobService.findAll(pageable);
+    public ResponseEntity<List<MjobDTO>> getAllMjobs(MjobCriteria criteria,@ApiParam Pageable pageable) {
+        log.debug("REST request to get Mjobs by criteria: {}", criteria);
+        Page<MjobDTO> page = mjobQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/mjobs");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

@@ -11,6 +11,8 @@ import com.panda.mojobs.repository.search.ApplyJobResumeSearchRepository;
 import com.panda.mojobs.service.dto.ApplyJobResumeDTO;
 import com.panda.mojobs.service.mapper.ApplyJobResumeMapper;
 import com.panda.mojobs.web.rest.errors.ExceptionTranslator;
+import com.panda.mojobs.service.dto.ApplyJobResumeCriteria;
+import com.panda.mojobs.service.ApplyJobResumeQueryService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -66,6 +68,9 @@ public class ApplyJobResumeResourceIntTest {
     private ApplyJobResumeSearchRepository applyJobResumeSearchRepository;
 
     @Autowired
+    private ApplyJobResumeQueryService applyJobResumeQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -84,7 +89,7 @@ public class ApplyJobResumeResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ApplyJobResumeResource applyJobResumeResource = new ApplyJobResumeResource(applyJobResumeService);
+        final ApplyJobResumeResource applyJobResumeResource = new ApplyJobResumeResource(applyJobResumeService, applyJobResumeQueryService);
         this.restApplyJobResumeMockMvc = MockMvcBuilders.standaloneSetup(applyJobResumeResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -232,6 +237,133 @@ public class ApplyJobResumeResourceIntTest {
             .andExpect(jsonPath("$.applyDate").value(DEFAULT_APPLY_DATE.toString()))
             .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()));
     }
+
+    @Test
+    @Transactional
+    public void getAllApplyJobResumesByApplyDateIsEqualToSomething() throws Exception {
+        // Initialize the database
+        applyJobResumeRepository.saveAndFlush(applyJobResume);
+
+        // Get all the applyJobResumeList where applyDate equals to DEFAULT_APPLY_DATE
+        defaultApplyJobResumeShouldBeFound("applyDate.equals=" + DEFAULT_APPLY_DATE);
+
+        // Get all the applyJobResumeList where applyDate equals to UPDATED_APPLY_DATE
+        defaultApplyJobResumeShouldNotBeFound("applyDate.equals=" + UPDATED_APPLY_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllApplyJobResumesByApplyDateIsInShouldWork() throws Exception {
+        // Initialize the database
+        applyJobResumeRepository.saveAndFlush(applyJobResume);
+
+        // Get all the applyJobResumeList where applyDate in DEFAULT_APPLY_DATE or UPDATED_APPLY_DATE
+        defaultApplyJobResumeShouldBeFound("applyDate.in=" + DEFAULT_APPLY_DATE + "," + UPDATED_APPLY_DATE);
+
+        // Get all the applyJobResumeList where applyDate equals to UPDATED_APPLY_DATE
+        defaultApplyJobResumeShouldNotBeFound("applyDate.in=" + UPDATED_APPLY_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllApplyJobResumesByApplyDateIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        applyJobResumeRepository.saveAndFlush(applyJobResume);
+
+        // Get all the applyJobResumeList where applyDate is not null
+        defaultApplyJobResumeShouldBeFound("applyDate.specified=true");
+
+        // Get all the applyJobResumeList where applyDate is null
+        defaultApplyJobResumeShouldNotBeFound("applyDate.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllApplyJobResumesByApplyDateIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        applyJobResumeRepository.saveAndFlush(applyJobResume);
+
+        // Get all the applyJobResumeList where applyDate greater than or equals to DEFAULT_APPLY_DATE
+        defaultApplyJobResumeShouldBeFound("applyDate.greaterOrEqualThan=" + DEFAULT_APPLY_DATE);
+
+        // Get all the applyJobResumeList where applyDate greater than or equals to UPDATED_APPLY_DATE
+        defaultApplyJobResumeShouldNotBeFound("applyDate.greaterOrEqualThan=" + UPDATED_APPLY_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllApplyJobResumesByApplyDateIsLessThanSomething() throws Exception {
+        // Initialize the database
+        applyJobResumeRepository.saveAndFlush(applyJobResume);
+
+        // Get all the applyJobResumeList where applyDate less than or equals to DEFAULT_APPLY_DATE
+        defaultApplyJobResumeShouldNotBeFound("applyDate.lessThan=" + DEFAULT_APPLY_DATE);
+
+        // Get all the applyJobResumeList where applyDate less than or equals to UPDATED_APPLY_DATE
+        defaultApplyJobResumeShouldBeFound("applyDate.lessThan=" + UPDATED_APPLY_DATE);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllApplyJobResumesByResumeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Resume resume = ResumeResourceIntTest.createEntity(em);
+        em.persist(resume);
+        em.flush();
+        applyJobResume.setResume(resume);
+        applyJobResumeRepository.saveAndFlush(applyJobResume);
+        Long resumeId = resume.getId();
+
+        // Get all the applyJobResumeList where resume equals to resumeId
+        defaultApplyJobResumeShouldBeFound("resumeId.equals=" + resumeId);
+
+        // Get all the applyJobResumeList where resume equals to resumeId + 1
+        defaultApplyJobResumeShouldNotBeFound("resumeId.equals=" + (resumeId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllApplyJobResumesByMjobIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Mjob mjob = MjobResourceIntTest.createEntity(em);
+        em.persist(mjob);
+        em.flush();
+        applyJobResume.setMjob(mjob);
+        applyJobResumeRepository.saveAndFlush(applyJobResume);
+        Long mjobId = mjob.getId();
+
+        // Get all the applyJobResumeList where mjob equals to mjobId
+        defaultApplyJobResumeShouldBeFound("mjobId.equals=" + mjobId);
+
+        // Get all the applyJobResumeList where mjob equals to mjobId + 1
+        defaultApplyJobResumeShouldNotBeFound("mjobId.equals=" + (mjobId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultApplyJobResumeShouldBeFound(String filter) throws Exception {
+        restApplyJobResumeMockMvc.perform(get("/api/apply-job-resumes?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(applyJobResume.getId().intValue())))
+            .andExpect(jsonPath("$.[*].applyDate").value(hasItem(DEFAULT_APPLY_DATE.toString())))
+            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultApplyJobResumeShouldNotBeFound(String filter) throws Exception {
+        restApplyJobResumeMockMvc.perform(get("/api/apply-job-resumes?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+    }
+
 
     @Test
     @Transactional

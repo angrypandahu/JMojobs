@@ -9,6 +9,8 @@ import com.panda.mojobs.repository.search.JobSubTypeSearchRepository;
 import com.panda.mojobs.service.dto.JobSubTypeDTO;
 import com.panda.mojobs.service.mapper.JobSubTypeMapper;
 import com.panda.mojobs.web.rest.errors.ExceptionTranslator;
+import com.panda.mojobs.service.dto.JobSubTypeCriteria;
+import com.panda.mojobs.service.JobSubTypeQueryService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -62,6 +64,9 @@ public class JobSubTypeResourceIntTest {
     private JobSubTypeSearchRepository jobSubTypeSearchRepository;
 
     @Autowired
+    private JobSubTypeQueryService jobSubTypeQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -80,7 +85,7 @@ public class JobSubTypeResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final JobSubTypeResource jobSubTypeResource = new JobSubTypeResource(jobSubTypeService);
+        final JobSubTypeResource jobSubTypeResource = new JobSubTypeResource(jobSubTypeService, jobSubTypeQueryService);
         this.restJobSubTypeMockMvc = MockMvcBuilders.standaloneSetup(jobSubTypeResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -199,6 +204,107 @@ public class JobSubTypeResourceIntTest {
             .andExpect(jsonPath("$.parent").value(DEFAULT_PARENT.toString()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
     }
+
+    @Test
+    @Transactional
+    public void getAllJobSubTypesByParentIsEqualToSomething() throws Exception {
+        // Initialize the database
+        jobSubTypeRepository.saveAndFlush(jobSubType);
+
+        // Get all the jobSubTypeList where parent equals to DEFAULT_PARENT
+        defaultJobSubTypeShouldBeFound("parent.equals=" + DEFAULT_PARENT);
+
+        // Get all the jobSubTypeList where parent equals to UPDATED_PARENT
+        defaultJobSubTypeShouldNotBeFound("parent.equals=" + UPDATED_PARENT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllJobSubTypesByParentIsInShouldWork() throws Exception {
+        // Initialize the database
+        jobSubTypeRepository.saveAndFlush(jobSubType);
+
+        // Get all the jobSubTypeList where parent in DEFAULT_PARENT or UPDATED_PARENT
+        defaultJobSubTypeShouldBeFound("parent.in=" + DEFAULT_PARENT + "," + UPDATED_PARENT);
+
+        // Get all the jobSubTypeList where parent equals to UPDATED_PARENT
+        defaultJobSubTypeShouldNotBeFound("parent.in=" + UPDATED_PARENT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllJobSubTypesByParentIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        jobSubTypeRepository.saveAndFlush(jobSubType);
+
+        // Get all the jobSubTypeList where parent is not null
+        defaultJobSubTypeShouldBeFound("parent.specified=true");
+
+        // Get all the jobSubTypeList where parent is null
+        defaultJobSubTypeShouldNotBeFound("parent.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllJobSubTypesByNameIsEqualToSomething() throws Exception {
+        // Initialize the database
+        jobSubTypeRepository.saveAndFlush(jobSubType);
+
+        // Get all the jobSubTypeList where name equals to DEFAULT_NAME
+        defaultJobSubTypeShouldBeFound("name.equals=" + DEFAULT_NAME);
+
+        // Get all the jobSubTypeList where name equals to UPDATED_NAME
+        defaultJobSubTypeShouldNotBeFound("name.equals=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllJobSubTypesByNameIsInShouldWork() throws Exception {
+        // Initialize the database
+        jobSubTypeRepository.saveAndFlush(jobSubType);
+
+        // Get all the jobSubTypeList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultJobSubTypeShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
+
+        // Get all the jobSubTypeList where name equals to UPDATED_NAME
+        defaultJobSubTypeShouldNotBeFound("name.in=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllJobSubTypesByNameIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        jobSubTypeRepository.saveAndFlush(jobSubType);
+
+        // Get all the jobSubTypeList where name is not null
+        defaultJobSubTypeShouldBeFound("name.specified=true");
+
+        // Get all the jobSubTypeList where name is null
+        defaultJobSubTypeShouldNotBeFound("name.specified=false");
+    }
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultJobSubTypeShouldBeFound(String filter) throws Exception {
+        restJobSubTypeMockMvc.perform(get("/api/job-sub-types?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(jobSubType.getId().intValue())))
+            .andExpect(jsonPath("$.[*].parent").value(hasItem(DEFAULT_PARENT.toString())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultJobSubTypeShouldNotBeFound(String filter) throws Exception {
+        restJobSubTypeMockMvc.perform(get("/api/job-sub-types?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+    }
+
 
     @Test
     @Transactional

@@ -11,7 +11,7 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface InvitationRepository extends JpaRepository<Invitation, Long> {
+public interface InvitationRepository extends JpaRepository<Invitation, Long>, JpaSpecificationExecutor<Invitation> {
 
     @Query("select invitation from Invitation invitation where invitation.user.login = ?#{principal.username}")
     List<Invitation> findByUserIsCurrentUser();

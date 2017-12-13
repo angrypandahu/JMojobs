@@ -1,15 +1,16 @@
-import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { School } from './school.model';
 import { SchoolPopupService } from './school-popup.service';
 import { SchoolService } from './school.service';
 import { Address, AddressService } from '../address';
+import { Image, ImageService } from '../image';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
@@ -23,13 +24,14 @@ export class SchoolDialogComponent implements OnInit {
 
     addresses: Address[];
 
+    images: Image[];
+
     constructor(
         public activeModal: NgbActiveModal,
-        private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
         private schoolService: SchoolService,
         private addressService: AddressService,
-        private elementRef: ElementRef,
+        private imageService: ImageService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -49,22 +51,19 @@ export class SchoolDialogComponent implements OnInit {
                         }, (subRes: ResponseWrapper) => this.onError(subRes.json));
                 }
             }, (res: ResponseWrapper) => this.onError(res.json));
-    }
-
-    byteSize(field) {
-        return this.dataUtils.byteSize(field);
-    }
-
-    openFile(contentType, field) {
-        return this.dataUtils.openFile(contentType, field);
-    }
-
-    setFileData(event, entity, field, isImage) {
-        this.dataUtils.setFileData(event, entity, field, isImage);
-    }
-
-    clearInputImage(field: string, fieldContentType: string, idInput: string) {
-        this.dataUtils.clearInputImage(this.school, this.elementRef, field, fieldContentType, idInput);
+        this.imageService
+            .query({filter: 'school-is-null'})
+            .subscribe((res: ResponseWrapper) => {
+                if (!this.school.imageId) {
+                    this.images = res.json;
+                } else {
+                    this.imageService
+                        .find(this.school.imageId)
+                        .subscribe((subRes: Image) => {
+                            this.images = [subRes].concat(res.json);
+                        }, (subRes: ResponseWrapper) => this.onError(subRes.json));
+                }
+            }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -102,6 +101,10 @@ export class SchoolDialogComponent implements OnInit {
     }
 
     trackAddressById(index: number, item: Address) {
+        return item.id;
+    }
+
+    trackImageById(index: number, item: Image) {
         return item.id;
     }
 }

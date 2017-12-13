@@ -46,7 +46,7 @@
     "changelogDate": "20171127055942",
     "entityTableName": "address",
     "dto": "mapstruct",
-    "pagination": "no",
+    "pagination": "pagination",
     "service": "serviceImpl",
-    "jpaMetamodelFiltering": false
+    "jpaMetamodelFiltering": true
 }

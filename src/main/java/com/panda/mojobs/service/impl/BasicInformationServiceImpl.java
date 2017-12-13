@@ -8,6 +8,8 @@ import com.panda.mojobs.service.dto.BasicInformationDTO;
 import com.panda.mojobs.service.mapper.BasicInformationMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -58,15 +60,15 @@ public class BasicInformationServiceImpl implements BasicInformationService{
     /**
      *  Get all the basicInformations.
      *
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
-    public List<BasicInformationDTO> findAll() {
+    public Page<BasicInformationDTO> findAll(Pageable pageable) {
         log.debug("Request to get all BasicInformations");
-        return basicInformationRepository.findAll().stream()
-            .map(basicInformationMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+        return basicInformationRepository.findAll(pageable)
+            .map(basicInformationMapper::toDto);
     }
 
 
@@ -114,15 +116,14 @@ public class BasicInformationServiceImpl implements BasicInformationService{
      * Search for the basicInformation corresponding to the query.
      *
      *  @param query the query of the search
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
-    public List<BasicInformationDTO> search(String query) {
-        log.debug("Request to search BasicInformations for query {}", query);
-        return StreamSupport
-            .stream(basicInformationSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .map(basicInformationMapper::toDto)
-            .collect(Collectors.toList());
+    public Page<BasicInformationDTO> search(String query, Pageable pageable) {
+        log.debug("Request to search for a page of BasicInformations for query {}", query);
+        Page<BasicInformation> result = basicInformationSearchRepository.search(queryStringQuery(query), pageable);
+        return result.map(basicInformationMapper::toDto);
     }
 }
