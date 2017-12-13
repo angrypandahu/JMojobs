@@ -1,0 +1,30 @@
+
+<div *ngIf="image">
+    <h2><span>Image</span> {{image.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Img</span></dt>
+        <dd>
+            <div *ngIf="image.img">
+                <a (click)="openFile(image.imgContentType, image.img)">
+                    <img [src]="'data:' + image.imgContentType + ';base64,' + image.img" style="max-width: 100%;" alt="image image"/>
+                </a>
+                {{image.imgContentType}}, {{byteSize(image.img)}}
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'image/'+ image.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

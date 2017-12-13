@@ -44,13 +44,10 @@
         <dd>
             <span>{{basicInformation.wechat}}</span>
         </dd>
-        <dt><span>Photo</span></dt>
+        <dt><span>Image</span></dt>
         <dd>
-            <div *ngIf="basicInformation.photo">
-                <a (click)="openFile(basicInformation.photoContentType, basicInformation.photo)">
-                    <img [src]="'data:' + basicInformation.photoContentType + ';base64,' + basicInformation.photo" style="max-width: 100%;" alt="basicInformation image"/>
-                </a>
-                {{basicInformation.photoContentType}}, {{byteSize(basicInformation.photo)}}
+            <div *ngIf="basicInformation.imageId">
+                <a [routerLink]="['/image', basicInformation.imageId]">{{basicInformation.imageId}}</a>
             </div>
         </dd>
     </dl>

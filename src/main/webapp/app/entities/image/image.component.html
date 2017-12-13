@@ -1,10 +1,10 @@
 <div>
     <h2>
-        <span>Basic Informations</span>
-        <button class="btn btn-primary float-right jh-create-entity create-basic-information" [routerLink]="['/', { outlets: { popup: ['basic-information-new'] } }]">
+        <span>Images</span>
+        <button class="btn btn-primary float-right jh-create-entity create-image" [routerLink]="['/', { outlets: { popup: ['image-new'] } }]">
             <span class="fa fa-plus"></span>
             <span class="hidden-sm-down" >
-            Create new Basic Information
+            Create new Image
             </span>
         </button>
     </h2>
@@ -25,60 +25,41 @@
         </div>
     </div>
     <br/>
-    <div class="table-responsive" *ngIf="basicInformations">
+    <div class="table-responsive" *ngIf="images">
         <table class="table table-striped">
             <thead>
-            <tr>
-            <th><span>ID</span></th>
-            <th><span>Last Name</span></th>
-            <th><span>First Name</span></th>
-            <th><span>Nationality</span></th>
-            <th><span>Gender</span></th>
-            <th><span>Dateof Brith</span></th>
-            <th><span>Education Level</span></th>
-            <th><span>Email</span></th>
-            <th><span>Skype</span></th>
-            <th><span>Phone</span></th>
-            <th><span>Wechat</span></th>
-            <th><span>Image</span></th>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="img"><span>Img</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let basicInformation of basicInformations ;trackBy: trackId">
-                <td><a [routerLink]="['../basic-information', basicInformation.id ]">{{basicInformation.id}}</a></td>
-                <td>{{basicInformation.lastName}}</td>
-                <td>{{basicInformation.firstName}}</td>
-                <td>{{basicInformation.nationality}}</td>
-                <td>{{basicInformation.gender}}</td>
-                <td>{{basicInformation.dateofBrith | date:'mediumDate'}}</td>
-                <td>{{basicInformation.educationLevel}}</td>
-                <td>{{basicInformation.email}}</td>
-                <td>{{basicInformation.skype}}</td>
-                <td>{{basicInformation.phone}}</td>
-                <td>{{basicInformation.wechat}}</td>
+            <tr *ngFor="let image of images ;trackBy: trackId">
+                <td><a [routerLink]="['../image', image.id ]">{{image.id}}</a></td>
                 <td>
-                    <div *ngIf="basicInformation.imageId">
-                        <a [routerLink]="['../image', basicInformation.imageId  ]" >{{basicInformation.imageId}}</a>
-                    </div>
+                    <a *ngIf="image.img" (click)="openFile(image.imgContentType, image.img)">
+                        <img [src]="'data:' + image.imgContentType + ';base64,' + image.img" style="max-height: 30px;" alt="image image"/>
+                    </a>
+                    <span *ngIf="image.img">{{image.imgContentType}}, {{byteSize(image.img)}}</span>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                [routerLink]="['../basic-information', basicInformation.id ]"
+                                [routerLink]="['../image', image.id ]"
                                 class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline">View</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'basic-information/'+ basicInformation.id + '/edit'} }]"
+                                [routerLink]="['/', { outlets: { popup: 'image/'+ image.id + '/edit'} }]"
                                 replaceUrl="true"
                                 class="btn btn-primary btn-sm">
                             <span class="fa fa-pencil"></span>
                             <span class="d-none d-md-inline">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'basic-information/'+ basicInformation.id + '/delete'} }]"
+                                [routerLink]="['/', { outlets: { popup: 'image/'+ image.id + '/delete'} }]"
                                 replaceUrl="true"
                                 class="btn btn-danger btn-sm">
                             <span class="fa fa-remove"></span>
@@ -90,4 +71,12 @@
             </tbody>
         </table>
     </div>
+        <div *ngIf="images && images.length">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [maxSize]="5" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
 </div>

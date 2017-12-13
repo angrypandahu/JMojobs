@@ -1,8 +1,11 @@
 package com.panda.mojobs.web.controller;
 
 import com.panda.mojobs.service.BasicInformationService;
+import com.panda.mojobs.service.ImageService;
 import com.panda.mojobs.service.ResumeService;
+import com.panda.mojobs.service.data.ResumeData;
 import com.panda.mojobs.service.dto.BasicInformationDTO;
+import com.panda.mojobs.service.dto.ImageDTO;
 import com.panda.mojobs.service.dto.ResumeDTO;
 import com.panda.mojobs.web.controller.util.EnumUtil;
 import org.springframework.stereotype.Controller;
@@ -21,10 +24,12 @@ public class ResumeController {
 
     final private ResumeService resumeService;
     final private BasicInformationService basicInformationService;
+    final private ImageService imageService;
 
-    public ResumeController(ResumeService resumeService, BasicInformationService basicInformationService) {
+    public ResumeController(ResumeService resumeService, BasicInformationService basicInformationService, ImageService imageService) {
         this.resumeService = resumeService;
         this.basicInformationService = basicInformationService;
+        this.imageService = imageService;
     }
 
     @RequestMapping("")
@@ -42,15 +47,8 @@ public class ResumeController {
     @RequestMapping(value = "/{resumeId}/**", method = RequestMethod.GET)
     public String resume(@PathVariable("resumeId") final Long resumeId, Model model) {
         ResumeDTO resumeDTO = resumeService.findOne(resumeId);
-        Long basicInformationId = resumeDTO.getBasicInformationId();
-        BasicInformationDTO basicInformationDTO;
-        if (basicInformationId != null) {
-            basicInformationDTO = basicInformationService.findOne(basicInformationId);
-        } else {
-            basicInformationDTO = new BasicInformationDTO();
-        }
-        model.addAttribute("resumeDTO", resumeDTO);
-        model.addAttribute("basicInformationDTO", basicInformationDTO);
+        ResumeData resumeData = resumeService.toResumeData(resumeDTO);
+        model.addAttribute("resumeData", resumeData);
         model.addAttribute("genders", EnumUtil.getGender());
         model.addAttribute("educationLevels", EnumUtil.getEducationLevel());
         return "resume/resume";
@@ -69,6 +67,14 @@ public class ResumeController {
             resumeService.save(resumeDTO);
             model.addAttribute("basicInformationDTO", basicInformationDTOSaved);
         }
+        Long imageId = basicInformationDTO.getImageId();
+        ImageDTO imageDTO;
+        if (imageId != null) {
+            imageDTO = imageService.findOne(imageId);
+        } else {
+            imageDTO = new ImageDTO();
+        }
+        model.addAttribute("imageDTO", imageDTO);
         model.addAttribute("resumeDTO", resumeDTO);
         model.addAttribute("genders", EnumUtil.getGender());
         model.addAttribute("educationLevels", EnumUtil.getEducationLevel());

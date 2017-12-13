@@ -13,6 +13,7 @@ import { JmojobsMLanguageModule } from './m-language/m-language.module';
 import { JmojobsInvitationModule } from './invitation/invitation.module';
 import { JmojobsApplyJobResumeModule } from './apply-job-resume/apply-job-resume.module';
 import { JmojobsChatMessageModule } from './chat-message/chat-message.module';
+import { JmojobsImageModule } from './image/image.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -30,6 +31,7 @@ import { JmojobsChatMessageModule } from './chat-message/chat-message.module';
         JmojobsInvitationModule,
         JmojobsApplyJobResumeModule,
         JmojobsChatMessageModule,
+        JmojobsImageModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

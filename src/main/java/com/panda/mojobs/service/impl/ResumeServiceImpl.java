@@ -1,8 +1,6 @@
 package com.panda.mojobs.service.impl;
 
-import com.panda.mojobs.domain.Experience;
-import com.panda.mojobs.domain.Resume;
-import com.panda.mojobs.domain.User;
+import com.panda.mojobs.domain.*;
 import com.panda.mojobs.repository.ResumeRepository;
 import com.panda.mojobs.repository.UserRepository;
 import com.panda.mojobs.repository.search.ResumeSearchRepository;
@@ -11,9 +9,11 @@ import com.panda.mojobs.service.ResumeService;
 import com.panda.mojobs.service.data.ResumeData;
 import com.panda.mojobs.service.dto.BasicInformationDTO;
 import com.panda.mojobs.service.dto.ExperienceDTO;
+import com.panda.mojobs.service.dto.ImageDTO;
 import com.panda.mojobs.service.dto.ResumeDTO;
 import com.panda.mojobs.service.mapper.BasicInformationMapper;
 import com.panda.mojobs.service.mapper.ExperienceMapper;
+import com.panda.mojobs.service.mapper.ImageMapper;
 import com.panda.mojobs.service.mapper.ResumeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,16 +43,18 @@ public class ResumeServiceImpl implements ResumeService {
     private final ResumeMapper resumeMapper;
     private final BasicInformationMapper basicInformationMapper;
     private final ExperienceMapper experienceMapper;
+    private final ImageMapper imageMapper;
 
     private final ResumeSearchRepository resumeSearchRepository;
 
     private final UserRepository userRepository;
 
-    public ResumeServiceImpl(ResumeRepository resumeRepository, ResumeMapper resumeMapper, BasicInformationMapper basicInformationMapper, ExperienceMapper experienceMapper, ResumeSearchRepository resumeSearchRepository, UserRepository userRepository) {
+    public ResumeServiceImpl(ResumeRepository resumeRepository, ResumeMapper resumeMapper, BasicInformationMapper basicInformationMapper, ExperienceMapper experienceMapper, ImageMapper imageMapper, ResumeSearchRepository resumeSearchRepository, UserRepository userRepository) {
         this.resumeRepository = resumeRepository;
         this.resumeMapper = resumeMapper;
         this.basicInformationMapper = basicInformationMapper;
         this.experienceMapper = experienceMapper;
+        this.imageMapper = imageMapper;
         this.resumeSearchRepository = resumeSearchRepository;
         this.userRepository = userRepository;
     }
@@ -150,8 +152,18 @@ public class ResumeServiceImpl implements ResumeService {
     public ResumeData toResumeData(Resume resume) {
         ResumeData resumeData = new ResumeData();
         resumeData.setResumeDTO(resumeMapper.toDto(resume));
-        BasicInformationDTO basicInformationDTO = basicInformationMapper.toDto(resume.getBasicInformation());
-        resumeData.setBasicInformationDTO(basicInformationDTO == null ? new BasicInformationDTO() : basicInformationDTO);
+        BasicInformation basicInformation = resume.getBasicInformation();
+        if (basicInformation != null) {
+            resumeData.setBasicInformationDTO(basicInformationMapper.toDto(basicInformation));
+            Image image = basicInformation.getImage();
+            if (image != null) {
+                resumeData.setImageDTO(imageMapper.toDto(image));
+            } else {
+                resumeData.setImageDTO(new ImageDTO());
+            }
+        } else {
+            resumeData.setBasicInformationDTO(new BasicInformationDTO());
+        }
         List<Experience> experienceList = new ArrayList<>();
         experienceList.addAll(resume.getExperiencies());
         List<ExperienceDTO> experienceDTOList = experienceMapper.toDto(experienceList);

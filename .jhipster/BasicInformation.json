@@ -8,6 +8,14 @@
             "otherEntityName": "resume",
             "ownerSide": false,
             "otherEntityRelationshipName": "basicInformation"
+        },
+        {
+            "relationshipName": "image",
+            "otherEntityName": "image",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "basicInformation"
         }
     ],
     "fields": [
@@ -93,15 +101,6 @@
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": 255
-        },
-        {
-            "fieldName": "photo",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "image",
-            "fieldValidateRules": [
-                "maxbytes"
-            ],
-            "fieldValidateRulesMaxbytes": 5000000
         }
     ],
     "changelogDate": "20171127055946",

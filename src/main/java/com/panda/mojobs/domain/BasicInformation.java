@@ -76,17 +76,13 @@ public class BasicInformation implements Serializable {
     @Column(name = "wechat", length = 255)
     private String wechat;
 
-    @Size(max = 5000000)
-    @Lob
-    @Column(name = "photo")
-    private byte[] photo;
-
-    @Column(name = "photo_content_type")
-    private String photoContentType;
-
     @OneToOne(mappedBy = "basicInformation")
     @JsonIgnore
     private Resume resume;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Image image;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -227,32 +223,6 @@ public class BasicInformation implements Serializable {
         this.wechat = wechat;
     }
 
-    public byte[] getPhoto() {
-        return photo;
-    }
-
-    public BasicInformation photo(byte[] photo) {
-        this.photo = photo;
-        return this;
-    }
-
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
-    }
-
-    public String getPhotoContentType() {
-        return photoContentType;
-    }
-
-    public BasicInformation photoContentType(String photoContentType) {
-        this.photoContentType = photoContentType;
-        return this;
-    }
-
-    public void setPhotoContentType(String photoContentType) {
-        this.photoContentType = photoContentType;
-    }
-
     public Resume getResume() {
         return resume;
     }
@@ -264,6 +234,19 @@ public class BasicInformation implements Serializable {
 
     public void setResume(Resume resume) {
         this.resume = resume;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public BasicInformation image(Image image) {
+        this.image = image;
+        return this;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -301,8 +284,6 @@ public class BasicInformation implements Serializable {
             ", skype='" + getSkype() + "'" +
             ", phone='" + getPhone() + "'" +
             ", wechat='" + getWechat() + "'" +
-            ", photo='" + getPhoto() + "'" +
-            ", photoContentType='" + photoContentType + "'" +
             "}";
     }
 }

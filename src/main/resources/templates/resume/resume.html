@@ -5,9 +5,11 @@
 
 </head>
 <body>
+<!--/*@thymesVar id="resumeData" type="com.panda.mojobs.service.data.ResumeData"*/-->
 <!--/*@thymesVar id="resumeDTO" type="com.panda.mojobs.service.dto.ResumeDTO"*/-->
 
-<div layout:fragment="content">
+<div layout:fragment="content"
+     th:with="resumeDTO=${resumeData.resumeDTO},basicInformationDTO=${resumeData.basicInformationDTO},imageDTO=${resumeData.imageDTO},experienceDTOList=${resumeData.experienceDTOList}">
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span3">
@@ -33,37 +35,65 @@
             <div class="span9">
 
                 <!--/*@thymesVar id="basicInformationDTO" type="com.panda.mojobs.service.dto.BasicInformationDTO"*/-->
-                <form th:method="POST" th:object="${basicInformationDTO}" th:form="basicInformationDTO"
-                      th:action="@{/resume/{resumeId}/basicInformation(resumeId=${resumeDTO.getId()})}">
-                    <div class="alert alert-danger" th:if="${#fields.hasErrors()}">
-                        <a href="#" class="close" data-dismiss="alert">&times;</a>
-                        <p th:each="err : ${#fields.detailedErrors()}"
-                           th:text="${err.fieldName + ' : ' + err.getMessage()}"></p>
-                    </div>
-                    <input type="hidden" name="id" th:value="*{id}"/>
-                    <input type="text" name="lastName" placeholder='Last Name' th:value="*{lastName}"/>
-                    <input type="text" name="firstName" placeholder='first Name' th:value="*{firstName}"/>
+                <!--/*@thymesVar id="imageDTO" type="com.panda.mojobs.service.dto.ImageDTO"*/-->
+                <!--<div>-->
+                <!--<form th:method="POST" th:object="${basicInformationDTO}" th:form="basicInformationDTO"-->
+                <!--th:action="@{/resume/{resumeId}/basicInformation(resumeId=${resumeDTO.getId()})}">-->
+                <!--&lt;!&ndash;<div class="alert alert-danger" th:if="${#fields.hasErrors()}">&ndash;&gt;-->
+                <!--&lt;!&ndash;<a href="#" class="close" data-dismiss="alert">&times;</a>&ndash;&gt;-->
+                <!--&lt;!&ndash;<p th:each="err : ${#fields.detailedErrors()}"&ndash;&gt;-->
+                <!--&lt;!&ndash;th:text="${err.fieldName + ' : ' + err.getMessage()}"></p>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--<input type="hidden" name="id" th:value="*{id}"/>-->
+                <!--<input type="hidden" name="imageId" th:value="*{imageId}"/>-->
+                <!--<img th:src="${imageDTO.getImgBase64()}"/>-->
+                <!--<input type="text" name="lastName" placeholder='Last Name' th:value="*{lastName}"/>-->
+                <!--<input type="text" name="firstName" placeholder='first Name' th:value="*{firstName}"/>-->
 
-                    <input type="text" name="nationality" placeholder='nationality' th:value="*{nationality}"/>
-                    <select name="gender">
-                        <!--/*@thymesVar id="genders" type="java.util.LinkedHashMap<com.panda.mojobs.domain.enumeration.Gender>"*/-->
-                        <option th:each="gender : ${genders}" th:value="${gender.key}"
-                                th:selected="${gender.key == basicInformationDTO.getGender()}"
-                                th:text="${gender.value}"></option>
-                    </select>
-                    <input type="date" name="dateofBrith" th:value="*{dateofBrith}"/>
-                    <select name="educationLevel">
-                        <!--/*@thymesVar id="genders" type="java.util.LinkedHashMap<com.panda.mojobs.domain.enumeration.EducationLevel>"*/-->
-                        <option th:each="level : ${educationLevels}" th:value="${level.key}"
-                                th:selected="${level.key == basicInformationDTO.getEducationLevel()}"
-                                th:text="${level.value}"></option>
-                    </select>
-                    <input type="email" name="email" th:value="*{email}" placeholder="email"/>
-                    <input type="text" name="skype" th:value="*{skype}" placeholder="skype"/>
-                    <input type="text" name="phone" th:value="*{phone}" placeholder="phone"/>
-                    <input type="text" name="wechat" th:value="*{wechat}" placeholder="wechat"/>
-                    <button type="submit">Save</button>
-                </form>
+                <!--<input type="text" name="nationality" placeholder='nationality' th:value="*{nationality}"/>-->
+                <!--<select name="gender">-->
+                <!--&lt;!&ndash;/*@thymesVar id="genders" type="java.util.LinkedHashMap<com.panda.mojobs.domain.enumeration.Gender>"*/&ndash;&gt;-->
+                <!--<option th:each="gender : ${genders}" th:value="${gender.key}"-->
+                <!--th:selected="${gender.key == basicInformationDTO.getGender()}"-->
+                <!--th:text="${gender.value}"></option>-->
+                <!--</select>-->
+                <!--<input type="date" name="dateofBrith" th:value="*{dateofBrith}"/>-->
+                <!--<select name="educationLevel">-->
+                <!--&lt;!&ndash;/*@thymesVar id="genders" type="java.util.LinkedHashMap<com.panda.mojobs.domain.enumeration.EducationLevel>"*/&ndash;&gt;-->
+                <!--<option th:each="level : ${educationLevels}" th:value="${level.key}"-->
+                <!--th:selected="${level.key == basicInformationDTO.getEducationLevel()}"-->
+                <!--th:text="${level.value}"></option>-->
+                <!--</select>-->
+                <!--<input type="email" name="email" th:value="*{email}" placeholder="email"/>-->
+                <!--<input type="text" name="skype" th:value="*{skype}" placeholder="skype"/>-->
+                <!--<input type="text" name="phone" th:value="*{phone}" placeholder="phone"/>-->
+                <!--<input type="text" name="wechat" th:value="*{wechat}" placeholder="wechat"/>-->
+                <!--<button type="submit">Save</button>-->
+                <!--</form>-->
+                <!--</div>-->
+                <div>
+                    <img th:src="${imageDTO.getImgBase64()}"/>
+                    Last Name:<span th:text="${basicInformationDTO.lastName}"></span>
+                    First Name:<span th:text="${basicInformationDTO.firstName}"></span><br/>
+                    Nationality:<span th:text="${basicInformationDTO.nationality}"></span>
+                    Gender:<span th:text="${basicInformationDTO.getGender()}"></span><br/>
+                    DateofBrith:<span th:text="${basicInformationDTO.getDateofBrith()}"></span>
+                    EducationLevel:<span th:text="${basicInformationDTO.getEducationLevel()}"></span><br/>
+                    Email:<span th:text="${basicInformationDTO.getEmail()}"></span><br/>
+                    Skype:<span th:text="${basicInformationDTO.getSkype()}"></span>
+                    Phone:<span th:text="${basicInformationDTO.getPhone()}"></span><br/>
+                    Wechat:<span th:text="${basicInformationDTO.getWechat()}"></span>
+
+                </div>
+                <div th:each="experienceDTO,experienceDTOStat :${experienceDTOList}">
+                    Title:<span th:text="${experienceDTO.getTitle()}"></span><br/>
+                    School:<span th:text="${experienceDTO.getSchool()}"></span><br/>
+                    Grade:<span th:text="${experienceDTO.getGrade()}"></span><br/>
+                    FromDate:<span th:text="${experienceDTO.getFromDate()}"></span>
+                    ToDate:<span th:text="${experienceDTO.getToDate()}"></span>
+
+                </div>
+
             </div>
         </div>
     </div>

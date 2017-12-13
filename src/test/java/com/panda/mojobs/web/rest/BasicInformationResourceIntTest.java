@@ -24,7 +24,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
@@ -77,11 +76,6 @@ public class BasicInformationResourceIntTest {
 
     private static final String DEFAULT_WECHAT = "AAAAAAAAAA";
     private static final String UPDATED_WECHAT = "BBBBBBBBBB";
-
-    private static final byte[] DEFAULT_PHOTO = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_PHOTO = TestUtil.createByteArray(5000000, "1");
-    private static final String DEFAULT_PHOTO_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_PHOTO_CONTENT_TYPE = "image/png";
 
     @Autowired
     private BasicInformationRepository basicInformationRepository;
@@ -139,9 +133,7 @@ public class BasicInformationResourceIntTest {
             .email(DEFAULT_EMAIL)
             .skype(DEFAULT_SKYPE)
             .phone(DEFAULT_PHONE)
-            .wechat(DEFAULT_WECHAT)
-            .photo(DEFAULT_PHOTO)
-            .photoContentType(DEFAULT_PHOTO_CONTENT_TYPE);
+            .wechat(DEFAULT_WECHAT);
         // Add required entity
         Resume resume = ResumeResourceIntTest.createEntity(em);
         em.persist(resume);
@@ -182,8 +174,6 @@ public class BasicInformationResourceIntTest {
         assertThat(testBasicInformation.getSkype()).isEqualTo(DEFAULT_SKYPE);
         assertThat(testBasicInformation.getPhone()).isEqualTo(DEFAULT_PHONE);
         assertThat(testBasicInformation.getWechat()).isEqualTo(DEFAULT_WECHAT);
-        assertThat(testBasicInformation.getPhoto()).isEqualTo(DEFAULT_PHOTO);
-        assertThat(testBasicInformation.getPhotoContentType()).isEqualTo(DEFAULT_PHOTO_CONTENT_TYPE);
 
         // Validate the BasicInformation in Elasticsearch
         BasicInformation basicInformationEs = basicInformationSearchRepository.findOne(testBasicInformation.getId());
@@ -363,9 +353,7 @@ public class BasicInformationResourceIntTest {
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
             .andExpect(jsonPath("$.[*].skype").value(hasItem(DEFAULT_SKYPE.toString())))
             .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE.toString())))
-            .andExpect(jsonPath("$.[*].wechat").value(hasItem(DEFAULT_WECHAT.toString())))
-            .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))));
+            .andExpect(jsonPath("$.[*].wechat").value(hasItem(DEFAULT_WECHAT.toString())));
     }
 
     @Test
@@ -388,9 +376,7 @@ public class BasicInformationResourceIntTest {
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
             .andExpect(jsonPath("$.skype").value(DEFAULT_SKYPE.toString()))
             .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE.toString()))
-            .andExpect(jsonPath("$.wechat").value(DEFAULT_WECHAT.toString()))
-            .andExpect(jsonPath("$.photoContentType").value(DEFAULT_PHOTO_CONTENT_TYPE))
-            .andExpect(jsonPath("$.photo").value(Base64Utils.encodeToString(DEFAULT_PHOTO)));
+            .andExpect(jsonPath("$.wechat").value(DEFAULT_WECHAT.toString()));
     }
 
     @Test
@@ -421,9 +407,7 @@ public class BasicInformationResourceIntTest {
             .email(UPDATED_EMAIL)
             .skype(UPDATED_SKYPE)
             .phone(UPDATED_PHONE)
-            .wechat(UPDATED_WECHAT)
-            .photo(UPDATED_PHOTO)
-            .photoContentType(UPDATED_PHOTO_CONTENT_TYPE);
+            .wechat(UPDATED_WECHAT);
         BasicInformationDTO basicInformationDTO = basicInformationMapper.toDto(updatedBasicInformation);
 
         restBasicInformationMockMvc.perform(put("/api/basic-informations")
@@ -445,8 +429,6 @@ public class BasicInformationResourceIntTest {
         assertThat(testBasicInformation.getSkype()).isEqualTo(UPDATED_SKYPE);
         assertThat(testBasicInformation.getPhone()).isEqualTo(UPDATED_PHONE);
         assertThat(testBasicInformation.getWechat()).isEqualTo(UPDATED_WECHAT);
-        assertThat(testBasicInformation.getPhoto()).isEqualTo(UPDATED_PHOTO);
-        assertThat(testBasicInformation.getPhotoContentType()).isEqualTo(UPDATED_PHOTO_CONTENT_TYPE);
 
         // Validate the BasicInformation in Elasticsearch
         BasicInformation basicInformationEs = basicInformationSearchRepository.findOne(testBasicInformation.getId());
@@ -515,9 +497,7 @@ public class BasicInformationResourceIntTest {
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
             .andExpect(jsonPath("$.[*].skype").value(hasItem(DEFAULT_SKYPE.toString())))
             .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE.toString())))
-            .andExpect(jsonPath("$.[*].wechat").value(hasItem(DEFAULT_WECHAT.toString())))
-            .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))));
+            .andExpect(jsonPath("$.[*].wechat").value(hasItem(DEFAULT_WECHAT.toString())));
     }
 
     @Test

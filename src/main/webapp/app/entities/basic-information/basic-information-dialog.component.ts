@@ -1,15 +1,16 @@
-import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { BasicInformation } from './basic-information.model';
 import { BasicInformationPopupService } from './basic-information-popup.service';
 import { BasicInformationService } from './basic-information.service';
 import { Resume, ResumeService } from '../resume';
+import { Image, ImageService } from '../image';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
@@ -22,15 +23,16 @@ export class BasicInformationDialogComponent implements OnInit {
     isSaving: boolean;
 
     resumes: Resume[];
+
+    images: Image[];
     dateofBrithDp: any;
 
     constructor(
         public activeModal: NgbActiveModal,
-        private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
         private basicInformationService: BasicInformationService,
         private resumeService: ResumeService,
-        private elementRef: ElementRef,
+        private imageService: ImageService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -39,22 +41,19 @@ export class BasicInformationDialogComponent implements OnInit {
         this.isSaving = false;
         this.resumeService.query()
             .subscribe((res: ResponseWrapper) => { this.resumes = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-    }
-
-    byteSize(field) {
-        return this.dataUtils.byteSize(field);
-    }
-
-    openFile(contentType, field) {
-        return this.dataUtils.openFile(contentType, field);
-    }
-
-    setFileData(event, entity, field, isImage) {
-        this.dataUtils.setFileData(event, entity, field, isImage);
-    }
-
-    clearInputImage(field: string, fieldContentType: string, idInput: string) {
-        this.dataUtils.clearInputImage(this.basicInformation, this.elementRef, field, fieldContentType, idInput);
+        this.imageService
+            .query({filter: 'basicinformation-is-null'})
+            .subscribe((res: ResponseWrapper) => {
+                if (!this.basicInformation.imageId) {
+                    this.images = res.json;
+                } else {
+                    this.imageService
+                        .find(this.basicInformation.imageId)
+                        .subscribe((subRes: Image) => {
+                            this.images = [subRes].concat(res.json);
+                        }, (subRes: ResponseWrapper) => this.onError(subRes.json));
+                }
+            }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -92,6 +91,10 @@ export class BasicInformationDialogComponent implements OnInit {
     }
 
     trackResumeById(index: number, item: Resume) {
+        return item.id;
+    }
+
+    trackImageById(index: number, item: Image) {
         return item.id;
     }
 }

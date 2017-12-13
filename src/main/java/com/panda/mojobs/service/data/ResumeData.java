@@ -2,6 +2,7 @@ package com.panda.mojobs.service.data;
 
 import com.panda.mojobs.service.dto.BasicInformationDTO;
 import com.panda.mojobs.service.dto.ExperienceDTO;
+import com.panda.mojobs.service.dto.ImageDTO;
 import com.panda.mojobs.service.dto.ResumeDTO;
 
 import java.io.Serializable;
@@ -10,10 +11,19 @@ import java.util.List;
 /**
  * Created by hupanpan on  2017/11/22.
  */
-public class ResumeData implements Serializable{
+public class ResumeData implements Serializable {
     private ResumeDTO resumeDTO;
     private BasicInformationDTO basicInformationDTO;
     private List<ExperienceDTO> experienceDTOList;
+    private ImageDTO imageDTO;
+
+    public ImageDTO getImageDTO() {
+        return imageDTO;
+    }
+
+    public void setImageDTO(ImageDTO imageDTO) {
+        this.imageDTO = imageDTO;
+    }
 
     public ResumeDTO getResumeDTO() {
         return resumeDTO;
